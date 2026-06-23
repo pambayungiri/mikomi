@@ -145,6 +145,14 @@ export default function ChapterReader({
         ) : (
           <span className="text-sm text-border">Last →</span>
         )}
+
+        <button
+          onClick={toggleMode}
+          className="text-xs px-2 py-1 rounded-full bg-surface-2 text-muted hover:text-fg transition-colors border-l border-border ml-1 pl-3"
+          aria-label="Toggle reading mode"
+        >
+          {mode === 'strip' ? '📄' : '📜'}
+        </button>
       </div>
 
       <div className="h-20" /> {/* Spacer for floating bar */}
