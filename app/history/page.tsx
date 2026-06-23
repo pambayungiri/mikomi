@@ -61,9 +61,9 @@ export default function HistoryPage() {
         <p className="text-muted text-center py-20 text-sm">No reading history yet.</p>
       ) : (
         <div className="space-y-2">
-          {history.map((entry, i) => (
+          {history.map((entry) => (
             <Link
-              key={i}
+              key={`${entry.slug}-${entry.chapter}`}
               href={`/chapter/${entry.slug}/${entry.chapter}`}
               className="flex items-center gap-4 p-3 rounded-xl bg-surface hover:bg-surface-2 transition-colors group"
             >

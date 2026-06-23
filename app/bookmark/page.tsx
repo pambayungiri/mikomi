@@ -20,6 +20,12 @@ export default function BookmarkPage() {
     setLoaded(true)
   }, [])
 
+  function removeBookmark(slug: string) {
+    const updated = bookmarks.filter(b => b.slug !== slug)
+    localStorage.setItem(KEY, JSON.stringify(updated))
+    setBookmarks(updated)
+  }
+
   function clearAll() {
     localStorage.removeItem(KEY)
     setBookmarks([])
@@ -46,10 +52,16 @@ export default function BookmarkPage() {
       ) : (
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
           {bookmarks.map(manga => (
-            <MangaCard
-              key={manga.slug}
-              manga={manga as MangaCardType}
-            />
+            <div key={manga.slug} className="relative group/bookmark">
+              <MangaCard manga={manga as MangaCardType} />
+              <button
+                onClick={() => removeBookmark(manga.slug)}
+                className="absolute top-1 right-1 z-10 w-6 h-6 rounded-full bg-black/60 text-white text-xs opacity-0 group-hover/bookmark:opacity-100 transition-opacity flex items-center justify-center"
+                aria-label="Remove bookmark"
+              >
+                ×
+              </button>
+            </div>
           ))}
         </div>
       )}
