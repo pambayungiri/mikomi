@@ -16,3 +16,13 @@ body {
   background-color: #0d0d12;
   color: #f0f0f8;
 }
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
