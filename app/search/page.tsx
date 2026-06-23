@@ -16,7 +16,7 @@ async function SearchResults({ query }: { query: string }) {
   }
   return (
     <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 mt-6">
-      {results.map(manga => (
+      {results.slice(0, 8).map(manga => (
         <MangaCard key={manga.id} manga={manga} />
       ))}
     </div>
