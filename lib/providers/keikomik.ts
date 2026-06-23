@@ -132,7 +132,7 @@ export class KeikomikProvider implements MangaProvider {
     const docs = await runQuery(query, 3600)
     const filtered = docs.filter(d => d.status !== 'tutup')
     const data = filtered.map(parseMangaCard)
-    const hasMore = docs.length === 36
+    const hasMore = opts.sort === 'create' ? false : docs.length === 36
     const nextCursor = hasMore && data.length > 0 ? data[data.length - 1].updatedAt : null
 
     return { data, nextCursor, hasMore }
@@ -172,7 +172,7 @@ export class KeikomikProvider implements MangaProvider {
     const doc = docs[0]
     const komik = (doc.Komik ?? {}) as Record<string, RawKomikChapter>
     const chapterData = komik[String(chapter)]
-    if (!chapterData || !chapterData.img?.length) {
+    if (!chapterData || !Array.isArray(chapterData.img) || chapterData.img.length === 0 || chapterData.img[0] === '') {
       throw new Error(`Chapter ${chapter} not found in ${slug}`)
     }
 

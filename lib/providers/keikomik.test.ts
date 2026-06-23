@@ -89,6 +89,12 @@ describe('KeikomikProvider.getChapter', () => {
     const provider = new KeikomikProvider()
     await expect(provider.getChapter('one-piece', 99)).rejects.toThrow('Chapter 99 not found')
   })
+
+  it('throws for chapter with empty img[0]', async () => {
+    vi.mocked(firestore.runQuery).mockResolvedValue([SAMPLE_DOC])
+    const provider = new KeikomikProvider()
+    await expect(provider.getChapter('one-piece', 3)).rejects.toThrow('Chapter 3 not found')
+  })
 })
 
 describe('KeikomikProvider.getGenres', () => {
