@@ -36,7 +36,7 @@
 ## 3. Source Site Reverse Engineering
 
 **Firebase project:** `komikapp-677a0`
-**API key:** `AIzaSyC6Jm-c0blt4T7JxBuMmoh5QNHaRQ0vgJI` (client-exposed, standard Firebase web pattern)
+**API key:** `<REDACTED>` (client-exposed, standard Firebase web pattern)
 **Firestore collection:** `KomikApp`
 **Auth required:** None — anonymous reads verified via REST API
 
