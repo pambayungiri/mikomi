@@ -73,6 +73,7 @@ export default function ChapterReader({
         <button
           onClick={toggleMode}
           className="text-xs px-3 py-1 rounded-full bg-surface-2 text-muted hover:text-fg transition-colors"
+          aria-label={mode === 'strip' ? 'Switch to single-page mode' : 'Switch to long-strip mode'}
         >
           {mode === 'strip' ? '📄 Single' : '📜 Strip'}
         </button>

@@ -22,9 +22,9 @@ export default async function MangaDetailPage({
   }
 
   const STATUS_COLOR: Record<string, string> = {
-    Ongoing: 'text-green-400',
-    Completed: 'text-blue-400',
-    Hiatus: 'text-yellow-400',
+    Ongoing: 'text-accent',
+    Completed: 'text-gold',
+    Hiatus: 'text-muted',
   }
 
   return (

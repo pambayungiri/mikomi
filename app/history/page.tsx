@@ -50,7 +50,7 @@ export default function HistoryPage() {
         {history.length > 0 && (
           <button
             onClick={clearAll}
-            className="text-sm text-muted hover:text-red-400 transition-colors"
+            className="text-sm text-muted hover:text-accent-2 transition-colors"
           >
             Clear All
           </button>

@@ -40,7 +40,7 @@ export default function BookmarkPage() {
         {bookmarks.length > 0 && (
           <button
             onClick={clearAll}
-            className="text-sm text-muted hover:text-red-400 transition-colors"
+            className="text-sm text-muted hover:text-accent-2 transition-colors"
           >
             Clear All
           </button>
@@ -50,7 +50,7 @@ export default function BookmarkPage() {
       {bookmarks.length === 0 ? (
         <p className="text-muted text-center py-20 text-sm">No bookmarks yet. Start bookmarking manga!</p>
       ) : (
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
           {bookmarks.map(manga => (
             <div key={manga.slug} className="relative group/bookmark">
               <MangaCard manga={manga as MangaCardType} />
