@@ -1,8 +1,7 @@
 import { Suspense } from 'react'
 import { getProvider } from '@/lib/providers'
-import MangaCard from '@/components/MangaCard'
 import GenreFilter from '@/components/GenreFilter'
-import Link from 'next/link'
+import BrowseGrid from '@/components/BrowseGrid'
 
 export const revalidate = 3600
 
@@ -24,13 +23,8 @@ export default async function ListPage({
     after,
   })
 
-  const nextParams = new URLSearchParams()
-  if (genre) nextParams.set('genre', genre)
-  if (sort) nextParams.set('sort', sort)
-  if (type) nextParams.set('type', type)
-  if (nextCursor) nextParams.set('after', nextCursor)
-
   const isFiltered = !!(genre || sort || type)
+  const showLoadMore = !genre && !type && sort !== 'rating'
 
   return (
     <div>
@@ -51,23 +45,16 @@ export default async function ListPage({
           {isFiltered && (
             <p className="text-xs text-muted mb-3">{data.length} titles found</p>
           )}
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
-            {data.map(manga => (
-              <MangaCard key={manga.id} manga={manga} />
-            ))}
-          </div>
+          <BrowseGrid
+            initialData={data}
+            initialHasMore={hasMore}
+            initialCursor={nextCursor}
+            genre={genre}
+            sort={sort}
+            type={type}
+            showLoadMore={showLoadMore}
+          />
         </>
-      )}
-
-      {hasMore && nextCursor && !genre && !type && sort !== 'rating' && (
-        <div className="flex justify-center mt-8">
-          <Link
-            href={`/list?${nextParams.toString()}`}
-            className="px-6 py-2 rounded-full bg-surface-2 text-muted hover:bg-accent hover:text-white transition-colors text-sm font-medium"
-          >
-            Load More
-          </Link>
-        </div>
       )}
     </div>
   )

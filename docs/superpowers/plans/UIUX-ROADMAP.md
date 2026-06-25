@@ -190,13 +190,13 @@
 17. [x] **F4/F5** — Search: recent searches stored + displayed when no query
 18. [x] **J4** — Search loading skeleton
 
-### Phase 4 — Remaining (To Do)
+### Phase 4 — Remaining
 19. [ ] **M2/M3** — Offline reading + push notifications
-20. [ ] **L1/L2/L3** — Accessibility: skip-to-content, better focus states
-21. [ ] **C1/C2** — MangaCard: bookmark indicator, reading progress indicator
+20. [x] **L3** — Accessibility: skip-to-content link
+21. [x] **C1/C2** — MangaCard: bookmark indicator overlay + reading progress bar
 22. [ ] **E7** — RTL reading mode untuk manga Jepang
-23. [ ] **H2/H5** — Bookmark: sort + search dalam bookmark
-24. [ ] **G4** — Load More tanpa kehilangan scroll position (infinite scroll)
+23. [x] **H2/H5** — Bookmark: sort (date/name/type) + search dalam bookmark
+24. [x] **G4** — Load More tanpa kehilangan scroll position (server action + client accumulation)
 
 ---
 

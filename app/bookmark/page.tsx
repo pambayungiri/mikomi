@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { MangaCard as MangaCardType } from '@/lib/providers/types'
@@ -11,6 +11,7 @@ const KEY = 'mikomi_bookmarks'
 const HISTORY_KEY = 'mikomi_history'
 
 type LastReadMap = Record<string, number>
+type SortKey = 'added' | 'name' | 'type'
 
 const TYPE_COLOR: Record<string, string> = {
   Manga: 'bg-accent',
@@ -22,6 +23,8 @@ export default function BookmarkPage() {
   const [bookmarks, setBookmarks] = useState<BookmarkEntry[]>([])
   const [lastRead, setLastRead] = useState<LastReadMap>({})
   const [loaded, setLoaded] = useState(false)
+  const [search, setSearch] = useState('')
+  const [sort, setSort] = useState<SortKey>('added')
 
   useEffect(() => {
     try {
@@ -51,6 +54,17 @@ export default function BookmarkPage() {
     setBookmarks([])
   }
 
+  const displayed = useMemo(() => {
+    let list = [...bookmarks]
+    if (search.trim()) {
+      const q = search.trim().toLowerCase()
+      list = list.filter(b => b.name.toLowerCase().includes(q))
+    }
+    if (sort === 'name') list.sort((a, b) => a.name.localeCompare(b.name))
+    else if (sort === 'type') list.sort((a, b) => a.type.localeCompare(b.type))
+    return list
+  }, [bookmarks, search, sort])
+
   if (!loaded) return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
       {Array.from({ length: 12 }).map((_, i) => (
@@ -64,7 +78,7 @@ export default function BookmarkPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-bold text-fg">
           Bookmarks
           {bookmarks.length > 0 && (
@@ -81,6 +95,34 @@ export default function BookmarkPage() {
         )}
       </div>
 
+      {bookmarks.length > 0 && (
+        <div className="flex flex-col sm:flex-row gap-2 mb-5">
+          {/* Search */}
+          <div className="relative flex-1">
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input
+              type="search"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder="Search bookmarks..."
+              className="w-full pl-8 pr-3 py-2 text-sm rounded-lg bg-surface border border-border text-fg placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
+            />
+          </div>
+          {/* Sort */}
+          <select
+            value={sort}
+            onChange={e => setSort(e.target.value as SortKey)}
+            className="px-3 py-2 text-sm rounded-lg bg-surface border border-border text-fg focus:outline-none focus:border-accent transition-colors"
+          >
+            <option value="added">Sort: Date Added</option>
+            <option value="name">Sort: Name (A–Z)</option>
+            <option value="type">Sort: Type</option>
+          </select>
+        </div>
+      )}
+
       {bookmarks.length === 0 ? (
         <div className="text-center py-20">
           <p className="text-muted text-sm">No bookmarks yet.</p>
@@ -88,13 +130,17 @@ export default function BookmarkPage() {
             Browse manga →
           </Link>
         </div>
+      ) : displayed.length === 0 ? (
+        <div className="text-center py-20">
+          <p className="text-muted text-sm">No bookmarks match &quot;{search}&quot;.</p>
+          <button onClick={() => setSearch('')} className="text-accent text-sm mt-3 hover:underline">Clear search</button>
+        </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-          {bookmarks.map(manga => {
+          {displayed.map(manga => {
             const chapter = lastRead[manga.slug]
             return (
               <div key={manga.slug} className="relative group">
-                {/* Card */}
                 <Link href={`/manga/${manga.slug}`} className="block">
                   <div className="relative overflow-hidden rounded-lg bg-surface aspect-[2/3]">
                     <Image
@@ -108,7 +154,6 @@ export default function BookmarkPage() {
                     <span className={`absolute top-1.5 left-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded text-white ${TYPE_COLOR[manga.type] ?? 'bg-muted'}`}>
                       {manga.type}
                     </span>
-                    {/* Remove button — always visible */}
                     <button
                       onClick={e => { e.preventDefault(); removeBookmark(manga.slug) }}
                       className="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-accent-2/80 transition-colors z-10"
@@ -126,7 +171,6 @@ export default function BookmarkPage() {
                   )}
                 </Link>
 
-                {/* Continue reading button */}
                 {chapter !== undefined && (
                   <Link
                     href={`/chapter/${manga.slug}/${chapter}`}
