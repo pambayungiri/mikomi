@@ -6,6 +6,27 @@ import Link from 'next/link'
 
 const MODE_KEY = 'mikomi_reading_mode'
 
+function PageImage({ src, index }: { src: string; index: number }) {
+  const [loaded, setLoaded] = useState(false)
+  return (
+    <div className="w-full max-w-2xl relative">
+      {!loaded && (
+        <div className="w-full aspect-[2/3] bg-surface-2 animate-pulse rounded" />
+      )}
+      <Image
+        src={src}
+        alt={`Page ${index + 1}`}
+        width={800}
+        height={1200}
+        className={`w-full h-auto ${loaded ? '' : 'absolute inset-0 opacity-0'}`}
+        unoptimized
+        loading={index < 3 ? 'eager' : 'lazy'}
+        onLoad={() => setLoaded(true)}
+      />
+    </div>
+  )
+}
+
 export default function ChapterReader({
   pages,
   slug,
@@ -24,6 +45,7 @@ export default function ChapterReader({
   const [mode, setMode] = useState<'strip' | 'single'>('strip')
   const [pageIndex, setPageIndex] = useState(0)
   const [progress, setProgress] = useState(0)
+  const [singleLoaded, setSingleLoaded] = useState(false)
 
   useEffect(() => {
     try {
@@ -32,13 +54,21 @@ export default function ChapterReader({
     } catch { /* ignore */ }
   }, [])
 
+  // Cache chapter images in service worker for offline reading
+  useEffect(() => {
+    if (!pages.length) return
+    if (!('serviceWorker' in navigator)) return
+    navigator.serviceWorker.ready.then(reg => {
+      reg.active?.postMessage({ type: 'CACHE_CHAPTER', urls: pages })
+    }).catch(() => {})
+  }, [pages])
+
   // Progress tracking
   useEffect(() => {
     if (mode === 'single') {
       setProgress(pages.length > 0 ? ((pageIndex + 1) / pages.length) * 100 : 0)
       return
     }
-    // Strip mode: track scroll position
     function handleScroll() {
       const scrolled = window.scrollY
       const total = document.documentElement.scrollHeight - window.innerHeight
@@ -54,15 +84,22 @@ export default function ChapterReader({
     setMode(nextMode)
     setPageIndex(0)
     setProgress(0)
+    setSingleLoaded(false)
     try { localStorage.setItem(MODE_KEY, nextMode) } catch { /* ignore */ }
   }
 
   const goNext = useCallback(() => {
-    if (mode === 'single' && pageIndex < pages.length - 1) setPageIndex(p => p + 1)
+    if (mode === 'single' && pageIndex < pages.length - 1) {
+      setPageIndex(p => p + 1)
+      setSingleLoaded(false)
+    }
   }, [mode, pageIndex, pages.length])
 
   const goPrev = useCallback(() => {
-    if (mode === 'single' && pageIndex > 0) setPageIndex(p => p - 1)
+    if (mode === 'single' && pageIndex > 0) {
+      setPageIndex(p => p - 1)
+      setSingleLoaded(false)
+    }
   }, [mode, pageIndex])
 
   useEffect(() => {
@@ -120,31 +157,25 @@ export default function ChapterReader({
       {mode === 'strip' ? (
         <div className="flex flex-col items-center gap-1">
           {pages.map((src, i) => (
-            <div key={i} className="w-full max-w-2xl">
-              <Image
-                src={src}
-                alt={`Page ${i + 1}`}
-                width={800}
-                height={1200}
-                className="w-full h-auto"
-                unoptimized
-                loading={i < 3 ? 'eager' : 'lazy'}
-              />
-            </div>
+            <PageImage key={src} src={src} index={i} />
           ))}
         </div>
       ) : (
         <div className="flex flex-col items-center">
           <div className="w-full max-w-2xl relative select-none">
+            {!singleLoaded && (
+              <div className="w-full aspect-[2/3] bg-surface-2 animate-pulse rounded" />
+            )}
             <Image
               key={pageIndex}
               src={pages[pageIndex]}
               alt={`Page ${pageIndex + 1}`}
               width={800}
               height={1200}
-              className="w-full h-auto"
+              className={`w-full h-auto ${singleLoaded ? '' : 'absolute inset-0 opacity-0'}`}
               unoptimized
               priority
+              onLoad={() => setSingleLoaded(true)}
             />
             {/* Tap zone — left (prev) */}
             <button

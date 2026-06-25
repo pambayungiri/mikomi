@@ -1,4 +1,5 @@
 import { runQuery } from '../firestore'
+import Fuse from 'fuse.js'
 import type { MangaCard, MangaDetail, ChapterDetail, ChapterMeta, PaginatedResult, MangaProvider } from './types'
 
 const GENRES = [
@@ -287,9 +288,18 @@ export class KeikomikProvider implements MangaProvider {
 
     // Search by full query + each individual word (for multi-word queries)
     const prefixes = [...new Set([q, ...words])]
-    const batches = await Promise.all(prefixes.map(makePrefix))
 
-    // Merge and deduplicate
+    // Fetch prefix results + popular pool for fuzzy fallback in parallel
+    const [batches, popularPool] = await Promise.all([
+      Promise.all(prefixes.map(makePrefix)),
+      runQuery({
+        from: [{ collectionId: 'KomikApp' }],
+        orderBy: [{ field: { fieldPath: 'views' }, direction: 'DESCENDING' }],
+        limit: 200,
+      }, 3600),
+    ])
+
+    // Merge prefix results and deduplicate
     const seen = new Set<string>()
     const all: RawDoc[] = []
     for (const batch of batches) {
@@ -301,7 +311,21 @@ export class KeikomikProvider implements MangaProvider {
       }
     }
 
-    // Relevance scoring: exact > starts-with-query > all-words-present > word-prefix
+    // Fuse.js fuzzy search on popular pool to catch typos (e.g. "nartu" → "Naruto")
+    const fuse = new Fuse(popularPool.filter(d => d.status !== 'tutup'), {
+      keys: ['name', 'nameLow'],
+      threshold: 0.35,
+      includeScore: true,
+    })
+    for (const { item } of fuse.search(query.trim())) {
+      const doc = item as RawDoc
+      if (!seen.has(doc.id)) {
+        seen.add(doc.id)
+        all.push(doc)
+      }
+    }
+
+    // Relevance scoring: exact > starts-with-query > all-words-present > word-prefix > fuzzy
     function score(doc: RawDoc): number {
       const name = (doc.nameLow as string) ?? (doc.name as string ?? '').toLowerCase()
       if (name === q) return 100

@@ -34,6 +34,13 @@ function dayLabel(ts: number): string {
   return d.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'short' })
 }
 
+function weeklyStats(history: HistoryEntry[]) {
+  const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000
+  const thisWeek = history.filter(e => e.timestamp >= cutoff)
+  const uniqueManga = new Set(thisWeek.map(e => e.slug)).size
+  return { chapters: thisWeek.length, manga: uniqueManga }
+}
+
 export default function HistoryPage() {
   const [history, setHistory] = useState<HistoryEntry[]>([])
   const [loaded, setLoaded] = useState(false)
@@ -77,9 +84,11 @@ export default function HistoryPage() {
     }
   }
 
+  const stats = weeklyStats(history)
+
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-bold text-fg">
           Reading History
           {history.length > 0 && (
@@ -95,6 +104,19 @@ export default function HistoryPage() {
           </button>
         )}
       </div>
+
+      {stats.chapters > 0 && (
+        <div className="flex gap-3 mb-6">
+          <div className="flex-1 rounded-xl bg-surface border border-border px-4 py-3">
+            <p className="text-2xl font-bold text-accent">{stats.chapters}</p>
+            <p className="text-xs text-muted mt-0.5">chapters this week</p>
+          </div>
+          <div className="flex-1 rounded-xl bg-surface border border-border px-4 py-3">
+            <p className="text-2xl font-bold text-accent-2">{stats.manga}</p>
+            <p className="text-xs text-muted mt-0.5">series read</p>
+          </div>
+        </div>
+      )}
 
       {history.length === 0 ? (
         <div className="text-center py-20">

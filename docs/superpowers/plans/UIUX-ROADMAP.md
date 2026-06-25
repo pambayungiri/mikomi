@@ -191,12 +191,19 @@
 18. [x] **J4** — Search loading skeleton
 
 ### Phase 4 — Remaining
-19. [ ] **M2/M3** — Offline reading + push notifications
+19. [x] **M2** — Offline chapter reading: SW caches images on visit, serves from cache offline
 20. [x] **L3** — Accessibility: skip-to-content link
 21. [x] **C1/C2** — MangaCard: bookmark indicator overlay + reading progress bar
-22. [ ] **E7** — RTL reading mode untuk manga Jepang
+22. [ ] **E7** — RTL reading mode untuk manga Jepang (skipped)
 23. [x] **H2/H5** — Bookmark: sort (date/name/type) + search dalam bookmark
 24. [x] **G4** — Load More tanpa kehilangan scroll position (server action + client accumulation)
+
+### Phase 5 — Extra Polish
+25. [x] **Search Fuse.js** — Fuzzy typo-tolerant search on top 200 popular manga (threshold 0.35)
+26. [x] **error.tsx / not-found.tsx** — Global error boundary + custom 404 page
+27. [x] **Chapter image placeholders** — Skeleton pulse while each page loads (strip + single mode)
+28. [x] **Reading stats** — Weekly chapter count + series count in History page
+29. [ ] **M3** — Push notifications (skipped — requires backend)
 
 ---
 
