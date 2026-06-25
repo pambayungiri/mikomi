@@ -254,6 +254,24 @@ export class KeikomikProvider implements MangaProvider {
     }
   }
 
+  async getRelated(genre: string, excludeSlug: string): Promise<MangaCard[]> {
+    const docs = await runQuery({
+      from: [{ collectionId: 'KomikApp' }],
+      where: {
+        fieldFilter: {
+          field: { fieldPath: 'genre' },
+          op: 'ARRAY_CONTAINS',
+          value: { stringValue: genre },
+        },
+      },
+      limit: 15,
+    }, 3600)
+    return docs
+      .filter(d => d.status !== 'tutup' && d.slug !== excludeSlug)
+      .slice(0, 8)
+      .map(parseMangaCard)
+  }
+
   async search(query: string, opts?: { type?: string }): Promise<MangaCard[]> {
     if (!query.trim()) return []
     const q = query.toLowerCase().trim()

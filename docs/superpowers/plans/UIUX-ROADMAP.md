@@ -174,18 +174,29 @@
 6. [x] **M1** — PWA: manifest.json + service worker + layout metadata + themeColor viewport
 
 ### Phase 2 — Polish & UX
-6. [ ] **J1/J2** — Skeleton loading screens
-7. [ ] **D1/D3** — Detail page: expand description + last read indicator
-8. [ ] **H1/H3/H4** — Bookmark: hapus per item di mobile + continue reading
-9. [ ] **I1/I3** — History: hapus individual + grouping by date
-10. [ ] **B1/B2/B3** — Carousel: pause on hover + arrow buttons + bigger dots
+6. [x] **J1/J2** — Skeleton loading screens (all pages + inline skeletons)
+7. [x] **D1/D3** — Detail page: expand description + last read indicator
+8. [x] **H1/H3/H4** — Bookmark: hapus per item (always visible) + continue reading shortcut
+9. [x] **I1/I2/I3/I4** — History: hapus individual + link ke detail + grouping by date + count
+10. [x] **B1/B2/B3** — Carousel: pause on hover + arrow buttons + bigger dots (8px)
 
-### Phase 3 — PWA & Discoverability
-11. [ ] **M1/M7** — PWA: manifest + service worker + install prompt
-12. [ ] **M4/M5/M6** — SEO: Open Graph + sitemap + structured data
-13. [ ] **M2/M3** — Offline + Push notifications
-14. [ ] **D6** — Related manga section
-15. [ ] **L1/L2/L3** — Accessibility fixes
+### Phase 3 — Nav, SEO & Discoverability
+11. [x] **A2** — Nav: active state indicator (underline + accent color)
+12. [x] **A3** — Nav: bookmark count badge (desktop + mobile)
+13. [x] **A4** — Mobile bottom navigation (Home/Browse/Search/Saved/History)
+14. [x] **D6** — Related manga section ("You May Also Like" with genre filter)
+15. [x] **M4** — Per-manga Open Graph + Twitter card metadata (generateMetadata)
+16. [x] **M5** — Sitemap.xml untuk static routes
+17. [x] **F4/F5** — Search: recent searches stored + displayed when no query
+18. [x] **J4** — Search loading skeleton
+
+### Phase 4 — Remaining (To Do)
+19. [ ] **M2/M3** — Offline reading + push notifications
+20. [ ] **L1/L2/L3** — Accessibility: skip-to-content, better focus states
+21. [ ] **C1/C2** — MangaCard: bookmark indicator, reading progress indicator
+22. [ ] **E7** — RTL reading mode untuk manga Jepang
+23. [ ] **H2/H5** — Bookmark: sort + search dalam bookmark
+24. [ ] **G4** — Load More tanpa kehilangan scroll position (infinite scroll)
 
 ---
 

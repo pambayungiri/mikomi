@@ -2,6 +2,7 @@
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, useRef } from 'react'
+import { saveSearch } from './RecentSearches'
 
 export default function SearchBar({ defaultValue = '' }: { defaultValue?: string }) {
   const router = useRouter()
@@ -13,13 +14,18 @@ export default function SearchBar({ defaultValue = '' }: { defaultValue?: string
     return () => { if (timerRef.current) clearTimeout(timerRef.current) }
   }, [])
 
+  // Save the query to recent searches when it settles
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value
     if (timerRef.current) clearTimeout(timerRef.current)
     timerRef.current = setTimeout(() => {
       const params = new URLSearchParams(searchParams.toString())
-      if (value.trim()) params.set('q', value.trim())
-      else params.delete('q')
+      if (value.trim()) {
+        params.set('q', value.trim())
+        saveSearch(value.trim())
+      } else {
+        params.delete('q')
+      }
       router.replace(`${pathname}?${params.toString()}`)
     }, 500)
   }

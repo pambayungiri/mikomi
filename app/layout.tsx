@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/Nav'
+import BottomNav from '@/components/BottomNav'
 import Footer from '@/components/Footer'
 import ServiceWorkerRegister from '@/components/ServiceWorkerRegister'
 
@@ -19,6 +20,12 @@ export const metadata: Metadata = {
     title: 'Mikomi — Read Manga, Manhwa, Manhua',
     description: 'Read manga, manhwa, and manhua online for free.',
     type: 'website',
+    siteName: 'Mikomi',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mikomi — Read Manga, Manhwa, Manhua',
+    description: 'Read manga, manhwa, and manhua online for free.',
   },
   appleWebApp: {
     capable: true,
@@ -36,8 +43,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} bg-bg text-fg min-h-screen`}>
         <ServiceWorkerRegister />
         <Nav />
-        <main className="max-w-6xl mx-auto px-4 py-6">{children}</main>
+        {/* pb-16 on mobile reserves space above the fixed bottom nav */}
+        <main className="max-w-6xl mx-auto px-4 py-6 pb-20 md:pb-6">{children}</main>
         <Footer />
+        <BottomNav />
       </body>
     </html>
   )
