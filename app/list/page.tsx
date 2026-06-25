@@ -46,6 +46,7 @@ export default async function ListPage({
             <p className="text-xs text-muted mb-3">{data.length} titles found</p>
           )}
           <BrowseGrid
+            key={`${genre ?? ''}-${sort ?? ''}-${type ?? ''}`}
             initialData={data}
             initialHasMore={hasMore}
             initialCursor={nextCursor}

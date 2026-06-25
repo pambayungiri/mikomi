@@ -140,9 +140,10 @@ export default function BookmarkPage() {
           {displayed.map(manga => {
             const chapter = lastRead[manga.slug]
             return (
-              <div key={manga.slug} className="relative group">
-                <Link href={`/manga/${manga.slug}`} className="block">
-                  <div className="relative overflow-hidden rounded-lg bg-surface aspect-[2/3]">
+              <div key={manga.slug} className="group">
+                {/* Card image + remove button as overlay sibling (not nested) */}
+                <div className="relative overflow-hidden rounded-lg bg-surface aspect-[2/3]">
+                  <Link href={`/manga/${manga.slug}`} className="block absolute inset-0 z-0">
                     <Image
                       src={manga.image}
                       alt={manga.name}
@@ -154,17 +155,20 @@ export default function BookmarkPage() {
                     <span className={`absolute top-1.5 left-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded text-white ${TYPE_COLOR[manga.type] ?? 'bg-muted'}`}>
                       {manga.type}
                     </span>
-                    <button
-                      onClick={e => { e.preventDefault(); removeBookmark(manga.slug) }}
-                      className="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-accent-2/80 transition-colors z-10"
-                      aria-label="Remove bookmark"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <path d="M18 6 6 18M6 6l12 12"/>
-                      </svg>
-                    </button>
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
+                  </Link>
+                  {/* Remove button — sibling of Link, not nested inside */}
+                  <button
+                    onClick={() => removeBookmark(manga.slug)}
+                    className="absolute top-1.5 right-1.5 z-10 w-6 h-6 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-accent-2/80 transition-colors"
+                    aria-label="Remove bookmark"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M18 6 6 18M6 6l12 12"/>
+                    </svg>
+                  </button>
+                </div>
+                <Link href={`/manga/${manga.slug}`} className="block">
                   <h3 className="mt-1.5 text-xs font-semibold text-fg line-clamp-2 leading-tight">{manga.name}</h3>
                   {manga.latestChapter !== null && (
                     <p className="text-[10px] text-muted mt-0.5">Ch. {manga.latestChapter}</p>
