@@ -63,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <Nav />
-        <main id="main-content" className="flex-1 max-w-6xl w-full mx-auto px-4 py-6 pb-24 md:pb-6">{children}</main>
+        <main id="main-content" className="flex-1 flex flex-col max-w-6xl w-full mx-auto px-4 py-6 pb-24 md:pb-6">{children}</main>
         <Footer />
         <BottomNav />
       </body>

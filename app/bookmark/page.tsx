@@ -77,7 +77,7 @@ export default function BookmarkPage() {
   )
 
   return (
-    <div>
+    <div className="flex flex-col flex-1">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-bold text-fg">
           Bookmarks
@@ -124,16 +124,16 @@ export default function BookmarkPage() {
       )}
 
       {bookmarks.length === 0 ? (
-        <div className="flex flex-col items-center justify-center min-h-[50vh] gap-2">
+        <div className="flex-1 flex flex-col items-center justify-center gap-2">
           <p className="text-muted text-sm">No bookmarks yet.</p>
           <Link href="/list" className="text-accent text-sm hover:underline">
             Browse manga →
           </Link>
         </div>
       ) : displayed.length === 0 ? (
-        <div className="text-center py-20">
+        <div className="flex-1 flex flex-col items-center justify-center gap-2">
           <p className="text-muted text-sm">No bookmarks match &quot;{search}&quot;.</p>
-          <button onClick={() => setSearch('')} className="text-accent text-sm mt-3 hover:underline">Clear search</button>
+          <button onClick={() => setSearch('')} className="text-accent text-sm hover:underline">Clear search</button>
         </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">

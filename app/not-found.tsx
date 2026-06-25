@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[50vh] text-center px-4">
+    <div className="flex flex-col items-center justify-center flex-1 text-center px-4">
       <p className="text-7xl font-black text-accent/20 mb-4">404</p>
       <h2 className="text-xl font-bold text-fg mb-2">Page not found</h2>
       <p className="text-muted text-sm mb-8 max-w-sm">The manga or page you&apos;re looking for doesn&apos;t exist or was removed.</p>

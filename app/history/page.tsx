@@ -87,7 +87,7 @@ export default function HistoryPage() {
   const stats = weeklyStats(history)
 
   return (
-    <div>
+    <div className="flex flex-col flex-1">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-bold text-fg">
           Reading History
@@ -119,7 +119,7 @@ export default function HistoryPage() {
       )}
 
       {history.length === 0 ? (
-        <div className="flex flex-col items-center justify-center min-h-[50vh] gap-2">
+        <div className="flex-1 flex flex-col items-center justify-center gap-2">
           <p className="text-muted text-sm">No reading history yet.</p>
           <Link href="/" className="text-accent text-sm hover:underline">
             Start reading →

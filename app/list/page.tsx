@@ -39,7 +39,7 @@ export default async function ListPage({
       </Suspense>
 
       {data.length === 0 ? (
-        <div className="flex flex-col items-center justify-center min-h-[50vh]">
+        <div className="flex-1 flex flex-col items-center justify-center">
           <p className="text-muted text-sm">No manga found.</p>
         </div>
       ) : (
