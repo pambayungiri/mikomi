@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getProvider } from '@/lib/providers'
 import BookmarkButton from '@/components/BookmarkButton'
+import ExpandableText from '@/components/ExpandableText'
+import ChapterList from '@/components/ChapterList'
 
 export const revalidate = 1800
 
@@ -56,7 +58,14 @@ export default async function MangaDetailPage({
           {manga.author && (
             <div>
               <dt className="text-muted text-xs">Author</dt>
-              <dd className="text-fg">{manga.author}</dd>
+              <dd>
+                <Link
+                  href={`/search?q=${encodeURIComponent(manga.author)}`}
+                  className="text-fg hover:text-accent transition-colors"
+                >
+                  {manga.author}
+                </Link>
+              </dd>
             </div>
           )}
           {manga.rilis && (
@@ -68,7 +77,12 @@ export default async function MangaDetailPage({
           {manga.rate > 0 && (
             <div>
               <dt className="text-muted text-xs">Rating</dt>
-              <dd className="text-fg">⭐ {manga.rate.toFixed(1)}</dd>
+              <dd className="flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" strokeWidth="1">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                <span className="text-fg font-medium">{manga.rate.toFixed(1)}</span>
+              </dd>
             </div>
           )}
         </dl>
@@ -92,9 +106,11 @@ export default async function MangaDetailPage({
           ))}
         </div>
 
-        {/* Description */}
+        {/* Description — expandable */}
         {manga.description && (
-          <p className="text-muted text-sm leading-relaxed mt-4 line-clamp-4">{manga.description}</p>
+          <div className="mt-4">
+            <ExpandableText text={manga.description} maxLines={4} />
+          </div>
         )}
 
         {/* Start reading */}
@@ -115,25 +131,10 @@ export default async function MangaDetailPage({
           </div>
         )}
 
-        {/* Chapter list */}
+        {/* Chapter list — with last read indicator */}
         <div className="mt-8">
           <h2 className="text-base font-semibold text-fg mb-3">{manga.chapters.length} Chapters</h2>
-          <div className="space-y-1 max-h-[480px] overflow-y-auto pr-1">
-            {manga.chapters.map(ch => (
-              <Link
-                key={ch.number}
-                href={`/chapter/${manga.slug}/${ch.number}`}
-                className="flex items-center justify-between px-3 py-2 rounded-lg bg-surface hover:bg-surface-2 transition-colors group"
-              >
-                <span className="text-sm text-fg group-hover:text-accent transition-colors">
-                  Chapter {ch.number}
-                </span>
-                <span className="text-xs text-muted">
-                  {ch.updatedAt ? new Date(ch.updatedAt).toLocaleDateString('id-ID') : ''}
-                </span>
-              </Link>
-            ))}
-          </div>
+          <ChapterList slug={manga.slug} chapters={manga.chapters} />
         </div>
       </div>
     </div>

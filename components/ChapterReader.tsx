@@ -149,45 +149,29 @@ export default function ChapterReader({
             {/* Tap zone — left (prev) */}
             <button
               onClick={goPrev}
-              className="absolute left-0 inset-y-0 w-1/3 flex items-center justify-start pl-3"
+              className="absolute left-0 inset-y-0 w-1/3 flex items-center justify-start"
               aria-label="Previous page"
             >
               {pageIndex > 0 && (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="28" height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-white/25 drop-shadow"
-                >
-                  <path d="m15 18-6-6 6-6"/>
-                </svg>
+                <div className="ml-2 w-8 h-8 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center shadow">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="m15 18-6-6 6-6"/>
+                  </svg>
+                </div>
               )}
             </button>
             {/* Tap zone — right (next) */}
             <button
               onClick={goNext}
-              className="absolute right-0 inset-y-0 w-1/3 flex items-center justify-end pr-3"
+              className="absolute right-0 inset-y-0 w-1/3 flex items-center justify-end"
               aria-label="Next page"
             >
               {pageIndex < pages.length - 1 && (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="28" height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-white/25 drop-shadow"
-                >
-                  <path d="m9 18 6-6-6-6"/>
-                </svg>
+                <div className="mr-2 w-8 h-8 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center shadow">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="m9 18 6-6-6-6"/>
+                  </svg>
+                </div>
               )}
             </button>
           </div>
