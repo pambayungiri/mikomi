@@ -10,7 +10,7 @@ export default function MangaError({ error, reset }: { error: Error; reset: () =
   const slug = params?.slug as string | undefined
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+    <div className="flex flex-col items-center justify-center min-h-[50vh] text-center px-4">
       <p className="text-7xl font-black text-accent/20 mb-4">404</p>
       <h2 className="text-xl font-bold text-fg mb-2">Manga not found</h2>
       <p className="text-muted text-sm mb-2 max-w-sm">

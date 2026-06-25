@@ -17,9 +17,9 @@ async function SearchResults({ query, type }: { query: string; type?: string }) 
 
   if (!results.length) {
     return (
-      <div className="text-center py-16">
+      <div className="flex flex-col items-center justify-center min-h-[50vh] gap-1">
         <p className="text-muted text-sm">No results for &quot;{query}&quot;{type ? ` in ${type}` : ''}</p>
-        <p className="text-muted/60 text-xs mt-2">Try a different keyword or remove the type filter</p>
+        <p className="text-muted/60 text-xs">Try a different keyword or remove the type filter</p>
       </div>
     )
   }
@@ -55,7 +55,7 @@ export default async function SearchPage({
       </Suspense>
       <Suspense
         fallback={
-          <div className="flex justify-center py-16">
+          <div className="flex items-center justify-center min-h-[50vh]">
             <div className="w-5 h-5 border-2 border-accent border-t-transparent rounded-full animate-spin" />
           </div>
         }

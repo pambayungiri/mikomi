@@ -39,7 +39,9 @@ export default async function ListPage({
       </Suspense>
 
       {data.length === 0 ? (
-        <p className="text-muted text-center py-20">No manga found.</p>
+        <div className="flex flex-col items-center justify-center min-h-[50vh]">
+          <p className="text-muted text-sm">No manga found.</p>
+        </div>
       ) : (
         <>
           {isFiltered && (
