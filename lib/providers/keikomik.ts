@@ -60,6 +60,20 @@ function parseMangaDetail(doc: RawDoc): MangaDetail {
   }
 }
 
+function sortDocs(docs: RawDoc[], sort?: string): RawDoc[] {
+  return [...docs].sort((a, b) => {
+    if (sort === 'rating') return ((b.rate as number) ?? 0) - ((a.rate as number) ?? 0)
+    if (sort === 'create') {
+      const ta = (a.CreateAt as string) ?? ''
+      const tb = (b.CreateAt as string) ?? ''
+      return tb > ta ? 1 : tb < ta ? -1 : 0
+    }
+    const ta = (a.UpdateAt as string) ?? ''
+    const tb = (b.UpdateAt as string) ?? ''
+    return tb > ta ? 1 : tb < ta ? -1 : 0
+  })
+}
+
 export class KeikomikProvider implements MangaProvider {
   getGenres(): string[] {
     return GENRES
@@ -92,14 +106,49 @@ export class KeikomikProvider implements MangaProvider {
     return docs.filter(d => d.status !== 'tutup').map(parseMangaCard)
   }
 
+  async getPopularByType(type: string): Promise<MangaCard[]> {
+    const docs = await runQuery({
+      from: [{ collectionId: 'KomikApp' }],
+      where: {
+        fieldFilter: {
+          field: { fieldPath: 'type' },
+          op: 'EQUAL',
+          value: { stringValue: type },
+        },
+      },
+      limit: 30,
+    }, 3600)
+    return docs
+      .filter(d => d.status !== 'tutup')
+      .sort((a, b) => ((b.views as number) ?? 0) - ((a.views as number) ?? 0))
+      .slice(0, 8)
+      .map(parseMangaCard)
+  }
+
   async getList(opts: {
     genre?: string
-    sort?: 'update' | 'create'
+    sort?: 'update' | 'create' | 'rating'
+    type?: string
     after?: string
   }): Promise<PaginatedResult<MangaCard>> {
-    const orderField = opts.sort === 'create' ? 'CreateAt' : 'UpdateAt'
+    // Type filter — fetch without orderBy to avoid composite index, sort client-side
+    if (opts.type) {
+      const docs = await runQuery({
+        from: [{ collectionId: 'KomikApp' }],
+        where: {
+          fieldFilter: {
+            field: { fieldPath: 'type' },
+            op: 'EQUAL',
+            value: { stringValue: opts.type },
+          },
+        },
+        limit: 100,
+      }, 3600)
+      const data = sortDocs(docs.filter(d => d.status !== 'tutup'), opts.sort).map(parseMangaCard)
+      return { data, nextCursor: null, hasMore: false }
+    }
 
-    // Genre filter: no orderBy (avoids composite index requirement)
+    // Genre filter — no orderBy to avoid composite index requirement
     if (opts.genre) {
       const docs = await runQuery({
         from: [{ collectionId: 'KomikApp' }],
@@ -116,6 +165,19 @@ export class KeikomikProvider implements MangaProvider {
       return { data, nextCursor: null, hasMore: false }
     }
 
+    // Rating sort — single field orderBy, no composite index needed
+    if (opts.sort === 'rating') {
+      const docs = await runQuery({
+        from: [{ collectionId: 'KomikApp' }],
+        orderBy: [{ field: { fieldPath: 'rate' }, direction: 'DESCENDING' }],
+        limit: 50,
+      }, 3600)
+      const data = docs.filter(d => d.status !== 'tutup').map(parseMangaCard)
+      return { data, nextCursor: null, hasMore: false }
+    }
+
+    // Default: sort by UpdateAt or CreateAt with cursor pagination
+    const orderField = opts.sort === 'create' ? 'CreateAt' : 'UpdateAt'
     const query: Record<string, unknown> = {
       from: [{ collectionId: 'KomikApp' }],
       orderBy: [{ field: { fieldPath: orderField }, direction: 'DESCENDING' }],
@@ -192,16 +254,54 @@ export class KeikomikProvider implements MangaProvider {
     }
   }
 
-  async search(query: string): Promise<MangaCard[]> {
+  async search(query: string, opts?: { type?: string }): Promise<MangaCard[]> {
     if (!query.trim()) return []
     const q = query.toLowerCase().trim()
-    const docs = await runQuery({
+    const words = q.split(/\s+/).filter(w => w.length >= 2)
+
+    const makePrefix = (prefix: string) => runQuery({
       from: [{ collectionId: 'KomikApp' }],
       orderBy: [{ field: { fieldPath: 'nameLow' }, direction: 'ASCENDING' }],
-      startAt: { values: [{ stringValue: q }], before: true },
-      endAt: { values: [{ stringValue: q + '' }], before: false },
-      limit: 8,
+      startAt: { values: [{ stringValue: prefix }], before: true },
+      endAt: { values: [{ stringValue: prefix + '' }], before: false },
+      limit: 25,
     })
-    return docs.filter(d => d.status !== 'tutup').map(parseMangaCard)
+
+    // Search by full query + each individual word (for multi-word queries)
+    const prefixes = [...new Set([q, ...words])]
+    const batches = await Promise.all(prefixes.map(makePrefix))
+
+    // Merge and deduplicate
+    const seen = new Set<string>()
+    const all: RawDoc[] = []
+    for (const batch of batches) {
+      for (const doc of batch) {
+        if (!seen.has(doc.id) && doc.status !== 'tutup') {
+          seen.add(doc.id)
+          all.push(doc)
+        }
+      }
+    }
+
+    // Relevance scoring: exact > starts-with-query > all-words-present > word-prefix
+    function score(doc: RawDoc): number {
+      const name = (doc.nameLow as string) ?? (doc.name as string ?? '').toLowerCase()
+      if (name === q) return 100
+      if (name.startsWith(q)) return 80
+      if (words.length > 1 && words.every(w => name.includes(w))) return 60
+      if (words.some(w => name.startsWith(w))) return 40
+      return 20
+    }
+
+    let filtered = all
+    if (opts?.type) {
+      filtered = filtered.filter(d => (d.type as string) === opts.type)
+    }
+
+    return filtered
+      .map(d => ({ doc: d, s: score(d) }))
+      .sort((a, b) => b.s - a.s)
+      .slice(0, 24)
+      .map(({ doc }) => parseMangaCard(doc))
   }
 }
