@@ -54,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icons/favicon-32.png" type="image/png" sizes="32x32" />
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
       </head>
-      <body className={`${inter.className} bg-bg text-fg min-h-screen`}>
+      <body className={`${inter.className} bg-bg text-fg flex flex-col min-h-screen`}>
         <ServiceWorkerRegister />
         <a
           href="#main-content"
@@ -63,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <Nav />
-        <main id="main-content" className="max-w-6xl mx-auto px-4 py-6 pb-24 md:pb-6 min-h-[60vh]">{children}</main>
+        <main id="main-content" className="flex-1 max-w-6xl w-full mx-auto px-4 py-6 pb-24 md:pb-6">{children}</main>
         <Footer />
         <BottomNav />
       </body>

@@ -119,9 +119,9 @@ export default function HistoryPage() {
       )}
 
       {history.length === 0 ? (
-        <div className="text-center py-20">
+        <div className="flex flex-col items-center justify-center min-h-[50vh] gap-2">
           <p className="text-muted text-sm">No reading history yet.</p>
-          <Link href="/" className="text-accent text-sm mt-3 inline-block hover:underline">
+          <Link href="/" className="text-accent text-sm hover:underline">
             Start reading →
           </Link>
         </div>

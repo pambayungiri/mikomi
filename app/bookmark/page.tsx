@@ -124,9 +124,9 @@ export default function BookmarkPage() {
       )}
 
       {bookmarks.length === 0 ? (
-        <div className="text-center py-20">
+        <div className="flex flex-col items-center justify-center min-h-[50vh] gap-2">
           <p className="text-muted text-sm">No bookmarks yet.</p>
-          <Link href="/list" className="text-accent text-sm mt-3 inline-block hover:underline">
+          <Link href="/list" className="text-accent text-sm hover:underline">
             Browse manga →
           </Link>
         </div>
