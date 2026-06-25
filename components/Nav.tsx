@@ -35,7 +35,7 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-50 bg-surface border-b border-border">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
+        <Link href="/" className="flex items-center gap-2 group md:flex-none absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
           <Image
             src="/icons/icon-48.png"
             alt="Mikomi logo"
