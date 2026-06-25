@@ -50,11 +50,14 @@ export interface MangaProvider {
   getNewArrivals(): Promise<MangaCard[]>
   getList(opts: {
     genre?: string
-    sort?: 'update' | 'create'
+    sort?: 'update' | 'create' | 'rating'
+    type?: string
     after?: string
   }): Promise<PaginatedResult<MangaCard>>
   getManga(slug: string): Promise<MangaDetail>
   getChapter(slug: string, chapter: number): Promise<ChapterDetail>
-  search(query: string): Promise<MangaCard[]>
+  search(query: string, opts?: { type?: string }): Promise<MangaCard[]>
+  getPopularByType(type: string): Promise<MangaCard[]>
+  getRelated(genre: string, excludeSlug: string): Promise<MangaCard[]>
   getGenres(): string[]
 }

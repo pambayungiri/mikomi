@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { MangaCard as MangaCardType } from '@/lib/providers/types'
+import BookmarkIndicator from './BookmarkIndicator'
+import ReadingProgressIndicator from './ReadingProgressIndicator'
 
 const TYPE_BADGE: Record<string, string> = {
   Manga: 'bg-accent text-white',
@@ -25,12 +27,14 @@ export default function MangaCard({ manga }: { manga: MangaCardType }) {
         <span className={`absolute top-1.5 left-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded ${badgeClass}`}>
           {manga.type}
         </span>
+        <BookmarkIndicator slug={manga.slug} />
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
       <h3 className="mt-1.5 text-xs font-semibold text-fg line-clamp-2 leading-tight">{manga.name}</h3>
       {manga.latestChapter !== null && (
         <p className="text-[10px] text-muted mt-0.5">Ch. {manga.latestChapter}</p>
       )}
+      <ReadingProgressIndicator slug={manga.slug} latestChapter={manga.latestChapter} />
     </Link>
   )
 }

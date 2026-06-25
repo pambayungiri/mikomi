@@ -2,23 +2,39 @@ import { Suspense } from 'react'
 import { getProvider } from '@/lib/providers'
 import MangaCard from '@/components/MangaCard'
 import SearchBar from '@/components/SearchBar'
+import SearchTypeFilter from '@/components/SearchTypeFilter'
+import RecentSearches from '@/components/RecentSearches'
 
 export const dynamic = 'force-dynamic'
 
-async function SearchResults({ query }: { query: string }) {
+async function SearchResults({ query, type }: { query: string; type?: string }) {
   if (!query.trim()) {
-    return <p className="text-muted text-center py-20 text-sm">Start typing to search...</p>
+    return <RecentSearches />
   }
+
   const provider = getProvider()
-  const results = await provider.search(query)
+  const results = await provider.search(query, type ? { type } : undefined)
+
   if (!results.length) {
-    return <p className="text-muted text-center py-20 text-sm">No results for "{query}"</p>
+    return (
+      <div className="text-center py-16">
+        <p className="text-muted text-sm">No results for &quot;{query}&quot;{type ? ` in ${type}` : ''}</p>
+        <p className="text-muted/60 text-xs mt-2">Try a different keyword or remove the type filter</p>
+      </div>
+    )
   }
+
   return (
-    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 mt-6">
-      {results.slice(0, 8).map(manga => (
-        <MangaCard key={manga.id} manga={manga} />
-      ))}
+    <div className="mt-6">
+      <p className="text-xs text-muted mb-3">
+        {results.length} result{results.length !== 1 ? 's' : ''} for &quot;{query}&quot;
+        {type && <span className="ml-1 text-accent-2">in {type}</span>}
+      </p>
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
+        {results.map(manga => (
+          <MangaCard key={manga.id} manga={manga} />
+        ))}
+      </div>
     </div>
   )
 }
@@ -26,18 +42,25 @@ async function SearchResults({ query }: { query: string }) {
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string }>
+  searchParams: Promise<{ q?: string; type?: string }>
 }) {
-  const { q = '' } = await searchParams
+  const { q = '', type } = await searchParams
 
   return (
     <div>
       <h1 className="text-xl font-bold text-fg mb-4">Search</h1>
       <Suspense>
         <SearchBar defaultValue={q} />
+        <SearchTypeFilter currentType={type} />
       </Suspense>
-      <Suspense fallback={<p className="text-muted text-center py-20 text-sm">Searching...</p>}>
-        <SearchResults query={q} />
+      <Suspense
+        fallback={
+          <div className="flex justify-center py-16">
+            <div className="w-5 h-5 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+          </div>
+        }
+      >
+        <SearchResults query={q} type={type} />
       </Suspense>
     </div>
   )
