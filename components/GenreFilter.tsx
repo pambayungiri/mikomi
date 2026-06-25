@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-import { useCallback } from 'react'
+import { useCallback, useState, useRef, useEffect } from 'react'
 
 const SORTS = [
   { id: 'update', label: 'Latest Update' },
@@ -9,14 +9,59 @@ const SORTS = [
   { id: 'rating', label: 'Top Rated' },
 ]
 
-const TYPE_FILTERS = [
-  { id: 'Manga', label: 'Manga' },
-  { id: 'Manhwa', label: 'Manhwa' },
-  { id: 'Manhua', label: 'Manhua' },
+const TYPES = ['Manga', 'Manhwa', 'Manhua']
+
+const GENRES = [
+  'Action', 'Fantasy', 'Adventure', 'Comedy', 'Sci-Fi',
+  'Romance', 'Mystery', 'Horror', 'Slice of Life', 'Supernatural', 'Isekai',
 ]
 
+function Dropdown({
+  label,
+  children,
+}: {
+  label: React.ReactNode
+  children: (close: () => void) => React.ReactNode
+}) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handle(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handle)
+    return () => document.removeEventListener('mousedown', handle)
+  }, [])
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen(o => !o)}
+        className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border transition-colors ${
+          open ? 'bg-accent text-white border-accent' : 'bg-surface border-border text-muted hover:text-fg hover:border-border/70'
+        }`}
+      >
+        {label}
+        <svg
+          xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" strokeWidth="2.5"
+          className={`transition-transform ${open ? 'rotate-180' : ''}`}
+        >
+          <path d="m6 9 6 6 6-6"/>
+        </svg>
+      </button>
+      {open && (
+        <div className="absolute top-full left-0 mt-1 z-50 bg-surface border border-border rounded-xl shadow-xl min-w-[180px] p-1">
+          {children(() => setOpen(false))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function GenreFilter({
-  genres,
+  genres: _genres,
   currentGenre,
   currentSort,
   currentType,
@@ -30,86 +75,138 @@ export default function GenreFilter({
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const createQuery = useCallback((updates: Record<string, string | null>) => {
+  const push = useCallback((updates: Record<string, string | null>) => {
     const params = new URLSearchParams(searchParams.toString())
-    params.delete('after') // reset pagination on filter change
+    params.delete('after')
     Object.entries(updates).forEach(([k, v]) => {
       if (v === null) params.delete(k)
       else params.set(k, v)
     })
-    return params.toString()
-  }, [searchParams])
+    router.push(`${pathname}?${params.toString()}`)
+  }, [searchParams, router, pathname])
 
-  const isDefault = !currentGenre && !currentSort && !currentType
+  const activeSort = SORTS.find(s => s.id === currentSort)
+  const hasFilters = !!(currentGenre || currentSort || currentType)
 
   return (
     <div className="mb-6 space-y-3">
-      {/* Sort row */}
-      <div className="flex flex-wrap gap-2">
+      {/* Row 1: Type tabs */}
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-hide">
         <button
-          onClick={() => router.push(`${pathname}?${createQuery({ sort: null, genre: null, type: null })}`)}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-            isDefault ? 'bg-accent text-white' : 'bg-surface-2 text-muted hover:text-fg'
+          onClick={() => push({ type: null, genre: null, sort: null })}
+          className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            !currentType ? 'bg-accent text-white' : 'bg-surface-2 text-muted hover:text-fg'
           }`}
         >
           All
         </button>
-        {SORTS.map(s => (
+        {TYPES.map(t => (
           <button
-            key={s.id}
-            onClick={() => router.push(`${pathname}?${createQuery({ sort: s.id, genre: null, type: null })}`)}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-              currentSort === s.id && !currentGenre && !currentType
-                ? 'bg-accent text-white'
-                : 'bg-surface-2 text-muted hover:text-fg'
+            key={t}
+            onClick={() => push({ type: currentType === t ? null : t, genre: null, sort: currentSort ?? null })}
+            className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              currentType === t ? 'bg-accent text-white' : 'bg-surface-2 text-muted hover:text-fg'
             }`}
           >
-            {s.label}
+            {t}
           </button>
         ))}
+
+        <div className="flex-1" />
+
+        {/* Genre dropdown */}
+        <Dropdown
+          label={
+            <span className={currentGenre ? 'text-white' : ''}>
+              {currentGenre ?? 'Genre'}
+            </span>
+          }
+        >
+          {close => (
+            <>
+              {currentGenre && (
+                <button
+                  onClick={() => { push({ genre: null }); close() }}
+                  className="w-full text-left px-3 py-2 text-xs text-accent hover:bg-surface-2 rounded-lg transition-colors"
+                >
+                  Clear genre
+                </button>
+              )}
+              {(GENRES.length ? GENRES : _genres).map(g => (
+                <button
+                  key={g}
+                  onClick={() => { push({ genre: currentGenre === g ? null : g, sort: null, type: null }); close() }}
+                  className={`w-full text-left px-3 py-2 text-sm rounded-lg transition-colors ${
+                    currentGenre === g ? 'text-accent font-medium bg-accent/10' : 'text-fg hover:bg-surface-2'
+                  }`}
+                >
+                  {g}
+                </button>
+              ))}
+            </>
+          )}
+        </Dropdown>
+
+        {/* Sort dropdown */}
+        <Dropdown
+          label={
+            <span className={currentSort ? 'text-white' : ''}>
+              {activeSort?.label ?? 'Sort'}
+            </span>
+          }
+        >
+          {close => SORTS.map(s => (
+            <button
+              key={s.id}
+              onClick={() => { push({ sort: currentSort === s.id ? null : s.id, genre: null }); close() }}
+              className={`w-full text-left px-3 py-2 text-sm rounded-lg transition-colors ${
+                currentSort === s.id ? 'text-accent font-medium bg-accent/10' : 'text-fg hover:bg-surface-2'
+              }`}
+            >
+              {s.label}
+            </button>
+          ))}
+        </Dropdown>
       </div>
 
-      {/* Type filter row */}
-      <div className="flex gap-2">
-        {TYPE_FILTERS.map(t => (
+      {/* Active filter chips */}
+      {hasFilters && (
+        <div className="flex flex-wrap gap-1.5">
+          {currentType && (
+            <button
+              onClick={() => push({ type: null })}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium hover:bg-accent/20 transition-colors"
+            >
+              {currentType}
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+          )}
+          {currentGenre && (
+            <button
+              onClick={() => push({ genre: null })}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium hover:bg-accent/20 transition-colors"
+            >
+              {currentGenre}
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+          )}
+          {currentSort && (
+            <button
+              onClick={() => push({ sort: null })}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium hover:bg-accent/20 transition-colors"
+            >
+              {activeSort?.label}
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+          )}
           <button
-            key={t.id}
-            onClick={() => router.push(`${pathname}?${createQuery({
-              type: currentType === t.id ? null : t.id,
-              genre: null,
-              sort: currentSort ?? null,
-            })}`)}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-colors ${
-              currentType === t.id
-                ? 'bg-accent-2 border-accent-2 text-white'
-                : 'border-border text-muted hover:border-accent-2 hover:text-accent-2'
-            }`}
+            onClick={() => push({ type: null, genre: null, sort: null })}
+            className="px-2.5 py-1 rounded-full bg-surface-2 text-muted text-xs hover:text-fg transition-colors"
           >
-            {t.label}
+            Clear all
           </button>
-        ))}
-      </div>
-
-      {/* Genre pills */}
-      <div className="flex flex-wrap gap-2">
-        {genres.map(g => (
-          <button
-            key={g}
-            onClick={() => router.push(`${pathname}?${createQuery({
-              genre: currentGenre === g ? null : g,
-              sort: null,
-              type: null,
-            })}`)}
-            className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${
-              currentGenre === g
-                ? 'bg-accent border-accent text-white'
-                : 'border-border text-muted hover:border-accent hover:text-accent'
-            }`}
-          >
-            {g}
-          </button>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

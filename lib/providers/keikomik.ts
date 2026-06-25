@@ -126,6 +126,33 @@ export class KeikomikProvider implements MangaProvider {
       .map(parseMangaCard)
   }
 
+  async getTopRatedByType(type: string): Promise<MangaCard[]> {
+    const docs = await runQuery({
+      from: [{ collectionId: 'KomikApp' }],
+      where: {
+        fieldFilter: {
+          field: { fieldPath: 'type' },
+          op: 'EQUAL',
+          value: { stringValue: type },
+        },
+      },
+      limit: 50,
+    }, 3600)
+    const rated = docs
+      .filter(d => d.status !== 'tutup' && ((d.rate as number) ?? 0) > 0)
+      .sort((a, b) => ((b.rate as number) ?? 0) - ((a.rate as number) ?? 0))
+      .slice(0, 10)
+    // Fallback to views-sorted if no rated manga found for this type
+    if (rated.length === 0) {
+      return docs
+        .filter(d => d.status !== 'tutup')
+        .sort((a, b) => ((b.views as number) ?? 0) - ((a.views as number) ?? 0))
+        .slice(0, 10)
+        .map(parseMangaCard)
+    }
+    return rated.map(parseMangaCard)
+  }
+
   async getList(opts: {
     genre?: string
     sort?: 'update' | 'create' | 'rating'

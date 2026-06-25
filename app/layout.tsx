@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const viewport: Viewport = {
   themeColor: '#7c6aff',
+  viewportFit: 'cover',
 }
 
 export const metadata: Metadata = {
@@ -49,8 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <Nav />
-        {/* pb-16 on mobile reserves space above the fixed bottom nav */}
-        <main id="main-content" className="max-w-6xl mx-auto px-4 py-6 pb-20 md:pb-6">{children}</main>
+        <main id="main-content" className="max-w-6xl mx-auto px-4 py-6 pb-24 md:pb-6">{children}</main>
         <Footer />
         <BottomNav />
       </body>

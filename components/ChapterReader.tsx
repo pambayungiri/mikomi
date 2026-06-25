@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -46,6 +46,9 @@ export default function ChapterReader({
   const [pageIndex, setPageIndex] = useState(0)
   const [progress, setProgress] = useState(0)
   const [singleLoaded, setSingleLoaded] = useState(false)
+  // Bottom nav auto-hides in strip mode; top bar stays always visible
+  const [showBottomNav, setShowBottomNav] = useState(true)
+  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     try {
@@ -56,12 +59,49 @@ export default function ChapterReader({
 
   // Cache chapter images in service worker for offline reading
   useEffect(() => {
-    if (!pages.length) return
-    if (!('serviceWorker' in navigator)) return
+    if (!pages.length || !('serviceWorker' in navigator)) return
     navigator.serviceWorker.ready.then(reg => {
       reg.active?.postMessage({ type: 'CACHE_CHAPTER', urls: pages })
     }).catch(() => {})
   }, [pages])
+
+  // Hide bottom nav when user pinch-zooms (iOS: fixed elements shift with zoom)
+  useEffect(() => {
+    const vv = window.visualViewport
+    if (!vv) return
+    function onResize() {
+      setShowBottomNav((vv?.scale ?? 1) <= 1.05)
+    }
+    vv.addEventListener('resize', onResize)
+    return () => vv.removeEventListener('resize', onResize)
+  }, [])
+
+  // In strip mode, tap to toggle bottom nav visibility with auto-hide
+  function scheduleHide() {
+    if (hideTimerRef.current) clearTimeout(hideTimerRef.current)
+    setShowBottomNav(true)
+    hideTimerRef.current = setTimeout(() => setShowBottomNav(false), 4000)
+  }
+
+  function handleStripTap() {
+    if (mode !== 'strip') return
+    if (hideTimerRef.current) clearTimeout(hideTimerRef.current)
+    setShowBottomNav(v => {
+      if (!v) scheduleHide()
+      return !v
+    })
+  }
+
+  useEffect(() => {
+    if (mode === 'strip') {
+      scheduleHide()
+    } else {
+      if (hideTimerRef.current) clearTimeout(hideTimerRef.current)
+      setShowBottomNav(true)
+    }
+    return () => { if (hideTimerRef.current) clearTimeout(hideTimerRef.current) }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode])
 
   // Progress tracking
   useEffect(() => {
@@ -125,13 +165,10 @@ export default function ChapterReader({
     <div>
       {/* Reading progress bar */}
       <div className="fixed top-14 left-0 right-0 h-0.5 bg-border z-40 pointer-events-none">
-        <div
-          className="h-full bg-accent transition-all duration-200"
-          style={{ width: `${progress}%` }}
-        />
+        <div className="h-full bg-accent transition-all duration-200" style={{ width: `${progress}%` }} />
       </div>
 
-      {/* Top bar */}
+      {/* Top bar — always visible so user can always go back or switch mode */}
       <div className="flex items-center justify-between mb-4">
         <Link
           href={`/manga/${slug}`}
@@ -142,20 +179,21 @@ export default function ChapterReader({
           </svg>
           <span className="truncate max-w-40">{mangaName}</span>
         </Link>
-        <span className="text-sm text-muted font-medium">Chapter {chapter}</span>
+        <span className="text-sm text-muted font-medium">Ch. {chapter}</span>
         <button
           onClick={toggleMode}
           className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-surface-2 text-muted hover:text-fg transition-colors"
-          aria-label={mode === 'strip' ? 'Switch to single-page mode' : 'Switch to long-strip mode'}
+          aria-label={mode === 'strip' ? 'Switch to single-page' : 'Switch to long-strip'}
         >
           <ModeIcon m={mode} />
           {mode === 'strip' ? 'Single' : 'Strip'}
         </button>
       </div>
 
-      {/* Reader */}
+      {/* Reader content */}
       {mode === 'strip' ? (
-        <div className="flex flex-col items-center gap-1">
+        // Tap anywhere on strip to toggle bottom nav
+        <div className="flex flex-col items-center gap-1" onClick={handleStripTap}>
           {pages.map((src, i) => (
             <PageImage key={src} src={src} index={i} />
           ))}
@@ -210,38 +248,39 @@ export default function ChapterReader({
         </div>
       )}
 
-      {/* Floating bottom nav */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-surface border border-border rounded-full px-5 py-2.5 shadow-xl">
-        {prev !== null ? (
-          <Link href={`/chapter/${slug}/${prev}`} className="text-sm text-muted hover:text-fg transition-colors">
-            ← Ch. {prev}
-          </Link>
-        ) : (
-          <span className="text-sm text-border">← First</span>
-        )}
+      {/* Bottom nav — anchored to safe edge, hides when zoomed or in strip mode after delay */}
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-50 flex justify-center pb-3 transition-all duration-300 ${
+          showBottomNav ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+        }`}
+        style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
+      >
+        <div className="flex items-center gap-4 bg-surface/95 backdrop-blur-sm border border-border rounded-2xl px-5 py-2.5 shadow-xl">
+          {prev !== null ? (
+            <Link href={`/chapter/${slug}/${prev}`} className="flex items-center gap-1 text-sm text-muted hover:text-fg transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m15 18-6-6 6-6"/></svg>
+              Ch. {prev}
+            </Link>
+          ) : (
+            <span className="text-sm text-border/50">First</span>
+          )}
 
-        <span className="text-xs text-muted px-2 border-x border-border">
-          {mode === 'single' ? `${pageIndex + 1}/${pages.length}` : `${pages.length}p`}
-        </span>
+          <span className="text-xs text-muted px-3 border-x border-border">
+            {mode === 'single' ? `${pageIndex + 1} / ${pages.length}` : `${pages.length}p`}
+          </span>
 
-        {next !== null ? (
-          <Link href={`/chapter/${slug}/${next}`} className="text-sm text-muted hover:text-fg transition-colors">
-            Ch. {next} →
-          </Link>
-        ) : (
-          <span className="text-sm text-border">Last →</span>
-        )}
-
-        <button
-          onClick={toggleMode}
-          className="flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-surface-2 text-muted hover:text-fg transition-colors border-l border-border ml-1 pl-3"
-          aria-label="Toggle reading mode"
-        >
-          <ModeIcon m={mode} />
-        </button>
+          {next !== null ? (
+            <Link href={`/chapter/${slug}/${next}`} className="flex items-center gap-1 text-sm text-muted hover:text-fg transition-colors">
+              Ch. {next}
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m9 18 6-6-6-6"/></svg>
+            </Link>
+          ) : (
+            <span className="text-sm text-border/50">Last</span>
+          )}
+        </div>
       </div>
 
-      <div className="h-20" />
+      <div className="h-24" />
     </div>
   )
 }
