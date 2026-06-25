@@ -90,83 +90,85 @@ export default function GenreFilter({
 
   return (
     <div className="mb-6 space-y-3">
-      {/* Row 1: Type tabs */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-hide">
-        <button
-          onClick={() => push({ type: null, genre: null, sort: null })}
-          className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-            !currentType ? 'bg-accent text-white' : 'bg-surface-2 text-muted hover:text-fg'
-          }`}
-        >
-          All
-        </button>
-        {TYPES.map(t => (
+      {/* Row: type pills (scrollable) + dropdowns (outside overflow so panels aren't clipped) */}
+      <div className="flex items-center gap-2">
+        {/* Scrollable type pills */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-hide flex-1 min-w-0">
           <button
-            key={t}
-            onClick={() => push({ type: currentType === t ? null : t, genre: null, sort: currentSort ?? null })}
+            onClick={() => push({ type: null, genre: null, sort: null })}
             className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              currentType === t ? 'bg-accent text-white' : 'bg-surface-2 text-muted hover:text-fg'
+              !currentType ? 'bg-accent text-white' : 'bg-surface-2 text-muted hover:text-fg'
             }`}
           >
-            {t}
+            All
           </button>
-        ))}
-
-        <div className="flex-1" />
-
-        {/* Genre dropdown */}
-        <Dropdown
-          label={
-            <span className={currentGenre ? 'text-white' : ''}>
-              {currentGenre ?? 'Genre'}
-            </span>
-          }
-        >
-          {close => (
-            <>
-              {currentGenre && (
-                <button
-                  onClick={() => { push({ genre: null }); close() }}
-                  className="w-full text-left px-3 py-2 text-xs text-accent hover:bg-surface-2 rounded-lg transition-colors"
-                >
-                  Clear genre
-                </button>
-              )}
-              {(GENRES.length ? GENRES : _genres).map(g => (
-                <button
-                  key={g}
-                  onClick={() => { push({ genre: currentGenre === g ? null : g, sort: null, type: null }); close() }}
-                  className={`w-full text-left px-3 py-2 text-sm rounded-lg transition-colors ${
-                    currentGenre === g ? 'text-accent font-medium bg-accent/10' : 'text-fg hover:bg-surface-2'
-                  }`}
-                >
-                  {g}
-                </button>
-              ))}
-            </>
-          )}
-        </Dropdown>
-
-        {/* Sort dropdown */}
-        <Dropdown
-          label={
-            <span className={currentSort ? 'text-white' : ''}>
-              {activeSort?.label ?? 'Sort'}
-            </span>
-          }
-        >
-          {close => SORTS.map(s => (
+          {TYPES.map(t => (
             <button
-              key={s.id}
-              onClick={() => { push({ sort: currentSort === s.id ? null : s.id, genre: null }); close() }}
-              className={`w-full text-left px-3 py-2 text-sm rounded-lg transition-colors ${
-                currentSort === s.id ? 'text-accent font-medium bg-accent/10' : 'text-fg hover:bg-surface-2'
+              key={t}
+              onClick={() => push({ type: currentType === t ? null : t, genre: null, sort: currentSort ?? null })}
+              className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                currentType === t ? 'bg-accent text-white' : 'bg-surface-2 text-muted hover:text-fg'
               }`}
             >
-              {s.label}
+              {t}
             </button>
           ))}
-        </Dropdown>
+        </div>
+
+        {/* Dropdowns — kept outside overflow container so the panel isn't clipped */}
+        <div className="flex items-center gap-1.5 flex-shrink-0">
+          <Dropdown
+            label={
+              <span className={currentGenre ? 'text-white' : ''}>
+                {currentGenre ?? 'Genre'}
+              </span>
+            }
+          >
+            {close => (
+              <>
+                {currentGenre && (
+                  <button
+                    onClick={() => { push({ genre: null }); close() }}
+                    className="w-full text-left px-3 py-2 text-xs text-accent hover:bg-surface-2 rounded-lg transition-colors"
+                  >
+                    Clear genre
+                  </button>
+                )}
+                {(GENRES.length ? GENRES : _genres).map(g => (
+                  <button
+                    key={g}
+                    onClick={() => { push({ genre: currentGenre === g ? null : g, sort: null, type: null }); close() }}
+                    className={`w-full text-left px-3 py-2 text-sm rounded-lg transition-colors ${
+                      currentGenre === g ? 'text-accent font-medium bg-accent/10' : 'text-fg hover:bg-surface-2'
+                    }`}
+                  >
+                    {g}
+                  </button>
+                ))}
+              </>
+            )}
+          </Dropdown>
+
+          <Dropdown
+            label={
+              <span className={currentSort ? 'text-white' : ''}>
+                {activeSort?.label ?? 'Sort'}
+              </span>
+            }
+          >
+            {close => SORTS.map(s => (
+              <button
+                key={s.id}
+                onClick={() => { push({ sort: currentSort === s.id ? null : s.id, genre: null }); close() }}
+                className={`w-full text-left px-3 py-2 text-sm rounded-lg transition-colors ${
+                  currentSort === s.id ? 'text-accent font-medium bg-accent/10' : 'text-fg hover:bg-surface-2'
+                }`}
+              >
+                {s.label}
+              </button>
+            ))}
+          </Dropdown>
+        </div>
       </div>
 
       {/* Active filter chips */}
