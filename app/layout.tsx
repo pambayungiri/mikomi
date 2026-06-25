@@ -17,6 +17,17 @@ export const metadata: Metadata = {
   title: 'Mikomi — Read Manga, Manhwa, Manhua',
   description: 'Read manga, manhwa, and manhua online for free. Discover the latest updates, popular series, and new arrivals.',
   manifest: '/manifest.json',
+  icons: {
+    icon: [
+      { url: '/icons/favicon-16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/icons/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icons/icon-96.png',    sizes: '96x96',  type: 'image/png' },
+    ],
+    apple: [
+      { url: '/icons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+  },
   openGraph: {
     title: 'Mikomi — Read Manga, Manhwa, Manhua',
     description: 'Read manga, manhwa, and manhua online for free.',
@@ -39,7 +50,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icons/favicon-32.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
       </head>
       <body className={`${inter.className} bg-bg text-fg min-h-screen`}>
         <ServiceWorkerRegister />
