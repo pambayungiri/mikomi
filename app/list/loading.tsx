@@ -3,25 +3,16 @@ import { MangaCardSkeletonGrid } from '@/components/MangaCardSkeleton'
 export default function ListLoading() {
   return (
     <div>
-      <div className="h-6 w-24 rounded bg-surface-2 animate-pulse mb-4" />
+      <div className="h-7 w-20 rounded bg-surface-2 animate-pulse mb-4" />
 
-      {/* Filter skeleton */}
-      <div className="mb-6 space-y-3">
-        <div className="flex gap-2">
-          {[80, 110, 100, 90].map((w, i) => (
-            <div key={i} className="h-8 rounded-full bg-surface-2 animate-pulse" style={{ width: w }} />
-          ))}
-        </div>
-        <div className="flex gap-2">
-          {[70, 80, 80].map((w, i) => (
-            <div key={i} className="h-8 rounded-full bg-surface-2 animate-pulse" style={{ width: w }} />
-          ))}
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {[60, 70, 80, 65, 90, 55, 75, 85, 100, 60, 70].map((w, i) => (
-            <div key={i} className="h-7 rounded-full bg-surface-2 animate-pulse" style={{ width: w }} />
-          ))}
-        </div>
+      {/* Filter bar skeleton — matches new 1-row design */}
+      <div className="mb-6 flex items-center gap-2 overflow-hidden">
+        {[60, 72, 88, 84].map((w, i) => (
+          <div key={i} className="h-9 rounded-lg bg-surface-2 animate-pulse flex-shrink-0" style={{ width: w }} />
+        ))}
+        <div className="flex-1" />
+        <div className="h-9 w-24 rounded-lg bg-surface-2 animate-pulse flex-shrink-0" />
+        <div className="h-9 w-20 rounded-lg bg-surface-2 animate-pulse flex-shrink-0" />
       </div>
 
       <MangaCardSkeletonGrid count={18} />
