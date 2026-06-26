@@ -43,7 +43,12 @@ export default function ChapterList({
       const { pages } = await res.json() as { pages: string[] }
 
       const reg = await navigator.serviceWorker.ready
-      reg.active?.postMessage({ type: 'CACHE_CHAPTER', urls: pages })
+      reg.active?.postMessage({
+        type: 'CACHE_CHAPTER',
+        urls: pages,
+        chapterUrl: `/chapter/${slug}/${chapterNum}`,
+        apiUrl: `/api/chapter/${slug}/${chapterNum}`,
+      })
 
       const existing: { slug: string; chapter: number }[] = JSON.parse(
         localStorage.getItem('mikomi_offline') ?? '[]'

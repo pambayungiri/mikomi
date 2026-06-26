@@ -1,6 +1,6 @@
 const CACHE = 'mikomi-v1'
 const CHAPTER_CACHE = 'mikomi-chapters-v1'
-const STATIC = ['/', '/list', '/search', '/bookmark', '/history']
+const STATIC = ['/', '/list', '/bookmark', '/history', '/offline']
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(STATIC).catch(() => {})))
@@ -16,22 +16,44 @@ self.addEventListener('activate', e => {
   self.clients.claim()
 })
 
-// Cache chapter images when the reader sends a CACHE_CHAPTER message
+// Cache chapter images + page HTML + API response when user saves a chapter
 self.addEventListener('message', e => {
   if (e.data?.type !== 'CACHE_CHAPTER') return
   const urls = Array.isArray(e.data.urls) ? e.data.urls : []
+  const chapterUrl = e.data.chapterUrl  // e.g. /chapter/slug/1
+  const apiUrl = e.data.apiUrl          // e.g. /api/chapter/slug/1
+
   e.waitUntil(
     caches.open(CHAPTER_CACHE).then(cache =>
-      Promise.all(
-        urls.map(url =>
+      Promise.all([
+        // Cache manga page images (no-cors for cross-origin CDN images)
+        ...urls.map(url =>
           cache.match(url).then(hit => {
-            if (hit) return // already cached
+            if (hit) return
             return fetch(url, { mode: 'no-cors' })
               .then(res => cache.put(url, res))
               .catch(() => {})
           })
-        )
-      )
+        ),
+        // Cache the chapter page HTML so it loads offline
+        chapterUrl
+          ? cache.match(chapterUrl).then(hit => {
+              if (hit) return
+              return fetch(chapterUrl)
+                .then(res => { if (res.ok) return cache.put(chapterUrl, res) })
+                .catch(() => {})
+            })
+          : Promise.resolve(),
+        // Cache the API response so same-origin image URLs resolve offline
+        apiUrl
+          ? cache.match(apiUrl).then(hit => {
+              if (hit) return
+              return fetch(apiUrl)
+                .then(res => { if (res.ok) return cache.put(apiUrl, res.clone()) })
+                .catch(() => {})
+            })
+          : Promise.resolve(),
+      ])
     )
   )
 })
@@ -40,7 +62,7 @@ self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return
   const url = new URL(e.request.url)
 
-  // Cross-origin: serve from chapter cache when available, otherwise network
+  // Cross-origin (CDN images): chapter cache first, then network
   if (url.hostname !== self.location.hostname) {
     e.respondWith(
       caches.open(CHAPTER_CACHE).then(cache =>
@@ -50,24 +72,37 @@ self.addEventListener('fetch', e => {
     return
   }
 
-  // Network-first for navigation (always fresh HTML)
+  // Navigation requests (page loads)
   if (e.request.mode === 'navigate') {
     e.respondWith(
-      fetch(e.request).catch(() => caches.match('/'))
+      fetch(e.request).catch(() => {
+        // For saved chapters: try chapter cache, then fall back to /offline
+        if (url.pathname.startsWith('/chapter/')) {
+          return caches.open(CHAPTER_CACHE)
+            .then(cache => cache.match(e.request))
+            .then(cached => cached ?? caches.match('/offline'))
+        }
+        return caches.match('/')
+      })
     )
     return
   }
 
-  // Cache-first for same-origin static assets
+  // Same-origin API + static assets: check both caches, then network (auto-cache on fetch)
   e.respondWith(
     caches.match(e.request).then(cached => {
       if (cached) return cached
-      return fetch(e.request).then(res => {
-        if (!res.ok || res.status === 206) return res
-        const clone = res.clone()
-        caches.open(CACHE).then(c => c.put(e.request, clone)).catch(() => {})
-        return res
-      })
+      return caches.open(CHAPTER_CACHE).then(chCache =>
+        chCache.match(e.request).then(chCached => {
+          if (chCached) return chCached
+          return fetch(e.request).then(res => {
+            if (!res.ok || res.status === 206) return res
+            const clone = res.clone()
+            caches.open(CACHE).then(c => c.put(e.request, clone)).catch(() => {})
+            return res
+          })
+        })
+      )
     })
   )
 })
