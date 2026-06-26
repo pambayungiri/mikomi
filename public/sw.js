@@ -1,6 +1,6 @@
 const CACHE = 'mikomi-v1'
 const CHAPTER_CACHE = 'mikomi-chapters-v1'
-const STATIC = ['/', '/list', '/bookmark', '/history', '/offline']
+const STATIC = ['/', '/list', '/bookmark', '/history', '/offline', '/manifest.json']
 
 self.addEventListener('install', e => {
   e.waitUntil(

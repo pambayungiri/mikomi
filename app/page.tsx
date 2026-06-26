@@ -4,7 +4,7 @@ import HeroCarousel from '@/components/HeroCarousel'
 import ContinueReadingSection from '@/components/ContinueReadingSection'
 import Link from 'next/link'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 function SectionHeader({ title, href }: { title: string; href: string }) {
   return (

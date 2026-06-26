@@ -58,9 +58,14 @@ export default function ChapterReader({
   useEffect(() => {
     if (!pages.length || !('serviceWorker' in navigator)) return
     navigator.serviceWorker.ready.then(reg => {
-      reg.active?.postMessage({ type: 'CACHE_CHAPTER', urls: pages })
+      reg.active?.postMessage({
+        type: 'CACHE_CHAPTER',
+        urls: pages,
+        chapterUrl: `/chapter/${slug}/${chapter}`,
+        apiUrl:     `/api/chapter/${slug}/${chapter}`,
+      })
     }).catch(() => {})
-  }, [pages])
+  }, [pages, slug, chapter])
 
   // Hide bottom nav when user pinch-zooms (iOS: fixed elements shift with zoom)
   useEffect(() => {
