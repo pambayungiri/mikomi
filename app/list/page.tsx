@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { getProvider } from '@/lib/providers'
+import type { PaginatedResult, MangaCard as MangaCardType } from '@/lib/providers/types'
 import GenreFilter from '@/components/GenreFilter'
 import BrowseGrid from '@/components/BrowseGrid'
 import MangaCard from '@/components/MangaCard'
@@ -51,7 +52,7 @@ export default async function BrowsePage({
   const isFiltered = !!(genre || sort || type)
   const showLoadMore = !genre && !type && sort !== 'rating'
 
-  let browseData: { data: Awaited<ReturnType<typeof provider.getList>>['data']; nextCursor?: string; hasMore: boolean } | null = null
+  let browseData: PaginatedResult<MangaCardType> | null = null
   if (!isSearching) {
     browseData = await provider.getList({ genre, sort: validSort, type, after })
   }
