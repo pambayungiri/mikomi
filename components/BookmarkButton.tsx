@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { readStorage, writeStorage, STORAGE_KEYS } from '@/lib/storage'
 import type { BookmarkEntry } from '@/lib/storage'
+import { showToast } from '@/lib/toast'
 
 export default function BookmarkButton({ manga }: { manga: BookmarkEntry }) {
   const [mounted, setMounted] = useState(false)
@@ -22,6 +23,10 @@ export default function BookmarkButton({ manga }: { manga: BookmarkEntry }) {
       : [manga, ...entries]
     writeStorage(STORAGE_KEYS.bookmarks, next)
     setBookmarked(!isBookmarked)
+    showToast(
+      isBookmarked ? 'Removed from favorites' : 'Added to favorites',
+      isBookmarked ? 'info' : 'success'
+    )
   }
 
   if (!mounted) {

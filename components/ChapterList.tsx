@@ -5,6 +5,7 @@ import Link from 'next/link'
 import type { ChapterMeta } from '@/lib/providers/types'
 import { readStorage, writeStorage, STORAGE_KEYS } from '@/lib/storage'
 import type { OfflineEntry } from '@/lib/storage'
+import { showToast } from '@/lib/toast'
 
 export default function ChapterList({
   slug,
@@ -55,7 +56,10 @@ export default function ChapterList({
       ]
       writeStorage(STORAGE_KEYS.offline, updated)
       setSaved(prev => new Set([...prev, chapterNum]))
-    } catch { /* ignore */ }
+      showToast('Chapter saved for offline reading')
+    } catch {
+      showToast('Failed to save chapter', 'error')
+    }
     setSaving(null)
   }
 

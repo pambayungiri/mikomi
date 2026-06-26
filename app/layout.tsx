@@ -5,6 +5,7 @@ import Nav from '@/components/Nav'
 import BottomNav from '@/components/BottomNav'
 import Footer from '@/components/Footer'
 import ServiceWorkerRegister from '@/components/ServiceWorkerRegister'
+import Toaster from '@/components/Toaster'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main-content" className="flex-1 flex flex-col max-w-6xl w-full mx-auto px-4 py-6 pb-24 md:pb-6">{children}</main>
         <Footer />
         <BottomNav />
+        <Toaster />
       </body>
     </html>
   )
