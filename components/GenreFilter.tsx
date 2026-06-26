@@ -11,11 +11,6 @@ const SORTS = [
 
 const TYPES = ['Manga', 'Manhwa', 'Manhua']
 
-const GENRES = [
-  'Action', 'Fantasy', 'Adventure', 'Comedy', 'Sci-Fi',
-  'Romance', 'Mystery', 'Horror', 'Slice of Life', 'Supernatural', 'Isekai',
-]
-
 function Dropdown({
   label,
   children,
@@ -61,7 +56,7 @@ function Dropdown({
 }
 
 export default function GenreFilter({
-  genres: _genres,
+  genres,
   currentGenre,
   currentSort,
   currentType,
@@ -134,7 +129,7 @@ export default function GenreFilter({
                     Clear genre
                   </button>
                 )}
-                {(GENRES.length ? GENRES : _genres).map(g => (
+                {genres.map(g => (
                   <button
                     key={g}
                     onClick={() => { push({ genre: currentGenre === g ? null : g, sort: null, type: null }); close() }}
