@@ -39,6 +39,7 @@ export default function BookmarkPage() {
   }
 
   function clearAll() {
+    if (!window.confirm('Remove all favorites? This cannot be undone.')) return
     writeStorage(STORAGE_KEYS.bookmarks, [])
     setBookmarks([])
   }

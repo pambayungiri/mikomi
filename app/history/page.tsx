@@ -50,6 +50,7 @@ export default function HistoryPage() {
   }
 
   function clearAll() {
+    if (!window.confirm('Clear all reading history? This cannot be undone.')) return
     writeStorage(STORAGE_KEYS.history, [])
     setHistory([])
   }
