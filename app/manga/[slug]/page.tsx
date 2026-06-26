@@ -102,7 +102,7 @@ export default async function MangaDetailPage({
                 <dt className="text-muted text-xs">Author</dt>
                 <dd>
                   <Link
-                    href={`/search?q=${encodeURIComponent(manga.author)}`}
+                    href={`/list?q=${encodeURIComponent(manga.author)}`}
                     className="text-fg hover:text-accent transition-colors"
                   >
                     {manga.author}

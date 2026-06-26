@@ -4,7 +4,7 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 import { saveSearch } from './RecentSearches'
 
-export default function SearchBar({ defaultValue = '' }: { defaultValue?: string }) {
+export default function SearchBar({ defaultValue = '', autoFocus = false }: { defaultValue?: string; autoFocus?: boolean }) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -45,7 +45,7 @@ export default function SearchBar({ defaultValue = '' }: { defaultValue?: string
         onChange={handleChange}
         placeholder="Search manga, manhwa, manhua..."
         className="w-full pl-10 pr-4 py-3 rounded-xl bg-surface border border-border text-fg placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
-        autoFocus
+        autoFocus={autoFocus}
       />
     </div>
   )

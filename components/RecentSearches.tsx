@@ -32,7 +32,7 @@ export default function RecentSearches() {
   }
 
   function search(q: string) {
-    router.push(`/search?q=${encodeURIComponent(q)}`)
+    router.push(`/list?q=${encodeURIComponent(q)}`)
   }
 
   if (!recents.length) return null
