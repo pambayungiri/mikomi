@@ -44,6 +44,7 @@ export default function Nav() {
             height={28}
             className="rounded-lg"
             priority
+            unoptimized
           />
           <span className="text-xl font-black tracking-tight bg-gradient-to-r from-accent via-pink-400 to-accent-2 bg-clip-text text-transparent group-hover:opacity-90 transition-opacity">
             Mikomi

@@ -3,7 +3,11 @@ const CHAPTER_CACHE = 'mikomi-chapters-v1'
 const STATIC = ['/', '/list', '/bookmark', '/history', '/offline']
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(STATIC).catch(() => {})))
+  e.waitUntil(
+    caches.open(CACHE).then(c =>
+      Promise.all(STATIC.map(url => c.add(url).catch(() => {})))
+    )
+  )
   self.skipWaiting()
 })
 
@@ -76,13 +80,15 @@ self.addEventListener('fetch', e => {
   if (e.request.mode === 'navigate') {
     e.respondWith(
       fetch(e.request).catch(() => {
-        // For saved chapters: try chapter cache, then fall back to /offline
+        // For saved chapters: try chapter cache first
         if (url.pathname.startsWith('/chapter/')) {
           return caches.open(CHAPTER_CACHE)
             .then(cache => cache.match(e.request))
-            .then(cached => cached ?? caches.match('/offline'))
+            .then(cached => cached ?? caches.match('/offline') ?? caches.match('/'))
         }
-        return caches.match('/')
+        // For other pages: try static cache, then fall back to home
+        return caches.match(e.request)
+          .then(cached => cached ?? caches.match('/'))
       })
     )
     return
