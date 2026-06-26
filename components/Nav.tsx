@@ -7,7 +7,8 @@ import { useEffect, useState } from 'react'
 
 const NAV_LINKS = [
   { href: '/list', label: 'Browse' },
-  { href: '/bookmark', label: 'Bookmark' },
+  { href: '/bookmark', label: 'Favorite' },
+  { href: '/offline', label: 'Saved' },
   { href: '/history', label: 'History' },
 ]
 

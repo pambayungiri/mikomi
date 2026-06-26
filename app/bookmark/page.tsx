@@ -80,7 +80,7 @@ export default function BookmarkPage() {
     <div className="flex flex-col flex-1">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-bold text-fg">
-          Bookmarks
+          Favorites
           {bookmarks.length > 0 && (
             <span className="text-sm font-normal text-muted ml-2">({bookmarks.length})</span>
           )}
@@ -106,7 +106,7 @@ export default function BookmarkPage() {
               type="search"
               value={search}
               onChange={e => setSearch(e.target.value)}
-              placeholder="Search bookmarks..."
+              placeholder="Search favorites..."
               className="w-full pl-8 pr-3 py-2 text-sm rounded-lg bg-surface border border-border text-fg placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
             />
           </div>
@@ -125,14 +125,14 @@ export default function BookmarkPage() {
 
       {bookmarks.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center gap-2">
-          <p className="text-muted text-sm">No bookmarks yet.</p>
+          <p className="text-muted text-sm">No favorites yet.</p>
           <Link href="/list" className="text-accent text-sm hover:underline">
             Browse manga →
           </Link>
         </div>
       ) : displayed.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center gap-2">
-          <p className="text-muted text-sm">No bookmarks match &quot;{search}&quot;.</p>
+          <p className="text-muted text-sm">No favorites match &quot;{search}&quot;.</p>
           <button onClick={() => setSearch('')} className="text-accent text-sm hover:underline">Clear search</button>
         </div>
       ) : (
