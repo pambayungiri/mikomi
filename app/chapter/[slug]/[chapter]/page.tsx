@@ -1,9 +1,31 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getProvider } from '@/lib/providers'
 import ChapterReader from '@/components/ChapterReader'
 import HistoryTracker from '@/components/HistoryTracker'
 
 export const revalidate = 86400
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string; chapter: string }>
+}): Promise<Metadata> {
+  const { slug, chapter } = await params
+  try {
+    const manga = await getProvider().getManga(slug)
+    return {
+      title: `${manga.name} — Chapter ${chapter} | Mikomi`,
+      description: `Read ${manga.name} Chapter ${chapter} on Mikomi.`,
+      openGraph: {
+        title: `${manga.name} — Chapter ${chapter}`,
+        images: manga.image ? [{ url: manga.image, alt: manga.name }] : [],
+      },
+    }
+  } catch {
+    return { title: `Chapter ${chapter} — Mikomi` }
+  }
+}
 
 export default async function ChapterPage({
   params,
