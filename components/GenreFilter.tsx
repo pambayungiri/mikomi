@@ -52,7 +52,7 @@ function Dropdown({
         </svg>
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-1 z-50 bg-surface border border-border rounded-xl shadow-xl min-w-[180px] p-1">
+        <div className="absolute top-full right-0 mt-1 z-50 bg-surface border border-border rounded-xl shadow-xl min-w-[180px] p-1">
           {children(() => setOpen(false))}
         </div>
       )}
@@ -89,7 +89,7 @@ export default function GenreFilter({
   const hasFilters = !!(currentGenre || currentSort || currentType)
 
   return (
-    <div className="mb-6 space-y-3">
+    <div className="mt-4 mb-6 space-y-3">
       {/* Row: type pills (scrollable) + dropdowns (outside overflow so panels aren't clipped) */}
       <div className="flex items-center gap-2">
         {/* Scrollable type pills */}
