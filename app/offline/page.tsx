@@ -28,8 +28,9 @@ export default function OfflinePage() {
           chapters: chapters.sort((a, b) => a - b),
         }))
       )
-    } catch { /* ignore */ }
-    setLoaded(true)
+    } catch { /* ignore */ } finally {
+      setLoaded(true)
+    }
   }, [])
 
   function removeChapter(slug: string, chapter: number) {

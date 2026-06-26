@@ -61,7 +61,7 @@ export default async function BrowsePage({
       <h1 className="text-xl font-bold text-fg mb-4">Browse</h1>
 
       <Suspense>
-        <SearchBar defaultValue={q} />
+        <SearchBar key={q} defaultValue={q} />
       </Suspense>
 
       {isSearching ? (

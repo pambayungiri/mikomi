@@ -26,7 +26,8 @@ export default function SearchBar({ defaultValue = '', autoFocus = false }: { de
       } else {
         params.delete('q')
       }
-      router.replace(`${pathname}?${params.toString()}`)
+      const qs = params.toString()
+      router.replace(qs ? `${pathname}?${qs}` : pathname)
     }, 500)
   }
 
