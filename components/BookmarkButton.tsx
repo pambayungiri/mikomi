@@ -1,35 +1,24 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import type { MangaCard } from '@/lib/providers/types'
-
-type BookmarkEntry = Pick<MangaCard, 'slug' | 'name' | 'image' | 'type' | 'latestChapter'>
-
-const KEY = 'mikomi_bookmarks'
-
-function load(): BookmarkEntry[] {
-  try { return JSON.parse(localStorage.getItem(KEY) ?? '[]') } catch { return [] }
-}
-
-function save(entries: BookmarkEntry[]) {
-  localStorage.setItem(KEY, JSON.stringify(entries))
-}
+import { readStorage, writeStorage, STORAGE_KEYS } from '@/lib/storage'
+import type { BookmarkEntry } from '@/lib/storage'
 
 export default function BookmarkButton({ manga }: { manga: BookmarkEntry }) {
   const [bookmarked, setBookmarked] = useState(false)
 
   useEffect(() => {
-    const entries = load()
+    const entries = readStorage<BookmarkEntry[]>(STORAGE_KEYS.bookmarks, [])
     setBookmarked(entries.some(e => e.slug === manga.slug))
   }, [manga.slug])
 
   function toggle() {
-    const entries = load()
+    const entries = readStorage<BookmarkEntry[]>(STORAGE_KEYS.bookmarks, [])
     const isBookmarked = entries.some(e => e.slug === manga.slug)
     const next = isBookmarked
       ? entries.filter(e => e.slug !== manga.slug)
       : [manga, ...entries]
-    save(next)
+    writeStorage(STORAGE_KEYS.bookmarks, next)
     setBookmarked(!isBookmarked)
   }
 

@@ -3,13 +3,8 @@
 import { useState, useEffect, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import type { MangaCard as MangaCardType } from '@/lib/providers/types'
-
-type BookmarkEntry = Pick<MangaCardType, 'slug' | 'name' | 'image' | 'type' | 'latestChapter'>
-
-const KEY = 'mikomi_bookmarks'
-const HISTORY_KEY = 'mikomi_history'
-
+import { readStorage, writeStorage, STORAGE_KEYS } from '@/lib/storage'
+import type { BookmarkEntry } from '@/lib/storage'
 type LastReadMap = Record<string, number>
 type SortKey = 'added' | 'name' | 'type'
 
@@ -27,30 +22,24 @@ export default function BookmarkPage() {
   const [sort, setSort] = useState<SortKey>('added')
 
   useEffect(() => {
-    try {
-      const data = JSON.parse(localStorage.getItem(KEY) ?? '[]')
-      setBookmarks(Array.isArray(data) ? data : [])
+    const data = readStorage<BookmarkEntry[]>(STORAGE_KEYS.bookmarks, [])
+    setBookmarks(Array.isArray(data) ? data : [])
 
-      const history: { slug: string; chapter: number }[] = JSON.parse(
-        localStorage.getItem(HISTORY_KEY) ?? '[]'
-      )
-      const map: LastReadMap = {}
-      for (const entry of history) map[entry.slug] = entry.chapter
-      setLastRead(map)
-    } catch {
-      setBookmarks([])
-    }
+    const history = readStorage<{ slug: string; chapter: number }[]>(STORAGE_KEYS.history, [])
+    const map: LastReadMap = {}
+    for (const entry of history) map[entry.slug] = entry.chapter
+    setLastRead(map)
     setLoaded(true)
   }, [])
 
   function removeBookmark(slug: string) {
     const updated = bookmarks.filter(b => b.slug !== slug)
-    localStorage.setItem(KEY, JSON.stringify(updated))
+    writeStorage(STORAGE_KEYS.bookmarks, updated)
     setBookmarks(updated)
   }
 
   function clearAll() {
-    localStorage.removeItem(KEY)
+    writeStorage(STORAGE_KEYS.bookmarks, [])
     setBookmarks([])
   }
 

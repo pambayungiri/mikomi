@@ -3,16 +3,8 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-
-type HistoryEntry = {
-  slug: string
-  chapter: number
-  mangaName: string
-  mangaImage: string
-  timestamp: number
-}
-
-const KEY = 'mikomi_history'
+import { readStorage, writeStorage, STORAGE_KEYS } from '@/lib/storage'
+import type { HistoryEntry } from '@/lib/storage'
 
 function relativeTime(ts: number): string {
   const diff = Date.now() - ts
@@ -46,21 +38,19 @@ export default function HistoryPage() {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    try {
-      const data = JSON.parse(localStorage.getItem(KEY) ?? '[]')
-      setHistory(Array.isArray(data) ? data : [])
-    } catch { setHistory([]) }
+    const data = readStorage<HistoryEntry[]>(STORAGE_KEYS.history, [])
+    setHistory(Array.isArray(data) ? data : [])
     setLoaded(true)
   }, [])
 
   function removeEntry(slug: string, chapter: number) {
     const updated = history.filter(e => !(e.slug === slug && e.chapter === chapter))
-    localStorage.setItem(KEY, JSON.stringify(updated))
+    writeStorage(STORAGE_KEYS.history, updated)
     setHistory(updated)
   }
 
   function clearAll() {
-    localStorage.removeItem(KEY)
+    writeStorage(STORAGE_KEYS.history, [])
     setHistory([])
   }
 

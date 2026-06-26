@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { STORAGE_KEYS } from '@/lib/storage'
 
-const KEY = 'mikomi_recent_searches'
 const MAX = 6
 
 export function saveSearch(query: string) {
   if (!query.trim()) return
   try {
-    const existing: string[] = JSON.parse(localStorage.getItem(KEY) ?? '[]')
+    const existing: string[] = JSON.parse(localStorage.getItem(STORAGE_KEYS.recentSearches) ?? '[]')
     const updated = [query, ...existing.filter(q => q !== query)].slice(0, MAX)
-    localStorage.setItem(KEY, JSON.stringify(updated))
+    localStorage.setItem(STORAGE_KEYS.recentSearches, JSON.stringify(updated))
   } catch { /* ignore */ }
 }
 
@@ -21,13 +21,13 @@ export default function RecentSearches() {
 
   useEffect(() => {
     try {
-      const data = JSON.parse(localStorage.getItem(KEY) ?? '[]')
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEYS.recentSearches) ?? '[]')
       setRecents(Array.isArray(data) ? data : [])
     } catch { setRecents([]) }
   }, [])
 
   function clear() {
-    localStorage.removeItem(KEY)
+    localStorage.removeItem(STORAGE_KEYS.recentSearches)
     setRecents([])
   }
 

@@ -3,8 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-
-const MODE_KEY = 'mikomi_reading_mode'
+import { readStorage, writeStorage, STORAGE_KEYS } from '@/lib/storage'
 
 function PageImage({ src, index }: { src: string; index: number }) {
   const [loaded, setLoaded] = useState(false)
@@ -51,10 +50,8 @@ export default function ChapterReader({
   const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem(MODE_KEY)
-      if (saved === 'single' || saved === 'strip') setMode(saved)
-    } catch { /* ignore */ }
+    const saved = readStorage<string>(STORAGE_KEYS.readingMode, 'strip')
+    if (saved === 'single' || saved === 'strip') setMode(saved)
   }, [])
 
   // Cache chapter images in service worker for offline reading
@@ -125,7 +122,7 @@ export default function ChapterReader({
     setPageIndex(0)
     setProgress(0)
     setSingleLoaded(false)
-    try { localStorage.setItem(MODE_KEY, nextMode) } catch { /* ignore */ }
+    writeStorage(STORAGE_KEYS.readingMode, nextMode)
   }
 
   const goNext = useCallback(() => {

@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-
-type OfflineEntry = { slug: string; chapter: number }
+import { readStorage, writeStorage, STORAGE_KEYS } from '@/lib/storage'
+import type { OfflineEntry } from '@/lib/storage'
 type MangaGroup = { slug: string; chapters: number[] }
 
 function slugToTitle(slug: string) {
@@ -16,7 +16,7 @@ export default function OfflinePage() {
 
   useEffect(() => {
     try {
-      const entries: OfflineEntry[] = JSON.parse(localStorage.getItem('mikomi_offline') ?? '[]')
+      const entries = readStorage<OfflineEntry[]>(STORAGE_KEYS.offline, [])
       const map = new Map<string, number[]>()
       for (const e of entries) {
         if (!map.has(e.slug)) map.set(e.slug, [])
@@ -35,9 +35,9 @@ export default function OfflinePage() {
 
   function removeChapter(slug: string, chapter: number) {
     try {
-      const entries: OfflineEntry[] = JSON.parse(localStorage.getItem('mikomi_offline') ?? '[]')
+      const entries = readStorage<OfflineEntry[]>(STORAGE_KEYS.offline, [])
       const updated = entries.filter(e => !(e.slug === slug && e.chapter === chapter))
-      localStorage.setItem('mikomi_offline', JSON.stringify(updated))
+      writeStorage(STORAGE_KEYS.offline, updated)
       setGroups(prev =>
         prev
           .map(g => g.slug === slug ? { ...g, chapters: g.chapters.filter(c => c !== chapter) } : g)
@@ -48,9 +48,9 @@ export default function OfflinePage() {
 
   function clearManga(slug: string) {
     try {
-      const entries: OfflineEntry[] = JSON.parse(localStorage.getItem('mikomi_offline') ?? '[]')
+      const entries = readStorage<OfflineEntry[]>(STORAGE_KEYS.offline, [])
       const updated = entries.filter(e => e.slug !== slug)
-      localStorage.setItem('mikomi_offline', JSON.stringify(updated))
+      writeStorage(STORAGE_KEYS.offline, updated)
       setGroups(prev => prev.filter(g => g.slug !== slug))
     } catch { /* ignore */ }
   }

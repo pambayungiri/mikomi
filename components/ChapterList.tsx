@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import type { ChapterMeta } from '@/lib/providers/types'
+import { readStorage, writeStorage, STORAGE_KEYS } from '@/lib/storage'
+import type { OfflineEntry } from '@/lib/storage'
 
 export default function ChapterList({
   slug,
@@ -21,15 +23,11 @@ export default function ChapterList({
     setSwSupported('serviceWorker' in navigator)
 
     try {
-      const history: { slug: string; chapter: number }[] = JSON.parse(
-        localStorage.getItem('mikomi_history') ?? '[]'
-      )
+      const history = readStorage<{ slug: string; chapter: number }[]>(STORAGE_KEYS.history, [])
       const entry = history.find(e => e.slug === slug)
       if (entry) setLastRead(entry.chapter)
 
-      const offline: { slug: string; chapter: number }[] = JSON.parse(
-        localStorage.getItem('mikomi_offline') ?? '[]'
-      )
+      const offline = readStorage<OfflineEntry[]>(STORAGE_KEYS.offline, [])
       setSaved(new Set(offline.filter(o => o.slug === slug).map(o => o.chapter)))
     } catch { /* ignore */ }
   }, [slug])
@@ -50,14 +48,12 @@ export default function ChapterList({
         apiUrl: `/api/chapter/${slug}/${chapterNum}`,
       })
 
-      const existing: { slug: string; chapter: number }[] = JSON.parse(
-        localStorage.getItem('mikomi_offline') ?? '[]'
-      )
-      const updated = [
+      const existing = readStorage<OfflineEntry[]>(STORAGE_KEYS.offline, [])
+      const updated: OfflineEntry[] = [
         ...existing.filter(o => !(o.slug === slug && o.chapter === chapterNum)),
         { slug, chapter: chapterNum },
       ]
-      localStorage.setItem('mikomi_offline', JSON.stringify(updated))
+      writeStorage(STORAGE_KEYS.offline, updated)
       setSaved(prev => new Set([...prev, chapterNum]))
     } catch { /* ignore */ }
     setSaving(null)

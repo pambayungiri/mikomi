@@ -3,25 +3,15 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-
-type HistoryEntry = {
-  slug: string
-  chapter: number
-  mangaName: string
-  mangaImage: string
-  timestamp: number
-}
+import { readStorage, STORAGE_KEYS } from '@/lib/storage'
+import type { HistoryEntry } from '@/lib/storage'
 
 export default function ContinueReadingSection() {
   const [history, setHistory] = useState<HistoryEntry[]>([])
 
   useEffect(() => {
-    try {
-      const data = JSON.parse(localStorage.getItem('mikomi_history') ?? '[]')
-      setHistory(Array.isArray(data) ? data.slice(0, 10) : [])
-    } catch {
-      setHistory([])
-    }
+    const data = readStorage<HistoryEntry[]>(STORAGE_KEYS.history, [])
+    setHistory(Array.isArray(data) ? data.slice(0, 10) : [])
   }, [])
 
   if (!history.length) return null
