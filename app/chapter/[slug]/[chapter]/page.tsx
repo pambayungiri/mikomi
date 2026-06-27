@@ -15,10 +15,10 @@ export async function generateMetadata({
   try {
     const manga = await getProvider().getManga(slug)
     return {
-      title: `${manga.name} — Chapter ${chapter} | Mikomi`,
-      description: `Read ${manga.name} Chapter ${chapter} on Mikomi.`,
+      title:       `Baca ${manga.name} Chapter ${chapter} Sub Indo | Mikomi`,
+      description: `Baca ${manga.name} chapter ${chapter} bahasa Indonesia online gratis di Mikomi.`,
       openGraph: {
-        title: `${manga.name} — Chapter ${chapter}`,
+        title:  `${manga.name} Chapter ${chapter} Sub Indo`,
         images: manga.image ? [{ url: manga.image, alt: manga.name }] : [],
       },
     }

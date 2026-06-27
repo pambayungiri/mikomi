@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import Script from 'next/script'
 import { getProvider } from '@/lib/providers'
 import AgeGate from '@/components/AgeGate'
 import BookmarkButton from '@/components/BookmarkButton'
@@ -17,27 +18,27 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const provider = getProvider()
   try {
-    const manga = await provider.getManga(slug)
+    const manga = await getProvider().getManga(slug)
+    const genreList = manga.genre.slice(0, 3).join(', ')
     const desc = manga.description
-      ? manga.description.slice(0, 155)
-      : `Read ${manga.name} — ${manga.genre.slice(0, 3).join(', ')} ${manga.type} on Mikomi.`
+      ? `${manga.description.slice(0, 120)} — Baca gratis di Mikomi.`
+      : `Baca manga ${manga.name} bahasa Indonesia online gratis di Mikomi. Genre: ${genreList}. Status: ${manga.status}.`
     return {
-      title: `${manga.name} — Mikomi`,
+      title:       `Baca ${manga.name} Bahasa Indonesia | Mikomi`,
       description: desc,
       openGraph: {
-        title: manga.name,
+        title:       `Baca ${manga.name} Bahasa Indonesia`,
         description: desc,
-        images: manga.image ? [{ url: manga.image, alt: manga.name }] : [],
-        type: 'book',
-        siteName: 'Mikomi',
+        images:      manga.image ? [{ url: manga.image, alt: manga.name }] : [],
+        type:        'book',
+        siteName:    'Mikomi',
       },
       twitter: {
-        card: 'summary_large_image',
-        title: manga.name,
+        card:        'summary_large_image',
+        title:       `Baca ${manga.name} Bahasa Indonesia`,
         description: desc,
-        images: manga.image ? [manga.image] : [],
+        images:      manga.image ? [manga.image] : [],
       },
     }
   } catch {
@@ -76,6 +77,20 @@ export default async function MangaDetailPage({
       {manga.contentRating && (
         <AgeGate mangaId={manga.id} contentRating={manga.contentRating} />
       )}
+      <Script id="manga-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Book',
+          name:          manga.name,
+          inLanguage:    'id',
+          genre:         manga.genre,
+          author:        manga.author ? { '@type': 'Person', name: manga.author } : undefined,
+          numberOfPages: manga.chapters.length,
+          url:           `${process.env.NEXT_PUBLIC_BASE_URL ?? 'https://mikomi.vercel.app'}/manga/${manga.slug}`,
+          image:         manga.image || undefined,
+          description:   manga.description || undefined,
+        })
+      }} />
       <div className="md:flex gap-8">
         {/* Sidebar */}
         <aside className="md:w-52 flex-shrink-0 md:sticky md:top-20 md:self-start">
