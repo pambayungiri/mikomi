@@ -181,7 +181,7 @@ async function getTagMap(): Promise<Map<string, string>> {
   const { data } = await mdexFetch<{ data: MDexTag[] }>(`${MDEX}/manga/tag`, 86400 * 7)
   tagMapCache = new Map(
     data
-      .filter(t => t.attributes.group === 'genre')
+      .filter(t => t.attributes.group === 'genre' || t.attributes.group === 'theme')
       .map(t => [(t.attributes.name.en ?? '').toLowerCase(), t.id])
   )
   return tagMapCache
@@ -191,8 +191,12 @@ async function resolveSlug(slug: string): Promise<string> {
   const cached = slugRegistry.getUuid(slug)
   if (cached) return cached
 
-  // Slug miss: search MangaDex by title derived from slug
-  const query = slug.replace(/-/g, ' ')
+  // Detect collision suffix: trailing `-xxxxxxxx` (8 hex chars)
+  const collisionMatch = slug.match(/^(.+)-([0-9a-f]{8})$/)
+  const searchSlug = collisionMatch ? collisionMatch[1] : slug
+  const uuidPrefix = collisionMatch ? collisionMatch[2] : null
+
+  const query = searchSlug.replace(/-/g, ' ')
   const url = buildUrl('/manga', {
     title: query,
     limit: '5',
@@ -203,10 +207,19 @@ async function resolveSlug(slug: string): Promise<string> {
   const { data } = await mdexFetch<MDexListResponse>(url, 3600)
   if (!data.length) throw new Error(`Manga not found: ${slug}`)
 
-  // Register all results so future lookups are cached
   for (const manga of data) {
     const name = pickTitle(manga.attributes.title, manga.attributes.altTitles)
     slugRegistry.register(manga.id, name)
+  }
+
+  // If we stripped a collision suffix, also try to match by UUID prefix
+  if (uuidPrefix) {
+    const byPrefix = data.find(m => m.id.replace(/-/g, '').startsWith(uuidPrefix))
+    if (byPrefix) {
+      const name = pickTitle(byPrefix.attributes.title, byPrefix.attributes.altTitles)
+      slugRegistry.register(byPrefix.id, name)
+      return byPrefix.id
+    }
   }
 
   return slugRegistry.getUuid(slug) ?? data[0].id
