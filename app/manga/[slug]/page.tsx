@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getProvider } from '@/lib/providers'
+import AgeGate from '@/components/AgeGate'
 import BookmarkButton from '@/components/BookmarkButton'
 import ExpandableText from '@/components/ExpandableText'
 import ChapterList from '@/components/ChapterList'
@@ -72,6 +73,9 @@ export default async function MangaDetailPage({
 
   return (
     <>
+      {manga.contentRating && (
+        <AgeGate mangaId={manga.id} contentRating={manga.contentRating} />
+      )}
       <div className="md:flex gap-8">
         {/* Sidebar */}
         <aside className="md:w-52 flex-shrink-0 md:sticky md:top-20 md:self-start">
