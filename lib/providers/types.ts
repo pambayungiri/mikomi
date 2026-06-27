@@ -26,6 +26,7 @@ export type MangaDetail = MangaCard & {
   status: string         // "Ongoing" | "Completed" | "Hiatus"
   rilis: string
   chapters: ChapterMeta[]
+  contentRating?: string
 }
 
 export type ChapterDetail = {
