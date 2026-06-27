@@ -5,8 +5,9 @@ import type {
 import { slugRegistry } from './mangadex-slug'
 
 const MDEX = 'https://api.mangadex.org'
-// erotica/pornographic require MangaDex auth — omit from unauthenticated server calls
-const CONTENT_RATINGS = ['safe', 'suggestive', 'mature']
+// MangaDex content ratings: safe | suggestive | erotica | pornographic (no 'mature')
+// erotica/pornographic require auth — use safe+suggestive for unauthenticated calls
+const CONTENT_RATINGS = ['safe', 'suggestive']
 
 // ─── MangaDex API types ──────────────────────────────────────────────────────
 
