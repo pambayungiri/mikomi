@@ -78,16 +78,19 @@ export function deduplicateChapters(chapters: MDexChapter[]): MDexChapter[] {
 
 // ─── Private helpers ─────────────────────────────────────────────────────────
 
+// MangaDex requires literal brackets in query param keys (e.g. `order[rating]=desc`).
+// URLSearchParams encodes them as %5B%5D which MangaDex does not decode → 400.
+// Build the query string manually to keep brackets unencoded.
 function buildUrl(path: string, params: Record<string, string | string[]>): string {
-  const url = new URL(`${MDEX}${path}`)
+  const parts: string[] = []
   for (const [key, value] of Object.entries(params)) {
     if (Array.isArray(value)) {
-      for (const v of value) url.searchParams.append(key, v)
+      for (const v of value) parts.push(`${key}=${encodeURIComponent(v)}`)
     } else {
-      url.searchParams.set(key, value)
+      parts.push(`${key}=${encodeURIComponent(value)}`)
     }
   }
-  return url.toString()
+  return parts.length ? `${MDEX}${path}?${parts.join('&')}` : `${MDEX}${path}`
 }
 
 async function mdexFetch<T>(url: string, revalidate = 3600): Promise<T> {
