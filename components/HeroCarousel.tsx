@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { MangaCard } from '@/lib/providers/types'
+import { proxyUrl } from '@/lib/proxy'
 
 const TYPE_BADGE: Record<string, string> = {
   Manga: 'bg-accent',
@@ -53,7 +54,7 @@ export default function HeroCarousel({ items }: { items: MangaCard[] }) {
           className={`absolute inset-0 transition-opacity duration-700 ${i === current ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         >
           <Image
-            src={manga.image}
+            src={proxyUrl(manga.image)}
             alt={manga.name}
             fill
             sizes="100vw"

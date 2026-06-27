@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Script from 'next/script'
+import { proxyUrl } from '@/lib/proxy'
 import { getProvider } from '@/lib/providers'
 import AgeGate from '@/components/AgeGate'
 import BookmarkButton from '@/components/BookmarkButton'
@@ -96,7 +97,7 @@ export default async function MangaDetailPage({
         <aside className="md:w-52 flex-shrink-0 md:sticky md:top-20 md:self-start">
           <div className="relative w-full aspect-[2/3] rounded-xl overflow-hidden mb-4">
             <Image
-              src={manga.image}
+              src={proxyUrl(manga.image)}
               alt={manga.name}
               fill
               sizes="208px"

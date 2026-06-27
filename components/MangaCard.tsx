@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { MangaCard as MangaCardType } from '@/lib/providers/types'
+import { proxyUrl } from '@/lib/proxy'
 import BookmarkIndicator from './BookmarkIndicator'
 import ReadingProgressIndicator from './ReadingProgressIndicator'
 
@@ -17,7 +18,7 @@ export default function MangaCard({ manga }: { manga: MangaCardType }) {
     <Link href={`/manga/${manga.slug}`} className="group block">
       <div className="relative overflow-hidden rounded-lg bg-surface aspect-[2/3]">
         <Image
-          src={manga.image}
+          src={proxyUrl(manga.image)}
           alt={manga.name}
           fill
           sizes="(max-width: 640px) 33vw, (max-width: 1024px) 20vw, 160px"

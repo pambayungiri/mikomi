@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { readStorage, STORAGE_KEYS } from '@/lib/storage'
+import { proxyUrl } from '@/lib/proxy'
 import type { HistoryEntry } from '@/lib/storage'
 
 export default function ContinueReadingSection() {
@@ -33,7 +34,7 @@ export default function ContinueReadingSection() {
           >
             <div className="relative aspect-[2/3] rounded-lg overflow-hidden bg-surface">
               <Image
-                src={entry.mangaImage}
+                src={proxyUrl(entry.mangaImage)}
                 alt={entry.mangaName}
                 fill
                 sizes="96px"
