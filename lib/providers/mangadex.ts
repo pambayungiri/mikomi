@@ -250,7 +250,6 @@ export class MangadexProvider implements MangaProvider {
     const base: Record<string, string | string[]> = {
       'contentRating[]': CONTENT_RATINGS,
       'includes[]':      ['cover_art', 'author', 'artist'],
-      'availableTranslatedLanguage[]': 'id',
     }
     return mdexFetch<MDexListResponse>(buildUrl('/manga', { ...base, ...params }), revalidate)
   }
