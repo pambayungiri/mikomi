@@ -123,7 +123,39 @@
 | `components/HeroCarousel.tsx` | No change needed |
 | `components/BottomNav.tsx` | Add text label to prominent Browse button |
 | `components/ChapterReader.tsx` | Increase mode toggle py to reach 44px |
-| `app/manga/[slug]/page.tsx` | Add "no chapters" message; show theme + demographic tags |
+| `app/manga/[slug]/page.tsx` | Add "no chapters" message (with DMCA explanation); show theme + demographic tags |
+| `lib/providers/mangadex.ts` | Change `getTopRatedByType` sort from `order[rating]=desc` → `order[followedCount]=desc` |
+| `app/page.tsx` | Rename "Top Rated" section headers to "Popular"; update `href` sort params |
+
+---
+
+### F. Content Accuracy (HIGH)
+
+**F1 — Famous manga show "0 Chapters" (DMCA/licensing stale flag)**
+- **Root cause (confirmed via API):** When manga publishers (Shueisha, Viz, etc.) issue DMCA takedowns, MangaDex removes the chapter content but keeps the manga metadata entry. Crucially, the `hasAvailableChapters=true` flag is NOT recalculated after removal — it stays `true` from when chapters were originally uploaded. This means One Piece, Naruto, Hunter x Hunter, Frieren, and others appear in browse/search results (stale flag says chapters exist) but the detail page shows 0 chapters (actual feed is empty).
+- **Evidence:** `GET /manga/{onePieceUuid}/feed` with no language or content-rating filter returns `total=0`.
+- **Scope:** We cannot fix MangaDex's stale flags. We CAN fix the user-facing message.
+- **Fix — update C2 message:** Change the 0-chapters message to explain the likely cause:
+  ```
+  <p className="text-muted text-sm mt-2">
+    Chapter tidak tersedia di MangaDex. Judul ini mungkin telah dihapus karena lisensi resmi
+    (seperti Shonen Jump / Viz). Coba baca di platform resmi.
+  </p>
+  ```
+  No code changes elsewhere — the spec item C2 already covers this, just update the copy.
+
+**F2 — "Top Rated" sections show obscure unknown manga (broken rating sort)**
+- **Root cause (confirmed via API):** MangaDex `order[rating]=desc` sorts by simple average — manga with 5 ratings of 10/10 rank above manga with 100,000 ratings of 9.5/10. There is no bayesian weighting. Additionally, MangaDex has removed the `rating` field from list API responses entirely (every result returns `rating: undefined` in June 2026), so the ordering is essentially arbitrary from a user perspective.
+- **Evidence:** `order[rating]=desc` for Manhwa returns "Eomma re Mannareo Ganeun Gil", "Yeokdaegeum Yeongji Seolgyesa", etc. — completely unknown titles. The same query with `order[followedCount]=desc` returns **Solo Leveling (#1)**, Omniscient Reader, A Returner's Magic — exactly what users expect.
+- **Fix:** Change `getTopRatedByType` in `lib/providers/mangadex.ts` from `order[rating]: 'desc'` → `order[followedCount]: 'desc'`. This makes per-type sections show the most followed (genuinely popular) titles per language origin:
+  - Manga (Japanese): My Dress-Up Darling, Shadow Garden, Tensei Slime, Frieren, Chainsaw Man
+  - Manhwa (Korean): **Solo Leveling**, Omniscient Reader, A Returner's Magic
+  - Manhua (Chinese): Known titles in the space
+- **Why not a duplicate of `getPopular()`:** `getPopular()` fetches across ALL types with no language filter → used for HeroCarousel (mixed). `getTopRatedByType` with `followedCount` filters by `originalLanguage[]=ko/ja/zh` → shows type-specific popular titles. Different set of results.
+- **Rename sections:** Update homepage labels from "Top Rated Manga/Manhwa/Manhua" → "Popular Manga/Popular Manhwa/Popular Manhua" to be accurate. Update `href` links from `?sort=rating` → `?sort=popular` (or keep as `followedCount` internally).
+- **Files:** `lib/providers/mangadex.ts` line 309, `app/page.tsx` lines 72-74
+
+---
 
 ## Global Constraints
 
