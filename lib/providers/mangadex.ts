@@ -205,7 +205,6 @@ async function resolveSlug(slug: string): Promise<string> {
   const url = buildUrl('/manga', {
     title: query,
     limit: '5',
-    'availableTranslatedLanguage[]': 'id',
     'contentRating[]': CONTENT_RATINGS,
     'includes[]': ['cover_art', 'author', 'artist'],
   })
@@ -235,10 +234,32 @@ async function fetchChapterFeed(uuid: string, lang = 'id'): Promise<MDexChapter[
     'translatedLanguage[]': lang,
     'order[chapter]': 'asc',
     limit: '500',
+    offset: '0',
     'contentRating[]': CONTENT_RATINGS,
   })
-  const { data } = await mdexFetch<MDexFeedResponse>(url, 3600)
-  return data
+  const res = await mdexFetch<MDexFeedResponse>(url, 3600)
+  const chapters = res.data
+
+  // If total > 500, fetch the remaining pages
+  if (res.total > 500) {
+    const extra = await Promise.all(
+      Array.from({ length: Math.ceil((res.total - 500) / 500) }, (_, i) =>
+        mdexFetch<MDexFeedResponse>(
+          buildUrl(`/manga/${uuid}/feed`, {
+            'translatedLanguage[]': lang,
+            'order[chapter]': 'asc',
+            limit: '500',
+            offset: String((i + 1) * 500),
+            'contentRating[]': CONTENT_RATINGS,
+          }),
+          3600,
+        ).then(r => r.data),
+      )
+    )
+    return chapters.concat(...extra)
+  }
+
+  return chapters
 }
 
 // ─── Provider ────────────────────────────────────────────────────────────────
@@ -249,8 +270,10 @@ export class MangadexProvider implements MangaProvider {
     revalidate = 3600,
   ): Promise<MDexListResponse> {
     const base: Record<string, string | string[]> = {
-      'contentRating[]': CONTENT_RATINGS,
-      'includes[]':      ['cover_art', 'author', 'artist'],
+      'contentRating[]':      CONTENT_RATINGS,
+      'includes[]':           ['cover_art', 'author', 'artist'],
+      // Only return manga that actually have chapters readable online
+      hasAvailableChapters:   'true',
     }
     return mdexFetch<MDexListResponse>(buildUrl('/manga', { ...base, ...params }), revalidate)
   }
@@ -272,7 +295,7 @@ export class MangadexProvider implements MangaProvider {
 
   async getPopularByType(type: string): Promise<MangaCard[]> {
     const { data } = await this.fetchList({
-      limit: '10',
+      limit: '16',
       'originalLanguage[]': [typeToLanguage(type)],
       'order[followedCount]': 'desc',
     })
@@ -281,11 +304,11 @@ export class MangadexProvider implements MangaProvider {
 
   async getTopRatedByType(type: string): Promise<MangaCard[]> {
     const { data } = await this.fetchList({
-      limit: '10',
+      limit: '16',
       'originalLanguage[]': [typeToLanguage(type)],
       'order[rating]': 'desc',
     })
-    return data.map(parseMangaCard)
+    return data.map(parseMangaCard).slice(0, 8)
   }
 
   async getList(opts: {
