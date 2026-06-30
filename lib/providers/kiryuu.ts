@@ -103,6 +103,28 @@ function parseMangaCard(m: WPManga): MangaCard {
 
 let genreMapCache: Map<string, number> | null = null
 
+// ─── Title index for fuzzy search fallback ────────────────────────────────────
+
+let titleIndexCache: { slug: string; name: string }[] | null = null
+
+async function buildTitleIndex(): Promise<{ slug: string; name: string }[]> {
+  if (titleIndexCache) return titleIndexCache
+  // Top 500 manga by modified date — covers most-searched titles without fetching all 8794
+  const pages = await Promise.all(
+    Array.from({ length: 5 }, (_, i) =>
+      kfetch<WPManga[]>(
+        `${BASE}/manga?per_page=100&page=${i + 1}&orderby=modified&order=desc&_fields=id,slug,title`,
+        86400
+      ).catch(() => [] as WPManga[])
+    )
+  )
+  titleIndexCache = pages.flat().map(m => ({
+    slug: m.slug,
+    name: decodeHtml(m.title.rendered),
+  }))
+  return titleIndexCache
+}
+
 async function getGenreMap(): Promise<Map<string, number>> {
   if (genreMapCache) return genreMapCache
   const terms = await kfetch<WPTaxTerm[]>(
@@ -329,7 +351,31 @@ export class KiryuuProvider implements MangaProvider {
       if (typeId) params['manga-type'] = typeId
     }
     const list = await this.fetchMangaList(params, 60)
-    return list.map(parseMangaCard)
+    const wpResults = list.map(parseMangaCard)
+
+    // Fuse.js fallback: WP MySQL LIKE search is literal — can't handle typos.
+    // Only runs when WP returns 0 results, so the hot path (≥1 WP result) is untouched.
+    if (wpResults.length === 0) {
+      const { default: Fuse } = await import('fuse.js')
+      const index = await buildTitleIndex()
+      const fuse = new Fuse(index, {
+        keys: ['name'],
+        threshold: 0.4,       // 0 = exact match, 1 = match anything — 0.4 handles single-word typos
+        minMatchCharLength: 2,
+      })
+      const matches = fuse.search(query.trim(), { limit: 8 })
+      if (matches.length === 0) return []
+      const details = await Promise.all(
+        matches.map(m =>
+          this.fetchMangaList({ slug: m.item.slug, per_page: 1 }, 3600)
+            .then(r => (r[0] ? parseMangaCard(r[0]) : null))
+            .catch(() => null)
+        )
+      )
+      return details.filter((d): d is MangaCard => d !== null)
+    }
+
+    return wpResults
   }
 
   async getRelated(genre: string, excludeSlug: string): Promise<MangaCard[]> {
