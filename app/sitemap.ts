@@ -34,7 +34,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return [...STATIC, ...mangaEntries]
   } catch {
-    // If MangaDex is unreachable, return static pages only
     return STATIC
   }
 }

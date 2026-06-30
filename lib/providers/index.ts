@@ -1,10 +1,10 @@
 import type { MangaProvider } from './types'
-import { MangadexProvider } from './mangadex'
+import { KiryuuProvider } from './kiryuu'
 
 let instance: MangaProvider | null = null
 
 export function getProvider(): MangaProvider {
   if (instance) return instance
-  instance = new MangadexProvider()
+  instance = new KiryuuProvider()
   return instance
 }
