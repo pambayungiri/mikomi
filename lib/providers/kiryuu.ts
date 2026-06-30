@@ -3,10 +3,12 @@ import type {
   PaginatedResult, MangaProvider,
 } from './types'
 
-const BASE = 'https://v6.kiryuu.to/wp-json/wp/v2'
+// If KIRYUU_BASE is set, requests go through a CF Worker relay instead of directly to
+// v6.kiryuu.to. Required on Vercel — Cloudflare blocks AWS datacenter IPs by ASN.
+const BASE = process.env.KIRYUU_BASE ?? 'https://v6.kiryuu.to/wp-json/wp/v2'
+const RELAY_KEY = process.env.KIRYUU_RELAY_KEY ?? ''
 
-// Cloudflare blocks requests without full browser headers from data-center IPs
-const HEADERS = {
+const HEADERS: Record<string, string> = {
   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
   'Accept': 'application/json, text/plain, */*',
   'Accept-Language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
@@ -15,6 +17,7 @@ const HEADERS = {
   'Cache-Control': 'no-cache',
   'Pragma': 'no-cache',
 }
+if (RELAY_KEY) HEADERS['x-relay-key'] = RELAY_KEY
 
 // Taxonomy IDs untuk filter per type
 const TYPE_IDS: Record<string, number> = {
