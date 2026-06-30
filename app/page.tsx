@@ -44,12 +44,12 @@ export default async function HomePage() {
     topManhwa,
     topManhua,
   ] = await Promise.all([
-    provider.getPopular(),
-    provider.getLatestUpdate(),
-    provider.getNewArrivals(),
-    provider.getTopRatedByType('Manga'),
-    provider.getTopRatedByType('Manhwa'),
-    provider.getTopRatedByType('Manhua'),
+    provider.getPopular().catch(() => [] as Awaited<ReturnType<typeof provider.getPopular>>),
+    provider.getLatestUpdate().catch(() => [] as Awaited<ReturnType<typeof provider.getLatestUpdate>>),
+    provider.getNewArrivals().catch(() => [] as Awaited<ReturnType<typeof provider.getNewArrivals>>),
+    provider.getTopRatedByType('Manga').catch(() => [] as Awaited<ReturnType<typeof provider.getTopRatedByType>>),
+    provider.getTopRatedByType('Manhwa').catch(() => [] as Awaited<ReturnType<typeof provider.getTopRatedByType>>),
+    provider.getTopRatedByType('Manhua').catch(() => [] as Awaited<ReturnType<typeof provider.getTopRatedByType>>),
   ])
 
   return (

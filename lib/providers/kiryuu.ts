@@ -5,10 +5,15 @@ import type {
 
 const BASE = 'https://v6.kiryuu.to/wp-json/wp/v2'
 
-// Cloudflare blocks requests without a browser User-Agent from data-center IPs
+// Cloudflare blocks requests without full browser headers from data-center IPs
 const HEADERS = {
   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
-  'Accept': 'application/json, */*',
+  'Accept': 'application/json, text/plain, */*',
+  'Accept-Language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
+  'Accept-Encoding': 'gzip, deflate, br',
+  'Referer': 'https://v6.kiryuu.to/',
+  'Cache-Control': 'no-cache',
+  'Pragma': 'no-cache',
 }
 
 // Taxonomy IDs untuk filter per type
@@ -266,7 +271,10 @@ export class KiryuuProvider implements MangaProvider {
     const sp = new URLSearchParams({ _embed: 'wp:featuredmedia,wp:term' })
     for (const [k, v] of Object.entries(params)) sp.set(k, String(v))
     const res = await fetch(`${BASE}/manga?${sp}`, { headers: HEADERS, next: { revalidate: 300 } })
-    if (!res.ok) throw new Error(`Kiryuu getList ${res.status}`)
+    if (!res.ok) {
+      if (res.status === 403) return { data: [], nextCursor: null, hasMore: false }
+      throw new Error(`Kiryuu getList ${res.status}`)
+    }
 
     const total     = parseInt(res.headers.get('X-WP-Total') ?? '0', 10)
     const list      = await res.json() as WPManga[]
