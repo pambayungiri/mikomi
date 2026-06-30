@@ -5,6 +5,12 @@ import type {
 
 const BASE = 'https://v6.kiryuu.to/wp-json/wp/v2'
 
+// Cloudflare blocks requests without a browser User-Agent from data-center IPs
+const HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+  'Accept': 'application/json, */*',
+}
+
 // Taxonomy IDs untuk filter per type
 const TYPE_IDS: Record<string, number> = {
   Manga:   8683,
@@ -82,7 +88,7 @@ function parseImages(html: string): string[] {
 }
 
 async function kfetch<T>(url: string, revalidate = 300): Promise<T> {
-  const res = await fetch(url, { next: { revalidate } })
+  const res = await fetch(url, { headers: HEADERS, next: { revalidate } })
   if (!res.ok) throw new Error(`Kiryuu ${res.status}: ${url}`)
   return res.json() as Promise<T>
 }
@@ -167,7 +173,7 @@ export class KiryuuProvider implements MangaProvider {
       `${BASE}/chapter?search=${encodeURIComponent(mangaSlug)}&per_page=${perPage}&page=${page}&orderby=date&order=asc&_fields=id,slug,date`
 
     // Fetch halaman pertama untuk dapat total
-    const firstRes = await fetch(chapterUrl(1), { next: { revalidate: 1800 } })
+    const firstRes = await fetch(chapterUrl(1), { headers: HEADERS, next: { revalidate: 1800 } })
     if (!firstRes.ok) return []
 
     const total = parseInt(firstRes.headers.get('X-WP-Total') ?? '0', 10)
@@ -182,7 +188,7 @@ export class KiryuuProvider implements MangaProvider {
     if (totalPages > 1) {
       const rest = await Promise.all(
         Array.from({ length: totalPages - 1 }, (_, i) =>
-          fetch(chapterUrl(i + 2), { next: { revalidate: 1800 } })
+          fetch(chapterUrl(i + 2), { headers: HEADERS, next: { revalidate: 1800 } })
             .then(r => r.ok ? r.json() as Promise<WPChapter[]> : [])
             .then(batch => batch.map(parseChap).filter((c): c is ChapterMeta => c !== null))
         )
@@ -259,7 +265,7 @@ export class KiryuuProvider implements MangaProvider {
 
     const sp = new URLSearchParams({ _embed: 'wp:featuredmedia,wp:term' })
     for (const [k, v] of Object.entries(params)) sp.set(k, String(v))
-    const res = await fetch(`${BASE}/manga?${sp}`, { next: { revalidate: 300 } })
+    const res = await fetch(`${BASE}/manga?${sp}`, { headers: HEADERS, next: { revalidate: 300 } })
     if (!res.ok) throw new Error(`Kiryuu getList ${res.status}`)
 
     const total     = parseInt(res.headers.get('X-WP-Total') ?? '0', 10)
