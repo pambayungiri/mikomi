@@ -196,6 +196,11 @@ export default async function MangaDetailPage({
           {/* Chapter list — with last read indicator */}
           <div className="mt-8">
             <h2 className="text-base font-semibold text-fg mb-3">{manga.chapters.length} Chapters</h2>
+            {manga.chapters.length === 0 && (
+              <p className="text-muted text-sm mt-2">
+                Belum ada chapter tersedia. Judul ini mungkin belum diunggah atau sedang dalam proses.
+              </p>
+            )}
             <ChapterList slug={manga.slug} chapters={manga.chapters} />
           </div>
         </div>

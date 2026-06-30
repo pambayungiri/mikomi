@@ -69,9 +69,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <HorizontalSection title="Top Rated Manga" href="/list?type=Manga&sort=rating" items={topManga} />
-      <HorizontalSection title="Top Rated Manhwa" href="/list?type=Manhwa&sort=rating" items={topManhwa} />
-      <HorizontalSection title="Top Rated Manhua" href="/list?type=Manhua&sort=rating" items={topManhua} />
+      <HorizontalSection title="Popular Manga"  href="/list?type=Manga"  items={topManga} />
+      <HorizontalSection title="Popular Manhwa" href="/list?type=Manhwa" items={topManhwa} />
+      <HorizontalSection title="Popular Manhua" href="/list?type=Manhua" items={topManhua} />
 
       <section>
         <SectionHeader title="New Arrivals" href="/list?sort=create" />
