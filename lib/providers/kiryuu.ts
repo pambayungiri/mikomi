@@ -4,8 +4,8 @@ import type {
 } from './types'
 
 // If KIRYUU_BASE is set, requests go through a CF Worker relay instead of directly to
-// v6.kiryuu.to. Required on Vercel — Cloudflare blocks AWS datacenter IPs by ASN.
-const BASE = process.env.KIRYUU_BASE ?? 'https://v6.kiryuu.to/wp-json/wp/v2'
+// v7.kiryuu.to. Required on Vercel — Cloudflare blocks AWS datacenter IPs by ASN.
+const BASE = process.env.KIRYUU_BASE ?? 'https://v7.kiryuu.to/wp-json/wp/v2'
 const RELAY_KEY = process.env.KIRYUU_RELAY_KEY ?? ''
 
 const HEADERS: Record<string, string> = {
@@ -13,7 +13,7 @@ const HEADERS: Record<string, string> = {
   'Accept': 'application/json, text/plain, */*',
   'Accept-Language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
   'Accept-Encoding': 'gzip, deflate, br',
-  'Referer': 'https://v6.kiryuu.to/',
+  'Referer': 'https://v7.kiryuu.to/',
   'Cache-Control': 'no-cache',
   'Pragma': 'no-cache',
 }

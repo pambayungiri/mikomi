@@ -1,6 +1,5 @@
 import { NextRequest } from 'next/server'
-
-const ALLOWED_HOSTS = ['v6.kiryuu.to', 'v5.kiryuu.to', 'yuucdn.com', 'cdn.uqni.net']
+import { isProxiedHost } from '@/lib/proxy'
 
 export async function GET(req: NextRequest) {
   const url = req.nextUrl.searchParams.get('url')
@@ -13,16 +12,19 @@ export async function GET(req: NextRequest) {
     return new Response('invalid url', { status: 400 })
   }
 
-  if (!ALLOWED_HOSTS.some(h => parsed.hostname === h || parsed.hostname.endsWith('.' + h))) {
+  if (!isProxiedHost(parsed.hostname)) {
     return new Response('host not allowed', { status: 403 })
   }
+
+  // Same-site referer for kiryuu hosts; the CDNs expect the kiryuu site as referer
+  const referer = parsed.hostname.endsWith('.kiryuu.to') ? `${parsed.origin}/` : 'https://v7.kiryuu.to/'
 
   const upstream = await fetch(url, {
     headers: {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
       'Accept': 'image/avif,image/webp,image/*,*/*;q=0.8',
       'Accept-Language': 'id-ID,id;q=0.9',
-      'Referer': 'https://v6.kiryuu.to/',
+      'Referer': referer,
     },
     next: { revalidate: 86400 },
   }).catch(() => null)

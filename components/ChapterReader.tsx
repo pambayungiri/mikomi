@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { readStorage, writeStorage, STORAGE_KEYS } from '@/lib/storage'
+import { proxyUrl } from '@/lib/proxy'
 
 function PageImage({ src, index }: { src: string; index: number }) {
   const [loaded, setLoaded] = useState(false)
@@ -13,7 +14,7 @@ function PageImage({ src, index }: { src: string; index: number }) {
         <div className="w-full aspect-[2/3] bg-surface-2 animate-pulse rounded" />
       )}
       <Image
-        src={src}
+        src={proxyUrl(src)}
         alt={`Page ${index + 1}`}
         width={800}
         height={1200}
@@ -222,7 +223,7 @@ export default function ChapterReader({
             )}
             <Image
               key={pageIndex}
-              src={pages[pageIndex]}
+              src={proxyUrl(pages[pageIndex])}
               alt={`Page ${pageIndex + 1}`}
               width={800}
               height={1200}
