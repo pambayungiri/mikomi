@@ -113,6 +113,21 @@ export function chapterSlugCandidates(mangaSlug: string, chapter: number): strin
   return [...new Set([raw, padded])].map(n => `${mangaSlug}-chapter-${n}`).join(',')
 }
 
+// WP full-text search scans titles/content only — the hyphenated manga slug matches
+// chapter content just because old-CDN image URLs embed it. New-CDN uploads
+// (cdn.uqni.net, hashed paths) don't, so slug search finds nothing. These tokens
+// match chapter TITLES instead: contraction tokens (I’m, I’ll) are dropped because
+// MySQL LIKE can't match across the apostrophe, and tokens under 3 chars are too
+// generic — one unmatched token fails the whole AND'd search.
+export function titleSearchTerms(title: string): string {
+  return title
+    .split(/\s+/)
+    .filter(t => !/['’]/.test(t))
+    .map(t => t.replace(/^[^\p{L}\p{N}]+/u, '').replace(/[^\p{L}\p{N}]+$/u, ''))
+    .filter(t => t.length >= 3)
+    .join(' ')
+}
+
 async function kfetch<T>(url: string, revalidate = 300): Promise<T> {
   const res = await fetch(url, { headers: HEADERS, next: { revalidate } })
   if (!res.ok) throw new Error(`Kiryuu ${res.status}: ${url}`)
@@ -186,7 +201,22 @@ export class KiryuuProvider implements MangaProvider {
 
   // Fetch semua chapters untuk satu manga (parallel pages)
   private async fetchChapters(mangaSlug: string): Promise<ChapterMeta[]> {
-    const prefix  = `${mangaSlug}-chapter-`
+    const prefix   = `${mangaSlug}-chapter-`
+    const chapters = await this.searchChapters(mangaSlug, prefix)
+    if (chapters.length > 0) return chapters
+
+    // Fallback: cari pakai kata-kata judul — slug search gagal untuk chapter
+    // yang di-host di CDN baru (lihat titleSearchTerms)
+    const m = await kfetch<WPManga[]>(
+      `${BASE}/manga?slug=${encodeURIComponent(mangaSlug)}&per_page=1&_fields=title`,
+      3600
+    ).catch(() => [] as WPManga[])
+    const terms = m[0] ? titleSearchTerms(decodeHtml(m[0].title.rendered)) : ''
+    if (!terms) return []
+    return this.searchChapters(terms, prefix)
+  }
+
+  private async searchChapters(searchTerm: string, prefix: string): Promise<ChapterMeta[]> {
     const perPage = 100
 
     const parseChap = (ch: WPChapter): ChapterMeta | null => {
@@ -195,7 +225,7 @@ export class KiryuuProvider implements MangaProvider {
     }
 
     const chapterUrl = (page: number) =>
-      `${BASE}/chapter?search=${encodeURIComponent(mangaSlug)}&per_page=${perPage}&page=${page}&orderby=date&order=asc&_fields=id,slug,date`
+      `${BASE}/chapter?search=${encodeURIComponent(searchTerm)}&per_page=${perPage}&page=${page}&orderby=date&order=asc&_fields=id,slug,date`
 
     // Fetch halaman pertama untuk dapat total
     const firstRes = await fetch(chapterUrl(1), { headers: HEADERS, next: { revalidate: 1800 } })
