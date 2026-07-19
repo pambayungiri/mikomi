@@ -3,7 +3,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { readStorage, writeStorage, STORAGE_KEYS } from '@/lib/storage'
+import { readStorage, writeStorage, STORAGE_KEYS, recordHistory } from '@/lib/storage'
+import { activeChapterIndex, chapterProgress } from '@/lib/reader'
 import { proxyUrl } from '@/lib/proxy'
 
 type LoadedChapter = { number: number; pages: string[]; prev: number | null; next: number | null }
@@ -36,6 +37,7 @@ export default function ChapterReader({
   prev,
   next,
   mangaName,
+  mangaImage,
 }: {
   pages: string[]
   slug: string
@@ -43,6 +45,7 @@ export default function ChapterReader({
   prev: number | null
   next: number | null
   mangaName: string
+  mangaImage: string
 }) {
   const [mode, setMode] = useState<'strip' | 'single'>('strip')
   const [pageIndex, setPageIndex] = useState(0)
@@ -62,6 +65,7 @@ export default function ChapterReader({
   const chapterRefs = useRef<(HTMLDivElement | null)[]>([])
   const sentinelRef = useRef<HTMLDivElement | null>(null)
   const activeChapter = chapters[activeIdx] ?? chapters[0]
+  const recordedRef = useRef<Set<number>>(new Set([chapter]))
 
   useEffect(() => {
     const saved = readStorage<string>(STORAGE_KEYS.readingMode, 'strip')
@@ -150,21 +154,46 @@ export default function ChapterReader({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode])
 
-  // Progress tracking
+  // Progress tracking + active-chapter boundary detection
   useEffect(() => {
     if (mode === 'single') {
-      setProgress(pages.length > 0 ? ((pageIndex + 1) / pages.length) * 100 : 0)
+      setProgress(activeChapter.pages.length > 0 ? ((pageIndex + 1) / activeChapter.pages.length) * 100 : 0)
       return
     }
     function handleScroll() {
-      const scrolled = window.scrollY
-      const total = document.documentElement.scrollHeight - window.innerHeight
-      setProgress(total > 0 ? Math.min(100, (scrolled / total) * 100) : 0)
+      const bounds = chapterRefs.current
+        .filter((el): el is HTMLDivElement => el !== null)
+        .map(el => ({ top: el.offsetTop, height: el.offsetHeight }))
+      if (bounds.length === 0) return
+      const idx = activeChapterIndex(bounds, window.scrollY, window.innerHeight)
+      setProgress(chapterProgress(bounds[idx], window.scrollY, window.innerHeight))
+      setActiveIdx(idx)
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [mode, pageIndex, pages.length])
+  }, [mode, pageIndex, chapters.length, activeChapter.pages.length])
+
+  // React to active-chapter changes — URL, history, offline cache
+  useEffect(() => {
+    const ch = chapters[activeIdx]
+    if (!ch) return
+    window.history.replaceState(null, '', `/chapter/${slug}/${ch.number}`)
+    if (!recordedRef.current.has(ch.number)) {
+      recordedRef.current.add(ch.number)
+      recordHistory({ slug, chapter: ch.number, mangaName, mangaImage })
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.ready.then(reg => {
+          reg.active?.postMessage({
+            type: 'CACHE_CHAPTER',
+            urls: ch.pages,
+            chapterUrl: `/chapter/${slug}/${ch.number}`,
+            apiUrl:     `/api/chapter/${slug}/${ch.number}`,
+          })
+        }).catch(() => {})
+      }
+    }
+  }, [activeIdx, chapters, slug, mangaName, mangaImage])
 
   function toggleMode() {
     const nextMode = mode === 'strip' ? 'single' : 'strip'
@@ -240,7 +269,7 @@ export default function ChapterReader({
           </svg>
           <span className="truncate max-w-40">{mangaName}</span>
         </Link>
-        <span className="text-sm text-muted font-medium">Ch. {chapter}</span>
+        <span className="text-sm text-muted font-medium">Ch. {activeChapter.number}</span>
         <button
           onClick={toggleMode}
           className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-surface-2 text-muted hover:text-fg transition-colors"
@@ -258,6 +287,7 @@ export default function ChapterReader({
           {chapters.map((ch, ci) => (
             <div
               key={ch.number}
+              data-chapter={ch.number}
               ref={el => { chapterRefs.current[ci] = el }}
               className="w-full flex flex-col items-center gap-1"
             >
@@ -358,22 +388,22 @@ export default function ChapterReader({
         style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
       >
         <div className="flex items-center gap-4 bg-surface/95 backdrop-blur-sm border border-border rounded-2xl px-5 py-2.5 shadow-xl">
-          {prev !== null ? (
-            <Link href={`/chapter/${slug}/${prev}`} className="flex items-center gap-1 text-sm text-muted hover:text-fg transition-colors">
+          {activeChapter.prev !== null ? (
+            <Link href={`/chapter/${slug}/${activeChapter.prev}`} className="flex items-center gap-1 text-sm text-muted hover:text-fg transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m15 18-6-6 6-6"/></svg>
-              Ch. {prev}
+              Ch. {activeChapter.prev}
             </Link>
           ) : (
             <span className="text-sm text-border/50">First</span>
           )}
 
           <span className="text-xs text-muted px-3 border-x border-border">
-            {mode === 'single' ? `${pageIndex + 1} / ${pages.length}` : `${pages.length}p`}
+            {mode === 'single' ? `${pageIndex + 1} / ${pages.length}` : `${activeChapter.pages.length}p`}
           </span>
 
-          {next !== null ? (
-            <Link href={`/chapter/${slug}/${next}`} className="flex items-center gap-1 text-sm text-muted hover:text-fg transition-colors">
-              Ch. {next}
+          {activeChapter.next !== null ? (
+            <Link href={`/chapter/${slug}/${activeChapter.next}`} className="flex items-center gap-1 text-sm text-muted hover:text-fg transition-colors">
+              Ch. {activeChapter.next}
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m9 18 6-6-6-6"/></svg>
             </Link>
           ) : (

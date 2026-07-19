@@ -60,6 +60,7 @@ export default async function ChapterPage({
         prev={data.prev}
         next={data.next}
         mangaName={data.mangaName}
+        mangaImage={data.mangaImage}
       />
     </div>
   )

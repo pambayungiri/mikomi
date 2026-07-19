@@ -70,7 +70,7 @@ While `loading` and the user is near the sentinel, the divider slot shows a smal
 
 ### 4.5 Boundary tracking — URL, label, history, offline cache
 
-- Each chapter's container registers in a second IntersectionObserver (threshold tuned so a chapter counts as "active" when it crosses the middle of the viewport).
+- Each chapter's active state is observed by the existing scroll handler using `activeChapterIndex`/`chapterProgress` from `lib/reader` (same midline rule, one mechanism, unit-testable).
 - On active chapter change:
   - `history.replaceState(null, '', '/chapter/<slug>/<n>')` — no reload, back button unaffected.
   - Top bar label and bottom-nav prev/next update from the active chapter's data.
