@@ -37,3 +37,14 @@ export function writeStorage<T>(key: string, value: T): void {
     localStorage.setItem(key, JSON.stringify(value))
   } catch { /* ignore quota errors */ }
 }
+
+export function recordHistory(entry: Omit<HistoryEntry, 'timestamp'>): void {
+  const existing = readStorage<HistoryEntry[]>(STORAGE_KEYS.history, [])
+  const filtered = existing.filter(
+    e => !(e.slug === entry.slug && e.chapter === entry.chapter)
+  )
+  writeStorage(STORAGE_KEYS.history, [
+    { ...entry, timestamp: Date.now() },
+    ...filtered,
+  ].slice(0, 100))
+}

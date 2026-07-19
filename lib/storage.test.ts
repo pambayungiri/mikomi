@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { readStorage, writeStorage, STORAGE_KEYS } from './storage'
+import { readStorage, writeStorage, STORAGE_KEYS, recordHistory, type HistoryEntry } from './storage'
 
 describe('STORAGE_KEYS', () => {
   it('has all expected keys', () => {
@@ -46,5 +46,34 @@ describe('writeStorage', () => {
     writeStorage('k', 'old')
     writeStorage('k', 'new')
     expect(localStorage.getItem('k')).toBe('"new"')
+  })
+})
+
+describe('recordHistory', () => {
+  beforeEach(() => localStorage.clear())
+
+  const entry = { slug: 'a', chapter: 1, mangaName: 'A', mangaImage: 'a.jpg' }
+
+  it('prepends a new entry with a timestamp', () => {
+    recordHistory(entry)
+    const list = JSON.parse(localStorage.getItem('mikomi_history')!) as HistoryEntry[]
+    expect(list).toHaveLength(1)
+    expect(list[0]).toMatchObject(entry)
+    expect(list[0].timestamp).toBeTypeOf('number')
+  })
+
+  it('dedupes the same slug+chapter and moves it to the front', () => {
+    recordHistory(entry)
+    recordHistory({ ...entry, slug: 'b' })
+    recordHistory(entry) // again — should move to front, not duplicate
+    const list = JSON.parse(localStorage.getItem('mikomi_history')!) as HistoryEntry[]
+    expect(list).toHaveLength(2)
+    expect(list[0].slug).toBe('a')
+  })
+
+  it('caps the list at 100 entries', () => {
+    for (let i = 0; i < 105; i++) recordHistory({ ...entry, chapter: i })
+    const list = JSON.parse(localStorage.getItem('mikomi_history')!) as HistoryEntry[]
+    expect(list).toHaveLength(100)
   })
 })
