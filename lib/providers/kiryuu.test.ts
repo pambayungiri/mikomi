@@ -59,6 +59,27 @@ describe('titleSearchTerms', () => {
   })
 })
 
+describe('KiryuuProvider search', () => {
+  afterEach(() => vi.unstubAllGlobals())
+
+  it('searches titles only — description matches bury real title hits', async () => {
+    const calls: string[] = []
+    vi.stubGlobal('fetch', async (input: RequestInfo | URL) => {
+      calls.push(String(input))
+      return new Response(JSON.stringify([]), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json', 'X-WP-Total': '0' },
+      })
+    })
+
+    await new KiryuuProvider().search('over')
+
+    const searchCall = calls.find(u => u.includes('/manga?') && u.includes('search=over'))
+    expect(searchCall).toBeDefined()
+    expect(searchCall).toContain('search_columns=post_title')
+  })
+})
+
 describe('KiryuuProvider chapter fallback', () => {
   afterEach(() => vi.unstubAllGlobals())
 

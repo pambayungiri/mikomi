@@ -405,7 +405,11 @@ export class KiryuuProvider implements MangaProvider {
 
   async search(query: string, opts?: { type?: string }): Promise<MangaCard[]> {
     if (!query.trim()) return []
-    const params: Record<string, string | number> = { search: query.trim(), per_page: 12 }
+    // Tanpa search_columns, WP juga mencari di deskripsi — query pendek seperti
+    // "over" match 182 judul dan mengubur hasil yang benar di luar 12 teratas
+    const params: Record<string, string | number> = {
+      search: query.trim(), search_columns: 'post_title', per_page: 12,
+    }
     if (opts?.type) {
       const typeId = TYPE_IDS[opts.type]
       if (typeId) params['manga-type'] = typeId
