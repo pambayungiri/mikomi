@@ -6,7 +6,9 @@ import Link from 'next/link'
 import { readStorage, writeStorage, STORAGE_KEYS } from '@/lib/storage'
 import { proxyUrl } from '@/lib/proxy'
 
-function PageImage({ src, index }: { src: string; index: number }) {
+type LoadedChapter = { number: number; pages: string[]; prev: number | null; next: number | null }
+
+function PageImage({ src, index, eager }: { src: string; index: number; eager: boolean }) {
   const [loaded, setLoaded] = useState(false)
   return (
     <div className="w-full max-w-2xl relative">
@@ -20,7 +22,7 @@ function PageImage({ src, index }: { src: string; index: number }) {
         height={1200}
         className={`w-full h-auto ${loaded ? '' : 'absolute inset-0 opacity-0'}`}
         unoptimized
-        loading={index < 3 ? 'eager' : 'lazy'}
+        loading={eager ? 'eager' : 'lazy'}
         onLoad={() => setLoaded(true)}
       />
     </div>
@@ -50,6 +52,17 @@ export default function ChapterReader({
   const [showBottomNav, setShowBottomNav] = useState(true)
   const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  const [chapters, setChapters] = useState<LoadedChapter[]>([
+    { number: chapter, pages, prev, next },
+  ])
+  const [activeIdx, setActiveIdx] = useState(0)
+  const [tail, setTail] = useState<{ status: 'idle' | 'loading' | 'error' | 'last' | 'empty'; chapter?: number }>(
+    next === null ? { status: 'last' } : { status: 'idle' }
+  )
+  const chapterRefs = useRef<(HTMLDivElement | null)[]>([])
+  const sentinelRef = useRef<HTMLDivElement | null>(null)
+  const activeChapter = chapters[activeIdx] ?? chapters[0]
+
   useEffect(() => {
     const saved = readStorage<string>(STORAGE_KEYS.readingMode, 'strip')
     if (saved === 'single' || saved === 'strip') setMode(saved)
@@ -67,6 +80,37 @@ export default function ChapterReader({
       })
     }).catch(() => {})
   }, [pages, slug, chapter])
+
+  const loadNext = useCallback(async () => {
+    const last = chapters[chapters.length - 1]
+    if (last.next === null) { setTail({ status: 'last' }); return }
+    setTail({ status: 'loading', chapter: last.next })
+    try {
+      const res = await fetch(`/api/chapter/${slug}/${last.next}`)
+      if (!res.ok) throw new Error(String(res.status))
+      const data = (await res.json()) as { chapter: number; pages: string[]; prev: number | null; next: number | null }
+      if (data.pages.length === 0) { setTail({ status: 'empty', chapter: data.chapter }); return }
+      setChapters(cs => [...cs, { number: data.chapter, pages: data.pages, prev: data.prev, next: data.next }])
+      setTail(data.next === null ? { status: 'last' } : { status: 'idle' })
+    } catch {
+      setTail({ status: 'error', chapter: last.next })
+    }
+  }, [chapters, slug])
+
+  const loadNextRef = useRef(loadNext)
+  useEffect(() => { loadNextRef.current = loadNext }, [loadNext])
+
+  useEffect(() => {
+    if (mode !== 'strip' || tail.status !== 'idle') return
+    const el = sentinelRef.current
+    if (!el || typeof IntersectionObserver === 'undefined') return
+    const io = new IntersectionObserver(
+      entries => { if (entries.some(e => e.isIntersecting)) loadNextRef.current() },
+      { rootMargin: '1500px 0px' }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [mode, chapters.length, tail.status])
 
   // Hide bottom nav when user pinch-zooms (iOS: fixed elements shift with zoom)
   useEffect(() => {
@@ -211,9 +255,50 @@ export default function ChapterReader({
       {mode === 'strip' ? (
         // Tap anywhere on strip to toggle bottom nav
         <div className="flex flex-col items-center gap-1" onClick={handleStripTap}>
-          {pages.map((src, i) => (
-            <PageImage key={src} src={src} index={i} />
+          {chapters.map((ch, ci) => (
+            <div
+              key={ch.number}
+              ref={el => { chapterRefs.current[ci] = el }}
+              className="w-full flex flex-col items-center gap-1"
+            >
+              {ci > 0 && (
+                <div className="w-full max-w-2xl flex items-center gap-3 py-6 text-xs text-muted">
+                  <div className="flex-1 border-t border-border" />
+                  <span>Ch. {chapters[ci - 1].number} selesai · Ch. {ch.number}</span>
+                  <div className="flex-1 border-t border-border" />
+                </div>
+              )}
+              {ch.pages.map((src, i) => (
+                <PageImage key={src} src={src} index={i} eager={i < 3} />
+              ))}
+            </div>
           ))}
+
+          {tail.status === 'loading' && (
+            <div className="py-8 flex justify-center">
+              <div className="w-5 h-5 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+            </div>
+          )}
+          {tail.status === 'error' && (
+            <div className="py-8 flex flex-col items-center gap-2 text-sm text-muted">
+              <span>Gagal memuat Ch. {tail.chapter}</span>
+              <button
+                onClick={e => { e.stopPropagation(); loadNext() }}
+                className="px-4 py-1.5 rounded-full bg-surface-2 text-fg text-xs hover:bg-border transition-colors"
+              >
+                Coba lagi
+              </button>
+            </div>
+          )}
+          {(tail.status === 'last' || tail.status === 'empty') && (
+            <div className="py-10 flex flex-col items-center gap-2 text-sm text-muted">
+              <span>{tail.status === 'last' ? 'Chapter terakhir' : `Ch. ${tail.chapter} belum tersedia`}</span>
+              <Link href={`/manga/${slug}`} className="text-accent text-xs hover:underline" onClick={e => e.stopPropagation()}>
+                Kembali ke {mangaName}
+              </Link>
+            </div>
+          )}
+          <div ref={sentinelRef} className="h-px w-full" />
         </div>
       ) : (
         <div className="flex flex-col items-center">
