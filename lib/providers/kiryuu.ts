@@ -95,6 +95,16 @@ function parseImages(html: string): string[] {
   return imgs
 }
 
+// Kiryuu zero-pads single-digit chapter numbers in some slugs ("chapter-01") but
+// not others ("chapter-1"). Return both candidates as a comma-separated WP slug
+// list so one request matches either convention. Dots slugify to dashes (5.5 → "5-5").
+export function chapterSlugCandidates(mangaSlug: string, chapter: number): string {
+  const raw = String(chapter).replace('.', '-')
+  const [int, ...rest] = raw.split('-')
+  const padded = [int.padStart(2, '0'), ...rest].join('-')
+  return [...new Set([raw, padded])].map(n => `${mangaSlug}-chapter-${n}`).join(',')
+}
+
 async function kfetch<T>(url: string, revalidate = 300): Promise<T> {
   const res = await fetch(url, { headers: HEADERS, next: { revalidate } })
   if (!res.ok) throw new Error(`Kiryuu ${res.status}: ${url}`)
@@ -321,12 +331,10 @@ export class KiryuuProvider implements MangaProvider {
   }
 
   async getChapter(slug: string, chapter: number): Promise<ChapterDetail> {
-    const chSlug = `${slug}-chapter-${chapter}`
-
     // Fetch chapter content + manga info + prev/next — semua paralel
     const [chapterList, mangaList, prevList, nextList] = await Promise.all([
       kfetch<WPChapter[]>(
-        `${BASE}/chapter?slug=${encodeURIComponent(chSlug)}&_fields=content`,
+        `${BASE}/chapter?slug=${encodeURIComponent(chapterSlugCandidates(slug, chapter))}&_fields=content`,
         86400
       ),
       kfetch<WPManga[]>(
@@ -334,10 +342,10 @@ export class KiryuuProvider implements MangaProvider {
         3600
       ),
       chapter > 1
-        ? kfetch<WPChapter[]>(`${BASE}/chapter?slug=${encodeURIComponent(`${slug}-chapter-${chapter - 1}`)}&_fields=id`, 86400)
+        ? kfetch<WPChapter[]>(`${BASE}/chapter?slug=${encodeURIComponent(chapterSlugCandidates(slug, chapter - 1))}&_fields=id`, 86400)
         : Promise.resolve([] as WPChapter[]),
       kfetch<WPChapter[]>(
-        `${BASE}/chapter?slug=${encodeURIComponent(`${slug}-chapter-${chapter + 1}`)}&_fields=id`,
+        `${BASE}/chapter?slug=${encodeURIComponent(chapterSlugCandidates(slug, chapter + 1))}&_fields=id`,
         86400
       ),
     ])
