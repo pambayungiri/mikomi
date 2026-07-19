@@ -98,6 +98,14 @@ function parseImages(html: string): string[] {
 // Kiryuu zero-pads single-digit chapter numbers in some slugs ("chapter-01") but
 // not others ("chapter-1"). Return both candidates as a comma-separated WP slug
 // list so one request matches either convention. Dots slugify to dashes (5.5 → "5-5").
+// Inverse of the slug convention above: "…chapter-9-1" → 9.1, "…chapter-01" → 1.
+export function chapterNumberFromSlug(slug: string, prefix: string): number | null {
+  if (!slug.startsWith(prefix)) return null
+  const raw = slug.slice(prefix.length)
+  if (!/^\d+(-\d+)?$/.test(raw)) return null
+  return parseFloat(raw.replace('-', '.'))
+}
+
 export function chapterSlugCandidates(mangaSlug: string, chapter: number): string {
   const raw = String(chapter).replace('.', '-')
   const [int, ...rest] = raw.split('-')
@@ -182,9 +190,8 @@ export class KiryuuProvider implements MangaProvider {
     const perPage = 100
 
     const parseChap = (ch: WPChapter): ChapterMeta | null => {
-      if (!ch.slug.startsWith(prefix)) return null
-      const num = parseFloat(ch.slug.slice(prefix.length))
-      return isNaN(num) ? null : { number: num, updatedAt: ch.date, note: '' }
+      const num = chapterNumberFromSlug(ch.slug, prefix)
+      return num === null ? null : { number: num, updatedAt: ch.date, note: '' }
     }
 
     const chapterUrl = (page: number) =>
@@ -331,8 +338,8 @@ export class KiryuuProvider implements MangaProvider {
   }
 
   async getChapter(slug: string, chapter: number): Promise<ChapterDetail> {
-    // Fetch chapter content + manga info + prev/next — semua paralel
-    const [chapterList, mangaList, prevList, nextList] = await Promise.all([
+    // Fetch chapter content + manga info + full chapter list (for prev/next) — semua paralel
+    const [chapterList, mangaList, allChapters] = await Promise.all([
       kfetch<WPChapter[]>(
         `${BASE}/chapter?slug=${encodeURIComponent(chapterSlugCandidates(slug, chapter))}&_fields=content`,
         86400
@@ -341,16 +348,14 @@ export class KiryuuProvider implements MangaProvider {
         `${BASE}/manga?slug=${encodeURIComponent(slug)}&_embed=wp:featuredmedia&_fields=id,title,_embedded,_links`,
         3600
       ),
-      chapter > 1
-        ? kfetch<WPChapter[]>(`${BASE}/chapter?slug=${encodeURIComponent(chapterSlugCandidates(slug, chapter - 1))}&_fields=id`, 86400)
-        : Promise.resolve([] as WPChapter[]),
-      kfetch<WPChapter[]>(
-        `${BASE}/chapter?slug=${encodeURIComponent(chapterSlugCandidates(slug, chapter + 1))}&_fields=id`,
-        86400
-      ),
+      this.fetchChapters(slug).catch(() => [] as ChapterMeta[]),
     ])
 
     if (!chapterList.length) throw new Error(`Chapter ${chapter} not found: ${slug}`)
+
+    // Neighbors from the real chapter list — handles sub-chapters (9.1 → 9.2) and gaps
+    const nums = allChapters.map(c => c.number) // sorted desc
+    const idx  = nums.indexOf(chapter)
 
     // Gambar langsung dari CDN Kiryuu — tidak ada proxy
     const pages      = parseImages(chapterList[0].content?.rendered ?? '')
@@ -363,8 +368,8 @@ export class KiryuuProvider implements MangaProvider {
       mangaImage,
       chapter,
       pages,
-      prev: prevList.length > 0 ? chapter - 1 : null,
-      next: nextList.length > 0 ? chapter + 1 : null,
+      prev: idx >= 0 && idx < nums.length - 1 ? nums[idx + 1] : null,
+      next: idx > 0 ? nums[idx - 1] : null,
     }
   }
 

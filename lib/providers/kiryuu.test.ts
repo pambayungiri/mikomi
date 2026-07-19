@@ -1,5 +1,26 @@
 import { describe, it, expect } from 'vitest'
-import { chapterSlugCandidates } from './kiryuu'
+import { chapterSlugCandidates, chapterNumberFromSlug } from './kiryuu'
+
+describe('chapterNumberFromSlug', () => {
+  const prefix = 'some-manga-chapter-'
+
+  it('parses plain and zero-padded chapter numbers', () => {
+    expect(chapterNumberFromSlug('some-manga-chapter-1', prefix)).toBe(1)
+    expect(chapterNumberFromSlug('some-manga-chapter-01', prefix)).toBe(1)
+    expect(chapterNumberFromSlug('some-manga-chapter-10', prefix)).toBe(10)
+  })
+
+  it('parses sub-chapter slugs as decimals (WP slugifies 9.1 to 9-1)', () => {
+    expect(chapterNumberFromSlug('some-manga-chapter-9-1', prefix)).toBe(9.1)
+    expect(chapterNumberFromSlug('some-manga-chapter-4-5', prefix)).toBe(4.5)
+    expect(chapterNumberFromSlug('some-manga-chapter-09-2', prefix)).toBe(9.2)
+  })
+
+  it('returns null for slugs that do not match the prefix or number', () => {
+    expect(chapterNumberFromSlug('other-manga-chapter-1', prefix)).toBe(null)
+    expect(chapterNumberFromSlug('some-manga-chapter-extra', prefix)).toBe(null)
+  })
+})
 
 describe('chapterSlugCandidates', () => {
   it('includes both unpadded and zero-padded slugs for chapters 1-9', () => {
