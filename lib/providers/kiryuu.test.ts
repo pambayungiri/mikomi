@@ -1,5 +1,47 @@
 import { describe, it, expect, afterEach, vi } from 'vitest'
-import { chapterNumberFromSlug, titleSearchTerms, KiryuuProvider } from './kiryuu'
+import { chapterNumberFromSlug, reconcileChapterNumber, titleSearchTerms, KiryuuProvider } from './kiryuu'
+
+describe('reconcileChapterNumber', () => {
+  it('trusts the title over a dash-dropped-decimal slug — Kiryuu sometimes drops the dash', () => {
+    // Real Kiryuu data: "…-chapter-1605" whose own title reads "Chapter 160.5" —
+    // the site dropped the dash (should've been "…-chapter-160-5"). The slug
+    // parses as a plausible-looking integer, so nothing else catches this.
+    expect(reconcileChapterNumber(1605, 'Kimetsu no Yaiba Chapter 160.5')).toBe(160.5)
+    expect(reconcileChapterNumber(11, 'Monster Musume no Oishasan Chapter 1.1')).toBe(1.1)
+    expect(reconcileChapterNumber(1281, 'To Be The Castellan King Chapter 128.1')).toBe(128.1)
+  })
+
+  it('uses the first number for a combined-release title — slug dash means range, not decimal', () => {
+    // Slug "chapter-656-657" parses as decimal 656.657 by the normal sub-chapter
+    // rule, but the title "Chapter 656-657" means chapters 656 and 657 bundled
+    // into one post — 656 is the number readers actually navigate to.
+    expect(reconcileChapterNumber(656.657, 'God of Martial Arts Chapter 656-657')).toBe(656)
+    expect(reconcileChapterNumber(131.132, 'I Have a Dragon in My Body Chapter 131-132')).toBe(131)
+  })
+
+  it('leaves a correctly-parsed decimal slug alone when the title just abbreviates it', () => {
+    // Slug "chapter-42-2" correctly parses as 42.2 (part 2 of chapter 42); the
+    // site's title text just says "Chapter 42" for both parts without
+    // restating ".2" — the slug is right here, nothing to override.
+    expect(reconcileChapterNumber(42.2, 'Arifureta Shokugyou de Sekai Saikyou Chapter 42')).toBe(42.2)
+  })
+
+  it('keeps the slug number when title and slug disagree with no recognizable pattern', () => {
+    // Real Kiryuu data: slug says 432, title says "Chapter 342" — a site-side
+    // typo with no reliable signal for which number is correct. Don't guess.
+    expect(reconcileChapterNumber(432, 'Release That Witch Chapter 342')).toBe(432)
+  })
+
+  it('returns the slug number unchanged when there is no title or no number in it', () => {
+    expect(reconcileChapterNumber(5, '')).toBe(5)
+    expect(reconcileChapterNumber(5, 'Some Manga Bonus Art')).toBe(5)
+  })
+
+  it('returns the slug number unchanged when slug and title already agree', () => {
+    expect(reconcileChapterNumber(12, 'Some Manga Chapter 12')).toBe(12)
+    expect(reconcileChapterNumber(9.1, 'Some Manga Chapter 9.1')).toBe(9.1)
+  })
+})
 
 describe('chapterNumberFromSlug', () => {
   const prefix = 'some-manga-chapter-'
@@ -203,6 +245,37 @@ describe('KiryuuProvider chapter fallback', () => {
     expect(manga.latestChapter).toBe(2)
     // fast path only — the slow slug-content search must not run
     expect(calls.some(u => u.includes(`search=${encodeURIComponent(slug)}`))).toBe(false)
+  })
+
+  it('getManga corrects a dash-dropped-decimal chapter using its own title text', async () => {
+    const slug = 'im-a-test-manga-but-cool'
+
+    vi.stubGlobal('fetch', async (input: RequestInfo | URL) => {
+      const url = String(input)
+
+      if (url.includes('/manga?') && url.includes(`slug=${slug}`) && url.includes('_embed')) {
+        return wpJson([{
+          id: 1, slug, title: { rendered: 'I&#8217;m a Test Manga, but Cool' },
+          excerpt: { rendered: '' }, modified: '2026-07-20T00:00:00',
+        }], 1)
+      }
+      if (url.includes('/manga?') && url.includes('_fields=title')) {
+        return wpJson([{ title: { rendered: 'I&#8217;m a Test Manga, but Cool' } }], 1)
+      }
+      if (url.includes('/chapter?') && url.includes('search_columns=post_title')) {
+        return wpJson([
+          { id: 10, slug: `${slug}-chapter-1`, date: '2026-07-01', title: { rendered: 'Test Manga but Cool Chapter 1' } },
+          // dash dropped: slug reads as integer 11, title says it's really 1.1
+          { id: 11, slug: `${slug}-chapter-11`, date: '2026-07-02', title: { rendered: 'Test Manga but Cool Chapter 1.1' } },
+        ], 2)
+      }
+      throw new Error(`unexpected fetch: ${url}`)
+    })
+
+    const manga = await new KiryuuProvider().getManga(slug)
+
+    expect(manga.chapters.map(c => c.number)).toEqual([1.1, 1])
+    expect(manga.latestChapter).toBe(1.1)
   })
 
   it('getManga falls back to slug-content search when the title search is empty', async () => {

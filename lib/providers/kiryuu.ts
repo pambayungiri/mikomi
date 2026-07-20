@@ -49,6 +49,7 @@ type WPChapter = {
   id: number
   slug: string
   date: string
+  title?: { rendered: string }
   content?: { rendered: string }
 }
 
@@ -113,6 +114,47 @@ export function chapterNumberFromSlug(slug: string, prefix: string): number | nu
   const m = raw.match(/^(\d+)(?:-(\d+))?/)
   if (!m) return null
   return m[2] ? parseFloat(`${m[1]}.${m[2]}`) : Number(m[1])
+}
+
+// Extracts the chapter number as Kiryuu's own title text states it
+// ("Chapter 160.5" → 160.5). Only the first number is captured, so a
+// combined-release title ("Chapter 656-657") yields 656.
+function numberFromChapterTitle(titleText: string): number | null {
+  const m = decodeHtml(titleText).match(/Chapter\s+0*(\d+(?:\.\d+)?)/i)
+  return m ? parseFloat(m[1]) : null
+}
+
+// Cross-checks the slug-derived number against the chapter's own title text and
+// corrects it for two confirmed, deterministic Kiryuu data patterns (found via a
+// full-catalog audit — 789 titles / 5,140 chapters affected):
+//
+// 1. Dash-dropped decimal: some sub-chapters get slugged by concatenating the
+//    decimal digits instead of separating them ("…chapter-1605" whose title
+//    reads "Chapter 160.5" — should have been "…chapter-160-5"). The slug then
+//    parses as a plausible-looking, but wrong, integer (1605). Detected by:
+//    slugNum is an integer, titleNum has a fractional part, and slugNum equals
+//    titleNum's digits with the decimal point removed.
+// 2. Combined-release range: a title like "Chapter 656-657" bundles two
+//    chapters into one post. The slug's dash there means "range", not
+//    "decimal point" — chapterNumberFromSlug's normal sub-chapter rule
+//    misreads "656-657" as 656.657. Corrected to the first number (656).
+//
+// Any other disagreement (title vs. slug) is a site-side data error with no
+// reliable signal for which number is correct — left as the slug value rather
+// than guessed.
+export function reconcileChapterNumber(slugNum: number, titleText: string): number {
+  const titleNum = numberFromChapterTitle(titleText)
+  if (titleNum === null || titleNum === slugNum) return slugNum
+
+  if (/Chapter\s+\d+\s*[-–]\s*\d+/i.test(titleText)) return titleNum
+
+  if (Number.isInteger(slugNum) && titleNum % 1 !== 0) {
+    const frac = Math.round((titleNum % 1) * 10)
+    const wholeAndFrac = Math.floor(titleNum) * 10 + frac
+    if (slugNum === wholeAndFrac) return titleNum
+  }
+
+  return slugNum
 }
 
 // WP full-text search scans titles/content only — the hyphenated manga slug matches
@@ -242,13 +284,15 @@ export class KiryuuProvider implements MangaProvider {
     const perPage = 100
 
     const parseChap = (ch: WPChapter): ChapterMetaWithSlug | null => {
-      const num = chapterNumberFromSlug(ch.slug, prefix)
-      return num === null ? null : { number: num, updatedAt: ch.date, note: '', slug: ch.slug }
+      const slugNum = chapterNumberFromSlug(ch.slug, prefix)
+      if (slugNum === null) return null
+      const num = reconcileChapterNumber(slugNum, ch.title?.rendered ?? '')
+      return { number: num, updatedAt: ch.date, note: '', slug: ch.slug }
     }
 
     const columns = searchColumns ? `&search_columns=${searchColumns}` : ''
     const chapterUrl = (page: number) =>
-      `${BASE}/chapter?search=${encodeURIComponent(searchTerm)}${columns}&per_page=${perPage}&page=${page}&orderby=date&order=asc&_fields=id,slug,date`
+      `${BASE}/chapter?search=${encodeURIComponent(searchTerm)}${columns}&per_page=${perPage}&page=${page}&orderby=date&order=asc&_fields=id,slug,date,title`
 
     // Fetch halaman pertama untuk dapat total
     const firstRes = await fetch(chapterUrl(1), { headers: HEADERS, next: { revalidate: 1800 } })
