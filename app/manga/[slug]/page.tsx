@@ -13,6 +13,12 @@ import MangaCard from '@/components/MangaCard'
 
 export const revalidate = 1800
 
+// Empty generateStaticParams opts this dynamic segment into the ISR route
+// cache — see app/chapter/[slug]/[chapter]/page.tsx for the rationale.
+export function generateStaticParams() {
+  return []
+}
+
 export async function generateMetadata({
   params,
 }: {

@@ -17,6 +17,9 @@ export async function GET(
       pages:   data.pages,
       prev:    data.prev,
       next:    data.next,
+    }, {
+      // CDN-cache successful lookups — chapter contents are effectively immutable
+      headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800' },
     })
   } catch {
     return NextResponse.json({ error: 'Chapter not found' }, { status: 404 })

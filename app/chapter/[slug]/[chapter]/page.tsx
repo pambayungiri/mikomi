@@ -6,6 +6,13 @@ import HistoryTracker from '@/components/HistoryTracker'
 
 export const revalidate = 86400
 
+// Without generateStaticParams a dynamic segment renders on demand on every
+// request; with it (even empty) the route joins the ISR cache — first visit
+// renders, then the CDN serves it for the revalidate window.
+export function generateStaticParams() {
+  return []
+}
+
 export async function generateMetadata({
   params,
 }: {

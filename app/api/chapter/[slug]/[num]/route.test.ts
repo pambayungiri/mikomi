@@ -21,6 +21,22 @@ describe('GET /api/chapter/[slug]/[num]', () => {
     expect(await res.json()).toEqual({ chapter: 2, pages: ['a.jpg', 'b.jpg'], prev: 1, next: 3 })
   })
 
+  it('marks successful responses CDN-cacheable', async () => {
+    getChapter.mockResolvedValueOnce({
+      mangaSlug: 'x', mangaName: 'X', mangaImage: '',
+      chapter: 2, pages: ['a.jpg'], prev: 1, next: 3,
+    })
+    const res = await GET(new Request('http://t/api/chapter/x/2'), makeParams('x', '2'))
+    expect(res.headers.get('Cache-Control')).toBe('public, s-maxage=86400, stale-while-revalidate=604800')
+  })
+
+  it('does not mark error responses cacheable', async () => {
+    getChapter.mockRejectedValueOnce(new Error('upstream down'))
+    const res = await GET(new Request('http://t/api/chapter/x/2'), makeParams('x', '2'))
+    expect(res.status).toBe(404)
+    expect(res.headers.get('Cache-Control')).toBe(null)
+  })
+
   it('accepts decimal chapter numbers without truncating', async () => {
     getChapter.mockResolvedValueOnce({
       mangaSlug: 'x', mangaName: 'X', mangaImage: '',
