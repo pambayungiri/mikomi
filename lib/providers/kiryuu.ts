@@ -37,6 +37,7 @@ type WPManga = {
   title: { rendered: string }
   excerpt: { rendered: string }
   modified: string
+  'manga-type'?: number[]
   metadata?: { meta?: { released?: string; score?: string; alternative_title?: string } }
   _embedded?: {
     'wp:featuredmedia'?: WPMedia[]
@@ -135,12 +136,17 @@ async function kfetch<T>(url: string, revalidate = 300): Promise<T> {
   return res.json() as Promise<T>
 }
 
+const TYPE_BY_ID: Record<number, string> = Object.fromEntries(
+  Object.entries(TYPE_IDS).map(([name, id]) => [id, name])
+)
+
 function parseMangaCard(m: WPManga): MangaCard {
+  const typeId = m['manga-type']?.[0]
   return {
     id:            String(m.id),
     slug:          m.slug,
     name:          decodeHtml(m.title.rendered),
-    type:          firstTerm('type', m._embedded) || 'Manga',
+    type:          (typeId && TYPE_BY_ID[typeId]) || firstTerm('type', m._embedded) || 'Manga',
     image:         coverOf(m._embedded),
     latestChapter: null,
     updatedAt:     m.modified,
@@ -187,17 +193,26 @@ async function getGenreMap(): Promise<Map<string, number>> {
 
 export class KiryuuProvider implements MangaProvider {
 
-  private mangaListUrl(params: Record<string, string | number>): string {
-    const sp = new URLSearchParams({ _embed: 'wp:featuredmedia,wp:term' })
+  // Slim by default: full wp:term embeds carry each term's Yoast SEO blob
+  // (~40KB per manga — a 24-item list breaks Next's 2MB data-cache limit).
+  // Cards only need the type, which manga-type IDs provide for free.
+  private mangaListUrl(params: Record<string, string | number>, full = false): string {
+    const sp = full
+      ? new URLSearchParams({ _embed: 'wp:featuredmedia,wp:term' })
+      : new URLSearchParams({
+          _embed: 'wp:featuredmedia',
+          _fields: 'id,slug,title,modified,manga-type,_links.wp:featuredmedia,_embedded',
+        })
     for (const [k, v] of Object.entries(params)) sp.set(k, String(v))
     return `${BASE}/manga?${sp}`
   }
 
   private async fetchMangaList(
     params: Record<string, string | number>,
-    revalidate = 300
+    revalidate = 300,
+    full = false
   ): Promise<WPManga[]> {
-    return kfetch<WPManga[]>(this.mangaListUrl(params), revalidate)
+    return kfetch<WPManga[]>(this.mangaListUrl(params, full), revalidate)
   }
 
   // Fetch semua chapters untuk satu manga (parallel pages).
@@ -345,7 +360,8 @@ export class KiryuuProvider implements MangaProvider {
   }
 
   async getManga(slug: string): Promise<MangaDetail> {
-    const list = await this.fetchMangaList({ slug, per_page: 1 }, 3600)
+    // Detail page needs genre/author/status names — full term embeds required
+    const list = await this.fetchMangaList({ slug, per_page: 1 }, 3600, true)
     if (!list.length) throw new Error(`Manga not found: ${slug}`)
     const m = list[0]
 

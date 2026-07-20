@@ -85,6 +85,28 @@ describe('KiryuuProvider search', () => {
   })
 })
 
+describe('KiryuuProvider slim card fetches', () => {
+  afterEach(() => vi.unstubAllGlobals())
+
+  it('list fetches skip term embeds and resolve type from manga-type IDs', async () => {
+    const calls: string[] = []
+    vi.stubGlobal('fetch', async (input: RequestInfo | URL) => {
+      calls.push(String(input))
+      return new Response(JSON.stringify([{
+        id: 1, slug: 'a', title: { rendered: 'A' }, modified: '2026-07-20T00:00:00',
+        'manga-type': [8679],
+      }]), { status: 200, headers: { 'Content-Type': 'application/json' } })
+    })
+
+    const cards = await new KiryuuProvider().getLatestUpdate()
+
+    expect(cards[0].type).toBe('Manhwa')
+    const url = calls[0]
+    expect(url).toContain('_fields=')
+    expect(url).not.toContain(encodeURIComponent('wp:term'))
+  })
+})
+
 describe('KiryuuProvider chapter fallback', () => {
   afterEach(() => vi.unstubAllGlobals())
 
