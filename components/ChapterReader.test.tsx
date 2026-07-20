@@ -2,7 +2,8 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import ChapterReader from './ChapterReader'
 
-vi.mock('next/navigation', () => ({ useRouter: () => ({ push: vi.fn() }) }))
+const routerPush = vi.fn()
+vi.mock('next/navigation', () => ({ useRouter: () => ({ push: routerPush }) }))
 
 // jsdom has no IntersectionObserver — capture instances so tests fire them manually
 type IOCallback = (entries: { isIntersecting: boolean }[]) => void
@@ -104,5 +105,16 @@ describe('ChapterReader auto-append', () => {
     })
     const history = JSON.parse(localStorage.getItem('mikomi_history') ?? '[]')
     expect(history.some((e: { chapter: number }) => e.chapter === 2)).toBe(true)
+  })
+
+  it('single mode: next tap on the last page navigates to the next chapter', async () => {
+    vi.stubGlobal('fetch', vi.fn())
+    localStorage.setItem('mikomi_reading_mode', JSON.stringify('single'))
+    render(<ChapterReader {...baseProps} mangaImage="cover.jpg" />)
+
+    const nextZone = await screen.findByRole('button', { name: /next page/i })
+    fireEvent.click(nextZone) // page 1 -> 2 (last page)
+    fireEvent.click(nextZone) // last page -> next chapter
+    expect(routerPush).toHaveBeenCalledWith('/chapter/test-slug/2')
   })
 })

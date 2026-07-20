@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { readStorage, writeStorage, STORAGE_KEYS, recordHistory } from '@/lib/storage'
 import { activeChapterIndex, chapterProgress } from '@/lib/reader'
 import { proxyUrl } from '@/lib/proxy'
@@ -47,6 +48,7 @@ export default function ChapterReader({
   mangaName: string
   mangaImage: string
 }) {
+  const router = useRouter()
   const [mode, setMode] = useState<'strip' | 'single'>('strip')
   const [pageIndex, setPageIndex] = useState(0)
   const [progress, setProgress] = useState(0)
@@ -197,6 +199,11 @@ export default function ChapterReader({
 
   function toggleMode() {
     const nextMode = mode === 'strip' ? 'single' : 'strip'
+    const current = chapters[activeIdx] ?? chapters[0]
+    setChapters([current])
+    setActiveIdx(0)
+    setTail(current.next === null ? { status: 'last' } : { status: 'idle' })
+    recordedRef.current = new Set([current.number])
     setMode(nextMode)
     setPageIndex(0)
     setProgress(0)
@@ -205,11 +212,14 @@ export default function ChapterReader({
   }
 
   const goNext = useCallback(() => {
-    if (mode === 'single' && pageIndex < pages.length - 1) {
+    if (mode !== 'single') return
+    if (pageIndex < activeChapter.pages.length - 1) {
       setPageIndex(p => p + 1)
       setSingleLoaded(false)
+    } else if (activeChapter.next !== null) {
+      router.push(`/chapter/${slug}/${activeChapter.next}`)
     }
-  }, [mode, pageIndex, pages.length])
+  }, [mode, pageIndex, activeChapter, router, slug])
 
   const goPrev = useCallback(() => {
     if (mode === 'single' && pageIndex > 0) {
@@ -338,7 +348,7 @@ export default function ChapterReader({
             )}
             <Image
               key={pageIndex}
-              src={proxyUrl(pages[pageIndex])}
+              src={proxyUrl(activeChapter.pages[pageIndex])}
               alt={`Page ${pageIndex + 1}`}
               width={800}
               height={1200}
@@ -367,7 +377,7 @@ export default function ChapterReader({
               className="absolute right-0 inset-y-0 w-1/3 flex items-center justify-end"
               aria-label="Next page"
             >
-              {pageIndex < pages.length - 1 && (
+              {(pageIndex < activeChapter.pages.length - 1 || activeChapter.next !== null) && (
                 <div className="mr-2 w-8 h-8 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center shadow">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="m9 18 6-6-6-6"/>
@@ -376,7 +386,7 @@ export default function ChapterReader({
               )}
             </button>
           </div>
-          <p className="text-muted text-sm mt-3">{pageIndex + 1} / {pages.length}</p>
+          <p className="text-muted text-sm mt-3">{pageIndex + 1} / {activeChapter.pages.length}</p>
         </div>
       )}
 
@@ -398,7 +408,7 @@ export default function ChapterReader({
           )}
 
           <span className="text-xs text-muted px-3 border-x border-border">
-            {mode === 'single' ? `${pageIndex + 1} / ${pages.length}` : `${activeChapter.pages.length}p`}
+            {mode === 'single' ? `${pageIndex + 1} / ${activeChapter.pages.length}` : `${activeChapter.pages.length}p`}
           </span>
 
           {activeChapter.next !== null ? (
