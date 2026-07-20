@@ -167,6 +167,22 @@ export function reconcileChapterNumber(slugNum: number, titleText: string): numb
   return slugNum
 }
 
+// Ranks a chapter post's slug by rendition quality, for picking a winner
+// when two posts collide on the same chapter number. HD/HQ beats LQ, colored
+// beats plain/unmarked (implicitly black-and-white). A slug with no
+// recognized marker (a "-fix" correction, a padding-only duplicate, an "-end"
+// label) scores neutral — those cases have no color/resolution signal and
+// fall back to whichever was posted latest, which already resolves them
+// correctly.
+export function chapterQualityScore(slug: string): number {
+  const s = slug.toLowerCase()
+  let score = 0
+  if (/warna|color|colour/.test(s)) score += 2
+  if (/-hd\b|-hq\b|hd$|hq$/.test(s)) score += 2
+  if (/-lq\b|lq$/.test(s)) score -= 1
+  return score
+}
+
 // WP full-text search scans titles/content only — the hyphenated manga slug matches
 // chapter content just because old-CDN image URLs embed it. New-CDN uploads
 // (cdn.uqni.net, hashed paths) don't, so slug search finds nothing. These tokens
@@ -334,13 +350,22 @@ export class KiryuuProvider implements MangaProvider {
       for (const batch of rest) chapters.push(...batch)
     }
 
-    // Same number can appear twice when a scanlator reposts a corrected chapter
-    // under a suffixed slug ("…chapter-59" + "…chapter-59-fix") — keep whichever
-    // was posted most recently; the repost supersedes the original.
+    // Same number can appear twice: a scanlator reposts a corrected chapter
+    // under a suffixed slug ("…chapter-59" + "…chapter-59-fix"), or the same
+    // chapter gets uploaded in two renditions (colored + black-and-white,
+    // HD + LQ scan). Corrections and unmarked duplicates have no quality
+    // signal — keep whichever was posted most recently, the repost
+    // supersedes the original. Renditions DO have a quality signal, and it
+    // must win regardless of which was posted later — an HD scan uploaded
+    // before an LQ one must not lose to it just for being older.
     const byNumber = new Map<number, ChapterMetaWithSlug>()
     for (const c of chapters) {
       const existing = byNumber.get(c.number)
-      if (!existing || c.updatedAt > existing.updatedAt) byNumber.set(c.number, c)
+      if (!existing) { byNumber.set(c.number, c); continue }
+      const existingScore = chapterQualityScore(existing.slug)
+      const newScore = chapterQualityScore(c.slug)
+      if (newScore > existingScore) byNumber.set(c.number, c)
+      else if (newScore === existingScore && c.updatedAt > existing.updatedAt) byNumber.set(c.number, c)
     }
 
     // Sort desc — chapter terbaru di atas (sesuai tampilan UI)

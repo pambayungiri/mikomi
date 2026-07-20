@@ -1,5 +1,31 @@
 import { describe, it, expect, afterEach, vi } from 'vitest'
-import { chapterNumberFromSlug, reconcileChapterNumber, titleSearchTerms, KiryuuProvider } from './kiryuu'
+import { chapterNumberFromSlug, reconcileChapterNumber, chapterQualityScore, titleSearchTerms, KiryuuProvider } from './kiryuu'
+
+describe('chapterQualityScore', () => {
+  it('ranks HD/HQ above LQ', () => {
+    expect(chapterQualityScore('manga-chapter-42-hd')).toBeGreaterThan(chapterQualityScore('manga-chapter-42-lq'))
+    expect(chapterQualityScore('manga-chapter-42hq')).toBeGreaterThan(chapterQualityScore('manga-chapter-42-lq'))
+  })
+
+  it('ranks colored above plain (implicitly black-and-white)', () => {
+    expect(chapterQualityScore('manga-chapter-42-warna')).toBeGreaterThan(chapterQualityScore('manga-chapter-42'))
+  })
+
+  it('ranks LQ below plain/unmarked — but this only matters when an alternative exists', () => {
+    // Dedup only ever compares candidates that collide on the same chapter
+    // number. An LQ-only chapter has no competing candidate, so it's shown
+    // regardless of its score; the score only decides who wins when a
+    // better copy is also present.
+    expect(chapterQualityScore('manga-chapter-42-lq')).toBeLessThan(chapterQualityScore('manga-chapter-42'))
+  })
+
+  it('gives unmarked slugs (corrections, padding, plain reposts) equal, neutral scores', () => {
+    // "-fix" and other non-quality markers carry no color/resolution signal —
+    // dedup falls back to latest-date for these, unaffected by this score.
+    expect(chapterQualityScore('manga-chapter-42-fix')).toBe(chapterQualityScore('manga-chapter-42'))
+    expect(chapterQualityScore('manga-chapter-42-end')).toBe(chapterQualityScore('manga-chapter-42'))
+  })
+})
 
 describe('reconcileChapterNumber', () => {
   it('trusts the title over a dash-dropped-decimal slug — Kiryuu sometimes drops the dash', () => {
@@ -289,6 +315,44 @@ describe('KiryuuProvider chapter fallback', () => {
 
     expect(manga.chapters.map(c => c.number)).toEqual([1.1, 1])
     expect(manga.latestChapter).toBe(1.1)
+  })
+
+  it('getManga keeps the HD repost over LQ even when the LQ copy was posted later', async () => {
+    // Real Kiryuu data: a chapter gets uploaded once in LQ, then again in HD
+    // (or vice versa, in either order) — "latest wins" alone would sometimes
+    // keep the worse-quality copy. Quality must win regardless of dates.
+    const slug = 'im-a-test-manga-but-cool'
+
+    vi.stubGlobal('fetch', async (input: RequestInfo | URL) => {
+      const url = String(input)
+
+      if (url.includes('/manga?') && url.includes(`slug=${slug}`) && url.includes('_embed')) {
+        return wpJson([{
+          id: 1, slug, title: { rendered: 'I&#8217;m a Test Manga, but Cool' },
+          excerpt: { rendered: '' }, modified: '2026-07-20T00:00:00',
+        }], 1)
+      }
+      if (url.includes('/manga?') && url.includes('_fields=title')) {
+        return wpJson([{ title: { rendered: 'I&#8217;m a Test Manga, but Cool' } }], 1)
+      }
+      if (url.includes('/chapter?') && url.includes('search_columns=post_title')) {
+        return wpJson([
+          { id: 10, slug: `${slug}-chapter-42-hd`, date: '2026-07-01', title: { rendered: 'Test Manga but Cool Chapter 42 HD' } },
+          // posted a day AFTER the HD copy — old "latest wins" logic would
+          // have kept this lower-quality one instead
+          { id: 11, slug: `${slug}-chapter-42-lq`, date: '2026-07-02', title: { rendered: 'Test Manga but Cool Chapter 42 LQ' } },
+        ], 2)
+      }
+      throw new Error(`unexpected fetch: ${url}`)
+    })
+
+    const manga = await new KiryuuProvider().getManga(slug)
+
+    expect(manga.chapters).toHaveLength(1)
+    expect(manga.chapters[0].number).toBe(42)
+    // the HD copy's date, not the later-posted LQ copy's — confirms quality
+    // beat recency
+    expect(manga.chapters[0].updatedAt).toBe('2026-07-01')
   })
 
   it('getManga recovers a chapter whose slug buries the number after other text', async () => {
