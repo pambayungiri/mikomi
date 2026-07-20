@@ -57,6 +57,11 @@ describe('titleSearchTerms', () => {
   it('returns empty string when no usable tokens remain', () => {
     expect(titleSearchTerms("I'm It")).toBe('')
   })
+
+  it('caps at 8 tokens — 10+ terms flip WP search into exact-phrase mode', () => {
+    expect(titleSearchTerms('Teisou Gyakuten Sekai De Yuiitsu No Otoko Kishi No Ore, Onna Kishi Gakuen Ni Nyuugaku'))
+      .toBe('Teisou Gyakuten Sekai Yuiitsu Otoko Kishi Ore Onna')
+  })
 })
 
 describe('KiryuuProvider search', () => {
@@ -89,7 +94,7 @@ describe('KiryuuProvider chapter fallback', () => {
       headers: { 'Content-Type': 'application/json', 'X-WP-Total': String(total) },
     })
 
-  it('getManga falls back to title-word search when slug search returns 0 chapters', async () => {
+  it('getManga finds chapters via fast title-column search first', async () => {
     const slug = 'im-a-test-manga-but-cool'
     const calls: string[] = []
 
@@ -103,18 +108,15 @@ describe('KiryuuProvider chapter fallback', () => {
           excerpt: { rendered: '' }, modified: '2026-07-20T00:00:00',
         }], 1)
       }
-      if (url.includes('/chapter?') && url.includes(`search=${encodeURIComponent(slug)}`)) {
-        return wpJson([], 0)
+      if (url.includes('/manga?') && url.includes('_fields=title')) {
+        return wpJson([{ title: { rendered: 'I&#8217;m a Test Manga, but Cool' } }], 1)
       }
-      if (url.includes('/chapter?') && url.includes(encodeURIComponent('Test Manga but Cool'))) {
+      if (url.includes('/chapter?') && url.includes('search_columns=post_title') && url.includes(encodeURIComponent('Test Manga but Cool'))) {
         return wpJson([
           { id: 10, slug: `${slug}-chapter-01`, date: '2026-07-01' },
           { id: 11, slug: `${slug}-chapter-2`,  date: '2026-07-02' },
           { id: 12, slug: 'other-manga-chapter-5', date: '2026-07-02' },
         ], 3)
-      }
-      if (url.includes('/manga?') && url.includes('_fields=title')) {
-        return wpJson([{ title: { rendered: 'I&#8217;m a Test Manga, but Cool' } }], 1)
       }
       throw new Error(`unexpected fetch: ${url}`)
     })
@@ -123,6 +125,37 @@ describe('KiryuuProvider chapter fallback', () => {
 
     expect(manga.chapters.map(c => c.number)).toEqual([2, 1])
     expect(manga.latestChapter).toBe(2)
-    expect(calls.some(u => u.includes(encodeURIComponent('Test Manga but Cool')))).toBe(true)
+    // fast path only — the slow slug-content search must not run
+    expect(calls.some(u => u.includes(`search=${encodeURIComponent(slug)}`))).toBe(false)
+  })
+
+  it('getManga falls back to slug-content search when the title search is empty', async () => {
+    const slug = 'im-a-test-manga-but-cool'
+
+    vi.stubGlobal('fetch', async (input: RequestInfo | URL) => {
+      const url = String(input)
+
+      if (url.includes('/manga?') && url.includes(`slug=${slug}`) && url.includes('_embed')) {
+        return wpJson([{
+          id: 1, slug, title: { rendered: 'I&#8217;m a Test Manga, but Cool' },
+          excerpt: { rendered: '' }, modified: '2026-07-20T00:00:00',
+        }], 1)
+      }
+      if (url.includes('/manga?') && url.includes('_fields=title')) {
+        return wpJson([{ title: { rendered: 'I&#8217;m a Test Manga, but Cool' } }], 1)
+      }
+      if (url.includes('/chapter?') && url.includes('search_columns=post_title')) {
+        return wpJson([], 0)
+      }
+      if (url.includes('/chapter?') && url.includes(`search=${encodeURIComponent(slug)}`)) {
+        return wpJson([
+          { id: 10, slug: `${slug}-chapter-01`, date: '2026-07-01' },
+        ], 1)
+      }
+      throw new Error(`unexpected fetch: ${url}`)
+    })
+
+    const manga = await new KiryuuProvider().getManga(slug)
+    expect(manga.chapters.map(c => c.number)).toEqual([1])
   })
 })

@@ -125,6 +125,7 @@ export function titleSearchTerms(title: string): string {
     .filter(t => !/['’]/.test(t))
     .map(t => t.replace(/^[^\p{L}\p{N}]+/u, '').replace(/[^\p{L}\p{N}]+$/u, ''))
     .filter(t => t.length >= 3)
+    .slice(0, 8) // WP switches to exact-phrase matching past 9 terms — long titles would return 0
     .join(' ')
 }
 
@@ -199,24 +200,29 @@ export class KiryuuProvider implements MangaProvider {
     return kfetch<WPManga[]>(this.mangaListUrl(params), revalidate)
   }
 
-  // Fetch semua chapters untuk satu manga (parallel pages)
+  // Fetch semua chapters untuk satu manga (parallel pages).
+  // Fast path: chapter titles embed the manga name, and a title-column-only
+  // search runs ~13x faster than WP's default title+content scan (content rows
+  // are huge — they hold the page-image HTML for 450k chapters).
   private async fetchChapters(mangaSlug: string): Promise<ChapterMeta[]> {
-    const prefix   = `${mangaSlug}-chapter-`
-    const chapters = await this.searchChapters(mangaSlug, prefix)
-    if (chapters.length > 0) return chapters
+    const prefix = `${mangaSlug}-chapter-`
 
-    // Fallback: cari pakai kata-kata judul — slug search gagal untuk chapter
-    // yang di-host di CDN baru (lihat titleSearchTerms)
     const m = await kfetch<WPManga[]>(
       `${BASE}/manga?slug=${encodeURIComponent(mangaSlug)}&per_page=1&_fields=title`,
       3600
     ).catch(() => [] as WPManga[])
     const terms = m[0] ? titleSearchTerms(decodeHtml(m[0].title.rendered)) : ''
-    if (!terms) return []
-    return this.searchChapters(terms, prefix)
+
+    if (terms) {
+      const viaTitle = await this.searchChapters(terms, prefix, 'post_title')
+      if (viaTitle.length > 0) return viaTitle
+    }
+
+    // Fallback: full search by slug — matches old-CDN chapter content
+    return this.searchChapters(mangaSlug, prefix)
   }
 
-  private async searchChapters(searchTerm: string, prefix: string): Promise<ChapterMeta[]> {
+  private async searchChapters(searchTerm: string, prefix: string, searchColumns?: string): Promise<ChapterMeta[]> {
     const perPage = 100
 
     const parseChap = (ch: WPChapter): ChapterMeta | null => {
@@ -224,8 +230,9 @@ export class KiryuuProvider implements MangaProvider {
       return num === null ? null : { number: num, updatedAt: ch.date, note: '' }
     }
 
+    const columns = searchColumns ? `&search_columns=${searchColumns}` : ''
     const chapterUrl = (page: number) =>
-      `${BASE}/chapter?search=${encodeURIComponent(searchTerm)}&per_page=${perPage}&page=${page}&orderby=date&order=asc&_fields=id,slug,date`
+      `${BASE}/chapter?search=${encodeURIComponent(searchTerm)}${columns}&per_page=${perPage}&page=${page}&orderby=date&order=asc&_fields=id,slug,date`
 
     // Fetch halaman pertama untuk dapat total
     const firstRes = await fetch(chapterUrl(1), { headers: HEADERS, next: { revalidate: 1800 } })
