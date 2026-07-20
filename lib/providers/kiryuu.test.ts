@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from 'vitest'
-import { chapterSlugCandidates, chapterNumberFromSlug, titleSearchTerms, KiryuuProvider } from './kiryuu'
+import { chapterNumberFromSlug, titleSearchTerms, KiryuuProvider } from './kiryuu'
 
 describe('chapterNumberFromSlug', () => {
   const prefix = 'some-manga-chapter-'
@@ -16,26 +16,22 @@ describe('chapterNumberFromSlug', () => {
     expect(chapterNumberFromSlug('some-manga-chapter-09-2', prefix)).toBe(9.2)
   })
 
-  it('returns null for slugs that do not match the prefix or number', () => {
+  it('ignores a trailing non-numeric suffix — reposted/corrected chapters', () => {
+    // Real Kiryuu slugs: scanlators repost a corrected chapter as "…-chapter-59-fix"
+    // (or, inconsistently, no dash: "…-chapter-208fix"). The strict regex used to
+    // reject these outright, making the chapter vanish from the reader entirely.
+    expect(chapterNumberFromSlug('some-manga-chapter-59-fix', prefix)).toBe(59)
+    expect(chapterNumberFromSlug('some-manga-chapter-208fix', prefix)).toBe(208)
+    expect(chapterNumberFromSlug('some-manga-chapter-12-repost', prefix)).toBe(12)
+  })
+
+  it('still parses a decimal sub-chapter with a trailing suffix', () => {
+    expect(chapterNumberFromSlug('some-manga-chapter-9-1-fix', prefix)).toBe(9.1)
+  })
+
+  it('returns null for slugs that do not match the prefix or have no leading number', () => {
     expect(chapterNumberFromSlug('other-manga-chapter-1', prefix)).toBe(null)
     expect(chapterNumberFromSlug('some-manga-chapter-extra', prefix)).toBe(null)
-  })
-})
-
-describe('chapterSlugCandidates', () => {
-  it('includes both unpadded and zero-padded slugs for chapters 1-9', () => {
-    expect(chapterSlugCandidates('some-manga', 1)).toBe('some-manga-chapter-1,some-manga-chapter-01')
-    expect(chapterSlugCandidates('some-manga', 9)).toBe('some-manga-chapter-9,some-manga-chapter-09')
-  })
-
-  it('returns a single slug for chapters 10 and above', () => {
-    expect(chapterSlugCandidates('some-manga', 10)).toBe('some-manga-chapter-10')
-    expect(chapterSlugCandidates('some-manga', 123)).toBe('some-manga-chapter-123')
-  })
-
-  it('slugifies decimal chapters the way WordPress does (dot becomes dash)', () => {
-    expect(chapterSlugCandidates('some-manga', 5.5)).toBe('some-manga-chapter-5-5,some-manga-chapter-05-5')
-    expect(chapterSlugCandidates('some-manga', 10.5)).toBe('some-manga-chapter-10-5')
   })
 })
 
@@ -104,6 +100,64 @@ describe('KiryuuProvider slim card fetches', () => {
     const url = calls[0]
     expect(url).toContain('_fields=')
     expect(url).not.toContain(encodeURIComponent('wp:term'))
+  })
+})
+
+describe('KiryuuProvider getChapter', () => {
+  afterEach(() => vi.unstubAllGlobals())
+
+  const wpJson = (body: unknown, total = 0) =>
+    new Response(JSON.stringify(body), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json', 'X-WP-Total': String(total) },
+    })
+
+  it('resolves a chapter whose only post has a non-numeric slug suffix (e.g. "-fix")', async () => {
+    const slug = 'some-manga'
+    const fixSlug = `${slug}-chapter-59-fix`
+
+    vi.stubGlobal('fetch', async (input: RequestInfo | URL) => {
+      const url = String(input)
+
+      if (url.includes('/manga?') && url.includes(`slug=${slug}`) && url.includes('_fields=title')) {
+        return wpJson([{ title: { rendered: 'Some Manga' } }], 1)
+      }
+      if (url.includes('/manga?') && url.includes(`slug=${slug}`) && url.includes('_embed=wp:featuredmedia')) {
+        return wpJson([{ id: 1, title: { rendered: 'Some Manga' }, _embedded: {} }], 1)
+      }
+      if (url.includes('/chapter?') && url.includes('search_columns=post_title')) {
+        return wpJson([
+          { id: 10, slug: `${slug}-chapter-58`, date: '2021-04-24' },
+          { id: 11, slug: fixSlug,               date: '2021-04-24' },
+          { id: 12, slug: `${slug}-chapter-60`, date: '2021-04-24' },
+        ], 3)
+      }
+      if (url.includes('/chapter?') && url.includes(`slug=${encodeURIComponent(fixSlug)}`)) {
+        return wpJson([{ id: 11, slug: fixSlug, content: { rendered: '<img src="p1.jpg">' } }], 1)
+      }
+      throw new Error(`unexpected fetch: ${url}`)
+    })
+
+    const result = await new KiryuuProvider().getChapter(slug, 59)
+
+    expect(result.pages).toEqual(['p1.jpg'])
+    expect(result.prev).toBe(58)
+    expect(result.next).toBe(60)
+  })
+
+  it('throws when the requested chapter number is not in the list at all', async () => {
+    const slug = 'some-manga'
+    vi.stubGlobal('fetch', async (input: RequestInfo | URL) => {
+      const url = String(input)
+      if (url.includes('/manga?') && url.includes('_fields=title')) return wpJson([{ title: { rendered: 'Some Manga' } }], 1)
+      if (url.includes('/manga?') && url.includes('_embed=wp:featuredmedia')) return wpJson([{ id: 1, title: { rendered: 'Some Manga' }, _embedded: {} }], 1)
+      if (url.includes('/chapter?') && url.includes('search_columns=post_title')) {
+        return wpJson([{ id: 10, slug: `${slug}-chapter-1`, date: '2021-01-01' }], 1)
+      }
+      throw new Error(`unexpected fetch: ${url}`)
+    })
+
+    await expect(new KiryuuProvider().getChapter(slug, 999)).rejects.toThrow()
   })
 })
 
