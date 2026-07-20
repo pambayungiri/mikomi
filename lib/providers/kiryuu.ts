@@ -118,9 +118,11 @@ export function chapterNumberFromSlug(slug: string, prefix: string): number | nu
 
 // Extracts the chapter number as Kiryuu's own title text states it
 // ("Chapter 160.5" → 160.5). Only the first number is captured, so a
-// combined-release title ("Chapter 656-657") yields 656.
+// combined-release title ("Chapter 656-657") yields 656. `\D*?` (not just
+// leading zeros) also finds the number when other text sits between "Chapter"
+// and the digits ("Chapter ep. 2 – siapa dia?" → 2).
 function numberFromChapterTitle(titleText: string): number | null {
-  const m = decodeHtml(titleText).match(/Chapter\s+0*(\d+(?:\.\d+)?)/i)
+  const m = decodeHtml(titleText).match(/Chapter\s+\D*?(\d+(?:\.\d+)?)/i)
   return m ? parseFloat(m[1]) : null
 }
 
@@ -138,6 +140,11 @@ function numberFromChapterTitle(titleText: string): number | null {
 //    chapters into one post. The slug's dash there means "range", not
 //    "decimal point" — chapterNumberFromSlug's normal sub-chapter rule
 //    misreads "656-657" as 656.657. Corrected to the first number (656).
+//    Only triggers when the slug's normal decimal parse is implausible (a
+//    multi-digit fraction) — a title like "Chapter 1-1"/"Chapter 1-2" marks
+//    part 1/part 2 of chapter 1, not a range, and a plausible single-digit
+//    fraction (1.1, 1.2) must be left alone or both posts collapse to
+//    chapter "1" and one silently overwrites the other.
 //
 // Any other disagreement (title vs. slug) is a site-side data error with no
 // reliable signal for which number is correct — left as the slug value rather
@@ -146,7 +153,10 @@ export function reconcileChapterNumber(slugNum: number, titleText: string): numb
   const titleNum = numberFromChapterTitle(titleText)
   if (titleNum === null || titleNum === slugNum) return slugNum
 
-  if (/Chapter\s+\d+\s*[-–]\s*\d+/i.test(titleText)) return titleNum
+  if (/Chapter\s+\d+\s*[-–]\s*\d+/i.test(titleText)) {
+    const fracDigits = String(slugNum).split('.')[1]?.length ?? 0
+    if (fracDigits > 1) return titleNum
+  }
 
   if (Number.isInteger(slugNum) && titleNum % 1 !== 0) {
     const frac = Math.round((titleNum % 1) * 10)
@@ -285,7 +295,13 @@ export class KiryuuProvider implements MangaProvider {
 
     const parseChap = (ch: WPChapter): ChapterMetaWithSlug | null => {
       const slugNum = chapterNumberFromSlug(ch.slug, prefix)
-      if (slugNum === null) return null
+      if (slugNum === null) {
+        // Some slugs bury the number after other text ("…chapter-ep-2-siapa-dia")
+        // instead of leading with it — the chapter's own title still states
+        // the number unambiguously.
+        const titleOnly = numberFromChapterTitle(ch.title?.rendered ?? '')
+        return titleOnly === null ? null : { number: titleOnly, updatedAt: ch.date, note: '', slug: ch.slug }
+      }
       const num = reconcileChapterNumber(slugNum, ch.title?.rendered ?? '')
       return { number: num, updatedAt: ch.date, note: '', slug: ch.slug }
     }

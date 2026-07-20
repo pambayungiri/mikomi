@@ -32,6 +32,19 @@ describe('reconcileChapterNumber', () => {
     expect(reconcileChapterNumber(432, 'Release That Witch Chapter 342')).toBe(432)
   })
 
+  it('does not collapse "Chapter N-M" part markers into a combined-range — only a genuine multi-digit range triggers that', () => {
+    // Real Kiryuu data: "Apotheosis" posts "…chapter-1-1" and "…chapter-1-2",
+    // titled "Chapter 1-1" and "Chapter 1-2" — these are part 1 and part 2 of
+    // chapter 1, not "chapters 1 and 2 combined". The combined-range title
+    // regex alone can't tell them apart from a real range like "656-657", so
+    // it also requires the slug's normal decimal parse to look implausible
+    // (a multi-digit fraction) before overriding. 1.1/1.2 are plausible
+    // sub-chapter fractions and must be left alone, or both posts collapse
+    // to chapter "1" and one silently overwrites the other.
+    expect(reconcileChapterNumber(1.1, 'Apotheosis Chapter 1-1')).toBe(1.1)
+    expect(reconcileChapterNumber(1.2, 'Apotheosis Chapter 1-2')).toBe(1.2)
+  })
+
   it('returns the slug number unchanged when there is no title or no number in it', () => {
     expect(reconcileChapterNumber(5, '')).toBe(5)
     expect(reconcileChapterNumber(5, 'Some Manga Bonus Art')).toBe(5)
@@ -276,6 +289,42 @@ describe('KiryuuProvider chapter fallback', () => {
 
     expect(manga.chapters.map(c => c.number)).toEqual([1.1, 1])
     expect(manga.latestChapter).toBe(1.1)
+  })
+
+  it('getManga recovers a chapter whose slug buries the number after other text', async () => {
+    // Real Kiryuu data: "Wonderwall" posts slugs like "…chapter-ep-2-siapa-dia"
+    // — chapterNumberFromSlug requires the number to lead, so these were
+    // silently dropped from the chapter list entirely (not a gap, a full
+    // disappearance). The number is unambiguous in the chapter's own title.
+    const slug = 'im-a-test-manga-but-cool'
+
+    vi.stubGlobal('fetch', async (input: RequestInfo | URL) => {
+      const url = String(input)
+
+      if (url.includes('/manga?') && url.includes(`slug=${slug}`) && url.includes('_embed')) {
+        return wpJson([{
+          id: 1, slug, title: { rendered: 'I&#8217;m a Test Manga, but Cool' },
+          excerpt: { rendered: '' }, modified: '2026-07-20T00:00:00',
+        }], 1)
+      }
+      if (url.includes('/manga?') && url.includes('_fields=title')) {
+        return wpJson([{ title: { rendered: 'I&#8217;m a Test Manga, but Cool' } }], 1)
+      }
+      if (url.includes('/chapter?') && url.includes('search_columns=post_title')) {
+        return wpJson([
+          { id: 10, slug: `${slug}-chapter-1`, date: '2026-07-01', title: { rendered: 'Test Manga but Cool Chapter 1' } },
+          { id: 11, slug: `${slug}-chapter-ep-2-siapa-dia`, date: '2026-07-02', title: { rendered: 'Test Manga but Cool Chapter ep. 2 – siapa dia?' } },
+          { id: 12, slug: `${slug}-chapter-prolog`, date: '2026-06-30', title: { rendered: 'Test Manga but Cool Chapter prolog' } },
+        ], 3)
+      }
+      throw new Error(`unexpected fetch: ${url}`)
+    })
+
+    const manga = await new KiryuuProvider().getManga(slug)
+
+    // prolog has no number at all — correctly excluded, not a numbered chapter
+    expect(manga.chapters.map(c => c.number)).toEqual([2, 1])
+    expect(manga.latestChapter).toBe(2)
   })
 
   it('getManga falls back to slug-content search when the title search is empty', async () => {
