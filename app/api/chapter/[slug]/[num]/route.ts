@@ -7,7 +7,7 @@ export async function GET(
 ) {
   try {
     const { slug, num } = await params
-    const chapter = parseFloat(num)
+    const chapter = Number(num)
     if (isNaN(chapter)) return NextResponse.json({ error: 'Invalid chapter' }, { status: 400 })
 
     const provider = getProvider()

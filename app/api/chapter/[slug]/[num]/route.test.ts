@@ -35,4 +35,9 @@ describe('GET /api/chapter/[slug]/[num]', () => {
     const res = await GET(new Request('http://t/api/chapter/x/abc'), makeParams('x', 'abc'))
     expect(res.status).toBe(400)
   })
+
+  it('400s on a chapter with trailing garbage', async () => {
+    const res = await GET(new Request('http://t/api/chapter/x/9.1abc'), makeParams('x', '9.1abc'))
+    expect(res.status).toBe(400)
+  })
 })

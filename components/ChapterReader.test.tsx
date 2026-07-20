@@ -35,6 +35,7 @@ describe('ChapterReader auto-append', () => {
   beforeEach(() => {
     localStorage.clear()
     observers.length = 0
+    routerPush.mockClear()
     vi.stubGlobal('IntersectionObserver', FakeIO)
   })
   afterEach(() => vi.unstubAllGlobals())
@@ -116,5 +117,54 @@ describe('ChapterReader auto-append', () => {
     fireEvent.click(nextZone) // page 1 -> 2 (last page)
     fireEvent.click(nextZone) // last page -> next chapter
     expect(routerPush).toHaveBeenCalledWith('/chapter/test-slug/2')
+  })
+
+  it('does not append a stale in-flight chapter after toggling mode mid-load', async () => {
+    let resolveFetch!: (res: Response) => void
+    const fetchMock = vi.fn().mockReturnValue(
+      new Promise<Response>(resolve => { resolveFetch = resolve })
+    )
+    vi.stubGlobal('fetch', fetchMock)
+
+    render(<ChapterReader {...baseProps} />)
+    fireSentinel()
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledWith('/api/chapter/test-slug/2'))
+
+    // Toggle to single mode while the fetch for chapter 2 is still in flight — this
+    // should invalidate the in-flight request.
+    const toSingle = await screen.findByRole('button', { name: /single/i })
+    fireEvent.click(toSingle)
+
+    // Toggle straight back to strip mode so we can observe the chapters array directly.
+    const toStrip = await screen.findByRole('button', { name: /strip/i })
+    fireEvent.click(toStrip)
+
+    // Now let the stale fetch resolve — it must not land, since it was started before
+    // both toggles collapsed/reset the reader.
+    resolveFetch(new Response(JSON.stringify({
+      chapter: 2, pages: ['https://v7.kiryuu.to/p3.jpg'], prev: 1, next: 3,
+    }), { status: 200, headers: { 'Content-Type': 'application/json' } }))
+
+    // Give any pending microtasks/effects a chance to run
+    await new Promise(r => setTimeout(r, 0))
+
+    // Only the collapsed chapter's own images should be rendered — the stale chapter 2
+    // must not be appended, and no divider for it should appear.
+    expect(screen.queryByText(/Ch\. 1 selesai · Ch\. 2/)).not.toBeInTheDocument()
+    expect(screen.getAllByRole('img').length).toBe(2)
+  })
+
+  it('shows the "not yet available" message when the next chapter has no pages, and does not refetch', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({
+      chapter: 2, pages: [], prev: 1, next: 3,
+    }), { status: 200, headers: { 'Content-Type': 'application/json' } }))
+    vi.stubGlobal('fetch', fetchMock)
+
+    render(<ChapterReader {...baseProps} />)
+    fireSentinel()
+
+    expect(await screen.findByText(/Ch\. 2 belum tersedia/)).toBeInTheDocument()
+    expect(fetchMock).toHaveBeenCalledTimes(1)
   })
 })

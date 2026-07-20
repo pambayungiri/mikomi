@@ -68,6 +68,9 @@ export default function ChapterReader({
   const sentinelRef = useRef<HTMLDivElement | null>(null)
   const activeChapter = chapters[activeIdx] ?? chapters[0]
   const recordedRef = useRef<Set<number>>(new Set([chapter]))
+  // Bumped whenever the reader collapses (mode toggle) so in-flight loadNext
+  // fetches started before the collapse can detect they're stale and bail.
+  const generationRef = useRef(0)
 
   useEffect(() => {
     const saved = readStorage<string>(STORAGE_KEYS.readingMode, 'strip')
@@ -88,17 +91,23 @@ export default function ChapterReader({
   }, [pages, slug, chapter])
 
   const loadNext = useCallback(async () => {
+    const gen = generationRef.current
     const last = chapters[chapters.length - 1]
     if (last.next === null) { setTail({ status: 'last' }); return }
     setTail({ status: 'loading', chapter: last.next })
     try {
       const res = await fetch(`/api/chapter/${slug}/${last.next}`)
+      if (generationRef.current !== gen) return
       if (!res.ok) throw new Error(String(res.status))
       const data = (await res.json()) as { chapter: number; pages: string[]; prev: number | null; next: number | null }
+      if (generationRef.current !== gen) return
       if (data.pages.length === 0) { setTail({ status: 'empty', chapter: data.chapter }); return }
-      setChapters(cs => [...cs, { number: data.chapter, pages: data.pages, prev: data.prev, next: data.next }])
+      setChapters(cs => cs.some(c => c.number === data.chapter)
+        ? cs
+        : [...cs, { number: data.chapter, pages: data.pages, prev: data.prev, next: data.next }])
       setTail(data.next === null ? { status: 'last' } : { status: 'idle' })
     } catch {
+      if (generationRef.current !== gen) return
       setTail({ status: 'error', chapter: last.next })
     }
   }, [chapters, slug])
@@ -198,6 +207,7 @@ export default function ChapterReader({
   }, [activeIdx, chapters, slug, mangaName, mangaImage])
 
   function toggleMode() {
+    generationRef.current += 1
     const nextMode = mode === 'strip' ? 'single' : 'strip'
     const current = chapters[activeIdx] ?? chapters[0]
     setChapters([current])
