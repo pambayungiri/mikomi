@@ -14,8 +14,8 @@ const HEADERS: Record<string, string> = {
   'Accept-Language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
   'Accept-Encoding': 'gzip, deflate, br',
   'Referer': 'https://v7.kiryuu.to/',
-  'Cache-Control': 'no-cache',
-  'Pragma': 'no-cache',
+  // No Cache-Control/Pragma no-cache here: Vercel's Data Cache treats them as a
+  // bypass signal on outbound fetches, defeating next.revalidate entirely.
 }
 if (RELAY_KEY) HEADERS['x-relay-key'] = RELAY_KEY
 
