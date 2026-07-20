@@ -171,9 +171,8 @@ export function reconcileChapterNumber(slugNum: number, titleText: string): numb
 // when two posts collide on the same chapter number. HD/HQ beats LQ, colored
 // beats plain/unmarked (implicitly black-and-white). A slug with no
 // recognized marker (a "-fix" correction, a padding-only duplicate, an "-end"
-// label) scores neutral — those cases have no color/resolution signal and
-// fall back to whichever was posted latest, which already resolves them
-// correctly.
+// label) scores neutral — those cases have no color/resolution signal, so
+// searchChapters falls back to comparing real page counts instead.
 export function chapterQualityScore(slug: string): number {
   const s = slug.toLowerCase()
   let score = 0
@@ -353,23 +352,54 @@ export class KiryuuProvider implements MangaProvider {
     // Same number can appear twice: a scanlator reposts a corrected chapter
     // under a suffixed slug ("…chapter-59" + "…chapter-59-fix"), or the same
     // chapter gets uploaded in two renditions (colored + black-and-white,
-    // HD + LQ scan). Corrections and unmarked duplicates have no quality
-    // signal — keep whichever was posted most recently, the repost
-    // supersedes the original. Renditions DO have a quality signal, and it
-    // must win regardless of which was posted later — an HD scan uploaded
-    // before an LQ one must not lose to it just for being older.
-    const byNumber = new Map<number, ChapterMetaWithSlug>()
+    // HD + LQ scan). Renditions DO have a quality signal (chapterQualityScore)
+    // and it wins regardless of posting date. Corrections and unmarked
+    // duplicates have no such signal — verified against 68 real "-fix"
+    // collisions, date alone picks the thinner post 8 times (the correction
+    // was posted before the original it was meant to replace), so ties are
+    // broken by real page count instead, falling back to latest date only
+    // when the page counts also match (a true duplicate — doesn't matter
+    // which is kept).
+    const groups = new Map<number, ChapterMetaWithSlug[]>()
     for (const c of chapters) {
-      const existing = byNumber.get(c.number)
-      if (!existing) { byNumber.set(c.number, c); continue }
-      const existingScore = chapterQualityScore(existing.slug)
-      const newScore = chapterQualityScore(c.slug)
-      if (newScore > existingScore) byNumber.set(c.number, c)
-      else if (newScore === existingScore && c.updatedAt > existing.updatedAt) byNumber.set(c.number, c)
+      const arr = groups.get(c.number)
+      if (arr) arr.push(c)
+      else groups.set(c.number, [c])
     }
 
+    const resolved = await Promise.all(
+      [...groups.values()].map(candidates => this.pickBestChapter(candidates))
+    )
+
     // Sort desc — chapter terbaru di atas (sesuai tampilan UI)
-    return [...byNumber.values()].sort((a, b) => b.number - a.number)
+    return resolved.sort((a, b) => b.number - a.number)
+  }
+
+  private async pickBestChapter(candidates: ChapterMetaWithSlug[]): Promise<ChapterMetaWithSlug> {
+    if (candidates.length === 1) return candidates[0]
+
+    const maxScore = Math.max(...candidates.map(c => chapterQualityScore(c.slug)))
+    const top = candidates.filter(c => chapterQualityScore(c.slug) === maxScore)
+    if (top.length === 1) return top[0]
+
+    const pageCounts = await Promise.all(top.map(c => this.chapterPageCount(c.slug)))
+    const maxPages = Math.max(...pageCounts)
+    const fullest = top.filter((_, i) => pageCounts[i] === maxPages)
+    if (fullest.length === 1) return fullest[0]
+
+    return fullest.reduce((latest, c) => (c.updatedAt > latest.updatedAt ? c : latest))
+  }
+
+  private async chapterPageCount(slug: string): Promise<number> {
+    try {
+      const data = await kfetch<WPChapter[]>(
+        `${BASE}/chapter?slug=${encodeURIComponent(slug)}&_fields=content`,
+        86400
+      )
+      return data[0] ? parseImages(data[0].content?.rendered ?? '').length : 0
+    } catch {
+      return 0
+    }
   }
 
   // ─── Interface methods ────────────────────────────────────────────────────

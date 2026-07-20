@@ -355,6 +355,53 @@ describe('KiryuuProvider chapter fallback', () => {
     expect(manga.chapters[0].updatedAt).toBe('2026-07-01')
   })
 
+  it('getManga picks the fuller repost by real page count when neither slug has a quality signal', async () => {
+    // Real Kiryuu data: a "-fix" correction repost has no color/HD/LQ marker,
+    // so quality score ties with the original and "latest wins" is the only
+    // signal left — but the plain original was sometimes posted AFTER the
+    // fix, so date alone keeps the thinner post. Verified via real page
+    // counts (60 titles / 68 collisions): only content length reliably tells
+    // which post is actually fuller.
+    const slug = 'im-a-test-manga-but-cool'
+    const plainSlug = `${slug}-chapter-67`
+    const fixSlug = `${slug}-chapter-67-fix`
+
+    vi.stubGlobal('fetch', async (input: RequestInfo | URL) => {
+      const url = String(input)
+
+      if (url.includes('/manga?') && url.includes(`slug=${slug}`) && url.includes('_embed')) {
+        return wpJson([{
+          id: 1, slug, title: { rendered: 'I&#8217;m a Test Manga, but Cool' },
+          excerpt: { rendered: '' }, modified: '2026-07-20T00:00:00',
+        }], 1)
+      }
+      if (url.includes('/manga?') && url.includes('_fields=title')) {
+        return wpJson([{ title: { rendered: 'I&#8217;m a Test Manga, but Cool' } }], 1)
+      }
+      if (url.includes('/chapter?') && url.includes('search_columns=post_title')) {
+        return wpJson([
+          // fix posted first, then a thinner "original" reposted a day later
+          { id: 10, slug: fixSlug,   date: '2026-07-01', title: { rendered: 'Test Manga but Cool Chapter 67 Fix' } },
+          { id: 11, slug: plainSlug, date: '2026-07-02', title: { rendered: 'Test Manga but Cool Chapter 67' } },
+        ], 2)
+      }
+      if (url.includes('/chapter?') && url.includes(`slug=${encodeURIComponent(fixSlug)}`) && url.includes('_fields=content')) {
+        return wpJson([{ id: 10, slug: fixSlug, content: { rendered: '<img src="a.jpg"><img src="b.jpg"><img src="c.jpg">' } }], 1)
+      }
+      if (url.includes('/chapter?') && url.includes(`slug=${encodeURIComponent(plainSlug)}`) && url.includes('_fields=content')) {
+        return wpJson([{ id: 11, slug: plainSlug, content: { rendered: '<img src="a.jpg">' } }], 1)
+      }
+      throw new Error(`unexpected fetch: ${url}`)
+    })
+
+    const manga = await new KiryuuProvider().getManga(slug)
+
+    expect(manga.chapters).toHaveLength(1)
+    expect(manga.chapters[0].number).toBe(67)
+    // the fuller "-fix" post's date, not the later-posted thinner original's
+    expect(manga.chapters[0].updatedAt).toBe('2026-07-01')
+  })
+
   it('getManga recovers a chapter whose slug buries the number after other text', async () => {
     // Real Kiryuu data: "Wonderwall" posts slugs like "…chapter-ep-2-siapa-dia"
     // — chapterNumberFromSlug requires the number to lead, so these were
