@@ -533,7 +533,6 @@ export class KiryuuProvider implements MangaProvider {
     ])
 
     const nums = allChapters.map(c => c.number) // sorted desc
-    console.error('[getChapter debug]', slug, 'requested=', chapter, 'count=', nums.length, 'sample=', nums.slice(0, 5))
     const idx  = nums.indexOf(chapter)
     if (idx === -1) throw new Error(`Chapter ${chapter} not found: ${slug}`)
     const target = allChapters[idx]
