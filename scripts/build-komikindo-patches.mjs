@@ -54,10 +54,16 @@ async function komikindoPageCount(postId) {
 }
 
 async function kiryuuAveragePageCount(kiryuuSlug) {
-  // orderby=date&order=asc makes results chronological (oldest first). We then sample
-  // a window centered on the 50th percentile of the list — avoiding the newest posts
-  // (which Kiryuu often paywalls/previews down to a handful of pages) and the very
-  // earliest posts (sometimes atypically short establishing chapters).
+  // orderby=date&order=asc makes results chronological (oldest first), capped at the
+  // first 100 posts (this call doesn't paginate further) — so for a title with more
+  // than 100 posts, the "middle" sampled below is the middle of that oldest-100 slice,
+  // not the true middle of the whole archive. That's still enough to dodge the failure
+  // mode this was built for: Kiryuu often paywalls/previews its most-recently-posted
+  // chapters down to a handful of pages, and those always sort past this window since
+  // it only ever covers the oldest posts. It does NOT guarantee a representative sample
+  // for titles whose page-count style changes partway through their own archive —
+  // review scripts/data/komikindo-patch-rejections.json for page-count-outlier entries
+  // after a full run rather than trusting this baseline blindly.
   const res = await fetchT(`${KIRYUU_BASE}/chapter?search=${encodeURIComponent(kiryuuSlug)}&orderby=date&order=asc&per_page=100&_fields=slug`)
   if (!res.ok) return null
   const posts = await res.json()
