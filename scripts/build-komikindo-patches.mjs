@@ -54,11 +54,17 @@ async function komikindoPageCount(postId) {
 }
 
 async function kiryuuAveragePageCount(kiryuuSlug) {
-  const res = await fetchT(`${KIRYUU_BASE}/chapter?search=${encodeURIComponent(kiryuuSlug)}&per_page=100&_fields=slug`)
+  // orderby=date&order=asc makes results chronological (oldest first). We then sample
+  // a window centered on the 50th percentile of the list — avoiding the newest posts
+  // (which Kiryuu often paywalls/previews down to a handful of pages) and the very
+  // earliest posts (sometimes atypically short establishing chapters).
+  const res = await fetchT(`${KIRYUU_BASE}/chapter?search=${encodeURIComponent(kiryuuSlug)}&orderby=date&order=asc&per_page=100&_fields=slug`)
   if (!res.ok) return null
   const posts = await res.json()
   if (posts.length === 0) return null
-  const sample = posts.slice(0, 7)
+  const midIdx = Math.max(0, Math.floor(posts.length / 2) - 3)
+  const start = Math.min(midIdx, Math.max(0, posts.length - 7))
+  const sample = posts.slice(start, start + 7)
   const counts = await Promise.all(sample.map(async (p) => {
     const r = await fetchT(`${KIRYUU_BASE}/chapter?slug=${encodeURIComponent(p.slug)}&_fields=content`)
     if (!r.ok) return 0
