@@ -2,6 +2,8 @@ import type {
   MangaCard, MangaDetail, ChapterDetail, ChapterMeta,
   PaginatedResult, MangaProvider,
 } from './types'
+import { getPatchedChapterNumbers, getPatchedChapterSlug } from './patch-data'
+import { fetchKomikindoChapterPages } from './komikindo'
 
 // If KIRYUU_BASE is set, requests go through a CF Worker relay instead of directly to
 // v7.kiryuu.to. Required on Vercel — Cloudflare blocks AWS datacenter IPs by ASN.
@@ -57,7 +59,10 @@ type WPTaxTerm = { id: number; name: string; slug: string }
 
 // Internal-only: carries the exact WP slug alongside the parsed chapter number,
 // so getChapter can fetch content by real slug instead of guessing one.
-type ChapterMetaWithSlug = ChapterMeta & { slug: string }
+// `source: 'komikindo'` marks a chapter merged in from the gap-patch table —
+// its `slug` is a komikindo chapter slug, not a Kiryuu one, and must only
+// ever be passed to fetchKomikindoChapterPages, never Kiryuu's own content URL.
+type ChapterMetaWithSlug = ChapterMeta & { slug: string; source?: 'komikindo' }
 
 // ─── Pure helpers ─────────────────────────────────────────────────────────────
 
@@ -402,6 +407,25 @@ export class KiryuuProvider implements MangaProvider {
     }
   }
 
+  // Adds any patched chapters komikindo has for this manga that Kiryuu's own
+  // chapters list doesn't already cover — never overrides an existing Kiryuu
+  // chapter number (spec: patches only ever fill a hole, never replace).
+  private mergePatchedChapters(mangaSlug: string, chapters: ChapterMetaWithSlug[]): ChapterMetaWithSlug[] {
+    const existingNumbers = new Set(chapters.map(c => c.number))
+    const patchedNumbers = getPatchedChapterNumbers(mangaSlug).filter(n => !existingNumbers.has(n))
+    if (patchedNumbers.length === 0) return chapters
+
+    const patched: ChapterMetaWithSlug[] = patchedNumbers.map(number => ({
+      number,
+      updatedAt: '',
+      note: '',
+      slug: getPatchedChapterSlug(mangaSlug, number) as string,
+      source: 'komikindo',
+    }))
+
+    return [...chapters, ...patched].sort((a, b) => b.number - a.number)
+  }
+
   // ─── Interface methods ────────────────────────────────────────────────────
 
   async getPopular(): Promise<MangaCard[]> {
@@ -490,7 +514,7 @@ export class KiryuuProvider implements MangaProvider {
     if (!list.length) throw new Error(`Manga not found: ${slug}`)
     const m = list[0]
 
-    const chapters = await this.fetchChapters(slug)
+    const chapters = this.mergePatchedChapters(slug, await this.fetchChapters(slug))
     const meta     = m.metadata?.meta ?? {}
 
     return {
@@ -519,27 +543,25 @@ export class KiryuuProvider implements MangaProvider {
     // Resolve against the real chapter list first, rather than guessing a slug —
     // some chapters are reposted with a non-numeric suffix ("…chapter-59-fix"),
     // so a plain "manga-chapter-59" guess 404s even though the chapter exists.
-    const [allChapters, mangaList] = await Promise.all([
+    const [rawChapters, mangaList] = await Promise.all([
       this.fetchChapters(slug),
       kfetch<WPManga[]>(
         `${BASE}/manga?slug=${encodeURIComponent(slug)}&_embed=wp:featuredmedia&_fields=id,title,_embedded,_links`,
         3600
       ),
     ])
+    const allChapters = this.mergePatchedChapters(slug, rawChapters)
 
     const nums = allChapters.map(c => c.number) // sorted desc
     const idx  = nums.indexOf(chapter)
     if (idx === -1) throw new Error(`Chapter ${chapter} not found: ${slug}`)
     const target = allChapters[idx]
 
-    const chapterList = await kfetch<WPChapter[]>(
-      `${BASE}/chapter?slug=${encodeURIComponent(target.slug)}&_fields=content`,
-      86400
-    )
-    if (!chapterList.length) throw new Error(`Chapter ${chapter} not found: ${slug}`)
+    const pages = target.source === 'komikindo'
+      ? await fetchKomikindoChapterPages(target.slug)
+      : await this.fetchKiryuuPages(target.slug)
+    if (pages.length === 0) throw new Error(`Chapter ${chapter} not found: ${slug}`)
 
-    // Gambar langsung dari CDN Kiryuu — tidak ada proxy
-    const pages      = parseImages(chapterList[0].content?.rendered ?? '')
     const mangaName  = mangaList[0] ? decodeHtml(mangaList[0].title.rendered) : slug
     const mangaImage = coverOf(mangaList[0]?._embedded)
 
@@ -552,6 +574,16 @@ export class KiryuuProvider implements MangaProvider {
       prev: idx < nums.length - 1 ? nums[idx + 1] : null,
       next: idx > 0 ? nums[idx - 1] : null,
     }
+  }
+
+  // Gambar langsung dari CDN Kiryuu — tidak ada proxy
+  private async fetchKiryuuPages(targetSlug: string): Promise<string[]> {
+    const chapterList = await kfetch<WPChapter[]>(
+      `${BASE}/chapter?slug=${encodeURIComponent(targetSlug)}&_fields=content`,
+      86400
+    )
+    if (!chapterList.length) return []
+    return parseImages(chapterList[0].content?.rendered ?? '')
   }
 
   async search(query: string, opts?: { type?: string }): Promise<MangaCard[]> {
