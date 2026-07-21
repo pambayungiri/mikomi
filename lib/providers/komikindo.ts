@@ -22,16 +22,15 @@ export async function fetchKomikindoChapterPages(chapterSlug: string): Promise<s
       `${BASE}/wp/v2/posts?slug=${encodeURIComponent(chapterSlug)}&_fields=id`,
       { headers: HEADERS }
     )
-    if (!postRes.ok) { console.error('[komikindo debug] post lookup not ok', postRes.status, chapterSlug); return [] }
+    if (!postRes.ok) return []
     const posts = await postRes.json() as KomikindoPost[]
-    if (!posts[0]) { console.error('[komikindo debug] no post match', chapterSlug); return [] }
+    if (!posts[0]) return []
 
     const chapterRes = await fetch(`${BASE}/apk/v2/chapter/${posts[0].id}`, { headers: HEADERS })
-    if (!chapterRes.ok) { console.error('[komikindo debug] chapter fetch not ok', chapterRes.status, posts[0].id); return [] }
+    if (!chapterRes.ok) return []
     const data = await chapterRes.json() as KomikindoChapterResponse
     return Array.isArray(data.image) ? data.image : []
-  } catch (e) {
-    console.error('[komikindo debug] threw', chapterSlug, e instanceof Error ? e.message : e)
+  } catch {
     return []
   }
 }
