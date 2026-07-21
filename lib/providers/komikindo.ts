@@ -29,7 +29,7 @@ export async function fetchKomikindoChapterPages(chapterSlug: string): Promise<s
     const chapterRes = await fetch(`${BASE}/apk/v2/chapter/${posts[0].id}`, { headers: HEADERS })
     if (!chapterRes.ok) return []
     const data = await chapterRes.json() as KomikindoChapterResponse
-    return data.image ?? []
+    return Array.isArray(data.image) ? data.image : []
   } catch {
     return []
   }

@@ -36,7 +36,11 @@ async function resolveKomikindoSlug(title) {
   if (!res.ok) return null
   const matches = await res.json()
   const exact = matches.find(m => decodeHtml(m.title.rendered).toLowerCase() === title.toLowerCase())
-  return exact ? exact.slug : (matches[0] ? matches[0].slug : null)
+  // No fallback to matches[0]: an unmatched title must resolve to null rather than
+  // risk silently patching in a chapter from a completely unrelated manga — neither
+  // downstream verification gate (chapter-title cross-check, page-count sanity) can
+  // catch a wrong-manga match, only a wrong-chapter one.
+  return exact ? exact.slug : null
 }
 
 async function findKomikindoPost(chapterSlug) {
@@ -53,7 +57,16 @@ async function komikindoPageCount(postId) {
   return Array.isArray(data.image) ? data.image.length : 0
 }
 
+const baselineCache = new Map()
+
 async function kiryuuAveragePageCount(kiryuuSlug) {
+  if (baselineCache.has(kiryuuSlug)) return baselineCache.get(kiryuuSlug)
+  const baseline = await computeKiryuuAveragePageCount(kiryuuSlug)
+  baselineCache.set(kiryuuSlug, baseline)
+  return baseline
+}
+
+async function computeKiryuuAveragePageCount(kiryuuSlug) {
   // orderby=date&order=asc makes results chronological (oldest first), capped at the
   // first 100 posts (this call doesn't paginate further) — so for a title with more
   // than 100 posts, the "middle" sampled below is the middle of that oldest-100 slice,
