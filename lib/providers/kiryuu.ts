@@ -413,9 +413,7 @@ export class KiryuuProvider implements MangaProvider {
   // chapter number (spec: patches only ever fill a hole, never replace).
   private mergePatchedChapters(mangaSlug: string, chapters: ChapterMetaWithSlug[]): ChapterMetaWithSlug[] {
     const existingNumbers = new Set(chapters.map(c => c.number))
-    const rawPatched = getPatchedChapterNumbers(mangaSlug)
-    console.error('[patch debug]', mangaSlug, 'rawPatched=', rawPatched, 'existingCount=', chapters.length)
-    const patchedNumbers = rawPatched.filter(n => !existingNumbers.has(n))
+    const patchedNumbers = getPatchedChapterNumbers(mangaSlug).filter(n => !existingNumbers.has(n))
     if (patchedNumbers.length === 0) return chapters
 
     const patched: ChapterMetaWithSlug[] = patchedNumbers.map(number => ({
