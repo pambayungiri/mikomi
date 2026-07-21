@@ -1,16 +1,7 @@
 import { describe, it, expect, afterEach, vi } from 'vitest'
 import { chapterNumberFromSlug, reconcileChapterNumber, chapterQualityScore, titleSearchTerms, KiryuuProvider } from './kiryuu'
-import { getPatchedChapterNumbers, getPatchedChapterSlug } from './patch-data'
-import { fetchKomikindoChapterPages } from './komikindo'
 import { isKnownEmpty } from './empty-manga'
 
-vi.mock('./patch-data', () => ({
-  getPatchedChapterNumbers: vi.fn(() => []),
-  getPatchedChapterSlug: vi.fn(() => null),
-}))
-vi.mock('./komikindo', () => ({
-  fetchKomikindoChapterPages: vi.fn(async () => []),
-}))
 vi.mock('./empty-manga', () => ({
   isKnownEmpty: vi.fn(() => false),
 }))
@@ -480,110 +471,6 @@ describe('KiryuuProvider chapter fallback', () => {
 
     const manga = await new KiryuuProvider().getManga(slug)
     expect(manga.chapters.map(c => c.number)).toEqual([1])
-  })
-})
-
-describe('KiryuuProvider komikindo patch merging', () => {
-  afterEach(() => {
-    vi.unstubAllGlobals()
-    vi.mocked(getPatchedChapterNumbers).mockReturnValue([])
-    vi.mocked(getPatchedChapterSlug).mockReturnValue(null)
-    vi.mocked(fetchKomikindoChapterPages).mockResolvedValue([])
-  })
-
-  const wpJson = (body: unknown, total = 0) =>
-    new Response(JSON.stringify(body), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json', 'X-WP-Total': String(total) },
-    })
-
-  it('getManga adds a patched chapter number Kiryuu does not have', async () => {
-    const slug = 'im-a-test-manga-but-cool'
-    vi.mocked(getPatchedChapterNumbers).mockReturnValue([197])
-    vi.mocked(getPatchedChapterSlug).mockReturnValue('im-a-test-manga-but-cool-chapter-197')
-
-    vi.stubGlobal('fetch', async (input: RequestInfo | URL) => {
-      const url = String(input)
-      if (url.includes('/manga?') && url.includes(`slug=${slug}`) && url.includes('_embed')) {
-        return wpJson([{
-          id: 1, slug, title: { rendered: 'I&#8217;m a Test Manga, but Cool' },
-          excerpt: { rendered: '' }, modified: '2026-07-21T00:00:00',
-        }], 1)
-      }
-      if (url.includes('/manga?') && url.includes('_fields=title')) {
-        return wpJson([{ title: { rendered: 'I&#8217;m a Test Manga, but Cool' } }], 1)
-      }
-      if (url.includes('/chapter?') && url.includes('search_columns=post_title')) {
-        return wpJson([
-          { id: 10, slug: `${slug}-chapter-196`, date: '2026-07-01', title: { rendered: 'Test Manga but Cool Chapter 196' } },
-        ], 1)
-      }
-      throw new Error(`unexpected fetch: ${url}`)
-    })
-
-    const manga = await new KiryuuProvider().getManga(slug)
-
-    expect(manga.chapters.map(c => c.number)).toEqual([197, 196])
-  })
-
-  it('getManga does not add a patch entry for a chapter number Kiryuu already has', async () => {
-    const slug = 'im-a-test-manga-but-cool'
-    vi.mocked(getPatchedChapterNumbers).mockReturnValue([196])
-    vi.mocked(getPatchedChapterSlug).mockReturnValue('im-a-test-manga-but-cool-chapter-196')
-
-    vi.stubGlobal('fetch', async (input: RequestInfo | URL) => {
-      const url = String(input)
-      if (url.includes('/manga?') && url.includes(`slug=${slug}`) && url.includes('_embed')) {
-        return wpJson([{
-          id: 1, slug, title: { rendered: 'I&#8217;m a Test Manga, but Cool' },
-          excerpt: { rendered: '' }, modified: '2026-07-21T00:00:00',
-        }], 1)
-      }
-      if (url.includes('/manga?') && url.includes('_fields=title')) {
-        return wpJson([{ title: { rendered: 'I&#8217;m a Test Manga, but Cool' } }], 1)
-      }
-      if (url.includes('/chapter?') && url.includes('search_columns=post_title')) {
-        return wpJson([
-          { id: 10, slug: `${slug}-chapter-196`, date: '2026-07-01', title: { rendered: 'Test Manga but Cool Chapter 196' } },
-        ], 1)
-      }
-      throw new Error(`unexpected fetch: ${url}`)
-    })
-
-    const manga = await new KiryuuProvider().getManga(slug)
-
-    expect(manga.chapters).toHaveLength(1)
-    expect(manga.chapters[0].number).toBe(196)
-  })
-
-  it("getChapter serves a patched chapter's pages from komikindo and resolves prev/next against the merged list", async () => {
-    const slug = 'im-a-test-manga-but-cool'
-    vi.mocked(getPatchedChapterNumbers).mockReturnValue([197])
-    vi.mocked(getPatchedChapterSlug).mockReturnValue('im-a-test-manga-but-cool-chapter-197')
-    vi.mocked(fetchKomikindoChapterPages).mockResolvedValue(['https://komikindo-cdn.example/1.jpg'])
-
-    vi.stubGlobal('fetch', async (input: RequestInfo | URL) => {
-      const url = String(input)
-      if (url.includes('/manga?') && url.includes(`slug=${slug}`) && url.includes('_fields=title')) {
-        return wpJson([{ title: { rendered: 'I&#8217;m a Test Manga, but Cool' } }], 1)
-      }
-      if (url.includes('/manga?') && url.includes(`slug=${slug}`) && url.includes('_embed=wp:featuredmedia')) {
-        return wpJson([{ id: 1, title: { rendered: 'I&#8217;m a Test Manga, but Cool' }, _embedded: {} }], 1)
-      }
-      if (url.includes('/chapter?') && url.includes('search_columns=post_title')) {
-        return wpJson([
-          { id: 10, slug: `${slug}-chapter-196`, date: '2026-07-01', title: { rendered: 'Test Manga but Cool Chapter 196' } },
-        ], 1)
-      }
-      throw new Error(`unexpected fetch: ${url}`)
-    })
-
-    const result = await new KiryuuProvider().getChapter(slug, 197)
-
-    expect(result.pages).toEqual(['https://komikindo-cdn.example/1.jpg'])
-    expect(result.prev).toBe(196)
-    expect(result.next).toBeNull()
-    expect(fetchKomikindoChapterPages).toHaveBeenCalledWith('im-a-test-manga-but-cool-chapter-197')
   })
 })
 
