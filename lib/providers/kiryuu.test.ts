@@ -2,6 +2,7 @@ import { describe, it, expect, afterEach, vi } from 'vitest'
 import { chapterNumberFromSlug, reconcileChapterNumber, chapterQualityScore, titleSearchTerms, KiryuuProvider } from './kiryuu'
 import { getPatchedChapterNumbers, getPatchedChapterSlug } from './patch-data'
 import { fetchKomikindoChapterPages } from './komikindo'
+import { isKnownEmpty } from './empty-manga'
 
 vi.mock('./patch-data', () => ({
   getPatchedChapterNumbers: vi.fn(() => []),
@@ -9,6 +10,9 @@ vi.mock('./patch-data', () => ({
 }))
 vi.mock('./komikindo', () => ({
   fetchKomikindoChapterPages: vi.fn(async () => []),
+}))
+vi.mock('./empty-manga', () => ({
+  isKnownEmpty: vi.fn(() => false),
 }))
 
 describe('chapterQualityScore', () => {
@@ -580,5 +584,48 @@ describe('KiryuuProvider komikindo patch merging', () => {
     expect(result.prev).toBe(196)
     expect(result.next).toBeNull()
     expect(fetchKomikindoChapterPages).toHaveBeenCalledWith('im-a-test-manga-but-cool-chapter-197')
+  })
+})
+
+describe('KiryuuProvider known-empty filtering', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals()
+    vi.mocked(isKnownEmpty).mockReturnValue(false)
+  })
+
+  const wpJson = (body: unknown, total = 0) =>
+    new Response(JSON.stringify(body), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json', 'X-WP-Total': String(total) },
+    })
+
+  it('getLatestUpdate excludes a manga with no readable chapters', async () => {
+    vi.mocked(isKnownEmpty).mockImplementation(slug => slug === 'empty-manga')
+
+    vi.stubGlobal('fetch', async () => wpJson([
+      { id: 1, slug: 'empty-manga', title: { rendered: 'Empty Manga' }, modified: '2026-07-21T00:00:00' },
+      { id: 2, slug: 'real-manga', title: { rendered: 'Real Manga' }, modified: '2026-07-21T00:00:00' },
+    ], 2))
+
+    const cards = await new KiryuuProvider().getLatestUpdate()
+
+    expect(cards.map(c => c.slug)).toEqual(['real-manga'])
+  })
+
+  it('getList filters known-empty titles from the page but computes pagination from the unfiltered total', async () => {
+    vi.mocked(isKnownEmpty).mockImplementation(slug => slug === 'empty-manga')
+
+    vi.stubGlobal('fetch', async () => wpJson([
+      { id: 1, slug: 'empty-manga', title: { rendered: 'Empty Manga' }, modified: '2026-07-21T00:00:00' },
+      { id: 2, slug: 'real-manga', title: { rendered: 'Real Manga' }, modified: '2026-07-21T00:00:00' },
+    ], 100))
+
+    const result = await new KiryuuProvider().getList({})
+
+    // Page shows fewer than the requested 24 when it contains excluded titles —
+    // no backfill — but hasMore/nextCursor still follow the real, unfiltered total.
+    expect(result.data.map(c => c.slug)).toEqual(['real-manga'])
+    expect(result.hasMore).toBe(true)
+    expect(result.nextCursor).toBe('24')
   })
 })

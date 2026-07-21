@@ -4,6 +4,7 @@ import type {
 } from './types'
 import { getPatchedChapterNumbers, getPatchedChapterSlug } from './patch-data'
 import { fetchKomikindoChapterPages } from './komikindo'
+import { isKnownEmpty } from './empty-manga'
 
 // If KIRYUU_BASE is set, requests go through a CF Worker relay instead of directly to
 // v7.kiryuu.to. Required on Vercel — Cloudflare blocks AWS datacenter IPs by ASN.
@@ -430,18 +431,18 @@ export class KiryuuProvider implements MangaProvider {
 
   async getPopular(): Promise<MangaCard[]> {
     const list = await this.fetchMangaList({ per_page: 12, orderby: 'modified', order: 'desc' })
-    return list.map(parseMangaCard)
+    return list.map(parseMangaCard).filter(c => !isKnownEmpty(c.slug))
   }
 
   async getLatestUpdate(): Promise<MangaCard[]> {
     // Offset 12 supaya tidak tampil manga yang sama dengan getPopular di homepage
     const list = await this.fetchMangaList({ per_page: 12, offset: 12, orderby: 'modified', order: 'desc' })
-    return list.map(parseMangaCard)
+    return list.map(parseMangaCard).filter(c => !isKnownEmpty(c.slug))
   }
 
   async getNewArrivals(): Promise<MangaCard[]> {
     const list = await this.fetchMangaList({ per_page: 12, orderby: 'date', order: 'desc' })
-    return list.map(parseMangaCard)
+    return list.map(parseMangaCard).filter(c => !isKnownEmpty(c.slug))
   }
 
   async getPopularByType(type: string): Promise<MangaCard[]> {
@@ -450,7 +451,7 @@ export class KiryuuProvider implements MangaProvider {
     const list = await this.fetchMangaList({
       per_page: 8, 'manga-type': typeId, orderby: 'modified', order: 'desc',
     })
-    return list.map(parseMangaCard)
+    return list.map(parseMangaCard).filter(c => !isKnownEmpty(c.slug))
   }
 
   async getTopRatedByType(type: string): Promise<MangaCard[]> {
@@ -460,7 +461,7 @@ export class KiryuuProvider implements MangaProvider {
     const list = await this.fetchMangaList({
       per_page: 8, 'manga-type': typeId, orderby: 'date', order: 'desc',
     })
-    return list.map(parseMangaCard)
+    return list.map(parseMangaCard).filter(c => !isKnownEmpty(c.slug))
   }
 
   async getList(opts: {
@@ -502,7 +503,11 @@ export class KiryuuProvider implements MangaProvider {
     const nextOffset = offset + limit
 
     return {
-      data:       list.map(parseMangaCard),
+      // Filtered after the fact against the raw, unfiltered total — a page
+      // containing excluded titles shows fewer than `limit` cards rather than
+      // being backfilled, but hasMore/nextCursor stay correct against Kiryuu's
+      // real count either way.
+      data:       list.map(parseMangaCard).filter(c => !isKnownEmpty(c.slug)),
       nextCursor: nextOffset < total ? String(nextOffset) : null,
       hasMore:    nextOffset < total,
     }
@@ -598,7 +603,9 @@ export class KiryuuProvider implements MangaProvider {
       if (typeId) params['manga-type'] = typeId
     }
     const list = await this.fetchMangaList(params, 60)
-    const wpResults = list.map(parseMangaCard)
+    // Filtered before the empty check below: a literal match that's known-empty
+    // shouldn't block the fuzzy fallback from finding something readable instead.
+    const wpResults = list.map(parseMangaCard).filter(c => !isKnownEmpty(c.slug))
 
     // Fuse.js fallback: WP MySQL LIKE search is literal — can't handle typos.
     // Only runs when WP returns 0 results, so the hot path (≥1 WP result) is untouched.
@@ -619,7 +626,7 @@ export class KiryuuProvider implements MangaProvider {
             .catch(() => null)
         )
       )
-      return details.filter((d): d is MangaCard => d !== null)
+      return details.filter((d): d is MangaCard => d !== null && !isKnownEmpty(d.slug))
     }
 
     return wpResults
@@ -633,7 +640,7 @@ export class KiryuuProvider implements MangaProvider {
       { genre: termId, per_page: 12, orderby: 'modified', order: 'desc' },
       3600
     )
-    return list.map(parseMangaCard).filter(m => m.slug !== excludeSlug).slice(0, 8)
+    return list.map(parseMangaCard).filter(m => m.slug !== excludeSlug && !isKnownEmpty(m.slug)).slice(0, 8)
   }
 
   getGenres(): string[] {
