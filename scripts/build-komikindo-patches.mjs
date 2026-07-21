@@ -24,11 +24,27 @@ function decodeHtml(s) {
     .replace(/&#8211;/g, '–').replace(/&#8220;/g, '“').replace(/&#8221;/g, '”')
 }
 
-async function fetchT(url) {
-  const ctrl = new AbortController()
-  const t = setTimeout(() => ctrl.abort(), REQUEST_TIMEOUT_MS)
-  try { return await fetch(url, { headers: HEADERS, signal: ctrl.signal }) }
-  finally { clearTimeout(t) }
+// Retries transient failures (timeout, connection reset, 429/5xx) before giving
+// up — found via spot-checking "not-found" rejections against live komikindo:
+// 7 of 10 sampled were real chapters that exist right now, wrongly logged as
+// absent because a single-attempt fetch under CONCURRENCY=8 load occasionally
+// timed out or hit a rate limit. A real "chapter doesn't exist" from this API
+// is a 200 with an empty array, never a non-ok status — so retrying only on
+// thrown errors or a non-ok response never wastes a retry on a genuine miss.
+async function fetchT(url, retries = 2) {
+  for (let attempt = 0; ; attempt++) {
+    const ctrl = new AbortController()
+    const t = setTimeout(() => ctrl.abort(), REQUEST_TIMEOUT_MS)
+    try {
+      const res = await fetch(url, { headers: HEADERS, signal: ctrl.signal })
+      clearTimeout(t)
+      if (res.ok || attempt === retries) return res
+    } catch (e) {
+      clearTimeout(t)
+      if (attempt === retries) throw e
+    }
+    await new Promise(r => setTimeout(r, 500 * (attempt + 1)))
+  }
 }
 
 async function resolveKomikindoSlug(title) {
