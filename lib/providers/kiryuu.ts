@@ -328,7 +328,7 @@ export class KiryuuProvider implements MangaProvider {
 
     // Fetch halaman pertama untuk dapat total
     const firstRes = await fetch(chapterUrl(1), { headers: HEADERS, next: { revalidate: 1800 } })
-    if (!firstRes.ok) { console.error('[kiryuu debug] chapter search not ok', firstRes.status, chapterUrl(1)); return [] }
+    if (!firstRes.ok) return []
 
     const total = parseInt(firstRes.headers.get('X-WP-Total') ?? '0', 10)
     if (total === 0) return []
