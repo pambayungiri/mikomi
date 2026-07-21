@@ -22,7 +22,7 @@ export async function GET(
       headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800' },
     })
   } catch (e) {
-    const msg = e instanceof Error ? e.message : String(e)
-    return NextResponse.json({ error: 'Chapter not found', debugMessage: msg }, { status: 404 })
+    console.error('[route debug] getChapter threw:', e instanceof Error ? e.message : e)
+    return NextResponse.json({ error: 'Chapter not found' }, { status: 404 })
   }
 }
