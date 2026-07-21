@@ -58,15 +58,17 @@ async function kiryuuAveragePageCount(kiryuuSlug) {
   if (!res.ok) return null
   const posts = await res.json()
   if (posts.length === 0) return null
-  const sample = posts.slice(0, 3)
+  const sample = posts.slice(0, 7)
   const counts = await Promise.all(sample.map(async (p) => {
     const r = await fetchT(`${KIRYUU_BASE}/chapter?slug=${encodeURIComponent(p.slug)}&_fields=content`)
     if (!r.ok) return 0
     const d = await r.json()
     return (d[0]?.content?.rendered.match(/<img[^>]+src=/gi) || []).length
   }))
-  const valid = counts.filter(c => c > 0)
-  return valid.length ? valid.reduce((a, b) => a + b, 0) / valid.length : null
+  const valid = counts.filter(c => c > 0).sort((a, b) => a - b)
+  if (valid.length === 0) return null
+  const mid = Math.floor(valid.length / 2)
+  return valid.length % 2 === 0 ? (valid[mid - 1] + valid[mid]) / 2 : valid[mid]
 }
 
 function titleStatesChapter(titleText, n) {
