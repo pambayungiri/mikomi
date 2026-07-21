@@ -1,0 +1,5541 @@
+{
+  "generatedFrom": "full-catalog-audit 2026-07-21 + manual reclassification",
+  "missing": [
+    {
+      "slug": "tomo-chan-wa-onnanoko",
+      "title": "Tomo-chan wa Onnanoko!",
+      "gapRanges": "2-10, 12-20, 22-30, 32-40, 42-50, 52-60, 62-70, 72-80, 82-90, 92-100, 102-110, 112-120, 122-130, 132-140, 142-150, 152-160, 162-170, 172-175, 177-180, 182-190, 192-195, 197-200, 202-210, 212-220, 222-225, 227-235, 237-240, 242-245, 247-260, 262-270, 272-280, 282-290, 292-300, 302-310, 312-320, 322-330, 332-340, 342-350, 352-360, 362-370, 372-380, 382-390, 392-400, 402-410, 412-420, 422-430, 432-440, 442-450, 452-460, 462-470, 472-480, 482-490, 492-500, 502-510, 512-520, 522-530, 532-540, 542-550, 552-560, 562-570, 572-580, 582-590, 592-599, 602-609, 612-619, 622-629, 632-639, 662-669, 672-679, 682-689, 692-699"
+    },
+    {
+      "slug": "mousou-telepathy",
+      "title": "Mousou Telepathy",
+      "gapRanges": "13-15, 17-20, 22-30, 32-40, 42-50, 52-60, 62-70, 72-80, 82-90, 92-101, 104-109, 112-120, 122-130, 132-140, 142-150, 152-160, 162-170"
+    },
+    {
+      "slug": "qp",
+      "title": "QP",
+      "gapRanges": "54-59, 61-62, 64-68, 71-107, 109-149, 152-171, 173-178, 183, 187, 189-190, 192, 195, 202, 205"
+    },
+    {
+      "slug": "fff-class-trashero",
+      "title": "FFF-Class Trashero",
+      "gapRanges": "7-37, 42-70, 72-92, 94-135, 139-140"
+    },
+    {
+      "slug": "berserk",
+      "title": "Berserk",
+      "gapRanges": "75-96, 126-200"
+    },
+    {
+      "slug": "survive-as-the-heros-husband",
+      "title": "Survive As The Hero’s Husband",
+      "gapRanges": "92-115, 126-180, 213-214"
+    },
+    {
+      "slug": "raid",
+      "title": "Raid",
+      "gapRanges": "109-186"
+    },
+    {
+      "slug": "shura-sword-sovereign",
+      "title": "Shura Sword Sovereign",
+      "gapRanges": "197, 321-396"
+    },
+    {
+      "slug": "sono-akuyaku-kizoku-mama-heroine-ga-suki-sugiru-shinshi-na-doryoku-de-saikyou-to-nari-fuguu-na-oshi-chara-tasukemakuru",
+      "title": "Sono Akuyaku Kizoku, Mama Heroine ga Suki Sugiru ~Shinshi na Doryoku de Saikyou to Nari Fuguu na Oshi Chara Tasukemakuru~",
+      "gapRanges": "44-120"
+    },
+    {
+      "slug": "creepy-cat",
+      "title": "Creepy Cat",
+      "gapRanges": "2-25, 27-29, 31-35, 37-40, 42-45, 47-50, 52-55, 57-60, 62-65, 67-70, 72-75, 77-80, 82-85"
+    },
+    {
+      "slug": "nobunaga-multiverse",
+      "title": "Nobunaga Multiverse",
+      "gapRanges": "9-74, 76-80"
+    },
+    {
+      "slug": "99-wooden-stick",
+      "title": "+99 Wooden Stick",
+      "gapRanges": "100-159, 162-169"
+    },
+    {
+      "slug": "i-debuted-as-an-exorcist-instead-of-an-idol",
+      "title": "I Debuted as an Exorcist Instead of an Idol",
+      "gapRanges": "40-107"
+    },
+    {
+      "slug": "swallow-the-whole-world",
+      "title": "Swallow The Whole World",
+      "gapRanges": "28-94"
+    },
+    {
+      "slug": "magi-labyrinth-of-magic",
+      "title": "Magi – Labyrinth of Magic",
+      "gapRanges": "81-100, 109-151, 183, 245"
+    },
+    {
+      "slug": "kekkaishi",
+      "title": "Kekkaishi",
+      "gapRanges": "63-121"
+    },
+    {
+      "slug": "yahari-ore-no-seishun-love-comedy-wa-machigatteiru-monologue",
+      "title": "Yahari Ore no Seishun Love Comedy wa Machigatteiru -Monologue-",
+      "gapRanges": "3-59"
+    },
+    {
+      "slug": "yahari-ore-no-seishun-love-comedy-wa-machigatteiru",
+      "title": "Yahari Ore no Seishun Love Comedy wa Machigatteiru",
+      "gapRanges": "3-59"
+    },
+    {
+      "slug": "one-day-suddenly-seoul-is",
+      "title": "One Day, Suddenly, Seoul Is",
+      "gapRanges": "35-37, 55-61, 72-117"
+    },
+    {
+      "slug": "match-made-in-heaven-by-chance",
+      "title": "Match Made in Heaven by Chance",
+      "gapRanges": "26-81"
+    },
+    {
+      "slug": "only-i-shall-be-immortal",
+      "title": "Only I Shall Be Immortal",
+      "gapRanges": "10-65"
+    },
+    {
+      "slug": "strongest-player-returns-after-a-thousand-years",
+      "title": "Strongest Player Returns After A Thousand Years",
+      "gapRanges": "12-67"
+    },
+    {
+      "slug": "the-novels-extra",
+      "title": "The Novel’s Extra",
+      "gapRanges": "166-219"
+    },
+    {
+      "slug": "avatar-the-last-airbender-azula-in-the-spirit-temple",
+      "title": "Avatar: The Last Airbender – Azula in the Spirit Temple",
+      "gapRanges": "2-50"
+    },
+    {
+      "slug": "peerless-heavenly-emperor",
+      "title": "Peerless Heavenly Emperor",
+      "gapRanges": "28-73"
+    },
+    {
+      "slug": "nanda-kore",
+      "title": "Nanda Kore",
+      "gapRanges": "2-47"
+    },
+    {
+      "slug": "arcane-sniper",
+      "title": "Arcane Sniper",
+      "gapRanges": "49-61, 64-95"
+    },
+    {
+      "slug": "chainsaw-man",
+      "title": "Chainsaw Man",
+      "gapRanges": "227, 233-276"
+    },
+    {
+      "slug": "overgeared-team-argo",
+      "title": "Overgeared (Team Argo)",
+      "gapRanges": "81-125"
+    },
+    {
+      "slug": "worlds-ruler",
+      "title": "World’s Ruler",
+      "gapRanges": "353-396"
+    },
+    {
+      "slug": "gintama",
+      "title": "Gintama",
+      "gapRanges": "445-454, 456-461, 463-469, 477-491, 497-501"
+    },
+    {
+      "slug": "mount-hua-sects-greatest-genius",
+      "title": "Mount Hua Sect’s Greatest Genius",
+      "gapRanges": "8-50"
+    },
+    {
+      "slug": "close-mad-doctor",
+      "title": "Close Mad Doctor",
+      "gapRanges": "2-5, 7-10, 12-15, 17, 19-23, 25-27, 29-30, 32-34, 36-38, 40-43, 45-47, 49-52, 54-56"
+    },
+    {
+      "slug": "bodyguard-of-the-goddess",
+      "title": "Bodyguard of the Goddess",
+      "gapRanges": "8-48"
+    },
+    {
+      "slug": "soul-land-legend-of-tangs-hero",
+      "title": "Soul Land – Legend of Tangs’ Hero",
+      "gapRanges": "35-74"
+    },
+    {
+      "slug": "castle",
+      "title": "Castle",
+      "gapRanges": "135-172, 176-177"
+    },
+    {
+      "slug": "idol",
+      "title": "Idol",
+      "gapRanges": "70-107"
+    },
+    {
+      "slug": "villainesss-idol",
+      "title": "Villainess’s Idol",
+      "gapRanges": "70-107"
+    },
+    {
+      "slug": "dreaming-freedom",
+      "title": "Dreaming Freedom",
+      "gapRanges": "113, 118-120, 129-161"
+    },
+    {
+      "slug": "transmoe-sword-fantasy",
+      "title": "Transmoe Sword Fantasy",
+      "gapRanges": "6-41"
+    },
+    {
+      "slug": "black-bird",
+      "title": "Black Bird",
+      "gapRanges": "7-41"
+    },
+    {
+      "slug": "12-prince",
+      "title": "1/2 Prince",
+      "gapRanges": "53-63, 65-87"
+    },
+    {
+      "slug": "naruto",
+      "title": "Naruto",
+      "gapRanges": "88, 91, 99, 102-103, 106, 111, 118, 124, 150-151, 153, 156, 163, 175, 186, 192, 194, 198, 203, 212, 218, 232-233, 239, 242-243, 309-310, 324, 330, 348, 484, 502"
+    },
+    {
+      "slug": "kobayashi-san-chi-no-maid-dragon",
+      "title": "Kobayashi-san Chi no Maid Dragon",
+      "gapRanges": "31-64"
+    },
+    {
+      "slug": "am-i-invincible",
+      "title": "Am I Invincible",
+      "gapRanges": "1141, 1577, 1988, 2017, 3026-3027, 3143-3168, 3350, 3366"
+    },
+    {
+      "slug": "invincible",
+      "title": "Invincible",
+      "gapRanges": "1141, 1577, 1988, 2017, 3026-3027, 3143-3168, 3350, 3366"
+    },
+    {
+      "slug": "invincible-novel",
+      "title": "Invincible (Novel)",
+      "gapRanges": "1141, 1577, 1988, 2017, 3026-3027, 3143-3168, 3350, 3366"
+    },
+    {
+      "slug": "emperor-domination",
+      "title": "Emperor Domination",
+      "gapRanges": "1716, 2191, 2217, 3197-3198, 4171-4172, 4174, 4621, 4711, 4719, 5746-5767"
+    },
+    {
+      "slug": "nues-exorcist",
+      "title": "Nue’s Exorcist",
+      "gapRanges": "96-107, 109-129"
+    },
+    {
+      "slug": "emperors-domination-novel",
+      "title": "Emperor’s Domination (Novel)",
+      "gapRanges": "1716, 2191, 2217, 3197-3198, 4171-4172, 4174, 4621, 4711, 4719, 5746-5767"
+    },
+    {
+      "slug": "hyouka",
+      "title": "Hyouka",
+      "gapRanges": "45-75"
+    },
+    {
+      "slug": "triangle-edge",
+      "title": "Triangle Edge",
+      "gapRanges": "5-35"
+    },
+    {
+      "slug": "bakuman",
+      "title": "Bakuman.",
+      "gapRanges": "5, 31, 65, 81, 87, 90-108, 123-124, 155, 165-166"
+    },
+    {
+      "slug": "zutto-otokonoko-da-to-omotte-ita-gakitaishou-ga-onnanoko-deshita",
+      "title": "Zutto Otokonoko da to Omotte ita Gakitaishou ga Onnanoko deshita",
+      "gapRanges": "4-31, 33"
+    },
+    {
+      "slug": "sss-class-suicide-hunter",
+      "title": "SSS-Class Suicide Hunter",
+      "gapRanges": "44-45, 48-73"
+    },
+    {
+      "slug": "otome-danshi-ni-koisuru-otome",
+      "title": "Otome Danshi ni Koisuru Otome",
+      "gapRanges": "2-25, 27-30"
+    },
+    {
+      "slug": "observation-diary-on-a-creature-i-picked-up",
+      "title": "Observation Diary On A Creature I Picked Up",
+      "gapRanges": "2-5, 7-10, 12-15, 17-20, 22-25, 27-30, 32-35"
+    },
+    {
+      "slug": "niwatori-fighter",
+      "title": "Niwatori Fighter",
+      "gapRanges": "6, 29, 59-83"
+    },
+    {
+      "slug": "the-newbie-is-too-strong",
+      "title": "The Newbie Is Too Strong",
+      "gapRanges": "15-41"
+    },
+    {
+      "slug": "im-not-the-overlord",
+      "title": "I’m Not The Overlord",
+      "gapRanges": "90, 126-150"
+    },
+    {
+      "slug": "marriage-contract-with-two-husbands",
+      "title": "Marriage Contract With Two Husbands",
+      "gapRanges": "3-7, 18, 29-48"
+    },
+    {
+      "slug": "not-over",
+      "title": "Not Over",
+      "gapRanges": "90, 126-150"
+    },
+    {
+      "slug": "overlord",
+      "title": "Overlord",
+      "gapRanges": "126-150"
+    },
+    {
+      "slug": "witch-hunter",
+      "title": "Witch Hunter",
+      "gapRanges": "112-135"
+    },
+    {
+      "slug": "mz",
+      "title": "MZ",
+      "gapRanges": "39-50, 54-57, 62-69"
+    },
+    {
+      "slug": "mechamecha-kininatteru-gyaru-ga-nanka-yabee-kanji-ni-natteku-yatsu",
+      "title": "Mechamecha Kininatteru Gyaru ga Nanka Yabee Kanji ni Natteku Yatsu",
+      "gapRanges": "2-5, 7-10, 12-15, 17-20, 22-25, 27-30"
+    },
+    {
+      "slug": "i-have-a-dragon-in-my-body",
+      "title": "I Have a Dragon in My Body",
+      "gapRanges": "132, 236, 385, 480-499"
+    },
+    {
+      "slug": "azur-lane-4-koma-slow-ahead",
+      "title": "Azur Lane 4-koma: Slow Ahead",
+      "gapRanges": "1-3, 5, 7, 9, 11, 13-14, 16, 18, 20, 22, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44"
+    },
+    {
+      "slug": "bimajyo-no-ayano-san",
+      "title": "Bimajyo no Ayano-san",
+      "gapRanges": "2-5, 7-8, 10, 12, 14, 16, 18-19, 21, 23, 25, 27, 29, 47-51"
+    },
+    {
+      "slug": "a-legend-of-the-wind",
+      "title": "A Legend of the Wind",
+      "gapRanges": "75-95"
+    },
+    {
+      "slug": "the-monstrous-gui",
+      "title": "The Monstrous Gui",
+      "gapRanges": "4-24"
+    },
+    {
+      "slug": "beauty-in-a-click",
+      "title": "Beauty in a Click",
+      "gapRanges": "47-62, 73-77"
+    },
+    {
+      "slug": "futago-matomete-kanojo-ni-shinai",
+      "title": "Futago Matomete Kanojo Ni Shinai",
+      "gapRanges": "16-36"
+    },
+    {
+      "slug": "it-all-starts-with-playing-game-seriously",
+      "title": "It All Starts With Playing Game Seriously",
+      "gapRanges": "200-219"
+    },
+    {
+      "slug": "sunao-ni-narenai-aizen-san",
+      "title": "Sunao ni Narenai Aizen-san",
+      "gapRanges": "2-5, 7-10, 12-15, 17-20, 22-25"
+    },
+    {
+      "slug": "ore-no-ie-no-koakuma-imouto",
+      "title": "Ore no Ie no Koakuma Imouto",
+      "gapRanges": "2-5, 7-10, 12-15, 17-20, 22-25"
+    },
+    {
+      "slug": "solo-leveling",
+      "title": "Solo Leveling",
+      "gapRanges": "105, 150, 180-196"
+    },
+    {
+      "slug": "the-second-life-of-an-idol",
+      "title": "The Second Life of an Idol",
+      "gapRanges": "36-54"
+    },
+    {
+      "slug": "my-second-life-as-an-idol",
+      "title": "My Second Life as an Idol",
+      "gapRanges": "36-54"
+    },
+    {
+      "slug": "isekai-yuusha-mizuki",
+      "title": "Isekai Yuusha Mizuki",
+      "gapRanges": "12-30"
+    },
+    {
+      "slug": "ushiro-no-hikaruko-chan",
+      "title": "Ushiro no Hikaruko-chan",
+      "gapRanges": "2-20"
+    },
+    {
+      "slug": "to-be-the-castellan-king",
+      "title": "To Be The Castellan King",
+      "gapRanges": "504-506, 509-510, 514, 519, 522, 524-529, 533, 539, 542-543"
+    },
+    {
+      "slug": "i-am-the-king",
+      "title": "I Am The King",
+      "gapRanges": "504-506, 509-510, 514, 519, 522, 524-529, 533, 539, 542-543"
+    },
+    {
+      "slug": "the-ladys-dark-secret",
+      "title": "The Lady’s Dark Secret",
+      "gapRanges": "3-9, 20-30"
+    },
+    {
+      "slug": "motto-manga-de-wakaru-fategrand-order",
+      "title": "Motto Manga de Wakaru! Fate/Grand Order",
+      "gapRanges": "15, 17-20, 22-25, 27-30, 32-35"
+    },
+    {
+      "slug": "zero-kill-assassin",
+      "title": "Zero Kill Assassin",
+      "gapRanges": "9-25"
+    },
+    {
+      "slug": "peerless-sword-god",
+      "title": "Peerless Sword God",
+      "gapRanges": "97, 103, 168-180, 188"
+    },
+    {
+      "slug": "manga-de-wakaru-fategrand-order",
+      "title": "Manga de Wakaru! Fate/Grand Order",
+      "gapRanges": "17-20, 22-25, 27-30, 32-35"
+    },
+    {
+      "slug": "the-tsuntsuntsuntsuntsuntsuntsuntsuntsuntsuntsundere-girl-getting-less-and-less-tsun-day-by-day",
+      "title": "The Tsuntsuntsuntsuntsuntsuntsuntsuntsuntsuntsundere Girl Getting Less and Less Tsun Day by Day",
+      "gapRanges": "2-5, 7-10, 12-15, 17-20"
+    },
+    {
+      "slug": "moonmade-child",
+      "title": "Moonmade Child",
+      "gapRanges": "14-23, 34-37, 54-55"
+    },
+    {
+      "slug": "you-two-will-give-birth-to-me-in-the-future",
+      "title": "You Two Will Give Birth To Me In The Future",
+      "gapRanges": "12-16, 29-39"
+    },
+    {
+      "slug": "taming-master",
+      "title": "Taming Master",
+      "gapRanges": "53-67"
+    },
+    {
+      "slug": "kojiin-tamer",
+      "title": "Kojiin Tamer",
+      "gapRanges": "32-46"
+    },
+    {
+      "slug": "insanely-talented-player",
+      "title": "Insanely-Talented Player",
+      "gapRanges": "28, 114-127"
+    },
+    {
+      "slug": "tomorrow",
+      "title": "Tomorrow",
+      "gapRanges": "176-190"
+    },
+    {
+      "slug": "villain-warrior",
+      "title": "Villain Warrior",
+      "gapRanges": "6-19"
+    },
+    {
+      "slug": "miyori-no-nai-onnanoko-a-girl-with-no-relatives",
+      "title": "Miyori no Nai Onnanoko (A Girl With No Relatives)",
+      "gapRanges": "28, 43-45, 48-50, 52-54, 56-59"
+    },
+    {
+      "slug": "the-top-clan-leader-in-history",
+      "title": "The Top Clan Leader In History",
+      "gapRanges": "21, 65, 73, 80, 82-84, 100, 113, 116, 118, 127-128"
+    },
+    {
+      "slug": "ingoshima",
+      "title": "Ingoshima",
+      "gapRanges": "39-51"
+    },
+    {
+      "slug": "tonari-no-seki-no-yankee-jk-no-jakuten",
+      "title": "Tonari no Seki no Yankee JK no Jakuten",
+      "gapRanges": "4-16"
+    },
+    {
+      "slug": "okaeri-alice",
+      "title": "Okaeri Alice",
+      "gapRanges": "22-33"
+    },
+    {
+      "slug": "hikaru-to-hikaru",
+      "title": "Hikaru to Hikaru",
+      "gapRanges": "9-20"
+    },
+    {
+      "slug": "the-strongest-daily-immortal-cultivation-repair-system-in-the-city",
+      "title": "The Strongest Daily Immortal Cultivation Repair System in The City",
+      "gapRanges": "9-14, 17-21"
+    },
+    {
+      "slug": "bao-jin-wo-de-xiao-majia",
+      "title": "Bao Jin Wo De Xiao Majia",
+      "gapRanges": "16, 383-392"
+    },
+    {
+      "slug": "how-to-hide-the-emperors-child",
+      "title": "How to Hide the Emperor’s Child",
+      "gapRanges": "93-103"
+    },
+    {
+      "slug": "watermelon",
+      "title": "Watermelon",
+      "gapRanges": "13-23"
+    },
+    {
+      "slug": "battle-frenzy",
+      "title": "Battle Frenzy",
+      "gapRanges": "290-298"
+    },
+    {
+      "slug": "menhera-shoujo-kurumi-chan",
+      "title": "Menhera Shoujo Kurumi-chan",
+      "gapRanges": "15-20, 24-26"
+    },
+    {
+      "slug": "the-beginning-after-the-end",
+      "title": "The Beginning After the End",
+      "gapRanges": "117-125"
+    },
+    {
+      "slug": "i-get-stronger-by-doing-nothing",
+      "title": "I Get Stronger By Doing Nothing",
+      "gapRanges": "44-52"
+    },
+    {
+      "slug": "in-this-life-the-greatest-star-in-the-universe",
+      "title": "In This Life the Greatest Star in the Universe",
+      "gapRanges": "25-33"
+    },
+    {
+      "slug": "zenryoku-henai-girl",
+      "title": "Zenryoku Henai Girl",
+      "gapRanges": "2-10"
+    },
+    {
+      "slug": "moonlight-sculptor-chibi",
+      "title": "Moonlight Sculptor Chibi",
+      "gapRanges": "2-10"
+    },
+    {
+      "slug": "chemy",
+      "title": "Chemy",
+      "gapRanges": "687, 1479, 1883, 1919, 1974, 2000, 2998, 3477"
+    },
+    {
+      "slug": "divine-emperor",
+      "title": "Divine Emperor",
+      "gapRanges": "687, 1479, 1883, 1919, 1974, 2000, 2998, 3477"
+    },
+    {
+      "slug": "the-sword-wielding-person",
+      "title": "The Sword-Wielding Person",
+      "gapRanges": "18, 21-27"
+    },
+    {
+      "slug": "alchemy-emperor-of-the-divine-dao",
+      "title": "Alchemy Emperor of the Divine Dao (Novel)",
+      "gapRanges": "687, 1479, 1883, 1919, 1974, 2000, 2998, 3477"
+    },
+    {
+      "slug": "god-game",
+      "title": "God Game",
+      "gapRanges": "38-44"
+    },
+    {
+      "slug": "danjou-no-yuujou-wa-seiritsu-suru-iya-shinai",
+      "title": "Danjou no Yuujou wa Seiritsu Suru? (Iya, Shinai!!)",
+      "gapRanges": "12-18"
+    },
+    {
+      "slug": "gods-desire-game",
+      "title": "God’s Desire Game",
+      "gapRanges": "38-44"
+    },
+    {
+      "slug": "beastly-night",
+      "title": "Beastly Night",
+      "gapRanges": "9-15"
+    },
+    {
+      "slug": "boku-wa-mari-no-naka",
+      "title": "Boku wa Mari no Naka",
+      "gapRanges": "25, 60, 62, 64, 69, 72"
+    },
+    {
+      "slug": "asura-handol",
+      "title": "ASURA (Handol)",
+      "gapRanges": "35-40"
+    },
+    {
+      "slug": "okusan",
+      "title": "Okusan",
+      "gapRanges": "60-65"
+    },
+    {
+      "slug": "nonbiri-vrmoo-ki",
+      "title": "Nonbiri VRMOO-ki",
+      "gapRanges": "60-65"
+    },
+    {
+      "slug": "demon-in-mount-hua",
+      "title": "Demon in Mount Hua",
+      "gapRanges": "25-30"
+    },
+    {
+      "slug": "love-4-walk",
+      "title": "Love 4 Walk",
+      "gapRanges": "20-25"
+    },
+    {
+      "slug": "ochame-na-okusan-to-no-nichijou-chabangoto",
+      "title": "Ochame na Okusan to no Nichijou Chabangoto",
+      "gapRanges": "60-65"
+    },
+    {
+      "slug": "i-regressed-to-level-up-instead-of-being-a-simp",
+      "title": "I Regressed to Level Up Instead of Being a Simp",
+      "gapRanges": "263-268"
+    },
+    {
+      "slug": "kimi-ga-shinu-natsu-ni",
+      "title": "Kimi ga Shinu Natsu ni",
+      "gapRanges": "4-9"
+    },
+    {
+      "slug": "19-days",
+      "title": "19 Days",
+      "gapRanges": "306, 308-311"
+    },
+    {
+      "slug": "skeleton-soldier-couldnt-protect-the-dungeon",
+      "title": "Skeleton Soldier Couldn’t Protect the Dungeon",
+      "gapRanges": "133, 326-328, 340"
+    },
+    {
+      "slug": "pseudo-harem",
+      "title": "Pseudo Harem",
+      "gapRanges": "26, 60, 62-63, 111"
+    },
+    {
+      "slug": "air-gear",
+      "title": "Air Gear",
+      "gapRanges": "114, 208-209, 223, 297"
+    },
+    {
+      "slug": "one-punch-man-one",
+      "title": "One Punch-Man (ONE)",
+      "gapRanges": "222-224, 226, 233"
+    },
+    {
+      "slug": "change-guy",
+      "title": "Change Guy",
+      "gapRanges": "45, 59-61, 65"
+    },
+    {
+      "slug": "days",
+      "title": "Days",
+      "gapRanges": "306, 308-311"
+    },
+    {
+      "slug": "lazy-prince-becomes-a-genius-reformation-of-the-deadbeat-noble",
+      "title": "Lazy Prince Becomes a Genius (Reformation of the Deadbeat Noble)",
+      "gapRanges": "16-19, 121"
+    },
+    {
+      "slug": "danshi-koukousei-ga-mahou-shoujo-ni-naru-hanashi",
+      "title": "Danshi Koukousei ga Mahou Shoujo ni Naru Hanashi",
+      "gapRanges": "28-32"
+    },
+    {
+      "slug": "kichiku-eiyuu",
+      "title": "Kichiku Eiyuu",
+      "gapRanges": "89, 94-95, 99, 101"
+    },
+    {
+      "slug": "i-cant-be-a-sword-god",
+      "title": "I Can’t Be a Sword God",
+      "gapRanges": "351-352, 1905, 2498, 2791"
+    },
+    {
+      "slug": "reincarnation-of-the-strongest-sword-god",
+      "title": "Reincarnation Of The Strongest Sword God",
+      "gapRanges": "351-352, 1905, 2498, 2791"
+    },
+    {
+      "slug": "the-scholars-reincarnation",
+      "title": "The Scholar’s Reincarnation",
+      "gapRanges": "351-352, 1905, 2498, 2791"
+    },
+    {
+      "slug": "tsurenai-hodo-aokute-azatoi-kurai-ni-akai",
+      "title": "Tsurenai Hodo Aokute Azatoi Kurai ni Akai",
+      "gapRanges": "75-79"
+    },
+    {
+      "slug": "the-strange-tales-of-the-crescent-moon-hall",
+      "title": "The Strange Tales of The Crescent Moon Hall",
+      "gapRanges": "11-15"
+    },
+    {
+      "slug": "a-record-of-a-mortals-journey-to-immortality",
+      "title": "A Record of a Mortal’s Journey to Immortality (Novel)",
+      "gapRanges": "431, 722, 1966, 2116, 2173"
+    },
+    {
+      "slug": "reincarnation-of-the-strongest-sword-god-novel",
+      "title": "Reincarnation Of The Strongest Sword God (Novel)",
+      "gapRanges": "351-352, 1905, 2498, 2791"
+    },
+    {
+      "slug": "revenge-of-the-iron-blooded-sword-hound-novel",
+      "title": "Revenge of the Iron-Blooded Sword Hound (Novel)",
+      "gapRanges": "38, 43-44, 237, 243"
+    },
+    {
+      "slug": "shadow-of-paradise",
+      "title": "Shadow of Paradise",
+      "gapRanges": "9, 12-15"
+    },
+    {
+      "slug": "dice",
+      "title": "DICE",
+      "gapRanges": "243, 263, 318, 356"
+    },
+    {
+      "slug": "akb49-renai-kinshi-jourei",
+      "title": "AKB49 – Renai Kinshi Jourei",
+      "gapRanges": "216, 218, 222, 228"
+    },
+    {
+      "slug": "absolute-martial-arts",
+      "title": "Absolute Martial Arts",
+      "gapRanges": "134-137"
+    },
+    {
+      "slug": "fukushuu-kyoushitsu",
+      "title": "Fukushuu Kyoushitsu",
+      "gapRanges": "12, 20-21, 23"
+    },
+    {
+      "slug": "yongbi",
+      "title": "Yongbi",
+      "gapRanges": "85, 93, 98, 104"
+    },
+    {
+      "slug": "kimi-no-koto-ga-dai-dai-dai-dai-daisuki-na-100-nin-no-kanojo",
+      "title": "Kimi no koto ga Dai Dai Dai Dai Daisuki na 100-nin no Kanojo",
+      "gapRanges": "50, 88, 96, 111"
+    },
+    {
+      "slug": "big-heros-girlfriend-is-super-fierce",
+      "title": "Big Hero’s Girlfriend is Super Fierce!",
+      "gapRanges": "8-9, 11, 13"
+    },
+    {
+      "slug": "kenkyu-gurupu",
+      "title": "Kenkyu Gurupu",
+      "gapRanges": "39, 59, 70, 164"
+    },
+    {
+      "slug": "futago-tachi-no-shojijou",
+      "title": "Futago-tachi no Shojijou",
+      "gapRanges": "12-15"
+    },
+    {
+      "slug": "denpa-kyoushi",
+      "title": "Denpa Kyoushi",
+      "gapRanges": "19-20, 78-79"
+    },
+    {
+      "slug": "i-am-not-the-hero",
+      "title": "I am Not The Hero!",
+      "gapRanges": "40-41, 71, 135"
+    },
+    {
+      "slug": "one-step-to-the-demon-king",
+      "title": "One Step to The Demon King",
+      "gapRanges": "14, 16, 18-19"
+    },
+    {
+      "slug": "onna-tomodachi-to-kekkon-shitemita",
+      "title": "Onna Tomodachi to Kekkon Shitemita",
+      "gapRanges": "14-17"
+    },
+    {
+      "slug": "the-witch-and-the-beast",
+      "title": "The Witch and the Beast",
+      "gapRanges": "21-24"
+    },
+    {
+      "slug": "number-one-star-instructor-master-baek-one-hit-teacher-master-baek",
+      "title": "Number One Star Instructor Master Baek (One Hit Teacher, Master Baek)",
+      "gapRanges": "30, 37, 101, 144"
+    },
+    {
+      "slug": "mookhyang-dark-lady",
+      "title": "MookHyang – Dark Lady",
+      "gapRanges": "274, 276, 281-282"
+    },
+    {
+      "slug": "invincible-after-a-hundred-years-of-seclusion",
+      "title": "Invincible After a Hundred Years of Seclusion",
+      "gapRanges": "88, 174, 214, 235"
+    },
+    {
+      "slug": "im-going-to-steal-again-today",
+      "title": "I’m Going to Steal Again Today",
+      "gapRanges": "6-9"
+    },
+    {
+      "slug": "the-grim-reaper-falls-in-love-with-a-human",
+      "title": "The Grim Reaper Falls in Love With a Human",
+      "gapRanges": "2-5"
+    },
+    {
+      "slug": "the-lecture-you-would-never-want-your-parents-to-give-you",
+      "title": "The Lecture You Would Never Want Your Parents To Give You",
+      "gapRanges": "2-5"
+    },
+    {
+      "slug": "haiena-chan-ni-nerawarete-being-targeted-by-hyena-chan",
+      "title": "Haiena-chan ni Nerawarete (Being Targeted by Hyena-chan)",
+      "gapRanges": "2-5"
+    },
+    {
+      "slug": "kore-kara-dandan-shiawase-ni-natte-iku-kowai-onna-joushi",
+      "title": "Kore kara Dandan Shiawase ni Natte Iku Kowai Onna Joushi",
+      "gapRanges": "37, 52, 67, 89"
+    },
+    {
+      "slug": "koko-wa-makasete-sakini-ike-wo-shitai-shinitagari-no-nozomanu-uchuu-gekokujou",
+      "title": "“Koko wa Makasete Sakini Ike!” wo shitai Shinitagari no Nozomanu Uchuu Gekokujou",
+      "gapRanges": "6-9"
+    },
+    {
+      "slug": "battle-of-mosol",
+      "title": "Battle of Mosol",
+      "gapRanges": "5-8"
+    },
+    {
+      "slug": "purely-delinquent",
+      "title": "Purely Delinquent",
+      "gapRanges": "2-4, 7"
+    },
+    {
+      "slug": "shinyuu-kun-to-issen-koetakute-tskko-chan",
+      "title": "Shinyuu-kun to Issen Koetakute TSkko-chan",
+      "gapRanges": "2-5"
+    },
+    {
+      "slug": "the-descent-of-the-demonic-master",
+      "title": "The Descent Of The Demonic Master",
+      "gapRanges": "113-115"
+    },
+    {
+      "slug": "ijiranaide-nagatoro-san",
+      "title": "Ijiranaide, Nagatoro-san",
+      "gapRanges": "96-98"
+    },
+    {
+      "slug": "one-punch-man",
+      "title": "One Punch-Man",
+      "gapRanges": "222, 226, 233"
+    },
+    {
+      "slug": "soul-land-ii-the-peerless-tang-sect",
+      "title": "Soul Land II – The Peerless Tang Sect",
+      "gapRanges": "261-262, 460"
+    },
+    {
+      "slug": "worlds-end-harem-fantasia",
+      "title": "World’s End Harem Fantasia",
+      "gapRanges": "28-30"
+    },
+    {
+      "slug": "tokyo-dted",
+      "title": "Tokyo DTED",
+      "gapRanges": "21-23"
+    },
+    {
+      "slug": "yochi-nouryoku-kunou-chiyo",
+      "title": "Yochi Nouryoku Kunou Chiyo",
+      "gapRanges": "6-8"
+    },
+    {
+      "slug": "wangpai-yushi",
+      "title": "Wangpai Yushi",
+      "gapRanges": "24, 44, 58"
+    },
+    {
+      "slug": "tong",
+      "title": "Tong",
+      "gapRanges": "33-35"
+    },
+    {
+      "slug": "tongari-boushi-no-atelier",
+      "title": "Tongari Boushi no Atelier",
+      "gapRanges": "33-35"
+    },
+    {
+      "slug": "my-beautiful-time-with-you",
+      "title": "My Beautiful Time With You",
+      "gapRanges": "32, 177-178"
+    },
+    {
+      "slug": "osananajimi-wo-onnanoko-ni-shiteshimatta-hanashi",
+      "title": "Osananajimi wo Onnanoko ni Shiteshimatta Hanashi",
+      "gapRanges": "130-132"
+    },
+    {
+      "slug": "outcast",
+      "title": "Outcast",
+      "gapRanges": "50-52"
+    },
+    {
+      "slug": "cultivators-in-the-city",
+      "title": "Cultivators in the City",
+      "gapRanges": "82-84"
+    },
+    {
+      "slug": "naka-no-warui-iinazuke-no-hanashi",
+      "title": "Naka no warui iinazuke no hanashi",
+      "gapRanges": "6, 31-32"
+    },
+    {
+      "slug": "monk-fron-the-future",
+      "title": "Monk Fron the Future",
+      "gapRanges": "27, 45, 61"
+    },
+    {
+      "slug": "hakumei-to-mikochi",
+      "title": "Hakumei to Mikochi",
+      "gapRanges": "36-38"
+    },
+    {
+      "slug": "hopeless",
+      "title": "Hopeless",
+      "gapRanges": "109, 140, 155"
+    },
+    {
+      "slug": "adventures-of-an-undead-who-became-paladin",
+      "title": "Adventures of an Undead Who Became Paladin",
+      "gapRanges": "78, 128, 132"
+    },
+    {
+      "slug": "mage-again",
+      "title": "Mage Again",
+      "gapRanges": "30, 38, 51"
+    },
+    {
+      "slug": "ashi-no-aji",
+      "title": "Ashi no Aji",
+      "gapRanges": "130-132"
+    },
+    {
+      "slug": "wind-breaker-nii-satoru",
+      "title": "Wind Breaker (NII Satoru)",
+      "gapRanges": "26, 160, 162"
+    },
+    {
+      "slug": "night-of-shadows",
+      "title": "Night of Shadows",
+      "gapRanges": "34-36"
+    },
+    {
+      "slug": "tigers-descent",
+      "title": "Tiger’s Descent",
+      "gapRanges": "113-115"
+    },
+    {
+      "slug": "chieri-no-koi-wa-8-meter",
+      "title": "Chieri no Koi wa 8 Meter",
+      "gapRanges": "26-28"
+    },
+    {
+      "slug": "the-scent-master",
+      "title": "The Scent Master",
+      "gapRanges": "113-115"
+    },
+    {
+      "slug": "past-life-regressor-remake-2022",
+      "title": "Past Life Regressor (Remake 2022)",
+      "gapRanges": "134-135, 139"
+    },
+    {
+      "slug": "the-emperors-sword",
+      "title": "The Emperor’s Sword",
+      "gapRanges": "1905, 2498, 2791"
+    },
+    {
+      "slug": "how-to-reject-my-obsessive-ex-husband",
+      "title": "How To Reject My Obsessive Ex-husband",
+      "gapRanges": "37-39"
+    },
+    {
+      "slug": "the-returned-c-rank-tank-wont-die",
+      "title": "The Returned C-Rank Tank Won’t Die!",
+      "gapRanges": "7-9"
+    },
+    {
+      "slug": "the-eternal-supreme-novel",
+      "title": "The Eternal Supreme (Novel)",
+      "gapRanges": "227, 1966, 2263"
+    },
+    {
+      "slug": "kurogane",
+      "title": "Kurogane",
+      "gapRanges": "28, 45, 49"
+    },
+    {
+      "slug": "kuso-onna-ni-sachiare",
+      "title": "Kuso Onna ni Sachiare",
+      "gapRanges": "16, 19-20"
+    },
+    {
+      "slug": "apotheosis",
+      "title": "Apotheosis",
+      "gapRanges": "92-93"
+    },
+    {
+      "slug": "different-kings",
+      "title": "Different Kings",
+      "gapRanges": "191-192"
+    },
+    {
+      "slug": "fire-brigade-of-flames",
+      "title": "Fire Brigade of Flames",
+      "gapRanges": "43, 266"
+    },
+    {
+      "slug": "iron-ladies",
+      "title": "Iron Ladies",
+      "gapRanges": "539, 637"
+    },
+    {
+      "slug": "akame-ga-kiru-zero",
+      "title": "Akame ga Kiru! Zero",
+      "gapRanges": "45-46"
+    },
+    {
+      "slug": "isekai-ntr-shinyuu-no-onna-wo-saikyou-skill-de-otosu-houhou",
+      "title": "Isekai NTR ~Shinyuu no Onna wo Saikyou Skill de Otosu Houhou~",
+      "gapRanges": "23-24"
+    },
+    {
+      "slug": "jimi-na-kensei-wa-sore-demo-saikyou-desu",
+      "title": "Jimi na Kensei wa Sore Demo Saikyou desu",
+      "gapRanges": "35, 51"
+    },
+    {
+      "slug": "komi-san-wa-komyushou-desu",
+      "title": "Komi-san wa Komyushou Desu.",
+      "gapRanges": "253, 485"
+    },
+    {
+      "slug": "magan-to-dangan-o-tsukatte-isekai-o-buchinuku",
+      "title": "Magan to Dangan o Tsukatte Isekai o Buchinuku!",
+      "gapRanges": "15-16"
+    },
+    {
+      "slug": "max-level-returner",
+      "title": "Max Level Returner",
+      "gapRanges": "26, 77"
+    },
+    {
+      "slug": "rokudou-no-onna-tachi",
+      "title": "Rokudou no Onna-tachi",
+      "gapRanges": "17-18"
+    },
+    {
+      "slug": "shijou-saikyou-orc-san-no-tanoshii-tanetsuke-harem-zukuri",
+      "title": "Shijou Saikyou Orc-san no Tanoshii Tanetsuke Harem Zukuri",
+      "gapRanges": "62, 81"
+    },
+    {
+      "slug": "the-breaker-new-waves",
+      "title": "The Breaker – New Waves",
+      "gapRanges": "8, 34"
+    },
+    {
+      "slug": "the-demon-king-who-lost-his-job",
+      "title": "The Demon King Who Lost His Job",
+      "gapRanges": "389-390"
+    },
+    {
+      "slug": "kimi-no-iru-machi",
+      "title": "Kimi no Iru Machi",
+      "gapRanges": "146, 220"
+    },
+    {
+      "slug": "ge-good-ending",
+      "title": "GE – Good Ending",
+      "gapRanges": "63, 69"
+    },
+    {
+      "slug": "wolhan-gangcheonrok",
+      "title": "Wolhan Gangcheonrok",
+      "gapRanges": "33, 37"
+    },
+    {
+      "slug": "aiki-s",
+      "title": "Aiki-S",
+      "gapRanges": "12-13"
+    },
+    {
+      "slug": "jiuyang-shenwang",
+      "title": "Jiuyang Shenwang",
+      "gapRanges": "79, 138"
+    },
+    {
+      "slug": "first-dragon-yuanlong",
+      "title": "First Dragon (Yuanlong)",
+      "gapRanges": "204-205"
+    },
+    {
+      "slug": "bakapple",
+      "title": "Bakapple",
+      "gapRanges": "4-5"
+    },
+    {
+      "slug": "beastars",
+      "title": "Beastars",
+      "gapRanges": "123, 166"
+    },
+    {
+      "slug": "no-guard-wife",
+      "title": "No Guard Wife",
+      "gapRanges": "2-3"
+    },
+    {
+      "slug": "bocchi-tenseiki",
+      "title": "Bocchi Tenseiki",
+      "gapRanges": "11-12"
+    },
+    {
+      "slug": "the-constellation-that-returned-from-hell-adapted",
+      "title": "The Constellation that Returned from Hell (Adapted)",
+      "gapRanges": "26, 36"
+    },
+    {
+      "slug": "mone-san-no-majime-sugiru-tsukiaikata",
+      "title": "Mone-san no Majime Sugiru Tsukiaikata",
+      "gapRanges": "22-23"
+    },
+    {
+      "slug": "itsudemo-jitaku-ni-kaerareru-ore-wa-isekai-de-gyoushounin-o-hajimemashita",
+      "title": "Itsudemo Jitaku Ni Kaerareru Ore Wa, Isekai De Gyoushounin O Hajimemashita",
+      "gapRanges": "19-20"
+    },
+    {
+      "slug": "miracle-doctor-abandoned-girl",
+      "title": "Miracle Doctor, Abandoned Girl",
+      "gapRanges": "2, 12"
+    },
+    {
+      "slug": "demon-x-angel-cant-get-along",
+      "title": "Demon X Angel, Can’t Get Along!",
+      "gapRanges": "78, 97"
+    },
+    {
+      "slug": "milady-just-wants-to-relax",
+      "title": "Milady Just Wants to Relax",
+      "gapRanges": "14-15"
+    },
+    {
+      "slug": "medical-martial-arts",
+      "title": "Medical Martial Arts",
+      "gapRanges": "20, 23"
+    },
+    {
+      "slug": "mamori-mama-wa-oyobi-ja-nai-no-isekai-musuko-hankouki",
+      "title": "Mamori Mama wa Oyobi ja nai no!?: Isekai Musuko Hankouki",
+      "gapRanges": "5-6"
+    },
+    {
+      "slug": "hitman-seo-kouji",
+      "title": "Hitman (SEO Kouji)",
+      "gapRanges": "65-66"
+    },
+    {
+      "slug": "dungeons-artifacts",
+      "title": "Dungeons & Artifacts",
+      "gapRanges": "108-109"
+    },
+    {
+      "slug": "tomb-raider-king",
+      "title": "Tomb Raider King",
+      "gapRanges": "387-388"
+    },
+    {
+      "slug": "advanced-evolution",
+      "title": "Advanced Evolution",
+      "gapRanges": "27-28"
+    },
+    {
+      "slug": "jueshi-guzun",
+      "title": "Jueshi Guzun",
+      "gapRanges": "46-47"
+    },
+    {
+      "slug": "rules-as-a-monarch-under-the-skirts",
+      "title": "Rules As A Monarch Under The Skirts",
+      "gapRanges": "24, 26"
+    },
+    {
+      "slug": "strongest-master",
+      "title": "Strongest Master",
+      "gapRanges": "31, 59"
+    },
+    {
+      "slug": "i-am-supreme",
+      "title": "I Am Supreme",
+      "gapRanges": "1966, 2263"
+    },
+    {
+      "slug": "drawing-romance",
+      "title": "Drawing Romance",
+      "gapRanges": "113, 149"
+    },
+    {
+      "slug": "infinite-level-up-in-murim",
+      "title": "Infinite Level Up in Murim",
+      "gapRanges": "52-53"
+    },
+    {
+      "slug": "i-have-countless-legendary-swords",
+      "title": "I Have Countless Legendary Swords",
+      "gapRanges": "2, 78"
+    },
+    {
+      "slug": "hidden-love-zhu-yi",
+      "title": "Hidden Love (Zhu Yi)",
+      "gapRanges": "29-30"
+    },
+    {
+      "slug": "estio",
+      "title": "Estio",
+      "gapRanges": "37, 79"
+    },
+    {
+      "slug": "kabushiki-gaisha-magilumiere",
+      "title": "Kabushiki Gaisha MagiLumiere",
+      "gapRanges": "43-44"
+    },
+    {
+      "slug": "tiger-coming-in",
+      "title": "Tiger Coming In",
+      "gapRanges": "61-62"
+    },
+    {
+      "slug": "shoukan-suru-sekai",
+      "title": "Shoukan Suru Sekai",
+      "gapRanges": "39, 45"
+    },
+    {
+      "slug": "wake-up-master",
+      "title": "Wake Up Master",
+      "gapRanges": "31, 59"
+    },
+    {
+      "slug": "kininatteru-hito-ga-otoko-jyanakatta",
+      "title": "Kininatteru Hito ga Otoko Jyanakatta",
+      "gapRanges": "118, 127"
+    },
+    {
+      "slug": "youchien-wars",
+      "title": "Youchien Wars",
+      "gapRanges": "35, 67"
+    },
+    {
+      "slug": "kono-bijutsubu-ni-wa-mondai-ga-aru",
+      "title": "Kono Bijutsubu ni wa Mondai ga Aru",
+      "gapRanges": "42, 86"
+    },
+    {
+      "slug": "infinite-mage",
+      "title": "Infinite Mage",
+      "gapRanges": "135, 140"
+    },
+    {
+      "slug": "you-werent-my-sister-but-my-fiancee",
+      "title": "You Weren’t My Sister, But My Fiancee!?",
+      "gapRanges": "10-11"
+    },
+    {
+      "slug": "divine-leveling-system",
+      "title": "Divine Leveling System",
+      "gapRanges": "161-162"
+    },
+    {
+      "slug": "revenge-of-the-iron-blooded-sword-hound",
+      "title": "Revenge Of The Iron-Blooded Sword Hound",
+      "gapRanges": "237, 243"
+    },
+    {
+      "slug": "100-years-old-top-chef",
+      "title": "100 Years Old Top Chef",
+      "gapRanges": "35, 53"
+    },
+    {
+      "slug": "isekai-shoukan-oji-san-no-juumusou-life-sabage-suki-salaryman-wa-kaisha-owari-ni-isekai-e-chokki-suru",
+      "title": "Isekai Shoukan Oji-san no Juumusou Life – Sabage Suki Salaryman wa Kaisha Owari ni Isekai e Chokki suru",
+      "gapRanges": "39, 45"
+    },
+    {
+      "slug": "beyond-walpurgis",
+      "title": "Beyond Walpurgis",
+      "gapRanges": "10, 12"
+    },
+    {
+      "slug": "why-i-quit-being-the-demon-king",
+      "title": "Why I Quit Being The Demon King",
+      "gapRanges": "49-50"
+    },
+    {
+      "slug": "i-am-the-strongest-awakeners-recognized-by-all-of-the-worlds-cheat-masters",
+      "title": "I Am the Strongest Awakeners, Recognized by All of the World’s Cheat Masters",
+      "gapRanges": "31, 59"
+    },
+    {
+      "slug": "the-mysterious-worlds-greatest-martial-artist-little-prince",
+      "title": "The Mysterious World’s Greatest Martial Artist Little Prince",
+      "gapRanges": "91, 119"
+    },
+    {
+      "slug": "unemployed-gye-baek-soon",
+      "title": "Unemployed Gye Baek Soon",
+      "gapRanges": "27, 43"
+    },
+    {
+      "slug": "nakinagi",
+      "title": "NakiNagi",
+      "gapRanges": "11-12"
+    },
+    {
+      "slug": "become-the-strongest-hero-through-the-cheat-system",
+      "title": "Become the Strongest Hero Through the Cheat System",
+      "gapRanges": "66, 95"
+    },
+    {
+      "slug": "the-s-class-hunter-who-heals-monsters",
+      "title": "The S-Class Hunter Who Heals Monsters",
+      "gapRanges": "24, 33"
+    },
+    {
+      "slug": "tower-of-god-2",
+      "title": "Tower of God",
+      "gapRanges": "477, 644"
+    },
+    {
+      "slug": "the-villain-of-the-octagon",
+      "title": "The Villain of the Octagon",
+      "gapRanges": "42-43"
+    },
+    {
+      "slug": "magic-emperor-novel",
+      "title": "Magic Emperor (Novel)",
+      "gapRanges": "626, 848"
+    },
+    {
+      "slug": "solo-max-level-newbie-novel",
+      "title": "Solo Max-Level Newbie (Novel)",
+      "gapRanges": "1, 474"
+    },
+    {
+      "slug": "reiwa-no-dara-san",
+      "title": "Reiwa no Dara-san",
+      "gapRanges": "21, 24"
+    },
+    {
+      "slug": "komen-fuufu",
+      "title": "Komen Fuufu",
+      "gapRanges": "11, 13"
+    },
+    {
+      "slug": "senchi-kara-kaette-kita-takashi-kun-futsuu-ni-koukou-seikatsu-wo-okuritai",
+      "title": "Senchi Kara Kaette kita Takashi-kun. Futsuu ni Koukou Seikatsu wo Okuritai",
+      "gapRanges": "3, 5"
+    },
+    {
+      "slug": "0-magic-a-high-spirit-and-a-demonic-sword",
+      "title": "0 Magic, a High Spirit, and a Demonic Sword",
+      "gapRanges": "3-4"
+    },
+    {
+      "slug": "detective-conan",
+      "title": "Detective Conan",
+      "gapRanges": "590"
+    },
+    {
+      "slug": "ichizu-de-bitch-na-kouhai",
+      "title": "Ichizu de Bitch na Kouhai",
+      "gapRanges": "31"
+    },
+    {
+      "slug": "release-that-witch",
+      "title": "Release That Witch",
+      "gapRanges": "342"
+    },
+    {
+      "slug": "dr-stone",
+      "title": "Dr. Stone",
+      "gapRanges": "85"
+    },
+    {
+      "slug": "peerless-soul",
+      "title": "Peerless Soul",
+      "gapRanges": "728"
+    },
+    {
+      "slug": "meng-shi-zai-shang",
+      "title": "Meng Shi Zai Shang",
+      "gapRanges": "86"
+    },
+    {
+      "slug": "god-of-martial-arts",
+      "title": "God of Martial Arts",
+      "gapRanges": "657"
+    },
+    {
+      "slug": "arafoo-kenja-no-isekai-seikatsu-nikki",
+      "title": "Arafoo Kenja no Isekai Seikatsu Nikki",
+      "gapRanges": "32"
+    },
+    {
+      "slug": "chaotic-sword-god",
+      "title": "Chaotic Sword God",
+      "gapRanges": "149"
+    },
+    {
+      "slug": "demon-spirit-seed-manual",
+      "title": "Demon Spirit Seed Manual",
+      "gapRanges": "292"
+    },
+    {
+      "slug": "first-class-family",
+      "title": "First Class Family",
+      "gapRanges": "110"
+    },
+    {
+      "slug": "fukushuu-o-koinegau-saikyou-yuusha-wa-yami-no-chikara-de-senmetsu-musou-suru",
+      "title": "Fukushuu o Koinegau Saikyou Yuusha wa, Yami no Chikara de Senmetsu Musou Suru",
+      "gapRanges": "134"
+    },
+    {
+      "slug": "hataraku-maou-sama",
+      "title": "Hataraku Maou-sama!",
+      "gapRanges": "110"
+    },
+    {
+      "slug": "i-was-dismissed-from-the-heros-party-because-they-dont-need-my-training-skills-so-i-strengthened-my-fief-which-i-got-as-a-replacement-for-my-retirement-money",
+      "title": "I Was Dismissed from the Hero’s Party Because They Don’t Need My Training Skills, so I Strengthened My [Fief] Which I Got as a Replacement for My Retirement Money.",
+      "gapRanges": "16"
+    },
+    {
+      "slug": "heaven-defying-sword",
+      "title": "Heaven Defying Sword",
+      "gapRanges": "395"
+    },
+    {
+      "slug": "hitoribocchi-no-isekai-kouryaku",
+      "title": "Hitoribocchi no Isekai Kouryaku",
+      "gapRanges": "7"
+    },
+    {
+      "slug": "above-the-cloud-sea",
+      "title": "Above the Cloud Sea",
+      "gapRanges": "2"
+    },
+    {
+      "slug": "a-strange-world",
+      "title": "A Strange World",
+      "gapRanges": "69"
+    },
+    {
+      "slug": "kami-ni-ai-sareta-ko",
+      "title": "Kami ni Ai sareta Ko",
+      "gapRanges": "47"
+    },
+    {
+      "slug": "jitsu-wa-ore-saikyou-deshita",
+      "title": "Jitsu wa Ore, Saikyou deshita?",
+      "gapRanges": "126"
+    },
+    {
+      "slug": "kill-the-hero",
+      "title": "Kill the Hero",
+      "gapRanges": "128"
+    },
+    {
+      "slug": "kishuku-gakkou-no-juliet",
+      "title": "Kishuku Gakkou no Juliet",
+      "gapRanges": "107"
+    },
+    {
+      "slug": "kuro-no-shoukanshi",
+      "title": "Kuro no Shoukanshi",
+      "gapRanges": "167"
+    },
+    {
+      "slug": "lookism",
+      "title": "Lookism",
+      "gapRanges": "518"
+    },
+    {
+      "slug": "maou-no-ore-ga-dorei-elf-wo-yome-ni-shitanda-ga-dou-medereba-ii",
+      "title": "Maou no Ore ga Dorei Elf wo Yome ni Shitanda ga, Dou Medereba Ii?",
+      "gapRanges": "52"
+    },
+    {
+      "slug": "maseki-gurume-mamono-no-chikara-o-tabeta-ore-wa-saikyou",
+      "title": "Maseki Gurume: Mamono no Chikara o Tabeta Ore wa Saikyou!",
+      "gapRanges": "23"
+    },
+    {
+      "slug": "mato-seihei-no-slave",
+      "title": "Mato Seihei no Slave",
+      "gapRanges": "44"
+    },
+    {
+      "slug": "martial-god-asura",
+      "title": "Martial God Asura",
+      "gapRanges": "783"
+    },
+    {
+      "slug": "moto-sekai-ichii-subchara-ikusei-nikki-hai-player-isekai-wo-kouryakuchuu",
+      "title": "Moto Sekai Ichi’i Subchara Ikusei Nikki: Hai Player, Isekai wo Kouryakuchuu!",
+      "gapRanges": "69"
+    },
+    {
+      "slug": "realist-maou-niyoru-seiiki-naki-isekai-kaikaku",
+      "title": "Realist Maou Niyoru Seiiki Naki Isekai Kaikaku",
+      "gapRanges": "15"
+    },
+    {
+      "slug": "seiken-gakuin-no-maken-tsukai",
+      "title": "Seiken Gakuin no Maken Tsukai",
+      "gapRanges": "45"
+    },
+    {
+      "slug": "shi-ni-modori-subete-wo-sukuu-tame-ni-saikyou-he-to-itaru",
+      "title": "Shi ni Modori, Subete wo Sukuu Tame ni Saikyou He to Itaru",
+      "gapRanges": "43"
+    },
+    {
+      "slug": "shin-no-nakama-janai-to-yuusha-no-party-wo-oidasareta-node-henkyou-de-slow-life-suru-koto-ni-shimashita",
+      "title": "Shin no Nakama janai to Yuusha no Party wo Oidasareta node, Henkyou de Slow Life suru Koto ni shimashita",
+      "gapRanges": "53"
+    },
+    {
+      "slug": "shinju-no-nectar",
+      "title": "Shinju no Nectar",
+      "gapRanges": "23"
+    },
+    {
+      "slug": "soul-land",
+      "title": "Soul Land",
+      "gapRanges": "460"
+    },
+    {
+      "slug": "soul-land-iv-the-ultimate-combat",
+      "title": "Soul Land IV – The Ultimate Combat",
+      "gapRanges": "71"
+    },
+    {
+      "slug": "takarakuji-de-40-oku-atatta-n-dakedo-isekai-ni-ijuu-suru",
+      "title": "Takarakuji de 40-oku Atatta n dakedo Isekai ni Ijuu Suru",
+      "gapRanges": "21"
+    },
+    {
+      "slug": "spirit-blade-mountain",
+      "title": "Spirit Blade Mountain",
+      "gapRanges": "33"
+    },
+    {
+      "slug": "the-dungeon-master",
+      "title": "The Dungeon Master",
+      "gapRanges": "69"
+    },
+    {
+      "slug": "the-gamer",
+      "title": "The Gamer",
+      "gapRanges": "350"
+    },
+    {
+      "slug": "the-mythical-realm",
+      "title": "The Mythical Realm",
+      "gapRanges": "203"
+    },
+    {
+      "slug": "the-world-is-full-of-monsters-now-therefore-i-want-to-live-as-i-wish",
+      "title": "The World Is Full of Monsters Now, Therefore I Want to Live As I Wish",
+      "gapRanges": "25"
+    },
+    {
+      "slug": "the-superb-captain-in-the-city",
+      "title": "The Superb Captain in the City",
+      "gapRanges": "53"
+    },
+    {
+      "slug": "tsuki-ga-michibiku-isekai-douchuu",
+      "title": "Tsuki ga Michibiku Isekai Douchuu",
+      "gapRanges": "106"
+    },
+    {
+      "slug": "yancha-gal-no-anjou-san",
+      "title": "Yancha Gal no Anjou-san",
+      "gapRanges": "9"
+    },
+    {
+      "slug": "yankee-wa-isekai-de-seirei-ni-aisaremasu",
+      "title": "Yankee Wa Isekai De Seirei Ni Aisaremasu.",
+      "gapRanges": "29"
+    },
+    {
+      "slug": "prince-charming-daddy-descended-from-heaven",
+      "title": "Prince Charming Daddy Descended From Heaven",
+      "gapRanges": "2"
+    },
+    {
+      "slug": "long-live-the-king",
+      "title": "Long Live the King",
+      "gapRanges": "17"
+    },
+    {
+      "slug": "bleach",
+      "title": "Bleach",
+      "gapRanges": "432"
+    },
+    {
+      "slug": "mahou-shoujo-site",
+      "title": "Mahou Shoujo Site",
+      "gapRanges": "48"
+    },
+    {
+      "slug": "ichigo-100",
+      "title": "Ichigo 100%",
+      "gapRanges": "139"
+    },
+    {
+      "slug": "feng-shen-ji-iii",
+      "title": "Feng Shen Ji III",
+      "gapRanges": "51"
+    },
+    {
+      "slug": "fire-punch",
+      "title": "Fire Punch",
+      "gapRanges": "3"
+    },
+    {
+      "slug": "x-blade",
+      "title": "X-Blade",
+      "gapRanges": "8"
+    },
+    {
+      "slug": "prison-school",
+      "title": "Prison School",
+      "gapRanges": "139"
+    },
+    {
+      "slug": "tokyo-esp",
+      "title": "Tokyo ESP",
+      "gapRanges": "27"
+    },
+    {
+      "slug": "mxzero",
+      "title": "MxZero",
+      "gapRanges": "50"
+    },
+    {
+      "slug": "digimon-v-tamer",
+      "title": "Digimon V-tamer",
+      "gapRanges": "36"
+    },
+    {
+      "slug": "yandere-kanojo",
+      "title": "Yandere Kanojo",
+      "gapRanges": "28"
+    },
+    {
+      "slug": "yakushoku-distopiary",
+      "title": "Yakushoku Distopiary",
+      "gapRanges": "9"
+    },
+    {
+      "slug": "xianwu-dizun",
+      "title": "Xianwu Dizun",
+      "gapRanges": "150"
+    },
+    {
+      "slug": "when-i-was-reincarnated-in-another-world-i-was-a-heroine-and-he-was-a-hero",
+      "title": "When I Was Reincarnated in Another World, I Was a Heroine and He Was a Hero",
+      "gapRanges": "30"
+    },
+    {
+      "slug": "welcome-to-cheap-restaurant-of-outcasts",
+      "title": "Welcome to Cheap Restaurant of Outcasts!",
+      "gapRanges": "50"
+    },
+    {
+      "slug": "who-made-me-a-princess",
+      "title": "Who Made Me a Princess",
+      "gapRanges": "105"
+    },
+    {
+      "slug": "watashi-no-oshi-wa-akuyaku-reijou",
+      "title": "Watashi no Oshi wa Akuyaku Reijou.",
+      "gapRanges": "54"
+    },
+    {
+      "slug": "uwakoi",
+      "title": "Uwakoi",
+      "gapRanges": "34"
+    },
+    {
+      "slug": "vagabond",
+      "title": "Vagabond",
+      "gapRanges": "55"
+    },
+    {
+      "slug": "undead-unluck",
+      "title": "Undead Unluck",
+      "gapRanges": "32"
+    },
+    {
+      "slug": "akuyaku-reijou-no-shitsuji-sama-hametsu-flag-wa-ore-ga-tsubusasete-itadakimasu",
+      "title": "Akuyaku Reijou no Shitsuji-sama: Hametsu Flag wa Ore ga Tsubusasete itadakimasu",
+      "gapRanges": "27"
+    },
+    {
+      "slug": "treading-on-fire-yuwen-jun",
+      "title": "Treading on Fire, Yuwen Jun!",
+      "gapRanges": "14"
+    },
+    {
+      "slug": "ame-no-hi",
+      "title": "Ame no Hi",
+      "gapRanges": "350"
+    },
+    {
+      "slug": "true-education",
+      "title": "True Education",
+      "gapRanges": "207"
+    },
+    {
+      "slug": "tonari-no-kimi-ga-ichiban-kawaii",
+      "title": "Tonari no Kimi ga Ichiban Kawaii",
+      "gapRanges": "37"
+    },
+    {
+      "slug": "to-be-you-even-just-for-a-day",
+      "title": "To Be You, Even Just For A Day",
+      "gapRanges": "36"
+    },
+    {
+      "slug": "the-tale-of-zi-wei",
+      "title": "The Tale of Zi Wei",
+      "gapRanges": "50"
+    },
+    {
+      "slug": "the-strongest-florist",
+      "title": "The Strongest Florist",
+      "gapRanges": "41"
+    },
+    {
+      "slug": "the-secret-of-angel",
+      "title": "The Secret of Angel",
+      "gapRanges": "169"
+    },
+    {
+      "slug": "the-presidents-school-flower-is-on-me",
+      "title": "The President’s School Flower Is on Me",
+      "gapRanges": "29"
+    },
+    {
+      "slug": "the-king-of-fighters-a-new-beginning",
+      "title": "The King of Fighters A New Beginning",
+      "gapRanges": "3"
+    },
+    {
+      "slug": "the-immortal-devil-emperor",
+      "title": "The Immortal Devil Emperor",
+      "gapRanges": "59"
+    },
+    {
+      "slug": "the-developer-system",
+      "title": "The Developer System",
+      "gapRanges": "217"
+    },
+    {
+      "slug": "hazure-skill-gacha-de-tsuihou-sareta-ore-wa-wagamama-osananajimi-o-zetsuen-shi-kakusei-suru",
+      "title": "Hazure Skill “Gacha” de Tsuihou Sareta Ore wa, Wagamama Osananajimi o Zetsuen Shi Kakusei Suru",
+      "gapRanges": "16"
+    },
+    {
+      "slug": "the-ghostly-doctor",
+      "title": "The Ghostly Doctor",
+      "gapRanges": "46"
+    },
+    {
+      "slug": "oroka-na-tenshi-wa-akuma-to-odoru",
+      "title": "Oroka na Tenshi wa Akuma to Odoru",
+      "gapRanges": "26"
+    },
+    {
+      "slug": "onii-chan-wa-oshimai",
+      "title": "Onii-chan wa Oshimai",
+      "gapRanges": "65"
+    },
+    {
+      "slug": "cultivator-against-hero-society",
+      "title": "Cultivator Against Hero Society",
+      "gapRanges": "217"
+    },
+    {
+      "slug": "shiguizhe",
+      "title": "Autophagy Regulation",
+      "gapRanges": "17"
+    },
+    {
+      "slug": "highschool-lunch-dad",
+      "title": "Highschool Lunch Dad",
+      "gapRanges": "36"
+    },
+    {
+      "slug": "ayakashi-triangle",
+      "title": "Ayakashi Triangle",
+      "gapRanges": "36"
+    },
+    {
+      "slug": "bai-zes-bizarre-records",
+      "title": "Bai Ze's Bizarre Records",
+      "gapRanges": "3"
+    },
+    {
+      "slug": "baby-steps",
+      "title": "Baby Steps",
+      "gapRanges": "262"
+    },
+    {
+      "slug": "carrying-the-goddess-along",
+      "title": "Carrying the Goddess Along",
+      "gapRanges": "54"
+    },
+    {
+      "slug": "mutually-unrequited-twin-sisters",
+      "title": "Mutually Unrequited Twin Sisters",
+      "gapRanges": "4"
+    },
+    {
+      "slug": "zennin-ossan-umareka-wattara-sss-ranku-jinsei-ga-kakutei-shita",
+      "title": "Zennin ossan, umareka wattara SSS ranku jinsei ga kakutei shita",
+      "gapRanges": "23"
+    },
+    {
+      "slug": "beauty-and-the-beasts",
+      "title": "Beauty and the Beasts",
+      "gapRanges": "138"
+    },
+    {
+      "slug": "nihon-e-youkoso-elf-san",
+      "title": "Nihon e Youkoso Elf-san",
+      "gapRanges": "17"
+    },
+    {
+      "slug": "negatibu-yuusha-to-maougun-kanbu",
+      "title": "Negatibu Yuusha to Maougun Kanbu",
+      "gapRanges": "20"
+    },
+    {
+      "slug": "beng-huai-3rd-honkai-impact",
+      "title": "Beng Huai 3rd Honkai Impact",
+      "gapRanges": "1"
+    },
+    {
+      "slug": "bloody-monday",
+      "title": "Bloody Monday",
+      "gapRanges": "57"
+    },
+    {
+      "slug": "my-girlfriend-is-a-villain",
+      "title": "My Girlfriend is a Villain",
+      "gapRanges": "72"
+    },
+    {
+      "slug": "fumetsu-no-anata-e",
+      "title": "Fumetsu no Anata e",
+      "gapRanges": "45"
+    },
+    {
+      "slug": "mother-keeper",
+      "title": "Mother Keeper",
+      "gapRanges": "18"
+    },
+    {
+      "slug": "jungle-juice",
+      "title": "Jungle Juice",
+      "gapRanges": "211"
+    },
+    {
+      "slug": "rebirth-abandoned-less-return",
+      "title": "Rebirth Abandoned Less Return",
+      "gapRanges": "96"
+    },
+    {
+      "slug": "boku-no-kokoro-no-yabai-yatsu",
+      "title": "Boku no Kokoro no Yabai yatsu",
+      "gapRanges": "51"
+    },
+    {
+      "slug": "dao-yin",
+      "title": "Dao Yin",
+      "gapRanges": "88"
+    },
+    {
+      "slug": "tsuihousha-shokudou-e-youkoso",
+      "title": "Tsuihousha Shokudou e Youkoso!",
+      "gapRanges": "17"
+    },
+    {
+      "slug": "mida-love",
+      "title": "Mida Love",
+      "gapRanges": "2"
+    },
+    {
+      "slug": "maou-jou-de-oyasumi",
+      "title": "Maou-jou de Oyasumi",
+      "gapRanges": "8"
+    },
+    {
+      "slug": "majo-senpai-nichijou",
+      "title": "Majo-senpai Nichijou",
+      "gapRanges": "5"
+    },
+    {
+      "slug": "mahouka-koukou-no-rettousei",
+      "title": "Mahouka Koukou no Rettousei",
+      "gapRanges": "46"
+    },
+    {
+      "slug": "infinite-viral-infection",
+      "title": "Infinite Viral Infection",
+      "gapRanges": "27"
+    },
+    {
+      "slug": "luck-control",
+      "title": "Luck Control",
+      "gapRanges": "18"
+    },
+    {
+      "slug": "rettou-gan-no-tensei-majutsushi-shiitage-rareta-saikyou-no-minashigo-ga-isekai-de-musou-suru",
+      "title": "Rettou Gan no Tensei Majutsushi – Shiitage Rareta Saikyou no Minashigo ga Isekai de Musou Suru",
+      "gapRanges": "17"
+    },
+    {
+      "slug": "ceos-sudden-proposal",
+      "title": "CEO’s Sudden Proposal",
+      "gapRanges": "290"
+    },
+    {
+      "slug": "elephant-invisible",
+      "title": "Elephant Invisible",
+      "gapRanges": "246"
+    },
+    {
+      "slug": "yurufuwa-noka-no-mojibake-skill-yurufuwa-nouka-no-mojibake-skill-isekai-de-katarogu-tsuuhan-yattemasu",
+      "title": "Yurufuwa Noka No Mojibake Skill, Yurufuwa Nouka no Mojibake Skill ~Isekai de Katarogu Tsuuhan Yattemasu~",
+      "gapRanges": "6"
+    },
+    {
+      "slug": "secret-gyaru-x-shota-couple",
+      "title": "Secret Gyaru x Shota Couple",
+      "gapRanges": "3"
+    },
+    {
+      "slug": "990k-ex-life-hunter",
+      "title": "990k Ex-Life Hunter",
+      "gapRanges": "73"
+    },
+    {
+      "slug": "asirhart-kingdom-aide",
+      "title": "Asirhart Kingdom Aide",
+      "gapRanges": "36"
+    },
+    {
+      "slug": "return-of-the-bachelor",
+      "title": "Return of The Bachelor",
+      "gapRanges": "4"
+    },
+    {
+      "slug": "mortal-cultivation-fairy-world",
+      "title": "Mortal Cultivation Fairy World",
+      "gapRanges": "56"
+    },
+    {
+      "slug": "oshimai",
+      "title": "Oshimai",
+      "gapRanges": "65"
+    },
+    {
+      "slug": "boku-no-kawai-musume-wa-futago-no-kenja-tokugi-ga-debafu-no-teihen-kuro-madoushi-sodateta-futago-no-musume-ga-s-rank-no-dai-kenja-ni-natte-shimau",
+      "title": "Boku no kawai musume wa futago no kenja ~tokugi ga debafu no teihen kuro madoushi, sodateta futago no musume ga S rank no dai kenja ni natte shimau~",
+      "gapRanges": "26"
+    },
+    {
+      "slug": "kaminari-mikado-to-yobareta-saikyo-bokensha",
+      "title": "Kaminari Mikado to Yobareta Saikyō Bōkensha",
+      "gapRanges": "4"
+    },
+    {
+      "slug": "minecraft-waifu",
+      "title": "Minecraft Waifu",
+      "gapRanges": "15"
+    },
+    {
+      "slug": "gokushufudou-the-way-of-the-house-husband",
+      "title": "Gokushufudou: The Way of the House Husband",
+      "gapRanges": "74"
+    },
+    {
+      "slug": "the-white-mage-who-was-banished-from-the-heros-party-is-picked-up-by-an-s-rank-adventurer",
+      "title": "The White Mage Who Was Banished From the Hero’s Party Is Picked up by an S Rank Adventurer",
+      "gapRanges": "2"
+    },
+    {
+      "slug": "the-dark-magician-transmigrates-after-66666-years",
+      "title": "The Dark Magician Transmigrates After 66666 Years",
+      "gapRanges": "56"
+    },
+    {
+      "slug": "crazy-professor-in-school-campus",
+      "title": "Crazy Professor in School Campus",
+      "gapRanges": "78"
+    },
+    {
+      "slug": "crows",
+      "title": "Crows",
+      "gapRanges": "41"
+    },
+    {
+      "slug": "venerable-war-dragon",
+      "title": "Venerable War Dragon",
+      "gapRanges": "34"
+    },
+    {
+      "slug": "dragon-warrior",
+      "title": "Dragon warrior",
+      "gapRanges": "28"
+    },
+    {
+      "slug": "gundaddy-immortal",
+      "title": "Gundaddy Immortal",
+      "gapRanges": "21"
+    },
+    {
+      "slug": "the-un-comparable",
+      "title": "The Un-Comparable",
+      "gapRanges": "4"
+    },
+    {
+      "slug": "solo-max-level-newbie",
+      "title": "Solo Max-Level Newbie",
+      "gapRanges": "474"
+    },
+    {
+      "slug": "rankers-return-remake",
+      "title": "Ranker’s Return (Remake)",
+      "gapRanges": "43"
+    },
+    {
+      "slug": "princess-please-distance-yourself-a-little-your-royal-highness-please-stay-away-from-me",
+      "title": "Princess, Please Distance Yourself A Little (Your Royal Highness, Please Stay Away From Me)",
+      "gapRanges": "8"
+    },
+    {
+      "slug": "tondemo-skill-de-isekai-hourou-meshi-sui-no-daibouken",
+      "title": "Tondemo Skill de Isekai Hourou Meshi: Sui no Daibouken",
+      "gapRanges": "17"
+    },
+    {
+      "slug": "irregular-empress",
+      "title": "Irregular Empress",
+      "gapRanges": "13"
+    },
+    {
+      "slug": "that-girl-is-cute-but-dangerous",
+      "title": "That Girl Is Cute… But Dangerous?",
+      "gapRanges": "78"
+    },
+    {
+      "slug": "drifters",
+      "title": "Drifters",
+      "gapRanges": "48"
+    },
+    {
+      "slug": "legend-the-beginning",
+      "title": "Legend the Beginning",
+      "gapRanges": "74"
+    },
+    {
+      "slug": "the-challenger",
+      "title": "The Challenger",
+      "gapRanges": "8"
+    },
+    {
+      "slug": "solo-necromancer",
+      "title": "Solo Necromancer",
+      "gapRanges": "201"
+    },
+    {
+      "slug": "vanitas-no-carte",
+      "title": "Vanitas no Carte",
+      "gapRanges": "22"
+    },
+    {
+      "slug": "i-tamed-the-crazy-marquis",
+      "title": "I Tamed the Crazy Marquis",
+      "gapRanges": "10"
+    },
+    {
+      "slug": "regressor-instruction-manual",
+      "title": "Regressor Instruction Manual",
+      "gapRanges": "166"
+    },
+    {
+      "slug": "manager-kim",
+      "title": "Manager Kim",
+      "gapRanges": "6"
+    },
+    {
+      "slug": "kimi-ni-todoke",
+      "title": "Kimi ni Todoke",
+      "gapRanges": "32"
+    },
+    {
+      "slug": "guomin-laogong-dai-huijia",
+      "title": "Guomin Laogong Dai Huijia",
+      "gapRanges": "137"
+    },
+    {
+      "slug": "i-made-a-harem-in-the-underworld",
+      "title": "I Made A Harem In The Underworld",
+      "gapRanges": "4"
+    },
+    {
+      "slug": "i-came-from-the-abyss-to-save-mankind",
+      "title": "I Came From The Abyss to Save Mankind",
+      "gapRanges": "92"
+    },
+    {
+      "slug": "protect-me-knight",
+      "title": "Protect Me, Knight",
+      "gapRanges": "38"
+    },
+    {
+      "slug": "someone-bother-my-on-hook-life",
+      "title": "Someone Bother My On-Hook Life",
+      "gapRanges": "8"
+    },
+    {
+      "slug": "broken-daily-life",
+      "title": "Broken Daily Life",
+      "gapRanges": "9"
+    },
+    {
+      "slug": "super-god-gene",
+      "title": "Super God Gene",
+      "gapRanges": "135"
+    },
+    {
+      "slug": "si-ye-ren-night-controller",
+      "title": "Si Ye Ren (Night Controller)",
+      "gapRanges": "18"
+    },
+    {
+      "slug": "my-civil-servant-life-reborn-in-the-strange-world",
+      "title": "My Civil Servant Life Reborn in the Strange World",
+      "gapRanges": "69"
+    },
+    {
+      "slug": "batsu-harem",
+      "title": "Batsu Harem",
+      "gapRanges": "160"
+    },
+    {
+      "slug": "sleeping-ranker",
+      "title": "Sleeping Ranker",
+      "gapRanges": "150"
+    },
+    {
+      "slug": "lord-of-the-mysteries",
+      "title": "Lord of the Mysteries",
+      "gapRanges": "269"
+    },
+    {
+      "slug": "transmigrating-to-the-otherworld-once-more",
+      "title": "Transmigrating to the Otherworld Once More",
+      "gapRanges": "76"
+    },
+    {
+      "slug": "overbearing-tyrant",
+      "title": "Overbearing Tyrant",
+      "gapRanges": "21"
+    },
+    {
+      "slug": "cursed-by-heaven-im-stronger",
+      "title": "Cursed by Heaven, I’m Stronger",
+      "gapRanges": "2"
+    },
+    {
+      "slug": "kanan-sama-wa-akumade-choroi",
+      "title": "Kanan-sama wa Akumade Choroi",
+      "gapRanges": "112"
+    },
+    {
+      "slug": "to-hell-with-being-a-saint-im-a-doctor",
+      "title": "To Hell With Being A Saint, I’m A Doctor",
+      "gapRanges": "138"
+    },
+    {
+      "slug": "marriagetoxin",
+      "title": "Marriagetoxin",
+      "gapRanges": "23"
+    },
+    {
+      "slug": "ruri-dragon",
+      "title": "Ruri Dragon",
+      "gapRanges": "13"
+    },
+    {
+      "slug": "the-novel-extra-remake",
+      "title": "The Novel Extra (Remake)",
+      "gapRanges": "39"
+    },
+    {
+      "slug": "aozora-to-kumorizora",
+      "title": "Aozora to Kumorizora",
+      "gapRanges": "8"
+    },
+    {
+      "slug": "clever-cleaning-life-of-the-returned-genius-hunter",
+      "title": "Clever Cleaning Life Of The Returned Genius Hunter",
+      "gapRanges": "8"
+    },
+    {
+      "slug": "grim-reaper-of-the-drifting-moon",
+      "title": "Grim Reaper of the Drifting Moon",
+      "gapRanges": "59"
+    },
+    {
+      "slug": "evolution-begins-with-a-big-tree",
+      "title": "Evolution Begins With A Big Tree",
+      "gapRanges": "419"
+    },
+    {
+      "slug": "death-god",
+      "title": "Death God",
+      "gapRanges": "131"
+    },
+    {
+      "slug": "hajirau-kimi-ga-mitainda",
+      "title": "Hajirau Kimi ga Mitainda",
+      "gapRanges": "4"
+    },
+    {
+      "slug": "my-wife-and-i-dominate-the-three-realms",
+      "title": "My Wife and I Dominate the Three Realms",
+      "gapRanges": "33"
+    },
+    {
+      "slug": "be-a-time-traveler",
+      "title": "Be A Time Traveler",
+      "gapRanges": "153"
+    },
+    {
+      "slug": "worlds-greatest-senior-disciple",
+      "title": "World’s Greatest Senior Disciple",
+      "gapRanges": "139"
+    },
+    {
+      "slug": "lu-bus-life-simulator",
+      "title": "Lu Bu’s Life Simulator",
+      "gapRanges": "133"
+    },
+    {
+      "slug": "re-life-player",
+      "title": "Re: Life Player",
+      "gapRanges": "64"
+    },
+    {
+      "slug": "dororo-reverse",
+      "title": "Dororo Re:Verse",
+      "gapRanges": "13"
+    },
+    {
+      "slug": "his-girlfriend",
+      "title": "His Girlfriend",
+      "gapRanges": "9"
+    },
+    {
+      "slug": "a-heartfelt-andante",
+      "title": "A Heartfelt Andante",
+      "gapRanges": "10"
+    },
+    {
+      "slug": "magic-level-99990000-all-attribute-great-sage",
+      "title": "Magic Level 99990000 All-Attribute Great Sage",
+      "gapRanges": "110"
+    },
+    {
+      "slug": "boku-to-kimi-gyaru-ga-fuufu-ni-naru-made",
+      "title": "Boku to Kimi (Gyaru) ga Fuufu ni Naru Made",
+      "gapRanges": "17"
+    },
+    {
+      "slug": "i-became-the-despised-granddaughter-of-the-murim-family",
+      "title": "I Became the Despised Granddaughter of the Murim Family",
+      "gapRanges": "31"
+    },
+    {
+      "slug": "mr-zombie",
+      "title": "Mr. Zombie",
+      "gapRanges": "172"
+    },
+    {
+      "slug": "jinrui-shoku-blight-of-man",
+      "title": "Jinrui-Shoku: Blight of Man",
+      "gapRanges": "3"
+    },
+    {
+      "slug": "fuufu-nara-doko-e-demo",
+      "title": "Fuufu nara Doko e demo",
+      "gapRanges": "4"
+    },
+    {
+      "slug": "i-reincarnated-as-an-sss-ranked-goblin",
+      "title": "I Reincarnated as an SSS-Ranked Goblin",
+      "gapRanges": "9"
+    },
+    {
+      "slug": "the-romance-of-the-three-kingdoms-phalaenopsis-dreamland",
+      "title": "The Romance of The Three Kingdoms (Phalaenopsis Dreamland)",
+      "gapRanges": "4"
+    },
+    {
+      "slug": "jimoto-no-ijimekko-tachi-ni-shikaeshi-shiyou-to-shitara-betsu-no-tatakai-ga-hajimatta",
+      "title": "Jimoto no Ijimekko-tachi ni Shikaeshi Shiyou to Shitara, Betsu no Tatakai ga Hajimatta",
+      "gapRanges": "22"
+    },
+    {
+      "slug": "evil-dragon-is-reincarnated-revenge-begins-at-the-age-of-five",
+      "title": "Evil Dragon Is Reincarnated! Revenge Begins at the Age of Five!",
+      "gapRanges": "202"
+    },
+    {
+      "slug": "solo-farming-in-the-tower",
+      "title": "Solo Farming In The Tower",
+      "gapRanges": "69"
+    },
+    {
+      "slug": "dungeon-ni-hisomu-yandere-na-kanojo-ni-ore-wa-nando-mo-korosareru",
+      "title": "Dungeon ni Hisomu Yandere na Kanojo ni Ore wa Nando mo Korosareru",
+      "gapRanges": "28"
+    },
+    {
+      "slug": "young-master-of-the-plutokart",
+      "title": "Young Master Of The Plutokart",
+      "gapRanges": "58"
+    },
+    {
+      "slug": "heir-of-mythical-heroes",
+      "title": "Heir of Mythical Heroes",
+      "gapRanges": "34"
+    },
+    {
+      "slug": "girl-and-science",
+      "title": "Girl and Science",
+      "gapRanges": "179"
+    },
+    {
+      "slug": "the-extra-is-too-strong",
+      "title": "The Extra Is Too Strong",
+      "gapRanges": "32"
+    },
+    {
+      "slug": "apocalypse-super-farm",
+      "title": "Apocalypse Super Farm",
+      "gapRanges": "24"
+    },
+    {
+      "slug": "savior-of-divine-blood-draw-out-0-00000001-to-become-the-strongest",
+      "title": "Savior of Divine Blood ~Draw Out 0.00000001% To Become the Strongest~",
+      "gapRanges": "34"
+    },
+    {
+      "slug": "shark-wyvern",
+      "title": "Shark Wyvern",
+      "gapRanges": "59"
+    },
+    {
+      "slug": "mad-daoist-son-in-law",
+      "title": "Mad Daoist Son-In-Law",
+      "gapRanges": "6"
+    },
+    {
+      "slug": "legendary-blacksmiths-vengeance",
+      "title": "Legendary Blacksmith’s Vengeance",
+      "gapRanges": "4"
+    },
+    {
+      "slug": "noa-senpai-wa-tomodachi",
+      "title": "Noa-senpai wa Tomodachi",
+      "gapRanges": "67"
+    },
+    {
+      "slug": "the-saintess-has-a-showdown",
+      "title": "The Saintess Has a Showdown",
+      "gapRanges": "23"
+    },
+    {
+      "slug": "jobless-monster-player",
+      "title": "Jobless Monster Player",
+      "gapRanges": "26"
+    },
+    {
+      "slug": "mixed-fantasy-my-journey-to-become-invincible-from-big-spending-begins",
+      "title": "Mixed Fantasy – My Journey To Become Invincible From Big-Spending Begins!",
+      "gapRanges": "56"
+    },
+    {
+      "slug": "ogami-tsumiki-to-kinichijou",
+      "title": "Ogami Tsumiki to Kinichijou",
+      "gapRanges": "21"
+    },
+    {
+      "slug": "ill-make-you-a-superstar",
+      "title": "I’ll Make You a Superstar",
+      "gapRanges": "24"
+    },
+    {
+      "slug": "my-wife-is-the-destined-villainess",
+      "title": "My Wife Is The Destined Villainess",
+      "gapRanges": "12"
+    },
+    {
+      "slug": "ano-toki-tasukete-itadaita-monster-musume-desu",
+      "title": "Ano Toki Tasukete Itadaita Monster Musume desu.",
+      "gapRanges": "20"
+    },
+    {
+      "slug": "dont-do-this-your-majesty",
+      "title": "Don’t Do This, Your Majesty!",
+      "gapRanges": "7"
+    },
+    {
+      "slug": "i-am-the-virus-monarch",
+      "title": "I Am the Virus Monarch",
+      "gapRanges": "34"
+    },
+    {
+      "slug": "akanabe-sensei-wa-tereshirazu-akanabe-sensei-doesnt-know-about-embarrassment",
+      "title": "Akanabe-sensei wa Tereshirazu (Akanabe-sensei Doesn’t Know about Embarrassment)",
+      "gapRanges": "29"
+    },
+    {
+      "slug": "shippaisaku-no-tsukaima",
+      "title": "Shippaisaku no Tsukaima",
+      "gapRanges": "3"
+    },
+    {
+      "slug": "the-possessed-genius-gaming-stream",
+      "title": "The Possessed Genius’ Gaming Stream",
+      "gapRanges": "41"
+    },
+    {
+      "slug": "exorcist-no-kiyoshi-kun",
+      "title": "Exorcist no Kiyoshi-kun",
+      "gapRanges": "60"
+    },
+    {
+      "slug": "mad-ootori-yuusuke",
+      "title": "MAD (OOTORI Yuusuke)",
+      "gapRanges": "41"
+    },
+    {
+      "slug": "ai-ga-omosugiru-uchi-no-yandere-kaineko",
+      "title": "Ai ga Omosugiru Uchi no Yandere Kaineko",
+      "gapRanges": "5"
+    },
+    {
+      "slug": "the-beginner-formerly-ranked-number-one-in-the-world",
+      "title": "The Beginner, Formerly Ranked Number One in the World",
+      "gapRanges": "40"
+    },
+    {
+      "slug": "girls-who-behave-differently-when-dating",
+      "title": "Girls Who Behave Differently When Dating",
+      "gapRanges": "2"
+    },
+    {
+      "slug": "the-demonic-cult-leader-is-too-reluctant",
+      "title": "The Demonic Cult Leader Is Too Reluctant",
+      "gapRanges": "49"
+    },
+    {
+      "slug": "tsuki-no-shiro-sa-wo-shirite-madoromu",
+      "title": "Tsuki No Shiro Sa Wo Shirite Madoromu",
+      "gapRanges": "6"
+    },
+    {
+      "slug": "fighting-ward",
+      "title": "Fighting Ward",
+      "gapRanges": "57"
+    },
+    {
+      "slug": "the-mercenary-bomber-explode-all-cheaters",
+      "title": "The Mercenary Bomber Explode All Cheaters",
+      "gapRanges": "7"
+    },
+    {
+      "slug": "the-rest-is-up-to-you-since-god-defeated-the-final-boss-in-the-tutorial-im-going-to-live-my-life-however-i-want",
+      "title": "The Rest Is Up to You ~Since God Defeated the Final Boss in the Tutorial, I’m Going to Live My Life However I Want~",
+      "gapRanges": "5"
+    },
+    {
+      "slug": "tsuma-ga-kanpeki-sugiru-no-de-chotto-midashite-ii-desu-ka",
+      "title": "Tsuma ga Kanpeki sugiru no de, Chotto Midashite Ii desu ka?",
+      "gapRanges": "20"
+    },
+    {
+      "slug": "kill-the-male-lead-to-become-the-villainess",
+      "title": "Kill the Male Lead to Become the Villainess",
+      "gapRanges": "25"
+    },
+    {
+      "slug": "dark-summoner-to-dekiteiru",
+      "title": "Dark Summoner to Dekiteiru",
+      "gapRanges": "22"
+    },
+    {
+      "slug": "dungeon-architect",
+      "title": "Dungeon Architect",
+      "gapRanges": "43"
+    },
+    {
+      "slug": "level-999-goblin",
+      "title": "Level 999 Goblin",
+      "gapRanges": "35"
+    },
+    {
+      "slug": "a-thousand-faces",
+      "title": "A Thousand Faces",
+      "gapRanges": "56"
+    },
+    {
+      "slug": "the-only-one-who-leveled-down-awakened-beyond-the-system",
+      "title": "The Only One Who Leveled Down: Awakened Beyond the System",
+      "gapRanges": "6"
+    },
+    {
+      "slug": "blood-wing-hunter",
+      "title": "Blood Wing Hunter",
+      "gapRanges": "9"
+    },
+    {
+      "slug": "hero-kariel",
+      "title": "Hero Kariel",
+      "gapRanges": "14"
+    },
+    {
+      "slug": "dont-tell-me-you-think-cultivating-immortality-is-difficult",
+      "title": "Don’t Tell Me You Think Cultivating Immortality Is Difficult?",
+      "gapRanges": "18"
+    },
+    {
+      "slug": "my-wife-comes-from-the-thousand-year-old-underworld",
+      "title": "My Wife Comes From the Thousand-Year-Old Underworld",
+      "gapRanges": "119"
+    },
+    {
+      "slug": "holy-night-the-zero",
+      "title": "Holy Night: The Zero",
+      "gapRanges": "37"
+    },
+    {
+      "slug": "my-strange-life",
+      "title": "My Strange Life",
+      "gapRanges": "69"
+    },
+    {
+      "slug": "overgeared-novel",
+      "title": "Overgeared (Novel)",
+      "gapRanges": "1134"
+    },
+    {
+      "slug": "renegade-immortal-novel",
+      "title": "Renegade Immortal (Novel)",
+      "gapRanges": "975"
+    },
+    {
+      "slug": "noble-in-name-vulgar-at-heart",
+      "title": "Noble in Name, Vulgar at Heart",
+      "gapRanges": "26"
+    },
+    {
+      "slug": "i-was-mistaken-for-the-villain",
+      "title": "I Was Mistaken for the Villain",
+      "gapRanges": "8"
+    },
+    {
+      "slug": "lord-of-the-mysteries-novel",
+      "title": "Lord of the Mysteries (Novel)",
+      "gapRanges": "269"
+    },
+    {
+      "slug": "the-almighty-daughter-runs-the-world",
+      "title": "The Almighty Daughter Runs The World",
+      "gapRanges": "130"
+    },
+    {
+      "slug": "royal-family",
+      "title": "Royal Family",
+      "gapRanges": "14"
+    },
+    {
+      "slug": "zettai-shinanai-stella-hime",
+      "title": "Zettai Shinanai Stella-hime",
+      "gapRanges": "5"
+    },
+    {
+      "slug": "the-regressor-makes-everything",
+      "title": "The Regressor Makes Everything",
+      "gapRanges": "24"
+    },
+    {
+      "slug": "criminal-transfer-student",
+      "title": "Criminal Transfer Student",
+      "gapRanges": "10"
+    },
+    {
+      "slug": "the-dutiful-kid-who-saved-the-villainous-family",
+      "title": "The Dutiful Kid Who Saved the Villainous Family",
+      "gapRanges": "27"
+    },
+    {
+      "slug": "dustland",
+      "title": "Dustland",
+      "gapRanges": "8"
+    },
+    {
+      "slug": "healing-agency",
+      "title": "Healing Agency",
+      "gapRanges": "7"
+    },
+    {
+      "slug": "mahouka-koukou-no-rettousei-shizoku-kaigi-hen",
+      "title": "Mahouka Koukou no Rettousei: Shizoku Kaigi-hen",
+      "gapRanges": "46"
+    },
+    {
+      "slug": "mentori-sama",
+      "title": "Mentori-Sama",
+      "gapRanges": "6"
+    },
+    {
+      "slug": "todays-han-yoil-is-a-woman",
+      "title": "Today’s Han Yoil is a Woman",
+      "gapRanges": "58"
+    },
+    {
+      "slug": "suterare-seijo-no-isekai-gohantabi",
+      "title": "Suterare Seijo no Isekai Gohantabi",
+      "gapRanges": "5"
+    },
+    {
+      "slug": "tatakai-shika-shiranai-onna-kishi-o-amayakashi-tsuzuketa",
+      "title": "Tatakai shika Shiranai Onna Kishi o Amayakashi Tsuzuketa",
+      "gapRanges": "3"
+    },
+    {
+      "slug": "villains-are-destined-to-die",
+      "title": "Villains Are Destined to Die",
+      "gapRanges": "65"
+    },
+    {
+      "slug": "in-the-garden-of-may",
+      "title": "In the Garden of May",
+      "gapRanges": "20"
+    },
+    {
+      "slug": "sister-in-law-of-the-heroine-in-a-childcare-novel",
+      "title": "Sister-in-law of the Heroine in a Childcare Novel",
+      "gapRanges": "20"
+    },
+    {
+      "slug": "a-despicable-marriage",
+      "title": "A Despicable Marriage",
+      "gapRanges": "6"
+    },
+    {
+      "slug": "the-grand-dukes-new-daughter-in-law-is-a-little-fierce",
+      "title": "The Grand Duke’s New Daughter-in-Law Is a Little Fierce",
+      "gapRanges": "8"
+    },
+    {
+      "slug": "sigrid",
+      "title": "Sigrid",
+      "gapRanges": "146"
+    },
+    {
+      "slug": "amari-mawari",
+      "title": "Amari Mawari",
+      "gapRanges": "2"
+    },
+    {
+      "slug": "mudameshi-kurai-nintei-sareta-node-aiso-o-tsukashi-teikoku-ni-utsute-shusse-suru-ookuku-no-erai-hitoni-wa-sore-ga-wakara-no-desu",
+      "title": "Mudameshi Kurai Nintei Sareta node Aiso o Tsukashi, Teikoku ni Utsute Shusse Suru ~Ookuku no Erai Hitoni wa Sore ga Wakara no desu~",
+      "gapRanges": "3"
+    },
+    {
+      "slug": "kamonohashi-ron-no-kindan-suiri",
+      "title": "Kamonohashi Ron no Kindan Suiri",
+      "gapRanges": "2"
+    },
+    {
+      "slug": "magan-de-hajimeru-gekokujou",
+      "title": "Magan de Hajimeru Gekokujou",
+      "gapRanges": "2"
+    },
+    {
+      "slug": "shippaisaku-no-tsukaima-to-majutsushi",
+      "title": "Shippaisaku no Tsukaima to Majutsushi",
+      "gapRanges": "3"
+    },
+    {
+      "slug": "getter-robo-devolution",
+      "title": "Getter Robo Devolution",
+      "gapRanges": "2"
+    },
+    {
+      "slug": "hololive-academy-%ef%bd%9eshiny-smily-stories%ef%bd%9e",
+      "title": "Hololive Academy ～Shiny Smily Stories～",
+      "gapRanges": "3"
+    }
+  ],
+  "noData": [
+    {
+      "slug": "29-sai-dokushin-wa-isekai-de-jiyuu-ni-ikitakatta",
+      "title": "29-sai Dokushin wa Isekai de Jiyuu ni Ikita……katta."
+    },
+    {
+      "slug": "unordinary-anti-hero",
+      "title": "Unordinary Anti-Hero"
+    },
+    {
+      "slug": "faster-than-a-kiss",
+      "title": "Faster Than a Kiss"
+    },
+    {
+      "slug": "stealth-symphony",
+      "title": "Stealth Symphony"
+    },
+    {
+      "slug": "hungry-joker",
+      "title": "Hungry Joker"
+    },
+    {
+      "slug": "strobe-edge",
+      "title": "Strobe Edge"
+    },
+    {
+      "slug": "dengeki-daisy",
+      "title": "Dengeki Daisy"
+    },
+    {
+      "slug": "nee-darenimo-himitsu-da-yo",
+      "title": "Akuma ga Kitarite"
+    },
+    {
+      "slug": "urasai",
+      "title": "Urasai"
+    },
+    {
+      "slug": "undead-killer",
+      "title": "Undead killer"
+    },
+    {
+      "slug": "troll-trap",
+      "title": "Troll Trap"
+    },
+    {
+      "slug": "tokiwa-kitareri",
+      "title": "Tokiwa Kitareri!!"
+    },
+    {
+      "slug": "the-smiling-proud-wanderer-2018",
+      "title": "The Smiling, Proud Wanderer (2018)"
+    },
+    {
+      "slug": "anagle-mole",
+      "title": "Anagle Mole"
+    },
+    {
+      "slug": "android-have-no-blood",
+      "title": "Android Have No Blood"
+    },
+    {
+      "slug": "the-gate-of-desire",
+      "title": "The Gate of Desire"
+    },
+    {
+      "slug": "the-fraudulent-game",
+      "title": "The Fraudulent Game"
+    },
+    {
+      "slug": "the-former-structural-researchers-story-of-otherworldly-adventure",
+      "title": "The Former Structural Researcher’s Story of Otherworldly Adventure"
+    },
+    {
+      "slug": "the-forgetful-dark-lord",
+      "title": "The Forgetful Dark Lord"
+    },
+    {
+      "slug": "the-first-son-in-law-vanguard-of-all-time",
+      "title": "The First Son-In-Law Vanguard of All Time"
+    },
+    {
+      "slug": "kodomo-no-kami-sama",
+      "title": "Kodomo no Kami-sama"
+    },
+    {
+      "slug": "the-first-hunter",
+      "title": "The First Hunter"
+    },
+    {
+      "slug": "the-fiancees-live-together",
+      "title": "The Fiancées Live Together"
+    },
+    {
+      "slug": "the-fable",
+      "title": "The Fable"
+    },
+    {
+      "slug": "the-executed-sage-is-reincarnated-as-a-lich-and-starts-an-all-out-war",
+      "title": "The Executed Sage is Reincarnated as a Lich and Starts an All-Out War"
+    },
+    {
+      "slug": "the-descendant-of-the-spiritual-diety",
+      "title": "The Descendant of the Spiritual Diety"
+    },
+    {
+      "slug": "osananajimi-no-mune-ga-ookiku-natta-no-wa-ore-no-sei-ka-mo-shirenai",
+      "title": "Osananajimi no Mune ga Ookiku natta no wa Ore no sei ka mo shirenai"
+    },
+    {
+      "slug": "the-evil-sorceress-plans-to-survive",
+      "title": "The Evil Sorceress Plans to Survive!"
+    },
+    {
+      "slug": "the-deer-and-the-cauldron",
+      "title": "The Deer and the Cauldron"
+    },
+    {
+      "slug": "the-cutest-girl-in-school-might-like-me",
+      "title": "The Cutest Girl in School Might Like Me!"
+    },
+    {
+      "slug": "the-cuckoos-fiancee",
+      "title": "The Cuckoo’s Fiancee"
+    },
+    {
+      "slug": "real-account-2",
+      "title": "Real Account 2"
+    },
+    {
+      "slug": "the-crazy-adventures-of-mystical-doctor",
+      "title": "The Crazy Adventures of Mystical Doctor"
+    },
+    {
+      "slug": "the-condor-heroes",
+      "title": "The Condor Heroes"
+    },
+    {
+      "slug": "the-closer-i-get-the-further-away-you-are",
+      "title": "The Closer I Get the Further Away You Are"
+    },
+    {
+      "slug": "the-chameleon-of-nibiiro",
+      "title": "The Chameleon of Nibiiro"
+    },
+    {
+      "slug": "the-brilliant-village-doctor",
+      "title": "The Brilliant Village Doctor"
+    },
+    {
+      "slug": "the-boy-in-the-all-girls-school",
+      "title": "The Boy in the All-Girls School"
+    },
+    {
+      "slug": "the-black-june",
+      "title": "The Black June"
+    },
+    {
+      "slug": "the-black-cat-who-became-the-director",
+      "title": "The Black Cat Who Became The Director"
+    },
+    {
+      "slug": "dokuzetsu-shoujo-wa-amanojaku",
+      "title": "Dokuzetsu Shoujo wa Amanojaku"
+    },
+    {
+      "slug": "i-log-in-alone-solo-login",
+      "title": "I Log In Alone (Solo Login)"
+    },
+    {
+      "slug": "arubaito-munekyun",
+      "title": "Arubaito Munekyun"
+    },
+    {
+      "slug": "kitanai-kimi-ga-ichiban-kawaii",
+      "title": "Kitanai Kimi ga Ichiban Kawaii"
+    },
+    {
+      "slug": "opening-day-record",
+      "title": "Opening Day Record"
+    },
+    {
+      "slug": "ooparts",
+      "title": "OOPARTS"
+    },
+    {
+      "slug": "my-girlfriend-is-a-futon-girl",
+      "title": "My Girlfriend is a Futon Girl"
+    },
+    {
+      "slug": "coffee-wo-shidzuka-ni",
+      "title": "Coffee wo Shidzuka ni"
+    },
+    {
+      "slug": "tonari-no-class-no-midorikawa-san",
+      "title": "Tonari no Class no Midorikawa-san"
+    },
+    {
+      "slug": "giri-giri-saegiru-katagirisan",
+      "title": "Giri-Giri Saegiru Katagirisan"
+    },
+    {
+      "slug": "shinda-otto-ga-mushi-ni-tensei-shita-ken",
+      "title": "Shinda Otto ga Mushi ni Tensei Shita Ken"
+    },
+    {
+      "slug": "a-story-about-living-with-a-ghost-who-will-attain-enlightenment-in-a-year",
+      "title": "A Story about Living with a Ghost who will Attain Enlightenment in a Year"
+    },
+    {
+      "slug": "i-want-you-to-say-you-love-me",
+      "title": "I Want You to Say You Love Me"
+    },
+    {
+      "slug": "isekai-ni-kita-boku-wa-kiyoubinbou-de-subayasa-tayori-na-tabi-o-suru",
+      "title": "Isekai ni Kita Boku wa Kiyoubinbou de Subayasa Tayori na Tabi o Suru"
+    },
+    {
+      "slug": "kusuriya-no-hitorigoto",
+      "title": "Kusuriya no Hitorigoto"
+    },
+    {
+      "slug": "miss-don039t-livestream-it",
+      "title": "Miss, Don’t Livestream It!"
+    },
+    {
+      "slug": "i-have-twin-girlfriends",
+      "title": "I Have Twin Girlfriends"
+    },
+    {
+      "slug": "angel-beats-heavens-door",
+      "title": "Angel Beats! – Heavens Door"
+    },
+    {
+      "slug": "angelic-syndrome",
+      "title": "Angelic Syndrome"
+    },
+    {
+      "slug": "ani-no-yome-to-kurashite-imasu",
+      "title": "Ani no Yome to Kurashite Imasu."
+    },
+    {
+      "slug": "ankoku-kishi-no-ore-desu-ga-saikyou-no-seikishi-wo-mezashimasu",
+      "title": "Ankoku Kishi no Ore desu Ga Saikyou no Seikishi wo Mezashimasu"
+    },
+    {
+      "slug": "annarasumanara",
+      "title": "Annarasumanara"
+    },
+    {
+      "slug": "annoying-alice",
+      "title": "Annoying Alice"
+    },
+    {
+      "slug": "shiro-seijo-to-kuro-bokushi",
+      "title": "Shiro Seijo to Kuro Bokushi"
+    },
+    {
+      "slug": "ano-hi-no-kimi-wo-dakishimeta-nara",
+      "title": "Ano Hi no Kimi wo Dakishimeta nara"
+    },
+    {
+      "slug": "ano-oni-kyoushi-ga-boku-no-ane-ni-narundesuka",
+      "title": "Ano Oni Kyoushi ga Boku no Ane ni Narundesuka?"
+    },
+    {
+      "slug": "the-evil-kings-wicked-consort",
+      "title": "The Evil King’s Wicked Consort"
+    },
+    {
+      "slug": "another-world-where-i-cant-even-collapse-and-die",
+      "title": "Another World Where I Can’t Even Collapse and Die"
+    },
+    {
+      "slug": "ansatsu-skill-de-isekai-saikyou-renkinjutsu-to-ansatsujutsu-o-kiwameta-ore-wa-sekai-o-kage-kara-shihai-suru",
+      "title": "Ansatsu Skill de Isekai Saikyou: Renkinjutsu to Ansatsujutsu o Kiwameta Ore wa, Sekai o Kage kara Shihai suru"
+    },
+    {
+      "slug": "ao-no-futsumashi-ao-no-exorcist",
+      "title": "Blue Exorcist (Ao no Exorcist)"
+    },
+    {
+      "slug": "ao-no-flag",
+      "title": "Ao no Flag"
+    },
+    {
+      "slug": "the-best-warrior-in-the-city",
+      "title": "The Best Warrior In The City"
+    },
+    {
+      "slug": "the-best-skilled-surgeon",
+      "title": "The Best Skilled Surgeon"
+    },
+    {
+      "slug": "the-beginning-of-journey",
+      "title": "The Beginning of Journey"
+    },
+    {
+      "slug": "the-adventurers-that-dont-believe-in-humanity-will-save-the-world",
+      "title": "The Adventurers That Don’t Believe in Humanity Will Save the World"
+    },
+    {
+      "slug": "the-8th-consciousness",
+      "title": "The 8th Consciousness"
+    },
+    {
+      "slug": "that-time-i-rented-a-little-sister",
+      "title": "That Time I Rented A Little Sister"
+    },
+    {
+      "slug": "that-girl-is-not-just-cute",
+      "title": "That Girl Is Not Just Cute"
+    },
+    {
+      "slug": "terror-man-vs-revival-man",
+      "title": "Terror Man vs Revival Man"
+    },
+    {
+      "slug": "territory-management-for-the-first-time-by-the-adventurers-of-level-99",
+      "title": "Territory Management For The First Time, By The Adventurers Of Level 99"
+    },
+    {
+      "slug": "terra-formars-2",
+      "title": "Terra Formars 2"
+    },
+    {
+      "slug": "tensura-nikki-tensei-shitara-slime-datta-ken",
+      "title": "Tensura Nikki Tensei Shitara Slime Datta Ken"
+    },
+    {
+      "slug": "tenseishimashite-genzai-wa-jijo-degozaimasu",
+      "title": "Tenseishimashite, Genzai wa Jijo Degozaimasu"
+    },
+    {
+      "slug": "tensei-shitara-slime-datta-ken-spin-off",
+      "title": "Tensei Shitara Slime Datta Ken: Spin Off"
+    },
+    {
+      "slug": "tensei-shitara-heishi-datta-akai-shinigami-to-yobareta-otoko",
+      "title": "Tensei Shitara Heishi Datta?! – Akai Shinigami to Yobareta Otoko"
+    },
+    {
+      "slug": "tensei-saki-ga-zannen-ouji-datta-ken-ima-wa-fukkin-1-kai-mo-dekinai-kedo-yasete-isekai-sukuimasu",
+      "title": "Tensei Saki ga Zannen Ouji Datta Ken Ima wa Fukkin 1-kai mo Dekinai kedo Yasete Isekai Sukuimasu"
+    },
+    {
+      "slug": "tensei-pandemic",
+      "title": "Tensei Pandemic"
+    },
+    {
+      "slug": "tensei-oujo-to-tensai-reijou-no-mahou-kakumei",
+      "title": "Tensei Oujo to Tensai Reijou no Mahou Kakumei"
+    },
+    {
+      "slug": "tensei-majo-wa-horobi-wo-tsugeru",
+      "title": "Tensei Majo wa Horobi wo Tsugeru"
+    },
+    {
+      "slug": "tensei-kyuuketsukisan-wa-ohirune-ga-shitai",
+      "title": "Tensei Kyuuketsukisan wa Ohirune ga Shitai"
+    },
+    {
+      "slug": "tensei-kusushi-wa-isekai-o-meguru",
+      "title": "Tensei Kusushi wa Isekai o Meguru"
+    },
+    {
+      "slug": "tensei-goblin-da-kedo-shitsumon-aru",
+      "title": "Tensei Goblin da kedo Shitsumon aru?"
+    },
+    {
+      "slug": "tenkuu-no-tobira",
+      "title": "Tenkuu no Tobira"
+    },
+    {
+      "slug": "tensei-kenja-wa-musume-to-kurasu",
+      "title": "Tensei Kenja wa Musume to Kurasu"
+    },
+    {
+      "slug": "tenki-no-ko",
+      "title": "Tenki no Ko"
+    },
+    {
+      "slug": "tengoku-daimakyou",
+      "title": "Tengoku Daimakyou"
+    },
+    {
+      "slug": "tenchura-tensei-shitara-slime-datta-ken",
+      "title": "Tenchura! Tensei Shitara Slime Datta Ken"
+    },
+    {
+      "slug": "ten-thousand-paths-to-becoming-a-god",
+      "title": "Ten Thousand Paths to Becoming a God"
+    },
+    {
+      "slug": "ten-count",
+      "title": "Ten Count"
+    },
+    {
+      "slug": "tekito-na-maid-no-oneesan",
+      "title": "Tekito na Maid no Oneesan"
+    },
+    {
+      "slug": "tejina-senpai",
+      "title": "Tejina Senpai"
+    },
+    {
+      "slug": "teito-seihai-kitan-fatetype-redline",
+      "title": "Teito Seihai Kitan – Fatetype Redline"
+    },
+    {
+      "slug": "teisou-gyakuten-sekai",
+      "title": "Teisou Gyakuten Sekai"
+    },
+    {
+      "slug": "teihen-ryoushu-no-kanchigai-eiyuutan",
+      "title": "Teihen Ryoushu no Kanchigai Eiyuutan"
+    },
+    {
+      "slug": "tedama-ni-toritai-kurokiya-san",
+      "title": "Tedama ni Toritai Kurokiya-san"
+    },
+    {
+      "slug": "tatoe-todokanu-ito-da-toshitemo",
+      "title": "Tatoe Todokanu Ito da toshitemo"
+    },
+    {
+      "slug": "tatoe-hai-ni-nattemo",
+      "title": "Tatoe Hai ni Nattemo"
+    },
+    {
+      "slug": "tate-no-yuusha-no-nariagari-anthology-raphtalia-to-issho",
+      "title": "Tate no Yuusha no Nariagari Anthology – Raphtalia to issho"
+    },
+    {
+      "slug": "tate-no-yusha-no-to-aru-1-nichi",
+      "title": "Tate no Yūsha no to Aru 1-Nichi"
+    },
+    {
+      "slug": "tantei-wa-mou-shindeiru",
+      "title": "Tantei wa Mou, Shindeiru"
+    },
+    {
+      "slug": "tanaka-no-isekai-nariagari",
+      "title": "Tanaka no Isekai Nariagari"
+    },
+    {
+      "slug": "tanaka-no-atelier",
+      "title": "Tanaka no Atelier"
+    },
+    {
+      "slug": "taming-the-possessive-girl",
+      "title": "Taming The Possessive Girl"
+    },
+    {
+      "slug": "tamen-de-gushi",
+      "title": "Tamen De Gushi"
+    },
+    {
+      "slug": "tales-of-berseria",
+      "title": "Tales of Berseria"
+    },
+    {
+      "slug": "take-your-mommy-home",
+      "title": "Take Your Mommy Home"
+    },
+    {
+      "slug": "take-the-girl-to-repair-fairy-in-the-city",
+      "title": "Take The Girl To Repair Fairy In The City"
+    },
+    {
+      "slug": "take-off-your-mask-ishikawa",
+      "title": "Take off your mask, Ishikawa"
+    },
+    {
+      "slug": "takayukashiki-shoujo",
+      "title": "Takayukashiki Shoujo"
+    },
+    {
+      "slug": "takane-no-hana-nara-ochitekoi",
+      "title": "Takane no Hana nara Ochitekoi!!"
+    },
+    {
+      "slug": "takamagahara",
+      "title": "Takamagahara"
+    },
+    {
+      "slug": "taiyou-no-ie",
+      "title": "Taiyou no Ie"
+    },
+    {
+      "slug": "taimashi-to-akuma-chan",
+      "title": "Taimashi to Akuma-chan"
+    },
+    {
+      "slug": "taikoku-cheat-nara-isekai-seifuku-mo-rakushou-desu-yo",
+      "title": "Taikoku Cheat nara Isekai Seifuku mo Rakushou desu yo?"
+    },
+    {
+      "slug": "taebaek-the-tutorial-man",
+      "title": "Taebaek: The Tutorial Man"
+    },
+    {
+      "slug": "tadokoro-san",
+      "title": "Tadokoro-San"
+    },
+    {
+      "slug": "tadashii-kodomo-no-tsukurikata",
+      "title": "Tadashii Kodomo no Tsukurikata!"
+    },
+    {
+      "slug": "tadashi-ore-wa-heroine-toshite",
+      "title": "Tadashi Ore wa Heroine Toshite"
+    },
+    {
+      "slug": "tachibanakan-triangle",
+      "title": "Tachibanakan Triangle"
+    },
+    {
+      "slug": "syakkin-daiou-wa-maou-o-taosu",
+      "title": "Syakkin Daiou wa Maou o Taosu!"
+    },
+    {
+      "slug": "sword-legend",
+      "title": "Sword Legend"
+    },
+    {
+      "slug": "sword-dance-online",
+      "title": "Sword Dance Online"
+    },
+    {
+      "slug": "sword-art-online-project-alicization",
+      "title": "Sword Art Online: Project Alicization"
+    },
+    {
+      "slug": "ta-sui-xian-he",
+      "title": "Ta Sui Xian He"
+    },
+    {
+      "slug": "sword-art-online-progressive",
+      "title": "Sword Art Online: Progressive"
+    },
+    {
+      "slug": "sword-art-online-girls-ops",
+      "title": "Sword Art Online: Girls Ops"
+    },
+    {
+      "slug": "swing",
+      "title": "Swing!!"
+    },
+    {
+      "slug": "sweety",
+      "title": "Sweety"
+    },
+    {
+      "slug": "sweet-x-trouble",
+      "title": "Sweet X Trouble"
+    },
+    {
+      "slug": "sweet-plunder",
+      "title": "Sweet Plunder"
+    },
+    {
+      "slug": "sweet-heart-of-girl",
+      "title": "Sweet Heart of Girl"
+    },
+    {
+      "slug": "sweet-first-love",
+      "title": "Sweet First Love"
+    },
+    {
+      "slug": "swap-swap",
+      "title": "Swap Swap"
+    },
+    {
+      "slug": "suzuki-kun-wa-miteiru-kami-appli-de-jk-no-kokoro-wo-nozoitara-do-%e2%97%8b%e2%97%8b-de-osowareta",
+      "title": "Suzuki-kun wa Miteiru, ~Kami Appli de JK no Kokoro wo Nozoitara do ○○ de Osowareta~"
+    },
+    {
+      "slug": "suzuka",
+      "title": "Suzuka"
+    },
+    {
+      "slug": "suterare-yuusha-wa-kitakuchuu",
+      "title": "Suterare Yuusha wa Kitakuchuu"
+    },
+    {
+      "slug": "survival-shounen-s-no-kiroku",
+      "title": "Survival: Shounen S no Kiroku"
+    },
+    {
+      "slug": "supreme-taoist",
+      "title": "Supreme Taoist"
+    },
+    {
+      "slug": "supreme-spirit-master",
+      "title": "Supreme Spirit Master"
+    },
+    {
+      "slug": "supreme-mouth-cannon",
+      "title": "Supreme Mouth Cannon"
+    },
+    {
+      "slug": "supreme-martial-chef",
+      "title": "Supreme Martial Chef"
+    },
+    {
+      "slug": "supreme-godly-system",
+      "title": "Supreme Godly System"
+    },
+    {
+      "slug": "supreme-gods-eye",
+      "title": "Supreme God’s Eye"
+    },
+    {
+      "slug": "supreme-demon-return",
+      "title": "Supreme Demon Return"
+    },
+    {
+      "slug": "supreme-demon",
+      "title": "Supreme Demon"
+    },
+    {
+      "slug": "supernova",
+      "title": "Supernova"
+    },
+    {
+      "slug": "super-wechat",
+      "title": "Super WeChat"
+    },
+    {
+      "slug": "super-system",
+      "title": "Super System"
+    },
+    {
+      "slug": "super-soldier",
+      "title": "Super Soldier"
+    },
+    {
+      "slug": "super-security-in-the-city",
+      "title": "Super Security In The City"
+    },
+    {
+      "slug": "the-evil-girl-is-the-emperor",
+      "title": "The Evil Girl Is the Emperor"
+    },
+    {
+      "slug": "super-school-doctor",
+      "title": "Super School Doctor"
+    },
+    {
+      "slug": "super-ruin",
+      "title": "Super Ruin"
+    },
+    {
+      "slug": "super-money-worship-system",
+      "title": "Super Money Worship System"
+    },
+    {
+      "slug": "the-eunuchs-consort-rules-the-world",
+      "title": "The Eunuch’s Consort Rules the World"
+    },
+    {
+      "slug": "the-doctors-supremacy",
+      "title": "The Doctor’s Supremacy"
+    },
+    {
+      "slug": "the-epic-revenge",
+      "title": "The Epic Revenge"
+    },
+    {
+      "slug": "the-numbers-kawakami-daishirou",
+      "title": "The Numbers (KAWAKAMI Daishirou)"
+    },
+    {
+      "slug": "the-embarrassing-daily-life-of-hazu-kun-and-kashii-san",
+      "title": "The Embarrassing Daily Life of Hazu-kun and Kashii-san"
+    },
+    {
+      "slug": "the-dragon-master",
+      "title": "The Dragon Master"
+    },
+    {
+      "slug": "super-medical-fairy-in-the-city",
+      "title": "Super Medical Fairy in The City"
+    },
+    {
+      "slug": "the-devils-descendants",
+      "title": "The Devil’s Descendants"
+    },
+    {
+      "slug": "super-mad-god",
+      "title": "Super Mad God"
+    },
+    {
+      "slug": "super-keyboard-man",
+      "title": "Super Keyboard Man"
+    },
+    {
+      "slug": "super-earnings-treasure",
+      "title": "Super Earnings Treasure"
+    },
+    {
+      "slug": "super-dragon-ball-heroes-universe-mission",
+      "title": "Super Dragon Ball Heroes: Universe Mission"
+    },
+    {
+      "slug": "super-dragon-ball-heroes-dark-demon-realm-mission",
+      "title": "Super Dragon Ball Heroes: Dark Demon Realm Mission!"
+    },
+    {
+      "slug": "super-doctor-metropolis",
+      "title": "Super Doctor Metropolis"
+    },
+    {
+      "slug": "super-devouring-system",
+      "title": "Super Devouring System"
+    },
+    {
+      "slug": "super-bodyguard",
+      "title": "Super Bodyguard"
+    },
+    {
+      "slug": "sunoharasou-no-kanrinin-san",
+      "title": "Sunoharasou no Kanrinin-san"
+    },
+    {
+      "slug": "sunny-matsumoto-taiyou",
+      "title": "Sunny (MATSUMOTO Taiyou)"
+    },
+    {
+      "slug": "sundome-milky-way",
+      "title": "Sundome!! Milky Way"
+    },
+    {
+      "slug": "sunami-yuuko-to-yuri-na-hitobito",
+      "title": "Sunami Yuuko to Yuri na Hitobito"
+    },
+    {
+      "slug": "sun-ken-rock",
+      "title": "Sun-ken Rock"
+    },
+    {
+      "slug": "the-devil-ring",
+      "title": "The Devil Ring"
+    },
+    {
+      "slug": "summon-swordsman-school",
+      "title": "Summon! Swordsman School"
+    },
+    {
+      "slug": "summertime-render",
+      "title": "Summertime Render"
+    },
+    {
+      "slug": "summer-basketball",
+      "title": "Summer Basketball"
+    },
+    {
+      "slug": "suki-x-suki",
+      "title": "Suki x Suki"
+    },
+    {
+      "slug": "super-cube",
+      "title": "Super Cube"
+    },
+    {
+      "slug": "suki-tte-ii-na-yo",
+      "title": "Suki tte Ii na yo."
+    },
+    {
+      "slug": "suki-koso-momo-no-jouzu-nare",
+      "title": "Suki koso Momo no Jouzu nare!"
+    },
+    {
+      "slug": "suki-na-ko-ga-megane-wo-wasureta",
+      "title": "Suki na Ko ga Megane wo Wasureta"
+    },
+    {
+      "slug": "suki-desu-suzuki-kun",
+      "title": "Suki Desu Suzuki-kun!!"
+    },
+    {
+      "slug": "sukedachi-09",
+      "title": "Sukedachi 09"
+    },
+    {
+      "slug": "suicide-girl",
+      "title": "Suicide Girl"
+    },
+    {
+      "slug": "sugar-dog",
+      "title": "Sugar Dog"
+    },
+    {
+      "slug": "succubus-ni-tensei-shita-node-milk-wo-shiborimasu",
+      "title": "Succubus ni Tensei shita node Milk wo Shiborimasu"
+    },
+    {
+      "slug": "sub-zero",
+      "title": "Sub Zero"
+    },
+    {
+      "slug": "strongest-transport-system",
+      "title": "Strongest Transport System"
+    },
+    {
+      "slug": "strongest-system-yan-luo",
+      "title": "Strongest System Yan Luo"
+    },
+    {
+      "slug": "strongest-system-boss",
+      "title": "Strongest System Boss"
+    },
+    {
+      "slug": "strongest-son-in-law",
+      "title": "Strongest Son-in-Law"
+    },
+    {
+      "slug": "strongest-fighter",
+      "title": "Strongest Fighter"
+    },
+    {
+      "slug": "strongest-divine-doctor-mixed-city",
+      "title": "Strongest Divine Doctor Mixed City"
+    },
+    {
+      "slug": "strongest-evolution-of-zombie",
+      "title": "Strongest Evolution of Zombie"
+    },
+    {
+      "slug": "strong-gale-mad-dragon",
+      "title": "Strong Gale, Mad Dragon"
+    },
+    {
+      "slug": "stretch",
+      "title": "Stretch"
+    },
+    {
+      "slug": "stresser",
+      "title": "Stresser"
+    },
+    {
+      "slug": "stravaganza-isai-no-hime",
+      "title": "Stravaganza: Isai no Hime"
+    },
+    {
+      "slug": "story-of-the-white-mage-who-can-read-the-swordmans-heart",
+      "title": "Story of the White Mage Who Can Read the Swordman’s Heart"
+    },
+    {
+      "slug": "stellar-transformations",
+      "title": "Stellar Transformations"
+    },
+    {
+      "slug": "stella-no-mahou",
+      "title": "Stella no Mahou"
+    },
+    {
+      "slug": "steinsgate",
+      "title": "Steins;Gate"
+    },
+    {
+      "slug": "starting-out-as-friends-with-a-yankee-girl",
+      "title": "Starting out as Friends With a Yankee Girl"
+    },
+    {
+      "slug": "starting-from-zero-in-doomsday",
+      "title": "Starting From Zero in Doomsday"
+    },
+    {
+      "slug": "star-dream-idol-project",
+      "title": "Star Dream Idol Project"
+    },
+    {
+      "slug": "strs",
+      "title": "ST&RS"
+    },
+    {
+      "slug": "stardust-wink",
+      "title": "Stardust Wink"
+    },
+    {
+      "slug": "stalkers",
+      "title": "Stalkers"
+    },
+    {
+      "slug": "ss-sisters",
+      "title": "SS Sisters"
+    },
+    {
+      "slug": "stalker-x-stalker",
+      "title": "Stalker x Stalker"
+    },
+    {
+      "slug": "spy-x-family-anya-and-damian",
+      "title": "Spy x Family: Anya and Damian"
+    },
+    {
+      "slug": "spring-weapon-number-one",
+      "title": "Spring Weapon Number One"
+    },
+    {
+      "slug": "spirit-of-sakura-tree",
+      "title": "Spirit of Sakura Tree"
+    },
+    {
+      "slug": "spirit-of-the-lord",
+      "title": "Spirit Of The Lord"
+    },
+    {
+      "slug": "spirit-migration",
+      "title": "Spirit Migration"
+    },
+    {
+      "slug": "spirit-circle",
+      "title": "Spirit Circle"
+    },
+    {
+      "slug": "sperman",
+      "title": "Sperman"
+    },
+    {
+      "slug": "spare-me-great-lord",
+      "title": "Spare Me, Great Lord!"
+    },
+    {
+      "slug": "space-time-prisoner",
+      "title": "Space-Time Prisoner"
+    },
+    {
+      "slug": "space-time-prisoner-2",
+      "title": "Space Time Prisoner"
+    },
+    {
+      "slug": "sozoshu-nano-de-motto-yasashikute-kudasai",
+      "title": "Sozoshu nano de Motto Yasashikute Kudasai!"
+    },
+    {
+      "slug": "sousou-no-frieren",
+      "title": "Sousou no Frieren"
+    },
+    {
+      "slug": "sousei-no-onmyouji-adashino-benio-hen",
+      "title": "Sousei no Onmyouji: Adashino Benio-hen"
+    },
+    {
+      "slug": "soul-eater-not",
+      "title": "Soul Eater Not!"
+    },
+    {
+      "slug": "soul-contract",
+      "title": "Soul Contract"
+    },
+    {
+      "slug": "soul-cartel",
+      "title": "Soul Cartel"
+    },
+    {
+      "slug": "soukyuu-no-lapis-lazuli",
+      "title": "Soukyuu no Lapis Lazuli"
+    },
+    {
+      "slug": "soukyuu-no-ariadne",
+      "title": "Soukyuu no Ariadne"
+    },
+    {
+      "slug": "soredemo-machi-wa-mawatte-iru",
+      "title": "Soredemo Machi wa Mawatte Iru"
+    },
+    {
+      "slug": "soredemo-ayumu-wa-yosetekuru",
+      "title": "Soredemo Ayumu wa Yosetekuru"
+    },
+    {
+      "slug": "sore-wa-tada-no-senpai-no-chinko",
+      "title": "Sore wa Tada no Senpai no Chinko"
+    },
+    {
+      "slug": "sore-wa-rei-no-shiwaza-desu",
+      "title": "Sore wa rei no Shiwaza desu"
+    },
+    {
+      "slug": "sorcerer-maiden",
+      "title": "Sorcerer Maiden"
+    },
+    {
+      "slug": "sorairo-no-graffiti",
+      "title": "Sorairo no Graffiti"
+    },
+    {
+      "slug": "sora-no-otoshimono",
+      "title": "Sora no Otoshimono"
+    },
+    {
+      "slug": "sono-ossan-isekai-de-nishuume-play-wo-mankitsuchuu",
+      "title": "Sono Ossan, Isekai de Nishuume Play wo Mankitsuchuu"
+    },
+    {
+      "slug": "sono-mono-nochi-ni-nariie-shinichirou",
+      "title": "Sono Mono. Nochi ni… (NARIIE Shinichirou)"
+    },
+    {
+      "slug": "sono-mono-nochi-ni",
+      "title": "Sono Mono. Nochi ni…"
+    },
+    {
+      "slug": "sono-monban-saikyou-nitsuki-tsuihou-sareta-bougyo-ryoku-9999-no-senshi-outo-no-monban-toshite-musou-suru",
+      "title": "Sono Monban, Saikyou Nitsuki: Tsuihou Sareta Bougyo Ryoku 9999 no Senshi, Outo no Monban Toshite Musou Suru"
+    },
+    {
+      "slug": "song-of-the-sky-walkers",
+      "title": "Song of the Sky Walkers"
+    },
+    {
+      "slug": "somali-to-mori-no-kamisama",
+      "title": "Somali to Mori no Kamisama"
+    },
+    {
+      "slug": "song-of-the-long-march",
+      "title": "Song of the Long March"
+    },
+    {
+      "slug": "solanin",
+      "title": "Solanin"
+    },
+    {
+      "slug": "sokuochi-mayuri-chan",
+      "title": "Sokuochi Mayuri-chan"
+    },
+    {
+      "slug": "sodatechi-maou",
+      "title": "Sodatechi Maou!"
+    },
+    {
+      "slug": "social-survival-rabbits",
+      "title": "Social Survival Rabbits"
+    },
+    {
+      "slug": "social-game-girlfriend",
+      "title": "Social Game Girlfriend"
+    },
+    {
+      "slug": "soba-ni-ite-mo-iinda-ze",
+      "title": "Soba ni Ite mo Iinda ze"
+    },
+    {
+      "slug": "sobiwaku-zero-no-saikyou-kenshi-demo-noroi-no-soubi-kawai-nara-9999-ko-tsuke-hodai",
+      "title": "Sobiwaku Zero No Saikyou Kenshi Demo, Noroi No Soubi (kawai) Nara 9999-ko Tsuke-hodai"
+    },
+    {
+      "slug": "soaring-sword-odyssey",
+      "title": "Soaring Sword Odyssey"
+    },
+    {
+      "slug": "smokin-parade",
+      "title": "Smokin’ Parade"
+    },
+    {
+      "slug": "slow-prison-life",
+      "title": "Slow Prison Life"
+    },
+    {
+      "slug": "slow-loop",
+      "title": "Slow Loop"
+    },
+    {
+      "slug": "slime-taoshite-300-nen-shiranai-uchi-ni-level-max-ni-nattemashita",
+      "title": "Slime Taoshite 300-nen, Shiranai Uchi ni Level Max ni Nattemashita"
+    },
+    {
+      "slug": "slime-life",
+      "title": "Slime Life"
+    },
+    {
+      "slug": "sleepy-barmaid",
+      "title": "Sleepy Barmaid"
+    },
+    {
+      "slug": "slam-dunk",
+      "title": "Slam Dunk"
+    },
+    {
+      "slug": "skyfire-avenue",
+      "title": "Skyfire Avenue"
+    },
+    {
+      "slug": "sky-blue",
+      "title": "Sky Blue"
+    },
+    {
+      "slug": "skip-beat",
+      "title": "Skip Beat!"
+    },
+    {
+      "slug": "skip-to-loafer",
+      "title": "Skip to Loafer"
+    },
+    {
+      "slug": "skill-unparalleled",
+      "title": "Skill Unparalleled"
+    },
+    {
+      "slug": "skeeter-rabbit",
+      "title": "Skeeter Rabbit"
+    },
+    {
+      "slug": "siscon-ani-to-brocon-imouto-ga-shoujiki-ni-nattara",
+      "title": "Siscon Ani to Brocon Imouto ga Shoujiki ni Nattara"
+    },
+    {
+      "slug": "siscon-onee-chan-to-ki-ni-shinai-imouto",
+      "title": "Siscon Onee-chan to Ki ni shinai Imouto"
+    },
+    {
+      "slug": "sins",
+      "title": "Sins"
+    },
+    {
+      "slug": "sinsu-jeil-sword",
+      "title": "Sinsu Jeil Sword"
+    },
+    {
+      "slug": "sinoalice",
+      "title": "SINoALICE"
+    },
+    {
+      "slug": "silver-demon-king",
+      "title": "Silver Demon King"
+    },
+    {
+      "slug": "shy",
+      "title": "SHY"
+    },
+    {
+      "slug": "shuumatsu-wa-aoi-haru",
+      "title": "Shuumatsu wa Aoi Haru"
+    },
+    {
+      "slug": "shuumatsu-no-laughter",
+      "title": "Shuumatsu no Laughter"
+    },
+    {
+      "slug": "shuukyuu-shoujo",
+      "title": "Shuukyuu Shoujo"
+    },
+    {
+      "slug": "shuukan-shounen-girl",
+      "title": "Shuukan Shounen Girl"
+    },
+    {
+      "slug": "shuuen-no-shiori",
+      "title": "Shuuen no Shiori"
+    },
+    {
+      "slug": "shukan-brick",
+      "title": "Shukan Brick"
+    },
+    {
+      "slug": "shurabara",
+      "title": "Shurabara!"
+    },
+    {
+      "slug": "shugoi-ne-shugorei-san",
+      "title": "Shugoi ne Shugorei-san"
+    },
+    {
+      "slug": "shu-ling-po-jing",
+      "title": "Shu Ling Po jing"
+    },
+    {
+      "slug": "shouwa-otome-otogibanashi",
+      "title": "Shouwa Otome Otogibanashi"
+    },
+    {
+      "slug": "show-me-the-money",
+      "title": "Show Me The Money"
+    },
+    {
+      "slug": "shouraiteki-ni-shinde-kure",
+      "title": "Shouraiteki ni Shinde Kure"
+    },
+    {
+      "slug": "shounin-yuusha-wa-isekai-o-gyuujiru-saibai-skill-de-nandemo-fuyashi-chaimasu",
+      "title": "Shounin Yuusha wa Isekai o Gyuujiru! – Saibai Skill de Nandemo Fuyashi Chaimasu"
+    },
+    {
+      "slug": "shounen-no-abyss",
+      "title": "Shounen no Abyss"
+    },
+    {
+      "slug": "shoujo-kishidan-x-knight-tale",
+      "title": "Shoujo Kishidan x Knight Tale"
+    },
+    {
+      "slug": "shoujo-jiten",
+      "title": "Shoujo Jiten"
+    },
+    {
+      "slug": "shougakusei-ga-mama-demo-ii-desu-ka",
+      "title": "Shougakusei ga Mama demo Ii desu ka?"
+    },
+    {
+      "slug": "shokugeki-no-souma-etoile",
+      "title": "Shokugeki no Souma Etoile"
+    },
+    {
+      "slug": "shokugeki-no-sanji",
+      "title": "Shokugeki no Sanji"
+    },
+    {
+      "slug": "shoki-skill-ga-benri-sugite-isekai-seikatsu-ga-tanoshisugiru",
+      "title": "Shoki Skill Ga Benri Sugite Isekai Seikatsu Ga Tanoshisugiru!"
+    },
+    {
+      "slug": "shokei-shoujo-no-ikirumichi",
+      "title": "Shokei Shoujo no Ikirumichi"
+    },
+    {
+      "slug": "shojo-akuma-to-naruniha",
+      "title": "Shojo, Akuma to Naruniha"
+    },
+    {
+      "slug": "shogi-senpai",
+      "title": "Shogi Senpai"
+    },
+    {
+      "slug": "shitennou-sai-jakudatta-ore-tensei-shitanode-heionna-seikatsu-wo-nozomu",
+      "title": "Shitennou Sai Jakudatta Ore. Tensei Shitanode Heionna Seikatsu wo Nozomu"
+    },
+    {
+      "slug": "shitei-bouryoku-shoujo-shiomi-chan",
+      "title": "Shitei Bouryoku Shoujo Shiomi-chan"
+    },
+    {
+      "slug": "shishunki-chan-no-shitsukekata",
+      "title": "Shishunki-chan no Shitsukekata"
+    },
+    {
+      "slug": "shitai-no-karen-san",
+      "title": "Shitai no Karen-san!!"
+    },
+    {
+      "slug": "shishunki-na-adam-evil-eyes",
+      "title": "Shishunki na Adam: Evil Eyes"
+    },
+    {
+      "slug": "shishunki-no-iron-maiden",
+      "title": "Shishunki no Iron Maiden"
+    },
+    {
+      "slug": "shishunki-bitter-change",
+      "title": "Shishunki Bitter Change"
+    },
+    {
+      "slug": "shishou-ni-saiminjutsu-o-kakete-iu-koto-o-kikasete-mita",
+      "title": "Shishou ni Saiminjutsu o Kakete Iu Koto o Kikasete mita"
+    },
+    {
+      "slug": "shishidou-san-ni-shikararetai",
+      "title": "Shishidou-san ni Shikararetai"
+    },
+    {
+      "slug": "shirokuma-tensei",
+      "title": "Shirokuma Tensei"
+    },
+    {
+      "slug": "shiro-madoushi-syrup-san",
+      "title": "Shiro Madoushi Syrup-san"
+    },
+    {
+      "slug": "shiotaiou-no-sato-san-ga-ore-ni-dake-amai",
+      "title": "Shiotaiou no Sato-san ga Ore ni dake Amai"
+    },
+    {
+      "slug": "shiota-sensei-to-amai-chan",
+      "title": "Shiota-sensei to Amai-chan"
+    },
+    {
+      "slug": "shinyaku-marchen",
+      "title": "Shinyaku Märchen"
+    },
+    {
+      "slug": "shinrei-tantei-yakumo",
+      "title": "Shinrei Tantei Yakumo"
+    },
+    {
+      "slug": "shinobuna-chiyo-chan",
+      "title": "Shinobuna! Chiyo-chan"
+    },
+    {
+      "slug": "shinobi-quartet",
+      "title": "Shinobi Quartet"
+    },
+    {
+      "slug": "shinobi-kill",
+      "title": "Shinobi Kill"
+    },
+    {
+      "slug": "shinja-zero-no-megami-sama-to-hajimeru-isekai-kouryaku",
+      "title": "Shinja Zero no Megami-sama to Hajimeru Isekai Kouryaku"
+    },
+    {
+      "slug": "shinka-no-mi-shiranai-uchi-ni-kachigumi-jinsei",
+      "title": "Shinka no Mi ~Shiranai Uchi ni Kachigumi Jinsei"
+    },
+    {
+      "slug": "shinigami-ni-sodaterareta-shoujo-wa-shikkoku-no-tsurugi-wo-mune-ni-idaku",
+      "title": "Shinigami ni Sodaterareta Shoujo wa Shikkoku no Tsurugi wo Mune ni Idaku"
+    },
+    {
+      "slug": "shinigami-sama-to-4-nin-no-kanojo",
+      "title": "Shinigami Sama To 4 Nin No Kanojo"
+    },
+    {
+      "slug": "shingetsutan-tsukihime",
+      "title": "Shingetsutan Tsukihime"
+    },
+    {
+      "slug": "shingeki-no-kyojin-before-the-fall",
+      "title": "Shingeki no Kyojin: Before the Fall"
+    },
+    {
+      "slug": "shingeki-no-eroko-san",
+      "title": "Shingeki no Eroko-san"
+    },
+    {
+      "slug": "shindou-yuusha-to-maid-onee-san",
+      "title": "Shindou Yuusha to Maid Onee-san"
+    },
+    {
+      "slug": "shindou-sefiria-no-gekokujou-program",
+      "title": "Shindou Sefiria no Gekokujou Program"
+    },
+    {
+      "slug": "shinde-kudasai-yuusha-desho",
+      "title": "Shinde kudasai! Yuusha desho?"
+    },
+    {
+      "slug": "shimazaki-nanaoshigoto-boshuuchuu",
+      "title": "Shimazaki Nana@Oshigoto Boshuuchuu"
+    },
+    {
+      "slug": "shimaichigai",
+      "title": "Shimaichigai"
+    },
+    {
+      "slug": "shikkoku-tsukai-no-saikyo-yusha-nakama-zenin-ni-uragira-retanode-saikyo-no-mamono",
+      "title": "Shikkoku Tsukai no Saikyo Yusha Nakama Zen’in ni Uragira Retanode Saikyo no Mamono"
+    },
+    {
+      "slug": "shikabane-shoujo-to-kakanai-gaka",
+      "title": "Shikabane Shoujo to Kakanai Gaka"
+    },
+    {
+      "slug": "shikabane-gatana",
+      "title": "Shikabane Gatana"
+    },
+    {
+      "slug": "shiikuin-san-wa-isekai-de-doubutsuen-tsukuritainode-monsutaa-wo-tenazukeru",
+      "title": "Shiikuin-san wa Isekai de Doubutsuen Tsukuritainode Monsutaa wo Tenazukeru"
+    },
+    {
+      "slug": "shihou-sekai-no-ou",
+      "title": "Shihou Sekai no Ou"
+    },
+    {
+      "slug": "shigatsu-wa-kimi-no-uso-coda",
+      "title": "Shigatsu wa Kimi no Uso – Coda"
+    },
+    {
+      "slug": "shiga-hime",
+      "title": "Shiga Hime"
+    },
+    {
+      "slug": "shibito-no-koe-wo-kiku-ga-yoi",
+      "title": "Shibito no Koe wo Kiku ga Yoi"
+    },
+    {
+      "slug": "shiawase-wo-wakenasai",
+      "title": "Shiawase Wo Wakenasai"
+    },
+    {
+      "slug": "shi-shen-zhi-lu",
+      "title": "Shi Shen Zhi Lu"
+    },
+    {
+      "slug": "shi-kong-lian-ren",
+      "title": "Shi Kong Lian Ren"
+    },
+    {
+      "slug": "shi-chenxiang",
+      "title": "Shi Chenxiang"
+    },
+    {
+      "slug": "shenwu-tianzun",
+      "title": "Shenwu Tianzun"
+    },
+    {
+      "slug": "shengzun",
+      "title": "Shengzun"
+    },
+    {
+      "slug": "sheng-wang",
+      "title": "Sheng Wang"
+    },
+    {
+      "slug": "shen-yi-di-nu",
+      "title": "Shen Yi Di Nu"
+    },
+    {
+      "slug": "shes-the-prince-and-im-the-princess",
+      "title": "She’s the Prince and I’m the Princess!?"
+    },
+    {
+      "slug": "shes-not-my-girlfriend-were-just-childhood-friends",
+      "title": "She’s Not My Girlfriend! We’re Just Childhood Friends"
+    },
+    {
+      "slug": "she-whos-most-special-to-me",
+      "title": "She Who’s Most Special To Me"
+    },
+    {
+      "slug": "she-may-not-be-cute",
+      "title": "She May Not Be Cute"
+    },
+    {
+      "slug": "shark",
+      "title": "Shark"
+    },
+    {
+      "slug": "she-hates-me",
+      "title": "She Hates Me"
+    },
+    {
+      "slug": "shared-dream",
+      "title": "Shared Dream"
+    },
+    {
+      "slug": "shamo",
+      "title": "Shamo"
+    },
+    {
+      "slug": "shadow-killer",
+      "title": "Shadow Killer"
+    },
+    {
+      "slug": "shadow-cat",
+      "title": "Shadow Cat"
+    },
+    {
+      "slug": "shachiku-san-wa-youjo-yuurei-ni-iyasaretai",
+      "title": "Shachiku-san wa Youjo Yuurei ni Iyasaretai"
+    },
+    {
+      "slug": "shachiku-succubus-no-hanashi",
+      "title": "Shachiku Succubus no Hanashi"
+    },
+    {
+      "slug": "sewayaki-kitsune-no-senko-san",
+      "title": "Sewayaki Kitsune no Senko-san"
+    },
+    {
+      "slug": "seven-knights-alkaid",
+      "title": "Seven Knights: Alkaid"
+    },
+    {
+      "slug": "sensei-wa-koi-wo-oshierarenai",
+      "title": "Sensei wa Koi wo Oshierarenai"
+    },
+    {
+      "slug": "sensei-no-yasashii-koroshikata",
+      "title": "Sensei no Yasashii Koroshikata"
+    },
+    {
+      "slug": "sensei-ni-ageru",
+      "title": "Sensei ni, Ageru."
+    },
+    {
+      "slug": "sensei-de-shicha-ikemasen",
+      "title": "Sensei de ￮￮ shicha ikemasen!"
+    },
+    {
+      "slug": "senryuu-shoujo",
+      "title": "Senryuu Shoujo"
+    },
+    {
+      "slug": "senren-banka",
+      "title": "Senren Banka"
+    },
+    {
+      "slug": "senpai-ore-no-koe-de-iyasa-renaide-kudasai",
+      "title": "Senpai! Ore no Koe de Iyasa Renaide Kudasai!"
+    },
+    {
+      "slug": "senpai-sore-hitokuchi-kudasai",
+      "title": "Senpai, Sore hitokuchi kudasai!"
+    },
+    {
+      "slug": "senpai-no-koe-ga-chiisa-sugirunode-hochouki-o-tsukete-mitara-itsunomanika-ore-ni-shinuhodo-derete-ita-hanashi",
+      "title": "Senpai no Koe ga Chiisa Sugirunode Hochouki o Tsukete Mitara, Itsunomanika Ore ni Shinuhodo Derete Ita Hanashi"
+    },
+    {
+      "slug": "senpai-x-kouhai",
+      "title": "Senpai x Kouhai"
+    },
+    {
+      "slug": "senpai-kara-me-ga-hanasenai-to-aru-kaishain-no-nichijou",
+      "title": "Senpai Kara Me ga Hanasenai To Aru Kaishain no Nichijou"
+    },
+    {
+      "slug": "senpai-ga-uzai-kouhai-no-hanashi-web",
+      "title": "Senpai ga Uzai Kouhai no Hanashi (Web)"
+    },
+    {
+      "slug": "senpai-ga-uzai-kouhai-no-hanashi-pixiv",
+      "title": "Senpai ga Uzai Kouhai no Hanashi (Pixiv)"
+    },
+    {
+      "slug": "senpai-ga-oyobidesu",
+      "title": "Senpai ga Oyobidesu!"
+    },
+    {
+      "slug": "senpai-doesnt-want-to-fall-for-her-kouhai",
+      "title": "Senpai Doesn't Want to Fall for Her Kouhai"
+    },
+    {
+      "slug": "senpai-4koma",
+      "title": "Senpai 4koma."
+    },
+    {
+      "slug": "sennen-sensou-aigis-eiyuu-no-kizuna",
+      "title": "Sennen Sensou Aigis Eiyuu no Kizuna"
+    },
+    {
+      "slug": "sennen-meikyuu-no-nana-ouji",
+      "title": "Sennen Meikyuu no Nana Ouji"
+    },
+    {
+      "slug": "sengoku-youko",
+      "title": "Sengoku Youko"
+    },
+    {
+      "slug": "senmon-gakkou-jk",
+      "title": "Senmon Gakkou JK"
+    },
+    {
+      "slug": "sengoku-vamp",
+      "title": "Sengoku Vamp"
+    },
+    {
+      "slug": "sengoku-night-blood",
+      "title": "Sengoku Night Blood"
+    },
+    {
+      "slug": "senaka-gurashi",
+      "title": "Senaka Gurashi"
+    },
+    {
+      "slug": "send-my-regards-to-kenshiro",
+      "title": "Send My Regards to Kenshiro"
+    },
+    {
+      "slug": "sen-to-man",
+      "title": "Sen to Man"
+    },
+    {
+      "slug": "sen-no-sukiru-o-motsu-otoko",
+      "title": "Sen no Sukiru o Motsu Otoko"
+    },
+    {
+      "slug": "semete-ano-yuki-no-you-ni",
+      "title": "Semete, Ano Yuki no You ni"
+    },
+    {
+      "slug": "selestial-god",
+      "title": "Selestial God"
+    },
+    {
+      "slug": "semelparous",
+      "title": "Semelparous"
+    },
+    {
+      "slug": "sex-and-dungeon",
+      "title": "Sex and Dungeon"
+    },
+    {
+      "slug": "sekirei",
+      "title": "Sekirei"
+    },
+    {
+      "slug": "sekimen-shinaide-sekime-san",
+      "title": "Sekimen Shinaide Sekime-san"
+    },
+    {
+      "slug": "sekai-wo-sukuu-tame-ni-watashi-to-asa-chun-dekimasu-ka",
+      "title": "Sekai wo Sukuu Tame ni Watashi to Asa Chun Dekimasu ka?"
+    },
+    {
+      "slug": "sekai-saikyou-no-shinjuu-tsukai",
+      "title": "Sekai Saikyou no Shinjuu Tsukai"
+    },
+    {
+      "slug": "sekai-no-owari-no-sekairoku",
+      "title": "Sekai no Owari no Sekairoku"
+    },
+    {
+      "slug": "sekai-no-owari-ni-shiba-inu-to",
+      "title": "Sekai no Owari ni Shiba Inu to"
+    },
+    {
+      "slug": "sekai-ka-kanojo-ka-erabenai",
+      "title": "Sekai ka Kanojo ka Erabenai"
+    },
+    {
+      "slug": "sekai-de-ichiban-oppai-ga-suki",
+      "title": "Sekai de Ichiban Oppai ga Suki!"
+    },
+    {
+      "slug": "seitokai-tantei-kirika",
+      "title": "Seitokai Tantei Kirika"
+    },
+    {
+      "slug": "seito-kaichou-desu-ga-josou-hajimemashita",
+      "title": "Seito Kaichou desu ga Josou Hajimemashita"
+    },
+    {
+      "slug": "seishun-scrap",
+      "title": "Seishun Scrap!"
+    },
+    {
+      "slug": "seishun-pop",
+      "title": "Seishun Pop!"
+    },
+    {
+      "slug": "seishun-forget",
+      "title": "Seishun Forget!"
+    },
+    {
+      "slug": "seishun-buta-yaro-wa-petit-devil-kouhai-no-yume-wo-minai",
+      "title": "Seishun Buta Yaro wa Petit Devil Kouhai no Yume wo Minai"
+    },
+    {
+      "slug": "seisan-shoku-o-kiwame-sugi-tara-densetsu-no-buki-ga-ore-no-yome-ni-narimashita",
+      "title": "Seisan Shoku o Kiwame Sugi tara Densetsu no Buki ga Ore no Yome ni Narimashita"
+    },
+    {
+      "slug": "seiken-no-blacksmith",
+      "title": "Seiken no Blacksmith"
+    },
+    {
+      "slug": "seijo-sama-wo-amayakashitai-tadashi-yuusha-omae-wa-dame-da",
+      "title": "Seijo-sama wo Amayakashitai! Tadashi Yuusha, Omae wa Dame da"
+    },
+    {
+      "slug": "under-the-oak-tree",
+      "title": "Under the Oak Tree"
+    },
+    {
+      "slug": "ao-no-orchestra",
+      "title": "Ao no Orchestra"
+    },
+    {
+      "slug": "aoi-hikaru-ga-chikyuu-ni-itakoro",
+      "title": "Aoi Hikaru Ga Chikyuu Ni Itakoro"
+    },
+    {
+      "slug": "aoi-san-wa-16-sai-toshishita",
+      "title": "Aoi-san wa 16-sai Toshishita."
+    },
+    {
+      "slug": "aoi-kiseki",
+      "title": "Aoi Kiseki"
+    },
+    {
+      "slug": "aoki-hagane-no-arpeggio",
+      "title": "Aoki Hagane no Arpeggio"
+    },
+    {
+      "slug": "aola-star-parallel-universe",
+      "title": "Aola Star – Parallel Universe"
+    },
+    {
+      "slug": "yellow-dragon-ga-arawareta",
+      "title": "Yellow Dragon ga Arawareta!"
+    },
+    {
+      "slug": "appli-trap",
+      "title": "Appli Trap"
+    },
+    {
+      "slug": "ara-fantasy",
+      "title": "Ara Fantasy"
+    },
+    {
+      "slug": "aqua",
+      "title": "Aqua"
+    },
+    {
+      "slug": "arachnid",
+      "title": "Arachnid"
+    },
+    {
+      "slug": "arasa-dakedo-hatsukoi-desu",
+      "title": "Arasa Dakedo, Hatsukoi desu."
+    },
+    {
+      "slug": "arakure-ojousama-wa-monmon-shiteiru",
+      "title": "Arakure Ojousama Wa MonMon Shiteiru"
+    },
+    {
+      "slug": "arashi-kun-no-dakimakura",
+      "title": "Arashi-kun no Dakimakura"
+    },
+    {
+      "slug": "arata-primal",
+      "title": "Arata Primal"
+    },
+    {
+      "slug": "area-no-kishi",
+      "title": "Area no Kishi"
+    },
+    {
+      "slug": "argate-online",
+      "title": "Argate Online"
+    },
+    {
+      "slug": "arifureta-gakuen-de-sekai-saikyou",
+      "title": "Arifureta Gakuen de Sekai Saikyou"
+    },
+    {
+      "slug": "arifureta-nichijou-de-sekai-saikyou",
+      "title": "Arifureta Nichijou de Sekai Saikyou"
+    },
+    {
+      "slug": "arifureta-shokugyou-de-sekai-saikyou-zero",
+      "title": "Arifureta Shokugyou de Sekai Saikyou Zero"
+    },
+    {
+      "slug": "arigatights",
+      "title": "Arigatights!"
+    },
+    {
+      "slug": "arisa",
+      "title": "Arisa"
+    },
+    {
+      "slug": "ark-taeha",
+      "title": "ARK (Taeha)"
+    },
+    {
+      "slug": "ark-romancer",
+      "title": "Ark: Romancer"
+    },
+    {
+      "slug": "arknights-operators",
+      "title": "Arknights: Operators!"
+    },
+    {
+      "slug": "arknights-comic-anthology",
+      "title": "Arknights Comic Anthology"
+    },
+    {
+      "slug": "aroma-chan-wa-konya-mo-hazukashii",
+      "title": "Aroma-chan wa Konya mo Hazukashii"
+    },
+    {
+      "slug": "asa-made-jugyou-chu",
+      "title": "Asa Made Jugyou Chu!"
+    },
+    {
+      "slug": "asagao-to-kase-san",
+      "title": "Asagao to Kase-san."
+    },
+    {
+      "slug": "asaha-furu",
+      "title": "Asaha furu"
+    },
+    {
+      "slug": "tensei-shitara-slime-datta-ken",
+      "title": "Tensei Shitara Slime Datta Ken"
+    },
+    {
+      "slug": "seifuku",
+      "title": "Seifuku!"
+    },
+    {
+      "slug": "seidon-no-ryuu",
+      "title": "Seidon no Ryuu"
+    },
+    {
+      "slug": "seibetsu-mona-lisa-no-kimi-e",
+      "title": "Seibetsu “Mona Lisa” no Kimi e"
+    },
+    {
+      "slug": "secret-order",
+      "title": "Secret Order"
+    },
+    {
+      "slug": "see-you-again",
+      "title": "See You Again"
+    },
+    {
+      "slug": "secret-love",
+      "title": "Secret Love"
+    },
+    {
+      "slug": "second-brain",
+      "title": "Second Brain"
+    },
+    {
+      "slug": "school-zone-ningiyau",
+      "title": "School Zone (Ningiyau)"
+    },
+    {
+      "slug": "school-flower-master",
+      "title": "School Flower Master"
+    },
+    {
+      "slug": "sayuri-san-no-imouto-wa-tenshi",
+      "title": "Sayuri-san no Imouto wa Tenshi"
+    },
+    {
+      "slug": "sayu-byoudou-shugi",
+      "title": "Sayu byoudou shugi"
+    },
+    {
+      "slug": "save-the-world-uncle",
+      "title": "Save the world! UNCLE"
+    },
+    {
+      "slug": "save-a-big-demon",
+      "title": "Save A Big Demon"
+    },
+    {
+      "slug": "save-load-no-dekiru-yadoya-san",
+      "title": "Save & Load no Dekiru Yadoya-san"
+    },
+    {
+      "slug": "saurus",
+      "title": "Saurus"
+    },
+    {
+      "slug": "satsuriku-no-tenshi",
+      "title": "Satsuriku no Tenshi"
+    },
+    {
+      "slug": "satsuriku-morph",
+      "title": "Satsuriku Morph"
+    },
+    {
+      "slug": "satou-kun-wa-nozoteiru-kami-sama-appli-de-onnanoko-no-kokoro-o-nozoitara-do-xx-datta",
+      "title": "Satou-kun wa Nozoteiru. ~Kami-sama Appli de Onnanoko no Kokoro o Nozoitara Do XX datta"
+    },
+    {
+      "slug": "satoko-to-nada",
+      "title": "Satoko to Nada"
+    },
+    {
+      "slug": "satanophany",
+      "title": "Satanophany"
+    },
+    {
+      "slug": "sasayaku-you-ni-koi-wo-utau",
+      "title": "Sasayaku you ni koi wo utau"
+    },
+    {
+      "slug": "saotome-girl-hitakakusu",
+      "title": "Saotome Girl, Hitakakusu"
+    },
+    {
+      "slug": "saotome-shimai-ha-manga-no-tame-nara",
+      "title": "Saotome Shimai Ha Manga No Tame Nara!?"
+    },
+    {
+      "slug": "santairiku-eiyuuki",
+      "title": "Santairiku Eiyuuki"
+    },
+    {
+      "slug": "samayoeru-tensei-sha-tachi-no-revival-game",
+      "title": "Samayoeru Tensei-sha-tachi no Revival Game"
+    },
+    {
+      "slug": "sakura-chan-to-amane-kun",
+      "title": "Sakura-chan to Amane-kun"
+    },
+    {
+      "slug": "sakurai-san-wants-to-be-noticed",
+      "title": "Sakurai-san Wants To Be Noticed"
+    },
+    {
+      "slug": "sakamoto-desu-ga",
+      "title": "Sakamoto Desu ga?"
+    },
+    {
+      "slug": "sakamoto-days",
+      "title": "Sakamoto Days"
+    },
+    {
+      "slug": "saint-no-just-a-passing-monster-tamer-the-completely-unparalleled-saint-travels-with-fluffies",
+      "title": "Saint? No, Just a Passing Monster Tamer! ~The Completely Unparalleled Saint Travels with Fluffies~"
+    },
+    {
+      "slug": "saikyou-yuusha-wa-oharai-hako-maou-ni-nattara-zutto-ore-no-musou-return",
+      "title": "Saikyou Yuusha wa Oharai Hako: Maou ni Nattara Zutto Ore no Musou Return"
+    },
+    {
+      "slug": "saikyou-shoku-ryukishi-kara-shokyu-shoku-hakobiya-ni-nattano-ni-naze-ka-yushatachi-kara-tayoraretemasu",
+      "title": "Saikyou Shoku (Ryukishi) Kara Shokyu Shoku (Hakobiya) Ni Nattano Ni Naze Ka Yushatachi Kara Tayoraretemasu"
+    },
+    {
+      "slug": "saikyou-onmyouji-no-isekai-tenseiki-geboku-no-youkaidomo-ni-kurabete-monster-ga-yowaisugirundaga",
+      "title": "Saikyou Onmyouji no Isekai Tenseiki ~Geboku no Youkaidomo ni Kurabete Monster ga Yowaisugirundaga~"
+    },
+    {
+      "slug": "saikyou-no-kyuuketsu-hime-wa-imouto-ga-hoshii",
+      "title": "Saikyou no Kyuuketsu Hime wa Imouto ga Hoshii!"
+    },
+    {
+      "slug": "saikyou-no-kurokishi-sentou-maid-ni-tenshoku-shimashita",
+      "title": "Saikyou no Kurokishi Sentou Maid ni Tenshoku shimashita"
+    },
+    {
+      "slug": "saikyou-mahoushi-no-inton-keikaku-the-alternative",
+      "title": "Saikyou Mahoushi no Inton Keikaku: The Alternative"
+    },
+    {
+      "slug": "saikyou-mahoushi-no-inton-keikaku",
+      "title": "Saikyou Mahoushi no Inton Keikaku"
+    },
+    {
+      "slug": "saikyou-jiko-bukken-to-reikan-zero-otoko-no-hanashi",
+      "title": "Saikyou Jiko Bukken to Reikan Zero Otoko no Hanashi."
+    },
+    {
+      "slug": "saiko",
+      "title": "Saiko"
+    },
+    {
+      "slug": "saijaku-tamer-wa-gomi-hiroi-no-tabi-wo-hajimemashita",
+      "title": "Saijaku Tamer wa Gomi Hiroi no Tabi wo Hajimemashita"
+    },
+    {
+      "slug": "saijaku-muhai-no-bahamut",
+      "title": "Saijaku Muhai no Bahamut"
+    },
+    {
+      "slug": "hana-samurai-no-sahara",
+      "title": "Hana Samurai no Sahara"
+    },
+    {
+      "slug": "saguri-chan-tankentai",
+      "title": "Saguri-chan Tankentai"
+    },
+    {
+      "slug": "saguri-san-tankentai",
+      "title": "Saguri-san Tankentai"
+    },
+    {
+      "slug": "sages-who-slaughter-the-heartless",
+      "title": "Sages Who Slaughter The Heartless"
+    },
+    {
+      "slug": "saenai-riman-to-yankee-joshi-kousei",
+      "title": "Saenai Riman to Yankee Joshi Kousei"
+    },
+    {
+      "slug": "saenai-kanojo-no-sodatekata-egoistic-lily",
+      "title": "Saenai Kanojo no Sodatekata – Egoistic-Lily"
+    },
+    {
+      "slug": "saenai-kanojo-no-sodatekata-koisuru-metronome",
+      "title": "Saenai Kanojo no Sodatekata – Koisuru Metronome"
+    },
+    {
+      "slug": "saeki-san-wa-nemutteru",
+      "title": "Saeki-san wa Nemutteru"
+    },
+    {
+      "slug": "sadako-to-deatte-shimau-hanashi",
+      "title": "Sadako to Deatte Shimau Hanashi"
+    },
+    {
+      "slug": "sacred-chevalier",
+      "title": "Sacred Chevalier"
+    },
+    {
+      "slug": "sachi-iro-no-one-room",
+      "title": "Sachi-iro no One Room"
+    },
+    {
+      "slug": "sacchi-sarenai-saikyou-shoku-rule-breaker",
+      "title": "Sacchi Sarenai Saikyou Shoku Rule Breaker"
+    },
+    {
+      "slug": "sid-supernatural-investigation-department",
+      "title": "S.I.D. – Supernatural Investigation Department"
+    },
+    {
+      "slug": "s-you-her-and-fate",
+      "title": "S – You, Her and Fate"
+    },
+    {
+      "slug": "s-watari-san-to-m-mura-kun",
+      "title": "S Watari-san to M Mura-kun"
+    },
+    {
+      "slug": "s-rare-soubi-no-niau-kanojo",
+      "title": "S Rare Soubi no Niau Kanojo"
+    },
+    {
+      "slug": "ryle-to-louis",
+      "title": "Ryle to Louis"
+    },
+    {
+      "slug": "ryuu-majin-hime-valalice-no-haiboku-makai-saikyou-no-hime-ga-jinrui-no-gurume-ni-makeru-hazu-ga-nai",
+      "title": "Ryuu majin hime Valalice no haiboku ~ makai saikyou no hime ga jinrui no gurume ni makeru hazu ga nai"
+    },
+    {
+      "slug": "rwby",
+      "title": "RWBY"
+    },
+    {
+      "slug": "rust-eater-bisco",
+      "title": "Rust-Eater Bisco"
+    },
+    {
+      "slug": "rurouni-kenshin-meiji-kenkaku-romantan-hokkaidou-hen",
+      "title": "Rurouni Kenshin: Meiji Kenkaku Romantan: Hokkaidou Hen"
+    },
+    {
+      "slug": "runway-de-waratte",
+      "title": "Runway de Waratte"
+    },
+    {
+      "slug": "rune-factory-4-koushiki-comic-visual-book",
+      "title": "Rune Factory 4: Koushiki Comic & Visual Book"
+    },
+    {
+      "slug": "rudolf-turkey",
+      "title": "Rudolf Turkey"
+    },
+    {
+      "slug": "ruler-of-the-land",
+      "title": "Ruler of the Land"
+    },
+    {
+      "slug": "royal-agent",
+      "title": "Royal Agent"
+    },
+    {
+      "slug": "rougo-ni-sonaete-isekai-de-8-manmai-no-kinka-wo-tamemasu",
+      "title": "Rougo ni Sonaete Isekai de 8-manmai no Kinka wo Tamemasu"
+    },
+    {
+      "slug": "roujoteki-shoujo-hinata-chan",
+      "title": "Roujoteki Shoujo Hinata-chan"
+    },
+    {
+      "slug": "rosario-to-vampire-season-ii",
+      "title": "Rosario to Vampire – Season II"
+    },
+    {
+      "slug": "romance-of-the-eclipse",
+      "title": "Romance of the Eclipse"
+    },
+    {
+      "slug": "roland-roland",
+      "title": "Roland Roland"
+    },
+    {
+      "slug": "roku-de-nashi-majutsu-koushi-to-kinki-kyouten",
+      "title": "Roku de Nashi Majutsu Koushi to Kinki Kyouten"
+    },
+    {
+      "slug": "rokka-no-yuusha",
+      "title": "Rokka no Yuusha"
+    },
+    {
+      "slug": "rodiura-kurashi",
+      "title": "Rodiura Kurashi"
+    },
+    {
+      "slug": "robot-x-laserbeam",
+      "title": "Robot x Laserbeam"
+    },
+    {
+      "slug": "road-to-the-awakening",
+      "title": "Road to the Awakening"
+    },
+    {
+      "slug": "road-to-heaven",
+      "title": "Road to Heaven"
+    },
+    {
+      "slug": "rivnes",
+      "title": "Rivnes"
+    },
+    {
+      "slug": "risou-no-musume-nara-sekai-saikyou-demo-kawaigatte-kuremasuka",
+      "title": "Risou no Musume Nara Sekai Saikyou Demo Kawaigatte Kuremasuka"
+    },
+    {
+      "slug": "rise-of-the-demon-king",
+      "title": "Rise of the Demon King"
+    },
+    {
+      "slug": "rin-harold-sakuishi",
+      "title": "Rin (HAROLD Sakuishi)"
+    },
+    {
+      "slug": "rikudou",
+      "title": "Rikudou"
+    },
+    {
+      "slug": "rikei-ga-koi-ni-ochita-no-de-shoumei-shitemita",
+      "title": "Rikei ga Koi ni Ochita no de Shoumei shitemita."
+    },
+    {
+      "slug": "right-click",
+      "title": "Right Click"
+    },
+    {
+      "slug": "rich-player",
+      "title": "Rich Player"
+    },
+    {
+      "slug": "reversing-the-immortal-path",
+      "title": "Reversing the Immortal Path"
+    },
+    {
+      "slug": "reversed-love-route",
+      "title": "Reversed Love Route"
+    },
+    {
+      "slug": "revenge-movie-queen",
+      "title": "Revenge Movie Queen"
+    },
+    {
+      "slug": "return-to-the-earth-and-be-a-god-stick",
+      "title": "Return To The Earth And Be A God Stick"
+    },
+    {
+      "slug": "return-to-beginning-of-the-apocalypse",
+      "title": "Return To Beginning Of The Apocalypse"
+    },
+    {
+      "slug": "return-the-demon-goddess",
+      "title": "Return The Demon Goddess"
+    },
+    {
+      "slug": "return-survival",
+      "title": "Return Survival"
+    },
+    {
+      "slug": "return-of-xiandi",
+      "title": "Return of Xiandi"
+    },
+    {
+      "slug": "return-of-the-reborn-god-emperor",
+      "title": "Return of the Reborn God Emperor"
+    },
+    {
+      "slug": "return-of-the-avenger",
+      "title": "Return of the Avenger"
+    },
+    {
+      "slug": "return-from-the-world-of-immortals",
+      "title": "Return From the World of Immortals"
+    },
+    {
+      "slug": "rinna-keibu-wa-iki-ga-dekinai",
+      "title": "Rinna Keibu wa Iki ga dekinai"
+    },
+    {
+      "slug": "rinjin-chan-ga-shinpai",
+      "title": "Rinjin-chan ga Shinpai"
+    },
+    {
+      "slug": "return-from-heaven",
+      "title": "Return From Heaven"
+    },
+    {
+      "slug": "retired-heroes",
+      "title": "Retired Heroes"
+    },
+    {
+      "slug": "retire-shita-ningyoushi-no-mmo-kikou-jojishi",
+      "title": "Retire Shita Ningyoushi No MMO Kikou Jojishi"
+    },
+    {
+      "slug": "rental-onii-chan",
+      "title": "Rental Onii-chan"
+    },
+    {
+      "slug": "rengoku-no-karma",
+      "title": "Rengoku no Karma"
+    },
+    {
+      "slug": "rental-girlfriend-tsukita-san",
+      "title": "Rental Girlfriend Tsukita-san"
+    },
+    {
+      "slug": "renai-shimasen-ka",
+      "title": "Renai Shimasen ka?"
+    },
+    {
+      "slug": "renai-shikou-seitokai",
+      "title": "Renai Shikou Seitokai"
+    },
+    {
+      "slug": "renai-kinshi-gakuen",
+      "title": "Renai Kinshi Gakuen"
+    },
+    {
+      "slug": "renai-boukun",
+      "title": "Renai Boukun"
+    },
+    {
+      "slug": "reiwa-hanamaru-gakuen",
+      "title": "Reiwa Hanamaru Gakuen"
+    },
+    {
+      "slug": "reincarnation-no-kaben",
+      "title": "Reincarnation no Kaben"
+    },
+    {
+      "slug": "reincarnated-into-an-otome-game-nah-im-too-busy-mastering-magic",
+      "title": "Reincarnated into an Otome Game? Nah, I’m Too Busy Mastering Magic!"
+    },
+    {
+      "slug": "reincarnated-war-god",
+      "title": "Reincarnated War God"
+    },
+    {
+      "slug": "reign",
+      "title": "Reign"
+    },
+    {
+      "slug": "reigen",
+      "title": "Reigen"
+    },
+    {
+      "slug": "red-sprite",
+      "title": "Red Sprite"
+    },
+    {
+      "slug": "red-spirit",
+      "title": "Red Spirit"
+    },
+    {
+      "slug": "red-night-eve",
+      "title": "Red Night Eve"
+    },
+    {
+      "slug": "red-envelope-fairy-group",
+      "title": "Red Envelope Fairy Group"
+    },
+    {
+      "slug": "record-of-yun-hai-celestial-chef",
+      "title": "Record of Yun Hai Celestial Chef"
+    },
+    {
+      "slug": "record-of-the-war-god",
+      "title": "Record of the War God"
+    },
+    {
+      "slug": "rebuild-world",
+      "title": "Rebuild World"
+    },
+    {
+      "slug": "reborn-of-war-god",
+      "title": "Reborn of War God"
+    },
+    {
+      "slug": "reborn-doctor",
+      "title": "Reborn Doctor"
+    },
+    {
+      "slug": "reborn-big-player",
+      "title": "Reborn Big Player"
+    },
+    {
+      "slug": "rebirth-city-deity",
+      "title": "Rebirth: City Deity"
+    },
+    {
+      "slug": "rebirth-super-goddess",
+      "title": "Rebirth Super Goddess"
+    },
+    {
+      "slug": "rebirth-self-cultivation",
+      "title": "Rebirth Self Cultivation"
+    },
+    {
+      "slug": "rebirth-of-tian-lun",
+      "title": "Rebirth Of Tian Lun"
+    },
+    {
+      "slug": "rebirth-of-the-top-villain",
+      "title": "Rebirth of the Top Villain"
+    },
+    {
+      "slug": "rebirth-of-the-urban-mad-immortal",
+      "title": "Rebirth of the Urban Mad Immortal"
+    },
+    {
+      "slug": "rebirth-of-the-sword-god-returns",
+      "title": "Rebirth of The Sword God Returns"
+    },
+    {
+      "slug": "rebirth-of-the-majestic-wife",
+      "title": "Rebirth of the Majestic Wife"
+    },
+    {
+      "slug": "rebirth-of-the-earth-immortal-venerable",
+      "title": "Rebirth of the Earth Immortal Venerable"
+    },
+    {
+      "slug": "rebirth-of-the-dynasty-tang",
+      "title": "Rebirth of the Dynasty Tang"
+    },
+    {
+      "slug": "rebirth-of-the-divine-doctor",
+      "title": "Rebirth of the Divine Doctor"
+    },
+    {
+      "slug": "the-rebirth-of-the-demon-god",
+      "title": "The Rebirth of the Demon God"
+    },
+    {
+      "slug": "rebirth-of-refining-emperor",
+      "title": "Rebirth of Refining Emperor"
+    },
+    {
+      "slug": "rebirth-into-the-strongest-immortal-cultivator",
+      "title": "Rebirth Into the Strongest Immortal Cultivator"
+    },
+    {
+      "slug": "rebirth-i-am-the-great-god",
+      "title": "Rebirth I Am The Great God"
+    },
+    {
+      "slug": "rebirth-extreme",
+      "title": "Rebirth Extreme"
+    },
+    {
+      "slug": "rebellio-machine",
+      "title": "Rebellio Machine"
+    },
+    {
+      "slug": "reawaken-man",
+      "title": "Reawaken Man"
+    },
+    {
+      "slug": "real-pg",
+      "title": "Real PG"
+    },
+    {
+      "slug": "real-account",
+      "title": "Real Account"
+    },
+    {
+      "slug": "remonster",
+      "title": "Re:Monster"
+    },
+    {
+      "slug": "rezero-kara-hajimeru-isekai-seikatsu",
+      "title": "Re:Zero kara Hajimeru Isekai Seikatsu"
+    },
+    {
+      "slug": "re-zero-alternative",
+      "title": "Re Zero Alternative"
+    },
+    {
+      "slug": "re-zero-kara-hajimeru-isekai-seikatsu-kenki-koiuta",
+      "title": "Re: Zero Kara Hajimeru Isekai Seikatsu – Kenki Koiuta"
+    },
+    {
+      "slug": "rdb-red-data-book",
+      "title": "RDB (Red Data Book)"
+    },
+    {
+      "slug": "raw-hero",
+      "title": "RaW Hero"
+    },
+    {
+      "slug": "rave-master",
+      "title": "Rave Master"
+    },
+    {
+      "slug": "rathard",
+      "title": "Rathard"
+    },
+    {
+      "slug": "rankers-return",
+      "title": "Ranker’s Return"
+    },
+    {
+      "slug": "ramia-yana",
+      "title": "Ramia-Yana"
+    },
+    {
+      "slug": "rakudai-kishi-no-cavalry",
+      "title": "Rakudai Kishi no Cavalry"
+    },
+    {
+      "slug": "rairaiden",
+      "title": "Rairaiden"
+    },
+    {
+      "slug": "rain",
+      "title": "Rain"
+    },
+    {
+      "slug": "raid-sf",
+      "title": "Raid (SF)"
+    },
+    {
+      "slug": "ragna-crimson",
+      "title": "Ragna Crimson"
+    },
+    {
+      "slug": "radiation-house",
+      "title": "Radiation House"
+    },
+    {
+      "slug": "radiant",
+      "title": "Radiant"
+    },
+    {
+      "slug": "rabbit-doubt",
+      "title": "Rabbit Doubt"
+    },
+    {
+      "slug": "queen-of-the-last-days",
+      "title": "Queen of the Last Days"
+    },
+    {
+      "slug": "queen-cecias-shorts",
+      "title": "Queen Cecia’s Shorts"
+    },
+    {
+      "slug": "quanzhi-gaoshou",
+      "title": "Quanzhi Gaoshou"
+    },
+    {
+      "slug": "qishi-huanxiang-ye",
+      "title": "Qishi Huanxiang Ye"
+    },
+    {
+      "slug": "qin-xia",
+      "title": "Qin Xia"
+    },
+    {
+      "slug": "qiang-shen-ji",
+      "title": "Qiang Shen Ji"
+    },
+    {
+      "slug": "pyramid-game",
+      "title": "Pyramid Game"
+    },
+    {
+      "slug": "purgatory-rebirth",
+      "title": "Purgatory Rebirth"
+    },
+    {
+      "slug": "pupillary-master",
+      "title": "Pupillary Master"
+    },
+    {
+      "slug": "pupa",
+      "title": "Pupa"
+    },
+    {
+      "slug": "pumpkin-night",
+      "title": "Pumpkin Night"
+    },
+    {
+      "slug": "pulseless-girlfriend",
+      "title": "Pulseless Girlfriend"
+    },
+    {
+      "slug": "psyren",
+      "title": "Psyren"
+    },
+    {
+      "slug": "psycho-revenge",
+      "title": "Psycho Revenge"
+    },
+    {
+      "slug": "psyche-matashitemo",
+      "title": "Psyche Matashitemo"
+    },
+    {
+      "slug": "prunus-girl",
+      "title": "Prunus Girl"
+    },
+    {
+      "slug": "protoss-dark-emperor",
+      "title": "Protoss Dark Emperor"
+    },
+    {
+      "slug": "promised-orchid",
+      "title": "Promised Orchid"
+    },
+    {
+      "slug": "private-punishment-game",
+      "title": "Private Punishment Game"
+    },
+    {
+      "slug": "prison-labs",
+      "title": "Prison Labs"
+    },
+    {
+      "slug": "princess-is-that-holy-water",
+      "title": "Princess, Is That Holy Water?"
+    },
+    {
+      "slug": "prince-dont-do-this",
+      "title": "Prince Don’t do This"
+    },
+    {
+      "slug": "pride-complex",
+      "title": "Pride Complex"
+    },
+    {
+      "slug": "premarital-relationship",
+      "title": "Premarital Relationship"
+    },
+    {
+      "slug": "pregnant-wife-one-plus-one",
+      "title": "Pregnant Wife, One Plus One"
+    },
+    {
+      "slug": "powerful-teenage-king",
+      "title": "Powerful Teenage King"
+    },
+    {
+      "slug": "power-master",
+      "title": "Power Master"
+    },
+    {
+      "slug": "pounding",
+      "title": "Pounding"
+    },
+    {
+      "slug": "potion-danomi-de-ikinobimasu",
+      "title": "Potion-danomi de Ikinobimasu!"
+    },
+    {
+      "slug": "post-apocalyptic-dispatch-company",
+      "title": "Post-Apocalyptic Dispatch Company"
+    },
+    {
+      "slug": "possession",
+      "title": "Possession"
+    },
+    {
+      "slug": "poro-no-ryuugakuki",
+      "title": "Poro no Ryuugakuki"
+    },
+    {
+      "slug": "poputepipikku",
+      "title": "Poputepipikku"
+    },
+    {
+      "slug": "poor-father-and-daughter",
+      "title": "Poor Father and Daughter"
+    },
+    {
+      "slug": "ponkotsu-chan-kenshouchuu",
+      "title": "Ponkotsu-chan Kenshouchuu"
+    },
+    {
+      "slug": "ponkotsu-megami-no-isekai-souseiroku",
+      "title": "Ponkotsu Megami no Isekai Souseiroku"
+    },
+    {
+      "slug": "ponkotsu-ga-tensei-shitara-zongai-saikyou",
+      "title": "Ponkotsu ga Tensei Shitara Zongai Saikyou"
+    },
+    {
+      "slug": "ponko-tsundere-na-osananajimi",
+      "title": "Ponko Tsundere na Osananajimi"
+    },
+    {
+      "slug": "poisonous-witch-doctor",
+      "title": "Poisonous Witch Doctor"
+    },
+    {
+      "slug": "pocha-climb",
+      "title": "Pocha Climb!"
+    },
+    {
+      "slug": "pochi-kuro",
+      "title": "Pochi Kuro"
+    },
+    {
+      "slug": "pluto",
+      "title": "Pluto"
+    },
+    {
+      "slug": "pluralistic-immortal",
+      "title": "Pluralistic Immortal"
+    },
+    {
+      "slug": "player",
+      "title": "Player"
+    },
+    {
+      "slug": "plastic-neesan",
+      "title": "Plastic Neesan"
+    },
+    {
+      "slug": "planet-of-the-fools",
+      "title": "Planet of the Fools"
+    },
+    {
+      "slug": "piyoko-to-makai-machi-no-hime-sama",
+      "title": "Piyoko to makai machi no Hime-sama"
+    },
+    {
+      "slug": "pigpen",
+      "title": "PIGPEN"
+    },
+    {
+      "slug": "asahina-koharus-delusional-weather",
+      "title": "Asahina Koharu’s Delusional Weather"
+    },
+    {
+      "slug": "asahina-wakaba-to-marumaru-na-kareshi",
+      "title": "Asahina Wakaba to Marumaru na kareshi"
+    },
+    {
+      "slug": "ascension-starts-from-raising-a-fairy",
+      "title": "Ascension Starts From Raising A Fairy"
+    },
+    {
+      "slug": "ascension-to-godhood-by-slaying-demons",
+      "title": "Ascension to Godhood by Slaying Demons"
+    },
+    {
+      "slug": "ase-to-sekken",
+      "title": "Ase to Sekken"
+    },
+    {
+      "slug": "asebi-to-sora-sekai-no-boukensha",
+      "title": "Asebi to Sora Sekai no Boukensha"
+    },
+    {
+      "slug": "ashigei-shoujo-komura-san",
+      "title": "Ashigei Shoujo Komura-san"
+    },
+    {
+      "slug": "ashita-wa-doyoubi",
+      "title": "Ashita wa Doyoubi"
+    },
+    {
+      "slug": "ashita-kimi-ni-aetara",
+      "title": "Ashita, Kimi ni Aetara"
+    },
+    {
+      "slug": "asu-watashi-wa-dareka-no-kanojo",
+      "title": "Asu, Watashi wa Dareka no Kanojo"
+    },
+    {
+      "slug": "phone-goddness",
+      "title": "Phone Goddness"
+    },
+    {
+      "slug": "phoenix-descends-from-above",
+      "title": "Phoenix Descends From Above"
+    },
+    {
+      "slug": "pharaohs-concubine",
+      "title": "Pharaoh’s Concubine"
+    },
+    {
+      "slug": "perowan-hayashinasai-goshujinsama",
+      "title": "Perowan!: Hayashinasai! Goshujinsama"
+    },
+    {
+      "slug": "perfect-world",
+      "title": "Perfect World"
+    },
+    {
+      "slug": "peerless-martial-spirit",
+      "title": "Peerless Martial Spirit"
+    },
+    {
+      "slug": "past-life-regressor",
+      "title": "Past Life Regressor"
+    },
+    {
+      "slug": "phantom-seer",
+      "title": "Phantom Seer"
+    },
+    {
+      "slug": "peter-grill-to-kenja-no-jikan",
+      "title": "Peter Grill to Kenja no Jikan"
+    },
+    {
+      "slug": "perspective-medical-saint",
+      "title": "Perspective Medical Saint"
+    },
+    {
+      "slug": "persona-5",
+      "title": "Persona 5"
+    },
+    {
+      "slug": "peerless-saint-emperor",
+      "title": "Peerless Saint Emperor"
+    },
+    {
+      "slug": "peerless-martial-art-soul",
+      "title": "Peerless Martial Art Soul"
+    },
+    {
+      "slug": "peerless-little-doctor",
+      "title": "Peerless Little Doctor"
+    },
+    {
+      "slug": "boyfriend-yamada-daisy",
+      "title": "Boyfriend (YAMADA Daisy)"
+    },
+    {
+      "slug": "maid-in-hikkomuse",
+      "title": "Maid in Hikkomuse"
+    },
+    {
+      "slug": "claymore",
+      "title": "Claymore"
+    },
+    {
+      "slug": "monster-dukes-daughter",
+      "title": "Monster Duke’s Daughter"
+    },
+    {
+      "slug": "i-became-the-wife-of-the-monstrous-crown-prince",
+      "title": "I Became the Wife of the Monstrous Crown Prince"
+    },
+    {
+      "slug": "mahousekai-no-uketsukejou-ni-naritai-desu",
+      "title": "Mahousekai no Uketsukejou ni Naritai desu!"
+    },
+    {
+      "slug": "ginger-and-the-cursed-prince",
+      "title": "Ginger and the Cursed Prince"
+    },
+    {
+      "slug": "sewayaki-danshi-to-guutara-osananajimi",
+      "title": "Sewayaki Danshi to Guutara Osananajimi"
+    },
+    {
+      "slug": "kenshin-no-succeed",
+      "title": "Kenshin no Succeed"
+    },
+    {
+      "slug": "kyomu-nee-chan-wa-kamatte-hoshii",
+      "title": "Kyomu Nee-chan wa Kamatte Hoshii"
+    },
+    {
+      "slug": "henkyou-no-roukishi-bard-loen",
+      "title": "Henkyou no Roukishi – Bard Loen"
+    }
+  ]
+}
