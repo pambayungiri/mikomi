@@ -21,7 +21,8 @@ export async function GET(
       // CDN-cache successful lookups — chapter contents are effectively immutable
       headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800' },
     })
-  } catch {
+  } catch (e) {
+    console.error('[route debug] getChapter threw:', e instanceof Error ? e.message : e)
     return NextResponse.json({ error: 'Chapter not found' }, { status: 404 })
   }
 }
